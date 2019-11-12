@@ -18,17 +18,34 @@
                 </button>
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
+
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link" id="yourProfile" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Your Profile</a>
+                    <a class="nav-link" id="yourLists" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Your Lists</a>
+                    <a class="nav-link" id="findItem" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Find Item</a>
+                    <a class="nav-link" id="findStore" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Find Store</a>
+                    <a class="nav-link" id="browseStore" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Browse Store</a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade" id="yourProfileFade" role="tabpanel" aria-labelledby="yourProfile"></div>
+                    <div class="tab-pane fade show active" id="yourListsFade" role="tabpanel" aria-labelledby="yourLists">@RenderBody()</div>
+                    <div class="tab-pane fade" id="findItemFade" role="tabpanel" aria-labelledby="findItem"></div>
+                    <div class="tab-pane fade" id="findStoreFade" role="tabpanel" aria-labelledby="findStore"></div>
+                    <div class="tab-pane fade" id="browseStoreFade" role="tabpanel" aria-labelledby="browseStore"></div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    
     <div class="container body-content">
-        @RenderBody()
+        
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
