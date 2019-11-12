@@ -95,7 +95,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ListIt_Backend\ListIt_DomainModel.csproj">
+    <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
       <Project>{407c3836-2917-427e-8a14-e4125cbc6b20}</Project>
       <Name>ListIt_DomainModel</Name>
     </ProjectReference>
