@@ -11,7 +11,7 @@
     <div class="d-flex" id="wrapper">
 
         <!-- SIDEBAR -->
-        <div class="bg-dark border-right" id="sidebar-wrapper">           
+        <div class="bg-dark border-right" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
                 <!-- ToDo: INSERT AVATAR PIC HERE -->
                 @Html.ActionLink("Your Profile", "Index", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
@@ -23,19 +23,22 @@
                 @Html.ActionLink("Find Store", "FindStore", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
                 @Html.ActionLink("Browse Store", "BrowseStore", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
             </div>
+
+            <div class="list-group list-group-flush" aria-orientation="vertical">
+                @Html.ActionLink("Trashbin", "Trashbin", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink("Settings", "Settings", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+            </div>
         </div>
 
         <!-- NAVBAR HEADER -->
         <div class="page-content-wrapper">
             <nav class="navbar fixed-top  navbar-dark bg-dark">
+                
                 <button class="navbar-toggler" id="menu-toggle" type="button" data-toggle="collapse" data-target="#sidebar-wrapper" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </!--button-->
+                              
+                
                 <span class="justify-content-center">
                     @Html.ActionLink("List It", "Lists", "User", new { area = "" }, new { @class = "navbar-brand" })
                 </span>              
@@ -45,6 +48,7 @@
                 </span>
                 
             </nav>
+
             <div class="container-fluid">
                 @RenderBody()
             </div>
@@ -60,7 +64,9 @@
 
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            
+
+
         </footer>
     </div>
 
@@ -73,7 +79,8 @@
     $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
-        });</script>
+    });
+    </script>
 
 </body>
 </html>

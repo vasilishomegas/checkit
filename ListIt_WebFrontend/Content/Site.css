@@ -1,7 +1,21 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
     overflow-x: hidden;
+}
+
+a {
+    color: gray;
+    font-style: inherit;
+}
+
+.carousel {
+    width: 100%;
+    height: auto;
+}
+
+.carousel-inner .carousel-item img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,9 +35,15 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+   /* max-width: 280px;*/
 }
 
+.logo-landingpage {
+ 
+    
+}
+
+   /* SIDEBAR TOGGLE */
     #sidebar-wrapper {
         min-height: 100vh;
         margin-left: -15rem;
@@ -63,4 +83,5 @@ textarea {
     #wrapper.toggled #sidebar-wrapper {
         margin-left: -15rem;
     }
+
 }

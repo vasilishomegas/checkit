@@ -1,28 +1,76 @@
 ﻿@{
     Layout = null;
+    ViewBag.Title = "List It";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-    <div>
-        <h1>Landing page of ListIt!</h1>
+    <div class="container h-100">
+        <div class="row align-items-center h-100">
+            <div class="col d-flex">
+                <div class="justify-content-center align-items-center logo-landingpage">
+                    <h1>Landing page of ListIt!</h1>
+
+                    <!-- INSERT LOGO HERE -->
+                    <!-- ActionLink here: Name, Action, Controller -->
+                    @Html.ActionLink("Register", "Register", "Launch")
+
+                    @Html.ActionLink("Login", "Login", "Launch")
+
+                    @Html.ActionLink("User Dashboard", "Lists", "User")
+                </div>                
+            </div>
+            <div class="col">
+                
+                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="~/Content/img/slider_1_v2.jpg" class="d-block w-100" alt="List your items, define them and check them!">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <button type="button" class="btn btn-outline-secondary">@Html.ActionLink("List It!", "Login", "Launch")</button>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Content/img/slider_2.jpg" class="d-block w-100" alt="Discover nearby stores and their products!">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <button type="button" class="btn btn-outline-secondary">@Html.ActionLink("Discover!", "Login", "Launch")</button>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Content/img/slider_3.jpg" class="d-block w-100" alt="Share your lists with a household.">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <button type="button" class="btn btn-outline-secondary">@Html.ActionLink("Start now!", "Login", "Launch")</button>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                
+            </div>
+        </div>
 
 
-        <!-- ActionLink here: Name, Action, Controller -->
-        @Html.ActionLink("Register", "Register", "Launch")
 
-        @Html.ActionLink("Login", "Login", "Launch")
-
-        @Html.ActionLink("User Dashboard", "Lists", "User")
-
- 
 
     </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>
