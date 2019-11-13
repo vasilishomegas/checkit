@@ -8,8 +8,20 @@ namespace ListIt_WebFrontend.Controllers
 {
     public class StoreController : Controller
     {
-        // GET: Store
+        // GET: Store/FindItem
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: Store/FindStore
+        public ActionResult FindStore()
+        {
+            return View();
+        }
+
+        // GET: Store/BrowseStore
+        public ActionResult BrowseStore()
         {
             return View();
         }

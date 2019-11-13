@@ -8,8 +8,14 @@ namespace ListIt_WebFrontend.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
+        // GET: User/Profile
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: User/Lists
+        public ActionResult Lists()
         {
             return View();
         }

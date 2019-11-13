@@ -202,9 +202,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Lists.cshtml" />
-    <Content Include="Views\Store\FindItem.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Store\FindStore.cshtml" />
     <Content Include="Views\Store\BrowseStore.cshtml" />
     <Content Include="Views\Launch\Index.cshtml" />

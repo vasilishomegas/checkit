@@ -8,8 +8,20 @@ namespace ListIt_WebFrontend.Controllers
 {
     public class LaunchController : Controller
     {
-        // GET: Launch
+        // GET: Launch/Index
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: Launch/Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        // GET: Launch/Register
+        public ActionResult Register()
         {
             return View();
         }
