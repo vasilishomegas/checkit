@@ -3,50 +3,61 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("List It", "Lists", "User", new { area = "" }, new { @class = "navbar-brand" })
-         
+    <div class="d-flex" id="wrapper">
+
+        <!-- SIDEBAR -->
+        <div class="bg-dark border-right" id="sidebar-wrapper">           
+            <div class="list-group list-group-flush">
+                <!-- ToDo: INSERT AVATAR PIC HERE -->
+                @Html.ActionLink("Your Profile", "Index", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
             </div>
 
+            <div class="list-group list-group-flush" aria-orientation="vertical">
+                @Html.ActionLink("Your Lists", "Lists", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink("Find Item", "Index", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink("Find Store", "FindStore", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink("Browse Store", "BrowseStore", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+            </div>
+        </div>
+
+        <!-- NAVBAR HEADER -->
+        <div class="page-content-wrapper">
+            <nav class="navbar fixed-top  navbar-dark bg-dark">
+                <button class="navbar-toggler" id="menu-toggle" type="button" data-toggle="collapse" data-target="#sidebar-wrapper" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </!--button-->
+                <span class="justify-content-center">
+                    @Html.ActionLink("List It", "Lists", "User", new { area = "" }, new { @class = "navbar-brand" })
+                </span>              
+               
+                <span class="justify-content-end">
+                    @Html.ActionLink("Logout", "Logout", "Launch", new { area = "" }, new { @class = "" })
+                </span>
+                
+            </nav>
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <div class="nav flex-column">
-                    @Html.ActionLink("Your Profile", "Index", "User", new { area = "" }, new { @class = "nav-link" })
-                </div>           
 
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
-                    @Html.ActionLink("Your Lists", "Lists", "User", new { area = "" }, new { @class = "nav-link" })
-                    @Html.ActionLink("Find Item", "Index", "Store", new { area = "" }, new { @class = "nav-link" })
-                    @Html.ActionLink("Find Store", "FindStore", "Store", new { area = "" }, new { @class = "nav-link" })
-                    @Html.ActionLink("Browse Store", "BrowseStore", "Store", new { area = "" }, new { @class = "nav-link" })
-                </div>
-            </div>
-            <div class="col-9">
-                <div class="tab-content" id="v-pills-tabContent">
-                    @RenderBody()      
-                </div>
-            </div>
-        </div> 
-    </div>
     
+
+   
+
     <div class="container body-content">
-        
+
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
@@ -56,5 +67,13 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });</script>
+
 </body>
 </html>

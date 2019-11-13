@@ -26,6 +26,12 @@ namespace ListIt_WebFrontend.Controllers
             return View();
         }
 
+        // GET: Launch/Logout
+        public ActionResult Logout()
+        {
+            return RedirectToAction("Login", "Launch");
+        }
+
         // GET: Launch/Details/5
         public ActionResult Details(int id)
         {
