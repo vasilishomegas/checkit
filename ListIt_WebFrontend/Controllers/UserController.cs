@@ -20,6 +20,18 @@ namespace ListIt_WebFrontend.Controllers
             return View();
         }
 
+        // GET: User/Trashbin
+        public ActionResult Trashbin()
+        {
+            return View();
+        }
+
+        // GET: User/Settings
+        public ActionResult Settings()
+        {
+            return View();
+        }
+
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
