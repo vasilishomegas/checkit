@@ -14,8 +14,32 @@ namespace ListIt_WebFrontend.Controllers
             return View();
         }
 
+        // GET: Launch/Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        // GET: Launch/Register
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        // GET: Launch/Logout
+        public ActionResult Logout()
+        {
+            return RedirectToAction("Login", "Launch");
+        }
+
         // GET: User/Lists
         public ActionResult Lists()
+        {
+            return View();
+        }
+
+        // GET: User/SingleList
+        public ActionResult SingleList()
         {
             return View();
         }
