@@ -1,0 +1,195 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "List";
+}
+
+    <div class="container-fluid">
+
+        <h1> 
+            <!-- INSERT LIST NAME HERE -->
+            Single List
+        </h1>
+
+        <!-- LISTING ITEMS IN ACCORDION -->
+        <div class="accordion" id="accordionItems">
+            <div class="d-flex justify-content-between" id="accordionHeading">
+                <div class="d-flex">
+                    <label class="form-text">
+                        Item name
+                    </label>
+                </div>
+                <div class="d-flex">
+                    <label class="form-text">
+                        Quantity
+                    </label>
+                </div>
+                <div class="d-flex">
+                    <label class="form-text">
+                        Price
+                    </label>
+                </div>
+                <div class="d-flex">
+                    <button class="btn" type="button" data-toggle="" data-target="" aria-expanded="false" aria-controls="">
+                        Sort
+                        <!-- INSERT SORT ICON -->
+                    </button>
+                </div>
+            </div>
+
+            <!-- FOREACH LOOP: create card for each item -->
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Item 1 <!-- INSERT ITEM NAME HERE-->
+                            </label>
+                        </div>
+                        <div class="d-flex">
+                            <label class="form-text">
+                                <!-- INSERT QUANTITY HERE -->
+                                10 pc.
+                            </label>
+                        </div>
+                        <div class="d-flex">
+                            <label class="form-text">
+                                <!-- INSERT PRICE HERE -->
+                                5 dkk/pc.
+                            </label>
+                        </div>
+                        <div class="d-flex">
+                            <button class="btn dropdown-toggle my-2 my-sm-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <!-- Dropdown icon button -->
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionItems">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col editItem">
+                                <!-- EDIT ITEM FORM-->
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col">
+                                            <label for="name">Name of item</label>
+                                            <input type="text" class="form-control" id="name" placeholder="Insert saved name here">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="price">Price</label>
+                                            <input type="number" class="form-control" id="price" placeholder="Insert saved name here">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col range-slider">
+                                            <label for="quantity">Quantity: </label><output id="rangevalue"></output>
+                                            <input type="range" min="0" max="20" step="0.5" class="custom-range range-slider__range" value="10" onchange="rangevalue.value=value" id="quantity">                                        
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="unit">Unit</label>
+                                            <select id="unit" class="custom-select custom-select-sm">
+                                                <option value="" selected>pc</option>
+                                                <option value="">lt</option>
+                                                <option value="">g</option>
+                                                <option value="">kg</option>
+                                                <option value="">pkg</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col">
+                                            <label for="category">Category</label>
+                                            <select id="category" class="custom-select custom-select-sm">
+                                                <option selected>Choose a category</option>
+                                                <option value="">Vegetables</option>
+                                                <option value="">Fruits</option>
+                                                <option value="">Milk products</option>
+                                                <option value="">...</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="createCategory">Create Category:</label>
+                                            <input type="text" class="form-control" id="createCategory" placeholder="MyCategory">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <button class="btn btn-dark" type="submit">Save</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="col">
+                                <!-- TRANSLATION -->
+                                <form>
+                                    <div class="form-row form-group">
+                                        <label for="translation">Translation</label>
+                                        <select id="translation" class="custom-select custom-select-sm">
+                                            <option selected>Original language</option>
+                                            <option value="">Arabic</option>
+                                            <option value="">Croatian</option>
+                                            <option value="">Danish</option>
+                                            <option value="">Dutch</option>
+                                            <option value="">English</option>
+                                            <option value="">German</option>
+                                            <option value="">Lithuanian</option>
+                                            <option value="">Polish</option>
+                                            <option value="">...</option>
+                                        </select>
+                                        <output>
+                                            <!-- Show translation here -->
+                                            show translation here
+                                        </output>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-dark">
+                                        Save translation
+                                    </button>
+                                </form>
+                                <hr />
+                                <div>
+                                    <label for="currency">Currency Exchange</label>
+                                    <select id="currency" class="custom-select custom-select-sm">
+                                        <option selected>DKK</option>
+                                        <option value="">EUR</option>
+                                        <option value="">GBP</option>
+                                        <option value="">SEK</option>
+                                        <option value="">...</option>
+                                    </select>
+                                    <output>
+                                        <!-- Show calculated price here -->
+                                        show price here
+                                    </output>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/gh/RubaXa/Sortable/Sortable.min.js">
+        Sortable.create(
+            accordionItems,
+            {
+                animation: 100,
+                group: 'list-1',
+                draggable: '.card',
+                handle: '.card',
+                sort: true,
+                filter: '.sortable-disabled',
+                chosenClass: 'active'
+            });
+    </script>
