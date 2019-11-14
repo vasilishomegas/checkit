@@ -18,10 +18,17 @@ a {
     object-fit: cover;
 }
 
+.login-container {
+    background-color: dimgrey;
+    height: 100%;
+    width: auto;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 70px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -56,6 +63,7 @@ textarea {
     #sidebar-wrapper .sidebar-heading {
         padding: 0.875rem 1.25rem;
         font-size: 1.2rem;
+        opacity: 0;
     }
 
     #sidebar-wrapper .list-group {
@@ -64,6 +72,7 @@ textarea {
 
     #page-content-wrapper {
         min-width: 100vw;
+        padding-top: 20rem;
     }
 
     #wrapper.toggled #sidebar-wrapper {
