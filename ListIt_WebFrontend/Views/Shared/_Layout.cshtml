@@ -6,6 +6,11 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
 </head>
 <body>
     <div class="d-flex" id="wrapper">
@@ -55,9 +60,9 @@
 
             </nav>
 
-            
 
-            
+
+
             <div class="body-content">
                 @RenderBody()
 
@@ -68,14 +73,12 @@
 
 
 
+
+
+
+
+
     
-
-
-
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 
     <!-- Menu Toggle Script -->
     <script>

@@ -29,7 +29,7 @@
                     </label>
                 </div>
                 <div class="d-flex">
-                    <button class="btn" type="button" data-toggle="" data-target="" aria-expanded="false" aria-controls="">
+                    <button class="btn" type="button" data-toggle="" data-target="" aria-controls="">
                         Sort
                         <!-- INSERT SORT ICON -->
                     </button>
@@ -38,28 +38,28 @@
 
             <!-- FOREACH LOOP: create card for each item -->
             <div class="card">
-                <div class="card-header" id="headingOne">
+                <div class="card-header check-toggle" id="headingOne">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
+                            <input class="form-check-input checkbox" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1" id="preview">
                                 Item 1 <!-- INSERT ITEM NAME HERE-->
                             </label>
                         </div>
                         <div class="d-flex">
-                            <label class="form-text">
+                            <label class="form-text" for="defaultCheck1" id="preview">
                                 <!-- INSERT QUANTITY HERE -->
                                 10 pc.
                             </label>
                         </div>
                         <div class="d-flex">
-                            <label class="form-text">
+                            <label class="form-text" for="defaultCheck1" id="preview">
                                 <!-- INSERT PRICE HERE -->
                                 5 dkk/pc.
                             </label>
                         </div>
                         <div class="d-flex">
-                            <button class="btn dropdown-toggle my-2 my-sm-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                 <!-- Dropdown icon button -->
                             </button>
                         </div>
@@ -179,6 +179,23 @@
 
 
 
+    <script>
+        jQuery(function ($) {         
+
+            $(".check-toggle").on('click', function() {
+                $(this).find(':checkbox').prop('checked', function(i, checked) {
+                    return !checked;
+                });
+
+
+                if ($('input.checkbox').is(':checked')) {
+                    $('label#preview').addClass('crossout');
+                } else {
+                    $('label#preview').removeClass('crossout');
+                }
+            });
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/gh/RubaXa/Sortable/Sortable.min.js">
         Sortable.create(

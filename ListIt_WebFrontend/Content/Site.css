@@ -60,11 +60,20 @@ textarea {
     min-width: 100%;
 }
 
+.check-toggle {
+    cursor: pointer;
+}
+
 #accordionHeading {
     padding-left: 15px;
     padding-right: 15px;
     color: dimgrey;
     font-size: small;
+}
+
+.crossout {
+    text-decoration: line-through;
+    color: dimgray;
 }
 
 input[type="range"]:hover ~ #rangevalue, input[type="range"]:active ~ #rangevalue {
