@@ -1,11 +1,149 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Your Profile";
 }
 
-<div class="container">
-    <h1>Username</h1>
+<div class="container-fluid">
 
-    <p>
-        Display User data here.
-    </p>
+
+    <h1>@ViewBag.Title</h1>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        <!-- INSERT NICKNAME HERE -->
+                        Steve Smith
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        E-Mail
+                    </td>
+                    <td>
+                        <!-- INSERT EMAIL ADRESS HERE -->
+                        steve.smith@ucn.dk
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        Country
+                    </td>
+                    <td>
+                        <!-- INSERT INDICATED COUNTRY HERE -->
+                        Denmark
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col">
+            <!-- INSERT PROFILE PIC HERE - IF NO PIC INSERT AVATAR -->
+            <!--img src="" alt="Profile Picture" /-->
+        </div>
+    </div>
+    
+    <div class="d-flex justify-content-center">
+        <div class="btn-group-sm">
+            <button class="btn btn-outline-dark" id="editProfile" data-toggle="modal" data-target="#modalEditProfile">
+                Edit profile data
+            </button>
+            <button class="btn btn-outline-dark" id="editPW" data-toggle="modal" data-target="#modalEditPW">
+                Change Password
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal EDIT PROFILE -->
+<div class="modal fade" id="modalEditProfile" tabindex="-1" role="dialog" aria-labelledby="modalEditProfileTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditProfileTitle">Edit your Profile Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="put">
+                    <div class="form-group">
+                        <label for="profilePic">Profile Picture</label>
+                        <!--img src="" /-->
+                        <input type="file" class="custom-file-input" id="profilePic">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Steve Smith">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-Mail</label>
+                        <input type="email" class="form-control" id="email" placeholder="steve.smith@ucn.dk">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select id="country" class="custom-select custom-select-sm">
+                            <option selected>Denmark</option>
+                            <option value="">Australia</option>
+                            <option value="">Austria</option>
+                            <option value="">Bulgaria</option>
+                            <option value="">China</option>
+                            <option value="">Croatia</option>
+                            <option value="">Denmark</option>
+                            <option value="">Lithuania</option>
+                            <option value="">Poland</option>
+                            <option value="">...</option>
+                        </select>
+                    </div>
+                    
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal EDIT PW -->
+<div class="modal fade" id="modalEditPW" tabindex="-1" role="dialog" aria-labelledby="modalEditPWTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditPWTitle">Change your Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="oldPw">Old Password</label>
+                        <input type="password" class="form-control" id="oldPw" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPw">New Password</label>
+                        <input type="password" class="form-control" id="newPw" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPwConfirm">Confirm new Password</label>
+                        <input type="password" class="form-control" id="newPwConfirm" placeholder="">
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
 </div>

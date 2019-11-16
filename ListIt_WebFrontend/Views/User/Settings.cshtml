@@ -4,10 +4,50 @@
 }
 
 
-    <div class="container">
+    <div class="container-fluid">
         <h1>@ViewBag.Title</h1>
 
-        <p>
-            Display User data here.
-        </p>
+        <div class="settings-container">
+            <form action="" method="put">
+                <div class="form-group">
+                    <label for="language">Interface Language</label>
+                    <select id="language" class="custom-select custom-select-sm">
+                        <option selected>English</option>
+                        <option value="">Arabic</option>
+                        <option value="">Croatian</option>
+                        <option value="">Danish</option>
+                        <option value="">Dutch</option>
+                        <option value="">English</option>
+                        <option value="">German</option>
+                        <option value="">Lithuanian</option>
+                        <option value="">Polish</option>
+                        <option value="">...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="currency">Default Currency</label>
+                    <select id="currency" class="custom-select custom-select-sm">
+                        <option selected>DKK</option>
+                        <option value="">EUR</option>
+                        <option value="">GBP</option>
+                        <option value="">SEK</option>
+                        <option value="">...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ordering">Default Ordering</label>
+                    <select id="ordering" class="custom-select custom-select-sm">
+                        <option selected>MyOrdering</option>
+                        <option value="">Template Fakta</option>
+                        <option value="">Template Netto</option>
+                        <option value="">Template Fotex</option>
+                        <option value="">...</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-dark">
+                    Save Changes
+                </button>
+            </form>
+        </div>
+        
     </div>

@@ -58,16 +58,16 @@
                                 5 dkk/pc.
                             </label>
                         </div>
-                        <div class="d-flex">
+                        <div class="d-flex item-dropdown">
                             <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                 <!-- Dropdown icon button -->
                             </button>
                         </div>
                     </div>
-
+                    
                 </div>
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionItems">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionItems">
                     <div class="card-body">
                         <div class="row">
                             <div class="col editItem">
@@ -164,25 +164,21 @@
                                     </output>
                                 </div>
                             </div>
-                        </div>
-
-
-                        
-                        
+                        </div>           
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
+
+    
 
 
 
     <script>
         jQuery(function ($) {         
 
-            $(".check-toggle").on('click', function() {
+            $(".check-toggle").on('click', function () {
                 $(this).find(':checkbox').prop('checked', function(i, checked) {
                     return !checked;
                 });
@@ -195,6 +191,8 @@
                 }
             });
         });
+
+        
     </script>
 
     <script src="https://cdn.jsdelivr.net/gh/RubaXa/Sortable/Sortable.min.js">
