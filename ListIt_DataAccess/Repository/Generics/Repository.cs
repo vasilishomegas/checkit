@@ -1,15 +1,16 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace ListIt_DataAccess.Repository.Generics
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        public IQueryable<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
             using (var context = new ListItContext())
             {
-                return context.Set<T>().AsQueryable<T>();
+                return context.Set<T>().ToList();
             }
         }
 
