@@ -1,0 +1,2330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dmaj0918_1074524Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApiProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Currency_Id" Type="int" Nullable="false" />
+          <Property Name="DefaultProduct_Id" Type="int" />
+          <Property Name="ShopApi_Id" Type="int" Nullable="false" />
+          <Property Name="Unit_Id" Type="int" Nullable="false" />
+          <Property Name="Endpoint" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Chains">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ShopApi_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Currencies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sign" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DefaultProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Currency_Id" Type="int" Nullable="false" />
+          <Property Name="UnitType_Id" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntryStates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LinkDefaultProductToCategory">
+          <Key>
+            <PropertyRef Name="DefaultProductId" />
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="DefaultProductId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LinkUserToDefaultProduct">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="DefaultProductId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DefaultProductId" Type="int" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LinkUserToList">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ShoppingListId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ShoppingListId" Type="int" Nullable="false" />
+          <Property Name="ListAccessTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListAccessTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Relation" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="ProductType_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShopApis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShoppingListEntries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Product_Id" Type="int" Nullable="false" />
+          <Property Name="ShoppingList_Id" Type="int" Nullable="false" />
+          <Property Name="State_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShoppingLists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="ChosenSorting_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Shops">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Street" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StreetNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Zipcode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Chain_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TemplateListOrderings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Shop_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="TemplateSortedProducts">
+          <Key>
+            <PropertyRef Name="TemplateListOrderingId" />
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="TemplateListOrderingId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TranslationOfCategories">
+          <Key>
+            <PropertyRef Name="Category_Id" />
+            <PropertyRef Name="Language_Id" />
+          </Key>
+          <Property Name="Category_Id" Type="int" Nullable="false" />
+          <Property Name="Language_Id" Type="int" Nullable="false" />
+          <Property Name="Translation" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TranslationOfProducts">
+          <Key>
+            <PropertyRef Name="Language_Id" />
+            <PropertyRef Name="Product_Id" />
+          </Key>
+          <Property Name="Language_Id" Type="int" Nullable="false" />
+          <Property Name="Product_Id" Type="int" Nullable="false" />
+          <Property Name="Translation" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TranslationOfUnitTypes">
+          <Key>
+            <PropertyRef Name="Language_Id" />
+            <PropertyRef Name="UnitType_Id" />
+          </Key>
+          <Property Name="Language_Id" Type="int" Nullable="false" />
+          <Property Name="UnitType_Id" Type="int" Nullable="false" />
+          <Property Name="Translation" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserEntrySortings">
+          <Key>
+            <PropertyRef Name="ShoppingListEntry_Id" />
+            <PropertyRef Name="UserListSorting_Id" />
+          </Key>
+          <Property Name="NextEntryId_Id" Type="int" />
+          <Property Name="PrevEntryId_Id" Type="int" />
+          <Property Name="ShoppingListEntry_Id" Type="int" Nullable="false" />
+          <Property Name="UserListSorting_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserListSortings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Shop_Id" Type="int" />
+          <Property Name="ShoppingList_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Category_Id" Type="int" />
+          <Property Name="Currency_Id" Type="int" />
+          <Property Name="UnitType_Id" Type="int" />
+          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nickname" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Country_Id" Type="int" Nullable="false" />
+          <Property Name="Language_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_ApiProducts_dbo_Currencies_Currency_Id">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+          <End Role="ApiProducts" Type="Self.ApiProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="Currency_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id">
+          <End Role="DefaultProducts" Type="Self.DefaultProducts" Multiplicity="0..1" />
+          <End Role="ApiProducts" Type="Self.ApiProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DefaultProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="DefaultProduct_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ApiProducts_dbo_Products_Id">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ApiProducts" Type="Self.ApiProducts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id">
+          <End Role="ShopApis" Type="Self.ShopApis" Multiplicity="1" />
+          <End Role="ApiProducts" Type="Self.ApiProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopApis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="ShopApi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ApiProducts_dbo_UnitTypes_Unit_Id">
+          <End Role="UnitTypes" Type="Self.UnitTypes" Multiplicity="1" />
+          <End Role="ApiProducts" Type="Self.ApiProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Categories_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categories">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Chains_dbo_ShopApi_Id">
+          <End Role="ShopApis" Type="Self.ShopApis" Multiplicity="0..1" />
+          <End Role="Chains" Type="Self.Chains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopApis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chains">
+              <PropertyRef Name="ShopApi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+          <End Role="DefaultProducts" Type="Self.DefaultProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultProducts">
+              <PropertyRef Name="Currency_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DefaultProducts_dbo_Products_Id">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="DefaultProducts" Type="Self.DefaultProducts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultProducts">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id">
+          <End Role="UnitTypes" Type="Self.UnitTypes" Multiplicity="1" />
+          <End Role="DefaultProducts" Type="Self.DefaultProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultProducts">
+              <PropertyRef Name="UnitType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinkDefaultProductToCategory_dbo_Categories_CategoryId">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="LinkDefaultProductToCategory" Type="Self.LinkDefaultProductToCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkDefaultProductToCategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinkDefaultProductToCategory_dbo_DefaultProducts_DefaultProductId">
+          <End Role="DefaultProducts" Type="Self.DefaultProducts" Multiplicity="1" />
+          <End Role="LinkDefaultProductToCategory" Type="Self.LinkDefaultProductToCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DefaultProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkDefaultProductToCategory">
+              <PropertyRef Name="DefaultProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId">
+          <End Role="DefaultProducts" Type="Self.DefaultProducts" Multiplicity="1" />
+          <End Role="LinkUserToDefaultProduct" Type="Self.LinkUserToDefaultProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DefaultProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUserToDefaultProduct">
+              <PropertyRef Name="DefaultProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinkUserToDefaultProduct_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="LinkUserToDefaultProduct" Type="Self.LinkUserToDefaultProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUserToDefaultProduct">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinkUserToList_dbo_ListAccessTypes_ListAccessTypeId">
+          <End Role="ListAccessTypes" Type="Self.ListAccessTypes" Multiplicity="1" />
+          <End Role="LinkUserToList" Type="Self.LinkUserToList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListAccessTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUserToList">
+              <PropertyRef Name="ListAccessTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinkUserToList_dbo_ShoppingLists_ShoppingListId">
+          <End Role="ShoppingLists" Type="Self.ShoppingLists" Multiplicity="1" />
+          <End Role="LinkUserToList" Type="Self.LinkUserToList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingLists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUserToList">
+              <PropertyRef Name="ShoppingListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Products_dbo_ProductTypes_ProductType_Id">
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProductType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id">
+          <End Role="EntryStates" Type="Self.EntryStates" Multiplicity="1" />
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntryStates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingListEntries">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ShoppingListEntries_dbo_Products_Product_Id">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingListEntries">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ShoppingListEntries_dbo_ShoppingLists_ShoppingList_Id">
+          <End Role="ShoppingLists" Type="Self.ShoppingLists" Multiplicity="1" />
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingLists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingListEntries">
+              <PropertyRef Name="ShoppingList_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ShoppingLists_dbo_ChosenSorting_Id">
+          <End Role="UserListSortings" Type="Self.UserListSortings" Multiplicity="0..1" />
+          <End Role="ShoppingLists" Type="Self.ShoppingLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserListSortings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingLists">
+              <PropertyRef Name="ChosenSorting_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Shops_dbo_Chains_Chain_Id">
+          <End Role="Chains" Type="Self.Chains" Multiplicity="1" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chains">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shops">
+              <PropertyRef Name="Chain_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TemplateListOrderings_dbo_Shops_Shop_Id">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="TemplateListOrderings" Type="Self.TemplateListOrderings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateListOrderings">
+              <PropertyRef Name="Shop_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TemplateSortedProducts_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="TemplateSortedProducts" Type="Self.TemplateSortedProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateSortedProducts">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TemplateSortedProducts_dbo_TemplateListOrderings_TemplateListOrderingId">
+          <End Role="TemplateListOrderings" Type="Self.TemplateListOrderings" Multiplicity="1" />
+          <End Role="TemplateSortedProducts" Type="Self.TemplateSortedProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TemplateListOrderings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateSortedProducts">
+              <PropertyRef Name="TemplateListOrderingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="TranslationOfCategories" Type="Self.TranslationOfCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfCategories">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfCategories_dbo_Languages_Language_Id">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="1" />
+          <End Role="TranslationOfCategories" Type="Self.TranslationOfCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfCategories">
+              <PropertyRef Name="Language_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfProducts_dbo_Languages_Language_Id">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="1" />
+          <End Role="TranslationOfProducts" Type="Self.TranslationOfProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfProducts">
+              <PropertyRef Name="Language_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfProducts_dbo_Products_Product_Id">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="TranslationOfProducts" Type="Self.TranslationOfProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfProducts">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfUnitTypes_dbo_Languages_Language_Id">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="1" />
+          <End Role="TranslationOfUnitTypes" Type="Self.TranslationOfUnitTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfUnitTypes">
+              <PropertyRef Name="Language_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfUnitTypes_dbo_UnitTypes_UnitType_Id">
+          <End Role="UnitTypes" Type="Self.UnitTypes" Multiplicity="1" />
+          <End Role="TranslationOfUnitTypes" Type="Self.TranslationOfUnitTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfUnitTypes">
+              <PropertyRef Name="UnitType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_NextEntryId_Id">
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntries" Multiplicity="0..1" />
+          <End Role="UserEntrySortings" Type="Self.UserEntrySortings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingListEntries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEntrySortings">
+              <PropertyRef Name="NextEntryId_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_PrevEntryId_Id">
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntries" Multiplicity="0..1" />
+          <End Role="UserEntrySortings" Type="Self.UserEntrySortings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingListEntries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEntrySortings">
+              <PropertyRef Name="PrevEntryId_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_ShoppingListEntry_Id">
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntries" Multiplicity="1" />
+          <End Role="UserEntrySortings" Type="Self.UserEntrySortings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingListEntries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEntrySortings">
+              <PropertyRef Name="ShoppingListEntry_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserEntrySortings_dbo_UserListSortings_UserListSorting_Id">
+          <End Role="UserListSortings" Type="Self.UserListSortings" Multiplicity="1" />
+          <End Role="UserEntrySortings" Type="Self.UserEntrySortings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserListSortings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEntrySortings">
+              <PropertyRef Name="UserListSorting_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserListSortings_dbo_ShoppingList_Id">
+          <End Role="ShoppingLists" Type="Self.ShoppingLists" Multiplicity="1" />
+          <End Role="UserListSortings" Type="Self.UserListSortings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingLists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserListSortings">
+              <PropertyRef Name="ShoppingList_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserListSortings_dbo_Shops_Shop_Id">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="UserListSortings" Type="Self.UserListSortings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserListSortings">
+              <PropertyRef Name="Shop_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserProducts_dbo_Categories_Category_Id">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserProducts_dbo_Currencies_Currency_Id">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="0..1" />
+          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="Currency_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserProducts_dbo_Products_Id">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id">
+          <End Role="UnitTypes" Type="Self.UnitTypes" Multiplicity="0..1" />
+          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="UnitType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserProducts_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Countries_Country_Id">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Country_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Languages_Language_Id">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Language_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dmaj0918_1074524ModelStoreContainer">
+          <EntitySet Name="ApiProducts" EntityType="Self.ApiProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chains" EntityType="Self.Chains" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DefaultProducts" EntityType="Self.DefaultProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntryStates" EntityType="Self.EntryStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinkDefaultProductToCategory" EntityType="Self.LinkDefaultProductToCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinkUserToDefaultProduct" EntityType="Self.LinkUserToDefaultProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinkUserToList" EntityType="Self.LinkUserToList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListAccessTypes" EntityType="Self.ListAccessTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopApis" EntityType="Self.ShopApis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingListEntries" EntityType="Self.ShoppingListEntries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingLists" EntityType="Self.ShoppingLists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shops" EntityType="Self.Shops" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateListOrderings" EntityType="Self.TemplateListOrderings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateSortedProducts" EntityType="Self.TemplateSortedProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TranslationOfCategories" EntityType="Self.TranslationOfCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TranslationOfProducts" EntityType="Self.TranslationOfProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TranslationOfUnitTypes" EntityType="Self.TranslationOfUnitTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitTypes" EntityType="Self.UnitTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserEntrySortings" EntityType="Self.UserEntrySortings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserListSortings" EntityType="Self.UserListSortings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProducts" EntityType="Self.UserProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_ApiProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_ApiProducts_dbo_Currencies_Currency_Id">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id" Association="Self.FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id">
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ApiProducts_dbo_Products_Id" Association="Self.FK_dbo_ApiProducts_dbo_Products_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id" Association="Self.FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id">
+            <End Role="ShopApis" EntitySet="ShopApis" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ApiProducts_dbo_UnitTypes_Unit_Id" Association="Self.FK_dbo_ApiProducts_dbo_UnitTypes_Unit_Id">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Categories_dbo_Users_User_Id" Association="Self.FK_dbo_Categories_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Categories" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Chains_dbo_ShopApi_Id" Association="Self.FK_dbo_Chains_dbo_ShopApi_Id">
+            <End Role="ShopApis" EntitySet="ShopApis" />
+            <End Role="Chains" EntitySet="Chains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DefaultProducts_dbo_Products_Id" Association="Self.FK_dbo_DefaultProducts_dbo_Products_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id" Association="Self.FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkDefaultProductToCategory_dbo_Categories_CategoryId" Association="Self.FK_dbo_LinkDefaultProductToCategory_dbo_Categories_CategoryId">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="LinkDefaultProductToCategory" EntitySet="LinkDefaultProductToCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkDefaultProductToCategory_dbo_DefaultProducts_DefaultProductId" Association="Self.FK_dbo_LinkDefaultProductToCategory_dbo_DefaultProducts_DefaultProductId">
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+            <End Role="LinkDefaultProductToCategory" EntitySet="LinkDefaultProductToCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId" Association="Self.FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId">
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+            <End Role="LinkUserToDefaultProduct" EntitySet="LinkUserToDefaultProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkUserToDefaultProduct_dbo_Users_UserId" Association="Self.FK_dbo_LinkUserToDefaultProduct_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LinkUserToDefaultProduct" EntitySet="LinkUserToDefaultProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkUserToList_dbo_ListAccessTypes_ListAccessTypeId" Association="Self.FK_dbo_LinkUserToList_dbo_ListAccessTypes_ListAccessTypeId">
+            <End Role="ListAccessTypes" EntitySet="ListAccessTypes" />
+            <End Role="LinkUserToList" EntitySet="LinkUserToList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkUserToList_dbo_ShoppingLists_ShoppingListId" Association="Self.FK_dbo_LinkUserToList_dbo_ShoppingLists_ShoppingListId">
+            <End Role="ShoppingLists" EntitySet="ShoppingLists" />
+            <End Role="LinkUserToList" EntitySet="LinkUserToList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Products_dbo_ProductTypes_ProductType_Id" Association="Self.FK_dbo_Products_dbo_ProductTypes_ProductType_Id">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id" Association="Self.FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id">
+            <End Role="EntryStates" EntitySet="EntryStates" />
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ShoppingListEntries_dbo_Products_Product_Id" Association="Self.FK_dbo_ShoppingListEntries_dbo_Products_Product_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ShoppingListEntries_dbo_ShoppingLists_ShoppingList_Id" Association="Self.FK_dbo_ShoppingListEntries_dbo_ShoppingLists_ShoppingList_Id">
+            <End Role="ShoppingLists" EntitySet="ShoppingLists" />
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ShoppingLists_dbo_ChosenSorting_Id" Association="Self.FK_dbo_ShoppingLists_dbo_ChosenSorting_Id">
+            <End Role="UserListSortings" EntitySet="UserListSortings" />
+            <End Role="ShoppingLists" EntitySet="ShoppingLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Shops_dbo_Chains_Chain_Id" Association="Self.FK_dbo_Shops_dbo_Chains_Chain_Id">
+            <End Role="Chains" EntitySet="Chains" />
+            <End Role="Shops" EntitySet="Shops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TemplateListOrderings_dbo_Shops_Shop_Id" Association="Self.FK_dbo_TemplateListOrderings_dbo_Shops_Shop_Id">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="TemplateListOrderings" EntitySet="TemplateListOrderings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TemplateSortedProducts_dbo_Products_ProductId" Association="Self.FK_dbo_TemplateSortedProducts_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="TemplateSortedProducts" EntitySet="TemplateSortedProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TemplateSortedProducts_dbo_TemplateListOrderings_TemplateListOrderingId" Association="Self.FK_dbo_TemplateSortedProducts_dbo_TemplateListOrderings_TemplateListOrderingId">
+            <End Role="TemplateListOrderings" EntitySet="TemplateListOrderings" />
+            <End Role="TemplateSortedProducts" EntitySet="TemplateSortedProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id" Association="Self.FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="TranslationOfCategories" EntitySet="TranslationOfCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfCategories_dbo_Languages_Language_Id" Association="Self.FK_dbo_TranslationOfCategories_dbo_Languages_Language_Id">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="TranslationOfCategories" EntitySet="TranslationOfCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfProducts_dbo_Languages_Language_Id" Association="Self.FK_dbo_TranslationOfProducts_dbo_Languages_Language_Id">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="TranslationOfProducts" EntitySet="TranslationOfProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfProducts_dbo_Products_Product_Id" Association="Self.FK_dbo_TranslationOfProducts_dbo_Products_Product_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="TranslationOfProducts" EntitySet="TranslationOfProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfUnitTypes_dbo_Languages_Language_Id" Association="Self.FK_dbo_TranslationOfUnitTypes_dbo_Languages_Language_Id">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="TranslationOfUnitTypes" EntitySet="TranslationOfUnitTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfUnitTypes_dbo_UnitTypes_UnitType_Id" Association="Self.FK_dbo_TranslationOfUnitTypes_dbo_UnitTypes_UnitType_Id">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="TranslationOfUnitTypes" EntitySet="TranslationOfUnitTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_NextEntryId_Id" Association="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_NextEntryId_Id">
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+            <End Role="UserEntrySortings" EntitySet="UserEntrySortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_PrevEntryId_Id" Association="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_PrevEntryId_Id">
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+            <End Role="UserEntrySortings" EntitySet="UserEntrySortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_ShoppingListEntry_Id" Association="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_ShoppingListEntry_Id">
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+            <End Role="UserEntrySortings" EntitySet="UserEntrySortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserEntrySortings_dbo_UserListSortings_UserListSorting_Id" Association="Self.FK_dbo_UserEntrySortings_dbo_UserListSortings_UserListSorting_Id">
+            <End Role="UserListSortings" EntitySet="UserListSortings" />
+            <End Role="UserEntrySortings" EntitySet="UserEntrySortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserListSortings_dbo_ShoppingList_Id" Association="Self.FK_dbo_UserListSortings_dbo_ShoppingList_Id">
+            <End Role="ShoppingLists" EntitySet="ShoppingLists" />
+            <End Role="UserListSortings" EntitySet="UserListSortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserListSortings_dbo_Shops_Shop_Id" Association="Self.FK_dbo_UserListSortings_dbo_Shops_Shop_Id">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="UserListSortings" EntitySet="UserListSortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserProducts_dbo_Categories_Category_Id" Association="Self.FK_dbo_UserProducts_dbo_Categories_Category_Id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_UserProducts_dbo_Currencies_Currency_Id">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserProducts_dbo_Products_Id" Association="Self.FK_dbo_UserProducts_dbo_Products_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id" Association="Self.FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserProducts_dbo_Users_User_Id" Association="Self.FK_dbo_UserProducts_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Countries_Country_Id" Association="Self.FK_dbo_Users_dbo_Countries_Country_Id">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Languages_Language_Id" Association="Self.FK_dbo_Users_dbo_Languages_Language_Id">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dmaj0918_1074524Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ApiProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Currency_Id" Type="Int32" Nullable="false" />
+          <Property Name="DefaultProduct_Id" Type="Int32" />
+          <Property Name="ShopApi_Id" Type="Int32" Nullable="false" />
+          <Property Name="Unit_Id" Type="Int32" Nullable="false" />
+          <Property Name="Endpoint" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_dbo_ApiProducts_dbo_Currencies_Currency_Id" FromRole="ApiProducts" ToRole="Currencies" />
+          <NavigationProperty Name="DefaultProduct" Relationship="Self.FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id" FromRole="ApiProducts" ToRole="DefaultProducts" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_ApiProducts_dbo_Products_Id" FromRole="ApiProducts" ToRole="Products" />
+          <NavigationProperty Name="ShopApi" Relationship="Self.FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id" FromRole="ApiProducts" ToRole="ShopApis" />
+          <NavigationProperty Name="UnitType" Relationship="Self.FK_dbo_ApiProducts_dbo_UnitTypes_Unit_Id" FromRole="ApiProducts" ToRole="UnitTypes" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Id" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Categories_dbo_Users_User_Id" FromRole="Categories" ToRole="Users" />
+          <NavigationProperty Name="TranslationOfCategories" Relationship="Self.FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id" FromRole="Categories" ToRole="TranslationOfCategories" />
+          <NavigationProperty Name="UserProducts" Relationship="Self.FK_dbo_UserProducts_dbo_Categories_Category_Id" FromRole="Categories" ToRole="UserProducts" />
+          <NavigationProperty Name="DefaultProducts" Relationship="Self.LinkDefaultProductToCategory" FromRole="Categories" ToRole="DefaultProducts" />
+        </EntityType>
+        <EntityType Name="Chain">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShopApi_Id" Type="Int32" />
+          <NavigationProperty Name="ShopApi" Relationship="Self.FK_dbo_Chains_dbo_ShopApi_Id" FromRole="Chains" ToRole="ShopApis" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_dbo_Shops_dbo_Chains_Chain_Id" FromRole="Chains" ToRole="Shops" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_Countries_Country_Id" FromRole="Countries" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sign" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ApiProducts" Relationship="Self.FK_dbo_ApiProducts_dbo_Currencies_Currency_Id" FromRole="Currencies" ToRole="ApiProducts" />
+          <NavigationProperty Name="DefaultProducts" Relationship="Self.FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id" FromRole="Currencies" ToRole="DefaultProducts" />
+          <NavigationProperty Name="UserProducts" Relationship="Self.FK_dbo_UserProducts_dbo_Currencies_Currency_Id" FromRole="Currencies" ToRole="UserProducts" />
+        </EntityType>
+        <EntityType Name="DefaultProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Currency_Id" Type="Int32" Nullable="false" />
+          <Property Name="UnitType_Id" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ApiProducts" Relationship="Self.FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id" FromRole="DefaultProducts" ToRole="ApiProducts" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id" FromRole="DefaultProducts" ToRole="Currencies" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_DefaultProducts_dbo_Products_Id" FromRole="DefaultProducts" ToRole="Products" />
+          <NavigationProperty Name="UnitType" Relationship="Self.FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id" FromRole="DefaultProducts" ToRole="UnitTypes" />
+          <NavigationProperty Name="LinkUserToDefaultProducts" Relationship="Self.FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId" FromRole="DefaultProducts" ToRole="LinkUserToDefaultProduct" />
+          <NavigationProperty Name="Categories" Relationship="Self.LinkDefaultProductToCategory" FromRole="DefaultProducts" ToRole="Categories" />
+        </EntityType>
+        <EntityType Name="EntryState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ShoppingListEntries" Relationship="Self.FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id" FromRole="EntryStates" ToRole="ShoppingListEntries" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TranslationOfCategories" Relationship="Self.FK_dbo_TranslationOfCategories_dbo_Languages_Language_Id" FromRole="Languages" ToRole="TranslationOfCategories" />
+          <NavigationProperty Name="TranslationOfProducts" Relationship="Self.FK_dbo_TranslationOfProducts_dbo_Languages_Language_Id" FromRole="Languages" ToRole="TranslationOfProducts" />
+          <NavigationProperty Name="TranslationOfUnitTypes" Relationship="Self.FK_dbo_TranslationOfUnitTypes_dbo_Languages_Language_Id" FromRole="Languages" ToRole="TranslationOfUnitTypes" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_Languages_Language_Id" FromRole="Languages" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="LinkUserToDefaultProduct">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="DefaultProductId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="DefaultProductId" Type="Int32" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DefaultProduct" Relationship="Self.FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId" FromRole="LinkUserToDefaultProduct" ToRole="DefaultProducts" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_LinkUserToDefaultProduct_dbo_Users_UserId" FromRole="LinkUserToDefaultProduct" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="LinkUserToList">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ShoppingListId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ShoppingListId" Type="Int32" Nullable="false" />
+          <Property Name="ListAccessTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ListAccessType" Relationship="Self.FK_dbo_LinkUserToList_dbo_ListAccessTypes_ListAccessTypeId" FromRole="LinkUserToList" ToRole="ListAccessTypes" />
+          <NavigationProperty Name="ShoppingList" Relationship="Self.FK_dbo_LinkUserToList_dbo_ShoppingLists_ShoppingListId" FromRole="LinkUserToList" ToRole="ShoppingLists" />
+        </EntityType>
+        <EntityType Name="ListAccessType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Relation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LinkUserToLists" Relationship="Self.FK_dbo_LinkUserToList_dbo_ListAccessTypes_ListAccessTypeId" FromRole="ListAccessTypes" ToRole="LinkUserToList" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProductType_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ApiProduct" Relationship="Self.FK_dbo_ApiProducts_dbo_Products_Id" FromRole="Products" ToRole="ApiProducts" />
+          <NavigationProperty Name="DefaultProduct" Relationship="Self.FK_dbo_DefaultProducts_dbo_Products_Id" FromRole="Products" ToRole="DefaultProducts" />
+          <NavigationProperty Name="ProductType" Relationship="Self.FK_dbo_Products_dbo_ProductTypes_ProductType_Id" FromRole="Products" ToRole="ProductTypes" />
+          <NavigationProperty Name="ShoppingListEntries" Relationship="Self.FK_dbo_ShoppingListEntries_dbo_Products_Product_Id" FromRole="Products" ToRole="ShoppingListEntries" />
+          <NavigationProperty Name="TemplateSortedProducts" Relationship="Self.FK_dbo_TemplateSortedProducts_dbo_Products_ProductId" FromRole="Products" ToRole="TemplateSortedProducts" />
+          <NavigationProperty Name="TranslationOfProducts" Relationship="Self.FK_dbo_TranslationOfProducts_dbo_Products_Product_Id" FromRole="Products" ToRole="TranslationOfProducts" />
+          <NavigationProperty Name="UserProduct" Relationship="Self.FK_dbo_UserProducts_dbo_Products_Id" FromRole="Products" ToRole="UserProducts" />
+        </EntityType>
+        <EntityType Name="ProductType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_ProductTypes_ProductType_Id" FromRole="ProductTypes" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ShopApi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ApiProducts" Relationship="Self.FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id" FromRole="ShopApis" ToRole="ApiProducts" />
+          <NavigationProperty Name="Chains" Relationship="Self.FK_dbo_Chains_dbo_ShopApi_Id" FromRole="ShopApis" ToRole="Chains" />
+        </EntityType>
+        <EntityType Name="ShoppingListEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Product_Id" Type="Int32" Nullable="false" />
+          <Property Name="ShoppingList_Id" Type="Int32" Nullable="false" />
+          <Property Name="State_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EntryState" Relationship="Self.FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id" FromRole="ShoppingListEntries" ToRole="EntryStates" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_ShoppingListEntries_dbo_Products_Product_Id" FromRole="ShoppingListEntries" ToRole="Products" />
+          <NavigationProperty Name="ShoppingList" Relationship="Self.FK_dbo_ShoppingListEntries_dbo_ShoppingLists_ShoppingList_Id" FromRole="ShoppingListEntries" ToRole="ShoppingLists" />
+          <NavigationProperty Name="UserEntrySortings" Relationship="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_NextEntryId_Id" FromRole="ShoppingListEntries" ToRole="UserEntrySortings" />
+          <NavigationProperty Name="UserEntrySortings1" Relationship="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_PrevEntryId_Id" FromRole="ShoppingListEntries" ToRole="UserEntrySortings" />
+          <NavigationProperty Name="UserEntrySortings2" Relationship="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_ShoppingListEntry_Id" FromRole="ShoppingListEntries" ToRole="UserEntrySortings" />
+        </EntityType>
+        <EntityType Name="ShoppingList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChosenSorting_Id" Type="Int32" />
+          <NavigationProperty Name="LinkUserToLists" Relationship="Self.FK_dbo_LinkUserToList_dbo_ShoppingLists_ShoppingListId" FromRole="ShoppingLists" ToRole="LinkUserToList" />
+          <NavigationProperty Name="ShoppingListEntries" Relationship="Self.FK_dbo_ShoppingListEntries_dbo_ShoppingLists_ShoppingList_Id" FromRole="ShoppingLists" ToRole="ShoppingListEntries" />
+          <NavigationProperty Name="UserListSorting" Relationship="Self.FK_dbo_ShoppingLists_dbo_ChosenSorting_Id" FromRole="ShoppingLists" ToRole="UserListSortings" />
+          <NavigationProperty Name="UserListSortings" Relationship="Self.FK_dbo_UserListSortings_dbo_ShoppingList_Id" FromRole="ShoppingLists" ToRole="UserListSortings" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StreetNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Chain_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Chain" Relationship="Self.FK_dbo_Shops_dbo_Chains_Chain_Id" FromRole="Shops" ToRole="Chains" />
+          <NavigationProperty Name="TemplateListOrderings" Relationship="Self.FK_dbo_TemplateListOrderings_dbo_Shops_Shop_Id" FromRole="Shops" ToRole="TemplateListOrderings" />
+          <NavigationProperty Name="UserListSortings" Relationship="Self.FK_dbo_UserListSortings_dbo_Shops_Shop_Id" FromRole="Shops" ToRole="UserListSortings" />
+        </EntityType>
+        <EntityType Name="TemplateListOrdering">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Shop_Id" Type="Int32" />
+          <NavigationProperty Name="Shop" Relationship="Self.FK_dbo_TemplateListOrderings_dbo_Shops_Shop_Id" FromRole="TemplateListOrderings" ToRole="Shops" />
+          <NavigationProperty Name="TemplateSortedProducts" Relationship="Self.FK_dbo_TemplateSortedProducts_dbo_TemplateListOrderings_TemplateListOrderingId" FromRole="TemplateListOrderings" ToRole="TemplateSortedProducts" />
+        </EntityType>
+        <EntityType Name="TemplateSortedProduct">
+          <Key>
+            <PropertyRef Name="TemplateListOrderingId" />
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="TemplateListOrderingId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_TemplateSortedProducts_dbo_Products_ProductId" FromRole="TemplateSortedProducts" ToRole="Products" />
+          <NavigationProperty Name="TemplateListOrdering" Relationship="Self.FK_dbo_TemplateSortedProducts_dbo_TemplateListOrderings_TemplateListOrderingId" FromRole="TemplateSortedProducts" ToRole="TemplateListOrderings" />
+        </EntityType>
+        <EntityType Name="TranslationOfCategory">
+          <Key>
+            <PropertyRef Name="Category_Id" />
+            <PropertyRef Name="Language_Id" />
+          </Key>
+          <Property Name="Category_Id" Type="Int32" Nullable="false" />
+          <Property Name="Language_Id" Type="Int32" Nullable="false" />
+          <Property Name="Translation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id" FromRole="TranslationOfCategories" ToRole="Categories" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_dbo_TranslationOfCategories_dbo_Languages_Language_Id" FromRole="TranslationOfCategories" ToRole="Languages" />
+        </EntityType>
+        <EntityType Name="TranslationOfProduct">
+          <Key>
+            <PropertyRef Name="Language_Id" />
+            <PropertyRef Name="Product_Id" />
+          </Key>
+          <Property Name="Language_Id" Type="Int32" Nullable="false" />
+          <Property Name="Product_Id" Type="Int32" Nullable="false" />
+          <Property Name="Translation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_dbo_TranslationOfProducts_dbo_Languages_Language_Id" FromRole="TranslationOfProducts" ToRole="Languages" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_TranslationOfProducts_dbo_Products_Product_Id" FromRole="TranslationOfProducts" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="TranslationOfUnitType">
+          <Key>
+            <PropertyRef Name="Language_Id" />
+            <PropertyRef Name="UnitType_Id" />
+          </Key>
+          <Property Name="Language_Id" Type="Int32" Nullable="false" />
+          <Property Name="UnitType_Id" Type="Int32" Nullable="false" />
+          <Property Name="Translation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_dbo_TranslationOfUnitTypes_dbo_Languages_Language_Id" FromRole="TranslationOfUnitTypes" ToRole="Languages" />
+          <NavigationProperty Name="UnitType" Relationship="Self.FK_dbo_TranslationOfUnitTypes_dbo_UnitTypes_UnitType_Id" FromRole="TranslationOfUnitTypes" ToRole="UnitTypes" />
+        </EntityType>
+        <EntityType Name="UnitType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ApiProducts" Relationship="Self.FK_dbo_ApiProducts_dbo_UnitTypes_Unit_Id" FromRole="UnitTypes" ToRole="ApiProducts" />
+          <NavigationProperty Name="DefaultProducts" Relationship="Self.FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id" FromRole="UnitTypes" ToRole="DefaultProducts" />
+          <NavigationProperty Name="TranslationOfUnitTypes" Relationship="Self.FK_dbo_TranslationOfUnitTypes_dbo_UnitTypes_UnitType_Id" FromRole="UnitTypes" ToRole="TranslationOfUnitTypes" />
+          <NavigationProperty Name="UserProducts" Relationship="Self.FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id" FromRole="UnitTypes" ToRole="UserProducts" />
+        </EntityType>
+        <EntityType Name="UserEntrySorting">
+          <Key>
+            <PropertyRef Name="ShoppingListEntry_Id" />
+            <PropertyRef Name="UserListSorting_Id" />
+          </Key>
+          <Property Name="NextEntryId_Id" Type="Int32" />
+          <Property Name="PrevEntryId_Id" Type="Int32" />
+          <Property Name="ShoppingListEntry_Id" Type="Int32" Nullable="false" />
+          <Property Name="UserListSorting_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ShoppingListEntry" Relationship="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_NextEntryId_Id" FromRole="UserEntrySortings" ToRole="ShoppingListEntries" />
+          <NavigationProperty Name="ShoppingListEntry1" Relationship="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_PrevEntryId_Id" FromRole="UserEntrySortings" ToRole="ShoppingListEntries" />
+          <NavigationProperty Name="ShoppingListEntry2" Relationship="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_ShoppingListEntry_Id" FromRole="UserEntrySortings" ToRole="ShoppingListEntries" />
+          <NavigationProperty Name="UserListSorting" Relationship="Self.FK_dbo_UserEntrySortings_dbo_UserListSortings_UserListSorting_Id" FromRole="UserEntrySortings" ToRole="UserListSortings" />
+        </EntityType>
+        <EntityType Name="UserListSorting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Shop_Id" Type="Int32" />
+          <Property Name="ShoppingList_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ShoppingLists" Relationship="Self.FK_dbo_ShoppingLists_dbo_ChosenSorting_Id" FromRole="UserListSortings" ToRole="ShoppingLists" />
+          <NavigationProperty Name="ShoppingList" Relationship="Self.FK_dbo_UserListSortings_dbo_ShoppingList_Id" FromRole="UserListSortings" ToRole="ShoppingLists" />
+          <NavigationProperty Name="Shop" Relationship="Self.FK_dbo_UserListSortings_dbo_Shops_Shop_Id" FromRole="UserListSortings" ToRole="Shops" />
+          <NavigationProperty Name="UserEntrySortings" Relationship="Self.FK_dbo_UserEntrySortings_dbo_UserListSortings_UserListSorting_Id" FromRole="UserListSortings" ToRole="UserEntrySortings" />
+        </EntityType>
+        <EntityType Name="UserProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Category_Id" Type="Int32" />
+          <Property Name="Currency_Id" Type="Int32" />
+          <Property Name="UnitType_Id" Type="Int32" />
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_dbo_UserProducts_dbo_Categories_Category_Id" FromRole="UserProducts" ToRole="Categories" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_dbo_UserProducts_dbo_Currencies_Currency_Id" FromRole="UserProducts" ToRole="Currencies" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_UserProducts_dbo_Products_Id" FromRole="UserProducts" ToRole="Products" />
+          <NavigationProperty Name="UnitType" Relationship="Self.FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id" FromRole="UserProducts" ToRole="UnitTypes" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_UserProducts_dbo_Users_User_Id" FromRole="UserProducts" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nickname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Country_Id" Type="Int32" Nullable="false" />
+          <Property Name="Language_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_dbo_Categories_dbo_Users_User_Id" FromRole="Users" ToRole="Categories" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_dbo_Users_dbo_Countries_Country_Id" FromRole="Users" ToRole="Countries" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_dbo_Users_dbo_Languages_Language_Id" FromRole="Users" ToRole="Languages" />
+          <NavigationProperty Name="LinkUserToDefaultProducts" Relationship="Self.FK_dbo_LinkUserToDefaultProduct_dbo_Users_UserId" FromRole="Users" ToRole="LinkUserToDefaultProduct" />
+          <NavigationProperty Name="UserProducts" Relationship="Self.FK_dbo_UserProducts_dbo_Users_User_Id" FromRole="Users" ToRole="UserProducts" />
+        </EntityType>
+        <Association Name="FK_dbo_ApiProducts_dbo_Currencies_Currency_Id">
+          <End Role="Currencies" Type="Self.Currency" Multiplicity="1" />
+          <End Role="ApiProducts" Type="Self.ApiProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="Currency_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id">
+          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="0..1" />
+          <End Role="ApiProducts" Type="Self.ApiProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DefaultProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="DefaultProduct_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ApiProducts_dbo_Products_Id">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="ApiProducts" Type="Self.ApiProduct" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id">
+          <End Role="ShopApis" Type="Self.ShopApi" Multiplicity="1" />
+          <End Role="ApiProducts" Type="Self.ApiProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopApis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="ShopApi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ApiProducts_dbo_UnitTypes_Unit_Id">
+          <End Role="UnitTypes" Type="Self.UnitType" Multiplicity="1" />
+          <End Role="ApiProducts" Type="Self.ApiProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Categories_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Categories" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categories">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id">
+          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
+          <End Role="TranslationOfCategories" Type="Self.TranslationOfCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfCategories">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserProducts_dbo_Categories_Category_Id">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="UserProducts" Type="Self.UserProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Chains_dbo_ShopApi_Id">
+          <End Role="ShopApis" Type="Self.ShopApi" Multiplicity="0..1" />
+          <End Role="Chains" Type="Self.Chain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopApis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chains">
+              <PropertyRef Name="ShopApi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Shops_dbo_Chains_Chain_Id">
+          <End Role="Chains" Type="Self.Chain" Multiplicity="1" />
+          <End Role="Shops" Type="Self.Shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chains">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shops">
+              <PropertyRef Name="Chain_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Countries_Country_Id">
+          <End Role="Countries" Type="Self.Country" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Country_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id">
+          <End Role="Currencies" Type="Self.Currency" Multiplicity="1" />
+          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultProducts">
+              <PropertyRef Name="Currency_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserProducts_dbo_Currencies_Currency_Id">
+          <End Role="Currencies" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="UserProducts" Type="Self.UserProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="Currency_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DefaultProducts_dbo_Products_Id">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultProducts">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id">
+          <End Role="UnitTypes" Type="Self.UnitType" Multiplicity="1" />
+          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultProducts">
+              <PropertyRef Name="UnitType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId">
+          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="1" />
+          <End Role="LinkUserToDefaultProduct" Type="Self.LinkUserToDefaultProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DefaultProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUserToDefaultProduct">
+              <PropertyRef Name="DefaultProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id">
+          <End Role="EntryStates" Type="Self.EntryState" Multiplicity="1" />
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntryStates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingListEntries">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfCategories_dbo_Languages_Language_Id">
+          <End Role="Languages" Type="Self.Language" Multiplicity="1" />
+          <End Role="TranslationOfCategories" Type="Self.TranslationOfCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfCategories">
+              <PropertyRef Name="Language_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfProducts_dbo_Languages_Language_Id">
+          <End Role="Languages" Type="Self.Language" Multiplicity="1" />
+          <End Role="TranslationOfProducts" Type="Self.TranslationOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfProducts">
+              <PropertyRef Name="Language_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfUnitTypes_dbo_Languages_Language_Id">
+          <End Role="Languages" Type="Self.Language" Multiplicity="1" />
+          <End Role="TranslationOfUnitTypes" Type="Self.TranslationOfUnitType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfUnitTypes">
+              <PropertyRef Name="Language_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Languages_Language_Id">
+          <End Role="Languages" Type="Self.Language" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Language_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinkUserToDefaultProduct_dbo_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="LinkUserToDefaultProduct" Type="Self.LinkUserToDefaultProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUserToDefaultProduct">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinkUserToList_dbo_ListAccessTypes_ListAccessTypeId">
+          <End Role="ListAccessTypes" Type="Self.ListAccessType" Multiplicity="1" />
+          <End Role="LinkUserToList" Type="Self.LinkUserToList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListAccessTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUserToList">
+              <PropertyRef Name="ListAccessTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinkUserToList_dbo_ShoppingLists_ShoppingListId">
+          <End Role="ShoppingLists" Type="Self.ShoppingList" Multiplicity="1" />
+          <End Role="LinkUserToList" Type="Self.LinkUserToList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingLists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUserToList">
+              <PropertyRef Name="ShoppingListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Products_dbo_ProductTypes_ProductType_Id">
+          <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProductType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ShoppingListEntries_dbo_Products_Product_Id">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingListEntries">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TemplateSortedProducts_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="TemplateSortedProducts" Type="Self.TemplateSortedProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateSortedProducts">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfProducts_dbo_Products_Product_Id">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="TranslationOfProducts" Type="Self.TranslationOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfProducts">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserProducts_dbo_Products_Id">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="UserProducts" Type="Self.UserProduct" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ShoppingListEntries_dbo_ShoppingLists_ShoppingList_Id">
+          <End Role="ShoppingLists" Type="Self.ShoppingList" Multiplicity="1" />
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingLists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingListEntries">
+              <PropertyRef Name="ShoppingList_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_NextEntryId_Id">
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntry" Multiplicity="0..1" />
+          <End Role="UserEntrySortings" Type="Self.UserEntrySorting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingListEntries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEntrySortings">
+              <PropertyRef Name="NextEntryId_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_PrevEntryId_Id">
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntry" Multiplicity="0..1" />
+          <End Role="UserEntrySortings" Type="Self.UserEntrySorting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingListEntries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEntrySortings">
+              <PropertyRef Name="PrevEntryId_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_ShoppingListEntry_Id">
+          <End Role="ShoppingListEntries" Type="Self.ShoppingListEntry" Multiplicity="1" />
+          <End Role="UserEntrySortings" Type="Self.UserEntrySorting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingListEntries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEntrySortings">
+              <PropertyRef Name="ShoppingListEntry_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ShoppingLists_dbo_ChosenSorting_Id">
+          <End Role="UserListSortings" Type="Self.UserListSorting" Multiplicity="0..1" />
+          <End Role="ShoppingLists" Type="Self.ShoppingList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserListSortings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingLists">
+              <PropertyRef Name="ChosenSorting_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserListSortings_dbo_ShoppingList_Id">
+          <End Role="ShoppingLists" Type="Self.ShoppingList" Multiplicity="1" />
+          <End Role="UserListSortings" Type="Self.UserListSorting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingLists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserListSortings">
+              <PropertyRef Name="ShoppingList_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TemplateListOrderings_dbo_Shops_Shop_Id">
+          <End Role="Shops" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="TemplateListOrderings" Type="Self.TemplateListOrdering" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateListOrderings">
+              <PropertyRef Name="Shop_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserListSortings_dbo_Shops_Shop_Id">
+          <End Role="Shops" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="UserListSortings" Type="Self.UserListSorting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserListSortings">
+              <PropertyRef Name="Shop_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TemplateSortedProducts_dbo_TemplateListOrderings_TemplateListOrderingId">
+          <End Role="TemplateListOrderings" Type="Self.TemplateListOrdering" Multiplicity="1" />
+          <End Role="TemplateSortedProducts" Type="Self.TemplateSortedProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TemplateListOrderings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateSortedProducts">
+              <PropertyRef Name="TemplateListOrderingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TranslationOfUnitTypes_dbo_UnitTypes_UnitType_Id">
+          <End Role="UnitTypes" Type="Self.UnitType" Multiplicity="1" />
+          <End Role="TranslationOfUnitTypes" Type="Self.TranslationOfUnitType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationOfUnitTypes">
+              <PropertyRef Name="UnitType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id">
+          <End Role="UnitTypes" Type="Self.UnitType" Multiplicity="0..1" />
+          <End Role="UserProducts" Type="Self.UserProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="UnitType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserEntrySortings_dbo_UserListSortings_UserListSorting_Id">
+          <End Role="UserListSortings" Type="Self.UserListSorting" Multiplicity="1" />
+          <End Role="UserEntrySortings" Type="Self.UserEntrySorting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserListSortings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEntrySortings">
+              <PropertyRef Name="UserListSorting_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserProducts_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserProducts" Type="Self.UserProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LinkDefaultProductToCategory">
+          <End Role="Categories" Type="Self.Category" Multiplicity="*" />
+          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="dmaj0918_1074524Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ApiProducts" EntityType="Self.ApiProduct" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Chains" EntityType="Self.Chain" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Currencies" EntityType="Self.Currency" />
+          <EntitySet Name="DefaultProducts" EntityType="Self.DefaultProduct" />
+          <EntitySet Name="EntryStates" EntityType="Self.EntryState" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="LinkUserToDefaultProducts" EntityType="Self.LinkUserToDefaultProduct" />
+          <EntitySet Name="LinkUserToLists" EntityType="Self.LinkUserToList" />
+          <EntitySet Name="ListAccessTypes" EntityType="Self.ListAccessType" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
+          <EntitySet Name="ShopApis" EntityType="Self.ShopApi" />
+          <EntitySet Name="ShoppingListEntries" EntityType="Self.ShoppingListEntry" />
+          <EntitySet Name="ShoppingLists" EntityType="Self.ShoppingList" />
+          <EntitySet Name="Shops" EntityType="Self.Shop" />
+          <EntitySet Name="TemplateListOrderings" EntityType="Self.TemplateListOrdering" />
+          <EntitySet Name="TemplateSortedProducts" EntityType="Self.TemplateSortedProduct" />
+          <EntitySet Name="TranslationOfCategories" EntityType="Self.TranslationOfCategory" />
+          <EntitySet Name="TranslationOfProducts" EntityType="Self.TranslationOfProduct" />
+          <EntitySet Name="TranslationOfUnitTypes" EntityType="Self.TranslationOfUnitType" />
+          <EntitySet Name="UnitTypes" EntityType="Self.UnitType" />
+          <EntitySet Name="UserEntrySortings" EntityType="Self.UserEntrySorting" />
+          <EntitySet Name="UserListSortings" EntityType="Self.UserListSorting" />
+          <EntitySet Name="UserProducts" EntityType="Self.UserProduct" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_dbo_ApiProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_ApiProducts_dbo_Currencies_Currency_Id">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id" Association="Self.FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id">
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ApiProducts_dbo_Products_Id" Association="Self.FK_dbo_ApiProducts_dbo_Products_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id" Association="Self.FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id">
+            <End Role="ShopApis" EntitySet="ShopApis" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ApiProducts_dbo_UnitTypes_Unit_Id" Association="Self.FK_dbo_ApiProducts_dbo_UnitTypes_Unit_Id">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Categories_dbo_Users_User_Id" Association="Self.FK_dbo_Categories_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Categories" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id" Association="Self.FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="TranslationOfCategories" EntitySet="TranslationOfCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserProducts_dbo_Categories_Category_Id" Association="Self.FK_dbo_UserProducts_dbo_Categories_Category_Id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Chains_dbo_ShopApi_Id" Association="Self.FK_dbo_Chains_dbo_ShopApi_Id">
+            <End Role="ShopApis" EntitySet="ShopApis" />
+            <End Role="Chains" EntitySet="Chains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Shops_dbo_Chains_Chain_Id" Association="Self.FK_dbo_Shops_dbo_Chains_Chain_Id">
+            <End Role="Chains" EntitySet="Chains" />
+            <End Role="Shops" EntitySet="Shops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Countries_Country_Id" Association="Self.FK_dbo_Users_dbo_Countries_Country_Id">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_UserProducts_dbo_Currencies_Currency_Id">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DefaultProducts_dbo_Products_Id" Association="Self.FK_dbo_DefaultProducts_dbo_Products_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id" Association="Self.FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId" Association="Self.FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId">
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+            <End Role="LinkUserToDefaultProduct" EntitySet="LinkUserToDefaultProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id" Association="Self.FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id">
+            <End Role="EntryStates" EntitySet="EntryStates" />
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfCategories_dbo_Languages_Language_Id" Association="Self.FK_dbo_TranslationOfCategories_dbo_Languages_Language_Id">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="TranslationOfCategories" EntitySet="TranslationOfCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfProducts_dbo_Languages_Language_Id" Association="Self.FK_dbo_TranslationOfProducts_dbo_Languages_Language_Id">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="TranslationOfProducts" EntitySet="TranslationOfProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfUnitTypes_dbo_Languages_Language_Id" Association="Self.FK_dbo_TranslationOfUnitTypes_dbo_Languages_Language_Id">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="TranslationOfUnitTypes" EntitySet="TranslationOfUnitTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Languages_Language_Id" Association="Self.FK_dbo_Users_dbo_Languages_Language_Id">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkUserToDefaultProduct_dbo_Users_UserId" Association="Self.FK_dbo_LinkUserToDefaultProduct_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LinkUserToDefaultProduct" EntitySet="LinkUserToDefaultProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkUserToList_dbo_ListAccessTypes_ListAccessTypeId" Association="Self.FK_dbo_LinkUserToList_dbo_ListAccessTypes_ListAccessTypeId">
+            <End Role="ListAccessTypes" EntitySet="ListAccessTypes" />
+            <End Role="LinkUserToList" EntitySet="LinkUserToLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkUserToList_dbo_ShoppingLists_ShoppingListId" Association="Self.FK_dbo_LinkUserToList_dbo_ShoppingLists_ShoppingListId">
+            <End Role="ShoppingLists" EntitySet="ShoppingLists" />
+            <End Role="LinkUserToList" EntitySet="LinkUserToLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Products_dbo_ProductTypes_ProductType_Id" Association="Self.FK_dbo_Products_dbo_ProductTypes_ProductType_Id">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ShoppingListEntries_dbo_Products_Product_Id" Association="Self.FK_dbo_ShoppingListEntries_dbo_Products_Product_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TemplateSortedProducts_dbo_Products_ProductId" Association="Self.FK_dbo_TemplateSortedProducts_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="TemplateSortedProducts" EntitySet="TemplateSortedProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfProducts_dbo_Products_Product_Id" Association="Self.FK_dbo_TranslationOfProducts_dbo_Products_Product_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="TranslationOfProducts" EntitySet="TranslationOfProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserProducts_dbo_Products_Id" Association="Self.FK_dbo_UserProducts_dbo_Products_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ShoppingListEntries_dbo_ShoppingLists_ShoppingList_Id" Association="Self.FK_dbo_ShoppingListEntries_dbo_ShoppingLists_ShoppingList_Id">
+            <End Role="ShoppingLists" EntitySet="ShoppingLists" />
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_NextEntryId_Id" Association="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_NextEntryId_Id">
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+            <End Role="UserEntrySortings" EntitySet="UserEntrySortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_PrevEntryId_Id" Association="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_PrevEntryId_Id">
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+            <End Role="UserEntrySortings" EntitySet="UserEntrySortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_ShoppingListEntry_Id" Association="Self.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_ShoppingListEntry_Id">
+            <End Role="ShoppingListEntries" EntitySet="ShoppingListEntries" />
+            <End Role="UserEntrySortings" EntitySet="UserEntrySortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ShoppingLists_dbo_ChosenSorting_Id" Association="Self.FK_dbo_ShoppingLists_dbo_ChosenSorting_Id">
+            <End Role="UserListSortings" EntitySet="UserListSortings" />
+            <End Role="ShoppingLists" EntitySet="ShoppingLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserListSortings_dbo_ShoppingList_Id" Association="Self.FK_dbo_UserListSortings_dbo_ShoppingList_Id">
+            <End Role="ShoppingLists" EntitySet="ShoppingLists" />
+            <End Role="UserListSortings" EntitySet="UserListSortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TemplateListOrderings_dbo_Shops_Shop_Id" Association="Self.FK_dbo_TemplateListOrderings_dbo_Shops_Shop_Id">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="TemplateListOrderings" EntitySet="TemplateListOrderings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserListSortings_dbo_Shops_Shop_Id" Association="Self.FK_dbo_UserListSortings_dbo_Shops_Shop_Id">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="UserListSortings" EntitySet="UserListSortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TemplateSortedProducts_dbo_TemplateListOrderings_TemplateListOrderingId" Association="Self.FK_dbo_TemplateSortedProducts_dbo_TemplateListOrderings_TemplateListOrderingId">
+            <End Role="TemplateListOrderings" EntitySet="TemplateListOrderings" />
+            <End Role="TemplateSortedProducts" EntitySet="TemplateSortedProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TranslationOfUnitTypes_dbo_UnitTypes_UnitType_Id" Association="Self.FK_dbo_TranslationOfUnitTypes_dbo_UnitTypes_UnitType_Id">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="TranslationOfUnitTypes" EntitySet="TranslationOfUnitTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id" Association="Self.FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id">
+            <End Role="UnitTypes" EntitySet="UnitTypes" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserEntrySortings_dbo_UserListSortings_UserListSorting_Id" Association="Self.FK_dbo_UserEntrySortings_dbo_UserListSortings_UserListSorting_Id">
+            <End Role="UserListSortings" EntitySet="UserListSortings" />
+            <End Role="UserEntrySortings" EntitySet="UserEntrySortings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserProducts_dbo_Users_User_Id" Association="Self.FK_dbo_UserProducts_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="LinkDefaultProductToCategory" Association="Self.LinkDefaultProductToCategory">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entities">
+          <EntitySetMapping Name="ApiProducts">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.ApiProduct">
+              <MappingFragment StoreEntitySet="ApiProducts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Currency_Id" ColumnName="Currency_Id" />
+                <ScalarProperty Name="DefaultProduct_Id" ColumnName="DefaultProduct_Id" />
+                <ScalarProperty Name="ShopApi_Id" ColumnName="ShopApi_Id" />
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Endpoint" ColumnName="Endpoint" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chains">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.Chain">
+              <MappingFragment StoreEntitySet="Chains">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="ShopApi_Id" ColumnName="ShopApi_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.Currency">
+              <MappingFragment StoreEntitySet="Currencies">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sign" ColumnName="Sign" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DefaultProducts">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.DefaultProduct">
+              <MappingFragment StoreEntitySet="DefaultProducts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Currency_Id" ColumnName="Currency_Id" />
+                <ScalarProperty Name="UnitType_Id" ColumnName="UnitType_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntryStates">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.EntryState">
+              <MappingFragment StoreEntitySet="EntryStates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.Language">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinkUserToDefaultProducts">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.LinkUserToDefaultProduct">
+              <MappingFragment StoreEntitySet="LinkUserToDefaultProduct">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DefaultProductId" ColumnName="DefaultProductId" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinkUserToLists">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.LinkUserToList">
+              <MappingFragment StoreEntitySet="LinkUserToList">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ShoppingListId" ColumnName="ShoppingListId" />
+                <ScalarProperty Name="ListAccessTypeId" ColumnName="ListAccessTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListAccessTypes">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.ListAccessType">
+              <MappingFragment StoreEntitySet="ListAccessTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Relation" ColumnName="Relation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="ProductType_Id" ColumnName="ProductType_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTypes">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.ProductType">
+              <MappingFragment StoreEntitySet="ProductTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopApis">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.ShopApi">
+              <MappingFragment StoreEntitySet="ShopApis">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingListEntries">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.ShoppingListEntry">
+              <MappingFragment StoreEntitySet="ShoppingListEntries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="ShoppingList_Id" ColumnName="ShoppingList_Id" />
+                <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingLists">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.ShoppingList">
+              <MappingFragment StoreEntitySet="ShoppingLists">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="ChosenSorting_Id" ColumnName="ChosenSorting_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shops">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.Shop">
+              <MappingFragment StoreEntitySet="Shops">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="StreetNumber" ColumnName="StreetNumber" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Chain_Id" ColumnName="Chain_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateListOrderings">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.TemplateListOrdering">
+              <MappingFragment StoreEntitySet="TemplateListOrderings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Shop_Id" ColumnName="Shop_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateSortedProducts">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.TemplateSortedProduct">
+              <MappingFragment StoreEntitySet="TemplateSortedProducts">
+                <ScalarProperty Name="TemplateListOrderingId" ColumnName="TemplateListOrderingId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TranslationOfCategories">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.TranslationOfCategory">
+              <MappingFragment StoreEntitySet="TranslationOfCategories">
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Language_Id" ColumnName="Language_Id" />
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TranslationOfProducts">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.TranslationOfProduct">
+              <MappingFragment StoreEntitySet="TranslationOfProducts">
+                <ScalarProperty Name="Language_Id" ColumnName="Language_Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TranslationOfUnitTypes">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.TranslationOfUnitType">
+              <MappingFragment StoreEntitySet="TranslationOfUnitTypes">
+                <ScalarProperty Name="Language_Id" ColumnName="Language_Id" />
+                <ScalarProperty Name="UnitType_Id" ColumnName="UnitType_Id" />
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitTypes">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.UnitType">
+              <MappingFragment StoreEntitySet="UnitTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserEntrySortings">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.UserEntrySorting">
+              <MappingFragment StoreEntitySet="UserEntrySortings">
+                <ScalarProperty Name="NextEntryId_Id" ColumnName="NextEntryId_Id" />
+                <ScalarProperty Name="PrevEntryId_Id" ColumnName="PrevEntryId_Id" />
+                <ScalarProperty Name="ShoppingListEntry_Id" ColumnName="ShoppingListEntry_Id" />
+                <ScalarProperty Name="UserListSorting_Id" ColumnName="UserListSorting_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserListSortings">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.UserListSorting">
+              <MappingFragment StoreEntitySet="UserListSortings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Shop_Id" ColumnName="Shop_Id" />
+                <ScalarProperty Name="ShoppingList_Id" ColumnName="ShoppingList_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProducts">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.UserProduct">
+              <MappingFragment StoreEntitySet="UserProducts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Currency_Id" ColumnName="Currency_Id" />
+                <ScalarProperty Name="UnitType_Id" ColumnName="UnitType_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+                <ScalarProperty Name="Language_Id" ColumnName="Language_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LinkDefaultProductToCategory" TypeName="dmaj0918_1074524Model.LinkDefaultProductToCategory" StoreEntitySet="LinkDefaultProductToCategory">
+            <EndProperty Name="Categories">
+              <ScalarProperty Name="Id" ColumnName="CategoryId" />
+            </EndProperty>
+            <EndProperty Name="DefaultProducts">
+              <ScalarProperty Name="Id" ColumnName="DefaultProductId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
