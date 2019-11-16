@@ -85,16 +85,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ListIt_DataAccess\ListIt_DataAccess.csproj">
-      <Project>{69d0c1b9-8540-400c-b602-1f72db05e9a7}</Project>
-      <Name>ListIt_DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
-      <Project>{ACF9A909-0FE3-45CA-8D5A-7087F3FFBB00}</Project>
-      <Name>ListIt_DomainModel</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

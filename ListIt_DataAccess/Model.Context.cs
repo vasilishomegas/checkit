@@ -9,23 +9,23 @@
 
 namespace ListIt_DataAccess
 {
-    using ListIt_DomainModel;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-    public partial class ListItContext : DbContext
+    using ListIt_DomainModel; <!--Added-->
+    
+    public partial class dmaj0918_1074524Entities : DbContext
     {
-        public ListItContext()
-            : base("name=ListItContext")
+        public dmaj0918_1074524Entities()
+            : base("name=dmaj0918_1074524Entities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<ApiProduct> ApiProducts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Chain> Chains { get; set; }
