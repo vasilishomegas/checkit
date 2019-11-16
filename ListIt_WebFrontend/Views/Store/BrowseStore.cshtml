@@ -3,11 +3,138 @@
     ViewBag.Title = "Browse Store";
 }
 
-    <div class="container">
+    <div class="container-fluid">
         <h1>@ViewBag.Title</h1>
 
-        <p>
-            Content comes here...
-        </p>
+        <!-- SEARCH & FILTER -->
+        <div class="searchFilterArea">
+
+            <!-- SEARCHBAR -->
+            <div class="searchbar">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+
+
+            <!-- FILTERAREA -->
+            <div class="filterarea">
+                <form action="" method="post">
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <div id="stores">
+                                <label>Stores</label>
+                                <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#selectStores" aria-expanded="false" aria-controls="collapseOne">
+                                    <!-- Dropdown icon button -->
+                                </button>
+
+                                <div id="selectStores" class="collapse" data-parent="#stores">
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="fakta" value="option1">
+                                            <label class="form-check-label" for="fakta">Fakta</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="netto" value="option1">
+                                            <label class="form-check-label" for="netto">Netto</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="lidl" value="option1">
+                                            <label class="form-check-label" for="lidl">Lidl</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="aldi" value="option1">
+                                            <label class="form-check-label" for="aldi">Aldi</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="fotex" value="option1">
+                                            <label class="form-check-label" for="fotex">Fotex</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="bilka" value="option1">
+                                            <label class="form-check-label" for="bilka">Bilka</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="spar" value="option1">
+                                            <label class="form-check-label" for="spar">Spar</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="meny" value="option1">
+                                            <label class="form-check-label" for="meny">Meny</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-dark">Filter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- SEARCH RESULTS -->
+        <div class="searchresults">
+            <!-- CARD DECK-->
+
+            <div class="card-deck">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <!-- insert item name-->
+                            Banana
+                        </h5>
+                        <p class="card-text">
+                            <!-- enter brand here -->
+                            Brand: Chiquita
+                        </p>
+                        <p class="card-text">
+                            <!-- enter origin here -->
+                            Origin: Peru
+                        </p>
+                        <p class="card-text">
+                            <!-- enter store here -->
+                            Store: Fakta
+                        </p>
+                        <span class="card-text align-content-end">
+                            <!-- enter price here -->
+                            2.5 DKK/pc
+                        </span>
+                        <button class="btn btn-outline-dark" type="button">
+                            Add to list
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
     </div>
 
