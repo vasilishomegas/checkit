@@ -12,18 +12,18 @@ namespace ListIt_DataAccess
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using ListIt_DomainModel; <!--Added-->
+    using ListIt_DomainModel;
     
     public partial class dmaj0918_1074524Entities : DbContext
     {
-        public dmaj0918_1074524Entities()
-            : base("name=dmaj0918_1074524Entities")
+        public dmaj0918_1074524Entities() : base("dmaj0918_1074524Entities")
         {
+
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            
         }
     
         public virtual DbSet<ApiProduct> ApiProducts { get; set; }
