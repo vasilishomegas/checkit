@@ -8,7 +8,7 @@ using ListIt_DomainModel;
 
 namespace ListIt_BusinessLogic.Services
 {
-    class ProductTypeService : Service<ProductType>
+    public class ProductTypeService : Service<ProductType>
     {
     }
 }

@@ -8,7 +8,7 @@ using ListIt_DomainModel;
 
 namespace ListIt_BusinessLogic.Services
 {
-    class LinkUserToDefaultProductService : Service<LinkUserToDefaultProduct>
+    public class LinkUserToDefaultProductService : Service<LinkUserToDefaultProduct>
     {
     }
 }

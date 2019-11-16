@@ -3,7 +3,7 @@ using ListIt_DomainModel;
 
 namespace ListIt_BusinessLogic.Services
 {
-    class CurrencyService : Service<Currency>
+    public class CurrencyService : Service<Currency>
     {
     }
 }

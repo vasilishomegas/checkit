@@ -8,7 +8,7 @@ using ListIt_DomainModel;
 
 namespace ListIt_BusinessLogic.Services.Generics
 {
-    class Service<T> where T : class
+    public class Service<T> where T : class
     {
         protected readonly Repository<T> _repository = new Repository<T>();
 
@@ -20,6 +20,11 @@ namespace ListIt_BusinessLogic.Services.Generics
         public T Get(int id)
         {
             return _repository.Get(id);
+        }
+
+        public void Create(T entity)
+        {
+            _repository.Create(entity);
         }
 
         public void Update(T entity)

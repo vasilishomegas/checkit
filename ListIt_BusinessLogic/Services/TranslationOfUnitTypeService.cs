@@ -8,7 +8,7 @@ using ListIt_DomainModel;
 
 namespace ListIt_BusinessLogic.Services
 {
-    class TranslationOfUnitTypeService : Service<TranslationOfUnitType>
+    public class TranslationOfUnitTypeService : Service<TranslationOfUnitType>
     {
     }
 }

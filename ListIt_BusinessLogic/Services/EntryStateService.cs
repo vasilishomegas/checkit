@@ -8,7 +8,7 @@ using ListIt_DomainModel;
 
 namespace ListIt_BusinessLogic.Services
 {
-    class EntryStateService : Service <EntryState>
+    public class EntryStateService : Service <EntryState>
     {
     }
 }

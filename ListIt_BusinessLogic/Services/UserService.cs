@@ -8,7 +8,7 @@ using ListIt_DomainModel;
 
 namespace ListIt_BusinessLogic.Services
 {
-    class UserService : Service<User>
+    public class UserService : Service<User>
     {
 
     }

@@ -6,7 +6,7 @@ using ListIt_DomainModel;
 
 namespace ListIt_BusinessLogic.Services
 {
-    class ChainService : Service<Chain>
+    public class ChainService : Service<Chain>
     {
         
     }

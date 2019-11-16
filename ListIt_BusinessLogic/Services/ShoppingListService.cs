@@ -8,7 +8,7 @@ using ListIt_DomainModel;
 
 namespace ListIt_BusinessLogic.Services
 {
-    class ShoppingListService : Service<ShoppingList>
+    public class ShoppingListService : Service<ShoppingList>
     {
         public ICollection<ShoppingList> GetListsNewerThan(DateTime dateTime)
         {
