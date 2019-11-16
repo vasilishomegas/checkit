@@ -51,11 +51,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\ChainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApiProductService.cs" />
+    <Compile Include="Services\CountryService.cs" />
+    <Compile Include="Services\CurrencyService.cs" />
+    <Compile Include="Services\DefaulProductService.cs" />
+    <Compile Include="Services\EntryStateService.cs" />
     <Compile Include="Services\Generics\Service.cs" />
+    <Compile Include="Services\LanguageService.cs" />
+    <Compile Include="Services\LinkUserToDefaultProductService.cs" />
+    <Compile Include="Services\LinkUserToListService.cs" />
+    <Compile Include="Services\ListAccessTypeService.cs" />
+    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\ProductTypeService.cs" />
+    <Compile Include="Services\ShopApiService.cs" />
+    <Compile Include="Services\ShoppingListEntryService.cs" />
     <Compile Include="Services\ShoppingListService.cs" />
+    <Compile Include="Services\ShopService.cs" />
+    <Compile Include="Services\TemplateListOrderingService.cs" />
+    <Compile Include="Services\TemplateSortedProductService.cs" />
+    <Compile Include="Services\TranslationOfCategoryService.cs" />
+    <Compile Include="Services\TranslationOfProductService.cs" />
+    <Compile Include="Services\TranslationOfUnitTypeService.cs" />
+    <Compile Include="Services\UnitTypeService.cs" />
+    <Compile Include="Services\UserEntrySortingService.cs" />
+    <Compile Include="Services\UserListSortingService.cs" />
+    <Compile Include="Services\UserProductService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
