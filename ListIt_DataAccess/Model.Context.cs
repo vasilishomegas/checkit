@@ -16,7 +16,7 @@ namespace ListIt_DataAccess
     
     public partial class dmaj0918_1074524Entities : DbContext
     {
-        public dmaj0918_1074524Entities() : base("dmaj0918_1074524Entities")
+        public dmaj0918_1074524Entities() : base("name=dmaj0918_1074524Entities")
         {
 
         }

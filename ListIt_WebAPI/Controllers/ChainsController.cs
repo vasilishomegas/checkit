@@ -16,6 +16,7 @@ namespace ListIt_WebAPI.Controllers
         // GET api/values
         public IEnumerable<Chain> Get()
         {
+            _chainService.Create(new Chain());
             return _chainService.GetAll();
         }
 
