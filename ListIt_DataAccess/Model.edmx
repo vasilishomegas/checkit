@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"/>
           <Property Name="Currency_Id" Type="int" Nullable="false" />
           <Property Name="DefaultProduct_Id" Type="int" />
           <Property Name="ShopApi_Id" Type="int" Nullable="false" />
@@ -22,14 +22,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="User_Id" Type="int" />
         </EntityType>
         <EntityType Name="Chains">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Logo" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ShopApi_Id" Type="int" />
@@ -38,7 +38,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -46,7 +46,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Sign" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
@@ -64,14 +64,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Languages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -105,14 +105,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Relation" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
           <Property Name="ProductType_Id" Type="int" Nullable="false" />
         </EntityType>
@@ -120,21 +120,21 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="ShopApis">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="ShoppingListEntries">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Product_Id" Type="int" Nullable="false" />
           <Property Name="ShoppingList_Id" Type="int" Nullable="false" />
@@ -144,7 +144,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
@@ -154,7 +154,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Street" Type="nvarchar(max)" Nullable="false" />
           <Property Name="StreetNumber" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Zipcode" Type="nvarchar(max)" Nullable="false" />
@@ -165,7 +165,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Shop_Id" Type="int" />
         </EntityType>
         <EntityType Name="TemplateSortedProducts">
@@ -209,7 +209,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="UserEntrySortings">
           <Key>
@@ -246,7 +246,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
           <Property Name="Nickname" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="false" />

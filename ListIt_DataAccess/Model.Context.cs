@@ -63,6 +63,9 @@ namespace ListIt_DataAccess
                 .HasRequired(x => x.Product)
                 .WithRequiredDependent();
 
+            modelBuilder.Entity<LinkUserToList>()
+                .HasRequired(x => x.ListAccessType)
+                .WithRequiredDependent();
         }
 
 

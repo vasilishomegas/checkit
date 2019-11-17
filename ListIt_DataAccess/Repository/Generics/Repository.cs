@@ -26,7 +26,8 @@ namespace ListIt_DataAccess.Repository.Generics
         {
             using (var context = new ListItContext())
             {
-                context.Set<T>().Add(entity);
+                var result = context.Set<T>().Add(entity);
+                context.SaveChanges();
             }
         }
 
