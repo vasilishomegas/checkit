@@ -37,7 +37,7 @@ namespace ListIt_BusinessLogic.Services
                 Id = chainDto.Id,
                 Logo = chainDto.Logo,
                 Name = chainDto.Name,
-                ShopApi_Id = shopApiId,
+                ShopApi_Id = shopApiId
                 // ShopApi = shopApi    Don't link it because every time it creates a new instance
             });
         }
