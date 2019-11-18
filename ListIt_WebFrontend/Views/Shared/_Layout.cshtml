@@ -7,10 +7,9 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-
 </head>
 <body>
     <div class="d-flex" id="wrapper">
@@ -33,7 +32,6 @@
             </div>
 
             <div class="list-group list-group-flush" aria-orientation="vertical">
-                @Html.ActionLink("Trashbin", "Trashbin", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
                 @Html.ActionLink("Settings", "Settings", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
             </div>
         </div>
@@ -78,7 +76,7 @@
 
 
 
-    
+
 
     <!-- Menu Toggle Script -->
     <script>
