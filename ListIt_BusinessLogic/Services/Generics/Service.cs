@@ -12,13 +12,18 @@ namespace ListIt_BusinessLogic.Services.Generics
         where T : class
         where DTO : class
     {
-        protected readonly Repository<T> _repository = new Repository<T>();
+        protected Repository<T> _repository;
 
-        public IEnumerable<DTO> GetAll()
+        protected Service()
+        {
+            _repository = new Repository<T>();
+        }
+
+        public virtual IEnumerable<DTO> GetAll()
         {
             return _repository.GetAll().Select(ConvertDomainToDto).ToList();
         }
-        public DTO Get(int id)
+        public virtual DTO Get(int id)
         {
             var entity = _repository.Get(id);
 
@@ -26,22 +31,20 @@ namespace ListIt_BusinessLogic.Services.Generics
                 ? null
                 : ConvertDomainToDto(entity);
         }
-        public void Create(DTO dto)
+        public virtual void Create(DTO dto)
         {
             _repository.Create(ConvertDtoToDomain(dto));
         }
 
-        public void Update(DTO dto)
+        public virtual void Update(DTO dto)
         {
             _repository.Update(ConvertDtoToDomain(dto));
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             _repository.Delete(id);
         }
-
-
 
         // =========================================================================
         // =========================================================================

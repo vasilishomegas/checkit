@@ -66,6 +66,11 @@ namespace ListIt_DataAccess
             modelBuilder.Entity<LinkUserToList>()
                 .HasRequired(x => x.ListAccessType)
                 .WithRequiredDependent();
+
+            modelBuilder.Entity<Chain>()
+                .HasOptional<ShopApi>(chain => chain.ShopApi)
+                .WithMany()
+                .WillCascadeOnDelete(true);
         }
 
 

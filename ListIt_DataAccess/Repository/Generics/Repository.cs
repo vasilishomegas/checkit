@@ -1,20 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 
 namespace ListIt_DataAccess.Repository.Generics
 {
     public class Repository<T> where T : class
     {
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             using (var context = new ListItContext())
             {
                 return context.Set<T>().ToList();
             }
         }
-
-        public T Get(int id)
+        
+        public virtual T Get(int id)
         {
             using (var context = new ListItContext())
             {
@@ -22,16 +24,35 @@ namespace ListIt_DataAccess.Repository.Generics
             }
         }
 
-        public void Create(T entity)
+        public virtual void Create(T entity)
         {
             using (var context = new ListItContext())
             {
                 var result = context.Set<T>().Add(entity);
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
+                                                         + " in state " + eve.Entry.State + " has the following" +
+                                                         " validation errors:");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
+                        }
+                    }
+
+                    throw new Exception(builder.ToString());
+                }
             }
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             using (var context = new ListItContext())
             {
@@ -48,7 +69,7 @@ namespace ListIt_DataAccess.Repository.Generics
             }
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             using (var context = new ListItContext())
             {
@@ -64,5 +85,8 @@ namespace ListIt_DataAccess.Repository.Generics
                 context.SaveChanges();
             }
         }
+
+        
+
     }
 }

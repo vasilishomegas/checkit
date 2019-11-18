@@ -6,11 +6,19 @@ using System.Net.Http;
 using System.Web.Http;
 using ListIt_BusinessLogic.DTO;
 using ListIt_BusinessLogic.Services;
+using ListIt_DomainModel;
+using ListIt_WebAPI.Controllers.Generics;
 
 namespace ListIt_WebAPI.Controllers
 {
-    public class ShopApisController : ApiController
+    public class ShopApisController : GenericController<ShopApi, ShopApiDto>
     {
+        public ShopApisController() : base(new ShopApiService())
+        {
+
+        }
+
+        /* NOT GENERIC IMPLEMENTATION COMMENTED OUT BELOW
         private readonly ShopApiService _shopApiService = new ShopApiService();
 
         // GET api/values
@@ -72,5 +80,6 @@ namespace ListIt_WebAPI.Controllers
 
             return Ok();
         }
+        */
     }
 }

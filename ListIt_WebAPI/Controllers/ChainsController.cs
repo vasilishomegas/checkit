@@ -7,11 +7,18 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using ListIt_BusinessLogic.DTO;
+using ListIt_WebAPI.Controllers.Generics;
 
 namespace ListIt_WebAPI.Controllers
 {
-    public class ChainsController : ApiController
+    public class ChainsController : GenericController<Chain, ChainDto>
     {
+        public ChainsController() : base(new ChainService())
+        {
+
+        }
+
+        /* NOT GENERIC IMPLEMENTATION COMMENTED OUT
         private readonly ChainService _chainService = new ChainService();
 
         // GET api/values
@@ -37,6 +44,6 @@ namespace ListIt_WebAPI.Controllers
             return Ok();
         }
 
-
+        */
     }
 }

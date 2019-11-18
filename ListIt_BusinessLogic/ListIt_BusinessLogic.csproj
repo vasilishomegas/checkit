@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\ChainDto.cs" />
+    <Compile Include="DTO\Interfaces\IDto.cs" />
     <Compile Include="DTO\ShopApiDto.cs" />
     <Compile Include="Services\ChainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
