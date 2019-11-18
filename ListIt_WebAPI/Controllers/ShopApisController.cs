@@ -38,20 +38,39 @@ namespace ListIt_WebAPI.Controllers
 
         public IHttpActionResult Put(int id, [FromBody]ShopApiDto shopApiDto)
         {
-            if (shopApiDto.Id != 0 && shopApiDto.Id != id) 
-                return BadRequest("Given ID and path variable ID differ");
+
             if (!ModelState.IsValid)
                 return BadRequest("Invalid data");
 
+            if (shopApiDto.Id != 0 && shopApiDto.Id != id) 
+                return BadRequest("Given ID and path variable ID differ");
+            
             shopApiDto.Id = id;
-            if (_shopApiService.Update(shopApiDto)) return Ok();
-            return NotFound();
+
+            try
+            {
+                _shopApiService.Update(shopApiDto);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return BadRequest("Given ID might not exist in the database. " + e.Message);
+            }
+
+            return Ok();
         }
 
         public IHttpActionResult Delete(int id)
         {
-            if (_shopApiService.Delete(id)) return Ok();
-            return NotFound();
+            try
+            {
+                _shopApiService.Delete(id);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return BadRequest(e.Message);
+            }
+
+            return Ok();
         }
     }
 }

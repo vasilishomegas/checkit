@@ -37,16 +37,14 @@ namespace ListIt_DataAccess.Repository.Generics
             {
                 context.Set<T>().Attach(entity);
                 context.Entry(entity).State = EntityState.Modified;
-                context.SaveChanges();
-            }
-        }
-
-        public void Delete(T entity)
-        {
-            using (var context = new ListItContext())
-            {
-                context.Set<T>().Remove(entity);
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException e)
+                {
+                    throw new KeyNotFoundException(e.Message, e.InnerException);
+                }
             }
         }
 
@@ -55,8 +53,14 @@ namespace ListIt_DataAccess.Repository.Generics
             using (var context = new ListItContext())
             {
                 var entity = context.Set<T>().Find(id);
-                if (entity == null) return;
-                context.Set<T>().Remove(entity);
+                try
+                {
+                    context.Set<T>().Remove(entity);
+                }
+                catch (System.ArgumentNullException e)
+                {
+                    throw new KeyNotFoundException("No entries were affected - the row does not exist");
+                }
                 context.SaveChanges();
             }
         }

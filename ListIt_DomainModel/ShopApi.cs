@@ -7,11 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ListIt_DomainModel
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class ShopApi
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +23,9 @@ namespace ListIt_DomainModel
             this.ApiProducts = new HashSet<ApiProduct>();
             this.Chains = new HashSet<Chain>();
         }
-    
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Url { get; set; }
     

@@ -7,4 +7,6 @@ namespace ListIt_BusinessLogic.DTO
         public int Id { get; set; }
         public string Url { get; set; }
     }
+
+
 }

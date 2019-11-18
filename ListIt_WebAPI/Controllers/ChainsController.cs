@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ListIt_BusinessLogic.DTO;
 
 namespace ListIt_WebAPI.Controllers
 {
@@ -14,34 +15,28 @@ namespace ListIt_WebAPI.Controllers
         private readonly ChainService _chainService = new ChainService();
 
         // GET api/values
-        public IEnumerable<Chain> Get()
+        public IHttpActionResult Get()
         {
-            _chainService.Create(new Chain());
-            return _chainService.GetAll();
+            return Ok(_chainService.GetAll());
         }
 
         // GET api/values/5
-        public Chain Get(int id)
+        public IHttpActionResult GetAll(int id)
         {
-            return _chainService.Get(id);
+            var chain = _chainService.Get(id);
+            if (chain == null) return NotFound();
+            return Ok(chain);
         }
 
         // POST api/values
-        public void Post([FromBody]Chain chain)
+        public IHttpActionResult Post([FromBody]ChainDto chainDto)
         {
-            _chainService.Create(chain);
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data.");
+            _chainService.Create(chainDto);
+            return Ok();
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody]Chain chain)
-        {
-            if(id == chain.Id) _chainService.Update(chain);
-        }
 
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
-            _chainService.Delete(id);
-        }
     }
 }
