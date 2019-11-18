@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ListIt_BusinessLogic.DTO;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_BusinessLogic.Tools;
+using ListIt_DataAccess.Repository;
 using ListIt_DataAccess.Repository.Generics;
 using ListIt_DomainModel;
 using Microsoft.CSharp;
@@ -14,6 +15,10 @@ namespace ListIt_BusinessLogic.Services
 {
     public class ShopApiService : Service<ShopApi, ShopApiDto>
     {
+        public ShopApiService() : base(new ShopApiRepository())
+        {
+
+        }
         // Overriden methods are created to move the logic to generic Service class
         // Static methods are needed to be able to convert reference properties in other services
         public static ShopApi StaticDtoToDomain(ShopApiDto shopApiDto)

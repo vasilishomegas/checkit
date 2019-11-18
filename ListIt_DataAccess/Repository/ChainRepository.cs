@@ -10,7 +10,7 @@ namespace ListIt_DataAccess.Repository
 {
     public class ChainRepository : Repository<Chain>
     {
-        // THIS STUPID CLASS IS NECESSARY FOR EAGER LOADING, WHICH MEANS THAT RELATED CLASSES ARE ALSO RETURNED IN WEB API
+        // THIS STUPID GET METHODS ARE NECESSARY FOR EAGER LOADING, WHICH MEANS THAT RELATED CLASSES ARE ALSO RETURNED IN WEB API
         public override IEnumerable<Chain> GetAll()
         {
             using (var context = new ListItContext())

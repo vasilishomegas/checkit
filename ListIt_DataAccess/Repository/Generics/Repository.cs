@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ListIt_DataAccess.Repository.Generics
 {
-    public class Repository<T> where T : class
+    public abstract class Repository<T> where T : class
     {
         public virtual IEnumerable<T> GetAll()
         {
@@ -80,7 +80,7 @@ namespace ListIt_DataAccess.Repository.Generics
                 }
                 catch (System.ArgumentNullException e)
                 {
-                    throw new KeyNotFoundException("No entries were affected - the row does not exist");
+                    throw new KeyNotFoundException("No entries were affected; the row does not exist." + e.Message);
                 }
                 context.SaveChanges();
             }

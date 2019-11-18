@@ -14,9 +14,9 @@ namespace ListIt_BusinessLogic.Services.Generics
     {
         protected Repository<T> _repository;
 
-        protected Service()
+        protected Service(Repository<T> repository)
         {
-            _repository = new Repository<T>();
+            _repository = repository;
         }
 
         public virtual IEnumerable<DTO> GetAll()

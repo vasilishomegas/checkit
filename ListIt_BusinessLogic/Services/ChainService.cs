@@ -11,14 +11,14 @@ namespace ListIt_BusinessLogic.Services
 {
     public class ChainService : Service<Chain, ChainDto>
     {
-        public ChainService()
+        public ChainService() : base(new ChainRepository())
         {
-            _repository = new ChainRepository();
+
         }
 
         public override void Create(ChainDto chainDto)
         {
-            var shopApiRepository = new Repository<ShopApi>();
+            var shopApiRepository = new ShopApiRepository();
 
             int? shopApiId = null;
             if (chainDto.ShopApi != null)
@@ -41,6 +41,22 @@ namespace ListIt_BusinessLogic.Services
                 // ShopApi = shopApi    Don't link it because every time it creates a new instance
             });
         }
+
+        /* CASCADE DELETE - DELETING CHAIN WILL ALSO DELETE ITS SHOPAPI // IMPLEMENTED IN REPOSITORY CLASS
+        public override void Delete(int id)
+        {
+            var shopApiRepository = new Repository<ShopApi>();
+            Chain chain = _repository.Get(id);
+            ShopApi shopApi = null;
+
+            if(chain != null)
+                shopApi = shopApiRepository.Get(chain.Id);
+            
+            if (shopApi != null)
+                shopApiRepository.Delete(shopApi.Id);
+
+            _repository.Delete(id);
+        } */
 
 
         protected override Chain ConvertDtoToDomain(ChainDto chainDto) 
