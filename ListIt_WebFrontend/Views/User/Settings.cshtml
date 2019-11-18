@@ -10,7 +10,8 @@
         <h1>@ViewBag.Title</h1>
 
         <div class="settings-container">
-            <form action="" method="put">
+            @using (Html.BeginForm())
+            {
                 <!--div class="form-group">
                     <label for="language">Interface Language</label>
                     <select id="language" class="custom-select custom-select-sm">
@@ -61,10 +62,10 @@
                         <option value="">...</option>
                     </select>
                 </div>
-                    <button type="submit" class="btn btn-dark">
-                        @Lang.save
-                    </button>
-            </form>
+                <button type="submit" class="btn btn-dark">
+                    @Lang.save
+                </button>
+            }
         </div>
         
     </div>

@@ -58,15 +58,16 @@
 
                 <div class="d-flex justify-content-end">
                     <div>
-                        <form method="post" class="form-inline">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { @class = "form-inline" }))
+                        {
                             @Lang.language
                             <select name="lang" class="custom-control">
                                 <option></option>
-                                <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "") >@Lang.english</option>
+                                <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
                                 <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
                             </select>
                             <input type="submit" value="@Lang.submit" />
-                        </form>
+                        }
                     </div>
                     <span>
 

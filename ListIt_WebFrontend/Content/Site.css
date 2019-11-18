@@ -89,36 +89,6 @@ textarea {
     border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.range-slider__range {
-    -webkit-appearance: none;
-    height: 10px;
-    border-radius: 5px;
-    background: #d7dcdf;
-    outline: none;
-    padding: 0;
-    margin: 0;
-}
-
-    .range-slider__range::-webkit-slider-thumb {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #2c3e50;
-        cursor: pointer;
-        transition: background 0.15s ease-in-out;
-    }
-
-        .range-slider__range::-webkit-slider-thumb:hover {
-            background: #1abc9c;
-        }
-
-    .range-slider__range:active::-webkit-slider-thumb {
-        background: #1abc9c;
-    }
-
-    .range-slider__range:focus::-webkit-slider-thumb {
-        box-shadow: 0 0 0 3px #fff, 0 0 0 6px #1abc9c;
-    }
 
 
 
