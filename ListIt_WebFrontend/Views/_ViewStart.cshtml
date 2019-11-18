@@ -1,3 +1,9 @@
 ﻿@{
     //Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    // Checks for requested language:
+    if(!Request["lang"].IsEmpty()){
+        Culture = UICulture = Request["lang"];
+    }
 }

@@ -1,7 +1,9 @@
 ﻿@model User
+@using Resources
 
 @{
     Layout = null;
+    ViewBag.Title = @Lang.register;
 }
 
 <!DOCTYPE html>
@@ -9,7 +11,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Register</title>
+    <title>@ViewBag.Title</title>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -29,47 +31,49 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.Nickname, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Nickname, Lang.name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control", placeholder="Name", required="required" } })
+                    @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control", placeholder=Lang.name, required="required" } })
                     @Html.ValidationMessageFor(model => model.Nickname, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Email, Lang.email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder="Email", type="email", required="required" } })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder=Lang.email, type="email", required="required" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.PasswordHash, "Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.PasswordHash, Lang.pw, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type="password", placeholder="Password", required="required" } })
+                    @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type="password", placeholder=Lang.pw, required="required" } })
                     @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.PasswordHash, "Repeat password", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.PasswordHash, Lang.repPW, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type="password", placeholder="Password", required="required" } })
+                    @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type="password", placeholder=Lang.pw, required="required" } })
                     @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Register" class="btn btn-default" />
+                    <button type="submit" class="btn btn-dark">
+                        @Lang.register
+                    </button>
                 </div>
             </div>
         </div>
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink(Lang.login, "Login")
     </div>
 
     @Scripts.Render("~/bundles/jquery")

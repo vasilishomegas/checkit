@@ -1,6 +1,8 @@
-﻿@{
+﻿@using Resources
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Your Profile";
+    ViewBag.Title = Lang.yourProfile;
 }
 
 <div class="container-fluid">
@@ -13,7 +15,7 @@
             <table class="table">
                 <tr>
                     <td>
-                        Name
+                        @Lang.name
                     </td>
                     <td>
                         <!-- INSERT NICKNAME HERE -->
@@ -22,7 +24,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Email
+                        @Lang.email
                     </td>
                     <td>
                         <!-- INSERT EMAIL ADRESS HERE -->
@@ -40,10 +42,10 @@
     <div class="d-flex justify-content-center">
         <div class="btn-group-sm">
             <button class="btn btn-outline-dark" id="editProfile" data-toggle="modal" data-target="#modalEditProfile">
-                Edit profile data
+                @Lang.editProfile
             </button>
             <button class="btn btn-outline-dark" id="editPW" data-toggle="modal" data-target="#modalEditPW">
-                Change Password
+                @Lang.editPW
             </button>
         </div>
     </div>
@@ -54,7 +56,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalEditProfileTitle">Edit your Profile Data</h5>
+                <h5 class="modal-title" id="modalEditProfileTitle">@Lang.editProfile</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -67,17 +69,17 @@
                         <input type="file" class="custom-file-input" id="profilePic">
                     </div>
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">@Lang.name</label>
                         <input type="text" class="form-control" id="name" placeholder="Steve Smith">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">@Lang.email</label>
                         <input type="email" class="form-control" id="email" placeholder="steve.smith@ucn.dk">
                     </div>
                     
 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Lang.close</button>
+                    <button type="button" class="btn btn-primary">@Lang.save</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -92,7 +94,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalEditPWTitle">Change your Password</h5>
+                <h5 class="modal-title" id="modalEditPWTitle">@Lang.editPW</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -100,20 +102,20 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="oldPw">Old Password</label>
+                        <label for="oldPw">@Lang.oldPw</label>
                         <input type="password" class="form-control" id="oldPw" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="newPw">New Password</label>
+                        <label for="newPw">@Lang.newPw</label>
                         <input type="password" class="form-control" id="newPw" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="newPwConfirm">Confirm new Password</label>
+                        <label for="newPwConfirm">@Lang.cnewPw</label>
                         <input type="password" class="form-control" id="newPwConfirm" placeholder="">
                     </div>
 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Lang.close</button>
+                    <button type="button" class="btn btn-primary">@Lang.save</button>
                 </form>
             </div>
             <div class="modal-footer">

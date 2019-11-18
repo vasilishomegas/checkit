@@ -1,6 +1,8 @@
-﻿@{
+﻿@using Resources
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Find Item";
+    ViewBag.Title = Lang.findItem;
 }
 
 
@@ -13,8 +15,8 @@
             <!-- SEARCHBAR -->
             <div class="searchbar">
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <input class="form-control mr-sm-2" type="search" placeholder="@Lang.search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">@Lang.search</button>
                 </form>
             </div>
             
@@ -25,18 +27,16 @@
                     <div class="form-row">
                         <div class="col form-group">
                             <select id="sort" class="custom-select custom-select-sm">
-                                <option selected>sort</option>
-                                <option value="">A to Z</option>
-                                <option value="">Z to A</option>
-                                <option value="">lowest price</option>
-                                <option value="">highest price</option>
-                                <option value="">sale</option>
-                                <option value="">availability</option>
+                                <option selected>@Lang.sortBy</option>
+                                <option value="">@Lang.A_Z</option>
+                                <option value="">@Lang.Z_A</option>
+                                <option value="">@Lang.lowestPrice</option>
+                                <option value="">@Lang.highestPrice</option>
                             </select>
                         </div>
                         <div class="col form-group">
                             <div id="stores">
-                                <label>Stores</label>
+                                <label>@Lang.stores</label>
                                 <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#selectStores" aria-expanded="false" aria-controls="collapseOne">
                                     <!-- Dropdown icon button -->
                                 </button>
@@ -83,7 +83,7 @@
 
                         </div>
                         <div class="col">
-                            <button type="submit" class="btn btn-outline-dark">Filter</button>
+                            <button type="submit" class="btn btn-outline-dark">@Lang.filter</button>
                         </div>
                     </div>
                 </form>
@@ -120,7 +120,7 @@
                             2.5 DKK/pc
                         </span>
                         <button class="btn btn-outline-dark" type="button">
-                            Add to list
+                            @Lang.addToList
                         </button>
                     </div> 
                 </div>

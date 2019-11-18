@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Resources
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "List";
 }
@@ -15,22 +17,22 @@
             <div class="d-flex justify-content-between" id="accordionHeading">
                 <div class="d-flex">
                     <label class="form-text">
-                        Item name
+                        @Lang.name
                     </label>
                 </div>
                 <div class="d-flex">
                     <label class="form-text">
-                        Quantity
+                        @Lang.quantity
                     </label>
                 </div>
                 <div class="d-flex">
                     <label class="form-text">
-                        Price
+                        @Lang.price
                     </label>
                 </div>
                 <div class="d-flex">
                     <button class="btn" type="button" data-toggle="" data-target="" aria-controls="">
-                        Sort
+                        @Lang.sortBy
                         <!-- INSERT SORT ICON -->
                     </button>
                 </div>
@@ -38,6 +40,7 @@
             
 
             <!-- FOREACH LOOP: create card for each item -->
+       
             <div class="card">
                 <div class="card-header check-toggle" id="headingOne">
                     <div class="d-flex justify-content-between">
@@ -76,21 +79,21 @@
                                 <form>
                                     <div class="form-row">
                                         <div class="form-group col">
-                                            <label for="name">Name of item</label>
-                                            <input type="text" class="form-control" id="name" placeholder="Insert saved name here">
+                                            <label for="name">@Lang.itemName</label>
+                                            <input type="text" class="form-control" id="name" placeholder=@Lang.itemName>
                                         </div>
                                         <div class="form-group col">
-                                            <label for="price">Price</label>
+                                            <label for="price">@Lang.price</label>
                                             <input type="number" class="form-control" id="price" placeholder="Insert saved name here">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col range-slider">
-                                            <label for="quantity">Quantity: </label><output id="rangevalue"></output>
-                                            <input type="range" min="0" max="20" step="0.5" class="custom-range range-slider__range" value="10" onchange="rangevalue.value=value" id="quantity">                                        
+                                            <label for="quantity">@Lang.quantity </label><output id="rangevalue"></output>
+                                            <input type="text" class="form-control" value="1"  id="quantity">                                        
                                         </div>
                                         <div class="form-group col">
-                                            <label for="unit">Unit</label>
+                                            <label for="unit">@Lang.unit</label>
                                             <select id="unit" class="custom-select custom-select-sm">
                                                 <option value="" selected>pc</option>
                                                 <option value="">lt</option>
@@ -102,7 +105,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col">
-                                            <label for="category">Category</label>
+                                            <label for="category">@Lang.category</label>
                                             <select id="category" class="custom-select custom-select-sm">
                                                 <option selected>Choose a category</option>
                                                 <option value="">Vegetables</option>
@@ -112,13 +115,13 @@
                                             </select>
                                         </div>
                                         <div class="form-group col">
-                                            <label for="createCategory">Create Category:</label>
+                                            <label for="createCategory">@Lang.createCat</label>
                                             <input type="text" class="form-control" id="createCategory" placeholder="MyCategory">
                                         </div>
                                     </div>
                                     
                                     <div class="form-row">
-                                        <button class="btn btn-dark" type="submit">Save</button>
+                                        <button class="btn btn-dark" type="submit">@Lang.save</button>
                                     </div>
 
                                 </form>

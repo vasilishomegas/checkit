@@ -1,5 +1,7 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using Resources
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,9 +54,26 @@
                     @Html.ActionLink("List It", "Lists", "User", new { area = "" }, new { @class = "navbar-brand" })
                 </span>
 
-                <span class="justify-content-end">
-                    @Html.ActionLink("Logout", "Logout", "User", new { area = "" }, new { @class = "" })
-                </span>
+                
+
+                <div class="d-flex justify-content-end">
+                    <div>
+                        <form method="post" class="form-inline">
+                            @Lang.language
+                            <select name="lang" class="custom-control">
+                                <option></option>
+                                <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "") >@Lang.english</option>
+                                <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
+                            </select>
+                            <input type="submit" value="@Lang.submit" />
+                        </form>
+                    </div>
+                    <span>
+
+                        @Html.ActionLink(@Lang.logout, "Logout", "User", new { area = "" }, new { @class = "" })
+                    </span>
+                    
+                </div>
 
             </nav>
 
