@@ -19,7 +19,7 @@ namespace ListIt_WebAPI
 
             // Explanation of underneath
             // https://www.koskila.net/system-invalidoperationexception-ado-net/
-            var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+            // var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
     }
 }

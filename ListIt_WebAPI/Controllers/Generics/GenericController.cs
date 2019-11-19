@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
-using ListIt_BusinessLogic.DTO.Interfaces;
 using ListIt_BusinessLogic.Services.Generics;
+using ListIt_DomainModel.DTO.Interfaces;
 
 namespace ListIt_WebAPI.Controllers.Generics
 {

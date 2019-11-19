@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ListIt_DataAccess
 {
-    public class ListItContext : dmaj0918_1074524Entities
+    public class ListItContext : dmaj0918_1074524Entities1
     {
         public ListItContext() : base()
         {

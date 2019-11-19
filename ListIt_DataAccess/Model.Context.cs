@@ -12,68 +12,19 @@ namespace ListIt_DataAccess
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using ListIt_DomainModel;
+    using ListIt_DataAccessModel;
     
-    public partial class dmaj0918_1074524Entities : DbContext
+    public partial class dmaj0918_1074524Entities1 : DbContext
     {
-        public dmaj0918_1074524Entities() : base("name=dmaj0918_1074524Entities")
+        public dmaj0918_1074524Entities1()
+            : base("name=dmaj0918_1074524Entities1")
         {
-
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TranslationOfCategory>()
-                .HasKey<int>(x => x.Category_Id)
-                .HasKey<int>(x => x.Language_Id);
-
-            modelBuilder.Entity<TranslationOfProduct>()
-                .HasKey<int>(x => x.Language_Id)
-                .HasKey<int>(x => x.Product_Id);
-
-            modelBuilder.Entity<TranslationOfUnitType>()
-                .HasKey<int>(x => x.Language_Id)
-                .HasKey<int>(x => x.UnitType_Id);
-
-            modelBuilder.Entity<UserEntrySorting>()
-                .HasKey<int>(x => x.ShoppingListEntry_Id)
-                .HasKey<int>(x => x.UserListSorting_Id);
-
-            modelBuilder.Entity<TemplateSortedProduct>()
-                .HasKey<int>(x => x.ProductId)
-                .HasKey<int>(x => x.TemplateListOrderingId);
-
-            modelBuilder.Entity<LinkUserToDefaultProduct>()
-                .HasKey<int>(x => x.DefaultProductId)
-                .HasKey<int>(x => x.UserId);
-
-            modelBuilder.Entity<LinkUserToList>()
-                .HasKey<int>(x => x.ShoppingListId)
-                .HasKey<int>(x => x.UserId);
-
-            modelBuilder.Entity<ApiProduct>()
-                .HasRequired(x => x.Product)
-                .WithRequiredDependent();
-
-            modelBuilder.Entity<DefaultProduct>()
-                .HasRequired(x => x.Product)
-                .WithRequiredDependent();
-
-            modelBuilder.Entity<UserProduct>()
-                .HasRequired(x => x.Product)
-                .WithRequiredDependent();
-
-            modelBuilder.Entity<LinkUserToList>()
-                .HasRequired(x => x.ListAccessType)
-                .WithRequiredDependent();
-
-            modelBuilder.Entity<Chain>()
-                .HasOptional<ShopApi>(chain => chain.ShopApi)
-                .WithMany()
-                .WillCascadeOnDelete(true);
+            throw new UnintentionalCodeFirstException();
         }
-
-
     
         public virtual DbSet<ApiProduct> ApiProducts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }

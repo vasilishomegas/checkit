@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ListIt_BusinessLogic.DTO;
 using ListIt_DataAccess.Repository.Generics;
 
 namespace ListIt_BusinessLogic.Services.Generics

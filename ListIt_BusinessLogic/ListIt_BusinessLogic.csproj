@@ -44,12 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\ChainDto.cs" />
-    <Compile Include="DTO\CountryDto.cs" />
-    <Compile Include="DTO\Interfaces\IDto.cs" />
-    <Compile Include="DTO\LanguageDto.cs" />
-    <Compile Include="DTO\ShopApiDto.cs" />
-    <Compile Include="DTO\UserDto.cs" />
     <Compile Include="Services\ChainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CountryService.cs" />
@@ -57,21 +51,23 @@
     <Compile Include="Services\LanguageService.cs" />
     <Compile Include="Services\ShopApiService.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="Tools\ServiceTools.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">
+      <Project>{1FC38C28-DF7B-403E-A99E-D4AF6C044A32}</Project>
+      <Name>ListIt_DataAccessModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ListIt_DataAccess\ListIt_DataAccess.csproj">
-      <Project>{6CB3895F-7B87-4196-9395-5D29A1CA5DF1}</Project>
+      <Project>{6d072a3b-84d4-4b44-a13c-40a0d4c63062}</Project>
       <Name>ListIt_DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
-      <Project>{4C3E72D5-CDB9-48C9-98C5-CB78AC433D20}</Project>
+      <Project>{6BE169C0-8627-42CF-A723-9B545CFEF07B}</Project>
       <Name>ListIt_DomainModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

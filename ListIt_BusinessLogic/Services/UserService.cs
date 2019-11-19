@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ListIt_BusinessLogic.DTO;
 using ListIt_DomainModel;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
+using ListIt_DataAccessModel;
+using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services
 {
@@ -40,6 +41,7 @@ namespace ListIt_BusinessLogic.Services
             });
         }
 
+        /*
         public override void Update(UserDto userDto)
         {
             var countryRepository = new CountryRepository();
@@ -64,6 +66,7 @@ namespace ListIt_BusinessLogic.Services
                 Timestamp = dateTime
             });
         }
+        */
 
         protected override UserDto ConvertDomainToDto(User entity)
         {

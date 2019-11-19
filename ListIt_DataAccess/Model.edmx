@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"/>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Currency_Id" Type="int" Nullable="false" />
           <Property Name="DefaultProduct_Id" Type="int" />
           <Property Name="ShopApi_Id" Type="int" Nullable="false" />
@@ -22,14 +22,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="User_Id" Type="int" />
         </EntityType>
         <EntityType Name="Chains">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Logo" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ShopApi_Id" Type="int" />
@@ -38,7 +38,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -46,7 +46,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Sign" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
@@ -55,7 +55,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Currency_Id" Type="int" Nullable="false" />
           <Property Name="UnitType_Id" Type="int" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -64,14 +64,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Languages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -105,14 +105,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Relation" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
           <Property Name="ProductType_Id" Type="int" Nullable="false" />
         </EntityType>
@@ -120,21 +120,21 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="ShopApis">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="ShoppingListEntries">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Product_Id" Type="int" Nullable="false" />
           <Property Name="ShoppingList_Id" Type="int" Nullable="false" />
@@ -144,7 +144,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
@@ -154,7 +154,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Street" Type="nvarchar(max)" Nullable="false" />
           <Property Name="StreetNumber" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Zipcode" Type="nvarchar(max)" Nullable="false" />
@@ -165,7 +165,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Shop_Id" Type="int" />
         </EntityType>
         <EntityType Name="TemplateSortedProducts">
@@ -209,7 +209,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="UserEntrySortings">
           <Key>
@@ -225,7 +225,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="Shop_Id" Type="int" />
           <Property Name="ShoppingList_Id" Type="int" Nullable="false" />
@@ -234,7 +234,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Category_Id" Type="int" />
           <Property Name="Currency_Id" Type="int" />
           <Property Name="UnitType_Id" Type="int" />
@@ -246,7 +246,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false"  StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nickname" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="false" />
@@ -997,7 +997,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Currency_Id" Type="Int32" Nullable="false" />
           <Property Name="DefaultProduct_Id" Type="Int32" />
           <Property Name="ShopApi_Id" Type="Int32" Nullable="false" />
@@ -1058,7 +1058,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Currency_Id" Type="Int32" Nullable="false" />
           <Property Name="UnitType_Id" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
@@ -1146,7 +1146,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ApiProducts" Relationship="Self.FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id" FromRole="ShopApis" ToRole="ApiProducts" />
           <NavigationProperty Name="Chains" Relationship="Self.FK_dbo_Chains_dbo_ShopApi_Id" FromRole="ShopApis" ToRole="Chains" />
@@ -1277,7 +1277,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Shop_Id" Type="Int32" />
           <Property Name="ShoppingList_Id" Type="Int32" Nullable="false" />
@@ -1290,7 +1290,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category_Id" Type="Int32" />
           <Property Name="Currency_Id" Type="Int32" />
           <Property Name="UnitType_Id" Type="Int32" />
@@ -1828,7 +1828,7 @@
           <End Role="Categories" Type="Self.Category" Multiplicity="*" />
           <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="dmaj0918_1074524Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dmaj0918_1074524Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ApiProducts" EntityType="Self.ApiProduct" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Chains" EntityType="Self.Chain" />
@@ -2034,7 +2034,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entities">
+        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entities1">
           <EntitySetMapping Name="ApiProducts">
             <EntityTypeMapping TypeName="dmaj0918_1074524Model.ApiProduct">
               <MappingFragment StoreEntitySet="ApiProducts">
