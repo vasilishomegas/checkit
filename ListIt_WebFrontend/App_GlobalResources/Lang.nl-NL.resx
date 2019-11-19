@@ -178,10 +178,10 @@
     <value>Filter</value>
   </data>
   <data name="findItem" xml:space="preserve">
-    <value>Vind een item</value>
+    <value>Zoek een item</value>
   </data>
   <data name="findStore" xml:space="preserve">
-    <value>Vind een winkel</value>
+    <value>Zoek een winkel</value>
   </data>
   <data name="forwardToRegister" xml:space="preserve">
     <value>Nog geen account? Maak er hier een!</value>

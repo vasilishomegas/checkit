@@ -23,18 +23,18 @@
             </div>
             <div class="list-group list-group-flush">
                 <!-- ToDo: INSERT AVATAR PIC HERE -->
-                @Html.ActionLink("Your Profile", "Index", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink(Lang.yourProfile, "Index", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
             </div>
 
             <div class="list-group list-group-flush" aria-orientation="vertical">
-                @Html.ActionLink("Your Lists", "Lists", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
-                @Html.ActionLink("Find Item", "Index", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
-                @Html.ActionLink("Find Store", "FindStore", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
-                @Html.ActionLink("Browse Store", "BrowseStore", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink(Lang.yourLists, "Lists", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink(Lang.findItem, "Index", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink(Lang.findStore, "FindStore", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink(Lang.browseStore, "BrowseStore", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
             </div>
 
             <div class="list-group list-group-flush" aria-orientation="vertical">
-                @Html.ActionLink("Settings", "Settings", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink(Lang.settings, "Settings", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
             </div>
         </div>
 
