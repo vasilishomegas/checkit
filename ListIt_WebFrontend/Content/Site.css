@@ -53,9 +53,20 @@ textarea {
    /* max-width: 280px;*/
 }
 
-.logo-landingpage {
- 
-    
+.navbar-brand {
+    font-size: 30px !important;
+}
+
+.logo-box {
+    padding-left: 20px;
+    width: unset;
+    max-width: 0.6em;
+    height: auto;
+}
+
+img .logo{
+    width: 0.6em !important;
+    height: auto;
 }
 
 /* SINGLE LIST ITEMS */
