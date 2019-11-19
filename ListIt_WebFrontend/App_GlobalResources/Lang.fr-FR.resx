@@ -145,7 +145,7 @@
     <value>Ajouter catégorie</value>
   </data>
   <data name="croatian" xml:space="preserve">
-    <value>croate</value>
+    <value>Croate</value>
   </data>
   <data name="currency" xml:space="preserve">
     <value>Monnaie</value>
@@ -238,7 +238,7 @@
     <value>Image</value>
   </data>
   <data name="polish" xml:space="preserve">
-    <value>polonais</value>
+    <value>Polonais</value>
   </data>
   <data name="price" xml:space="preserve">
     <value>Prix</value>
