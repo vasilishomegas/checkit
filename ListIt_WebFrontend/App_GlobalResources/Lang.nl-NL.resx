@@ -118,162 +118,162 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="A-Z" xml:space="preserve">
-    <value>A to Z</value>
+    <value>A tot Z</value>
   </data>
   <data name="addToList" xml:space="preserve">
-    <value>Add to list</value>
+    <value>Aan lijst toevoegen</value>
   </data>
   <data name="brand" xml:space="preserve">
-    <value>Brand</value>
+    <value>Merk</value>
   </data>
   <data name="browseStore" xml:space="preserve">
-    <value>Browse Store</value>
+    <value>Winkel doorzoeken</value>
   </data>
   <data name="category" xml:space="preserve">
-    <value>Category</value>
+    <value>Categorie</value>
   </data>
   <data name="close" xml:space="preserve">
-    <value>Close</value>
+    <value>Sluiten</value>
   </data>
   <data name="cnewPw" xml:space="preserve">
-    <value>Confirm new Password</value>
+    <value>Nieuw wachtwoord bevestigen</value>
   </data>
   <data name="country" xml:space="preserve">
-    <value>Country</value>
+    <value>Land</value>
   </data>
   <data name="createCat" xml:space="preserve">
-    <value>Create Category</value>
+    <value>Categorie toevoegen</value>
   </data>
   <data name="currency" xml:space="preserve">
-    <value>Currency</value>
+    <value>Valuta</value>
   </data>
   <data name="default" xml:space="preserve">
-    <value>Default</value>
+    <value>Standaard</value>
   </data>
   <data name="discover" xml:space="preserve">
-    <value>Discover</value>
+    <value>Ontdek</value>
   </data>
   <data name="dutch" xml:space="preserve">
-    <value>Dutch</value>
+    <value>Nederlands</value>
   </data>
   <data name="editProfile" xml:space="preserve">
-    <value>Edit profile data</value>
+    <value>Profiel bewerken</value>
   </data>
   <data name="editPW" xml:space="preserve">
-    <value>Change Password</value>
+    <value>Wachtwoord veranderen</value>
   </data>
   <data name="email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="english" xml:space="preserve">
-    <value>English</value>
+    <value>Engels</value>
   </data>
   <data name="filter" xml:space="preserve">
     <value>Filter</value>
   </data>
   <data name="findItem" xml:space="preserve">
-    <value>Find Item</value>
+    <value>Vind een item</value>
   </data>
   <data name="findStore" xml:space="preserve">
-    <value>Find Store</value>
+    <value>Vind een winkel</value>
   </data>
   <data name="forwardToRegister" xml:space="preserve">
-    <value>No Account yet? Create a new one here!</value>
+    <value>Nog geen account? Maak er hier een!</value>
   </data>
   <data name="german" xml:space="preserve">
-    <value>German</value>
+    <value>Duits</value>
   </data>
   <data name="highestPrice" xml:space="preserve">
-    <value>highest Price</value>
+    <value>höchster Preis</value>
   </data>
   <data name="itemName" xml:space="preserve">
-    <value>Name of item</value>
+    <value>Productnaam</value>
   </data>
   <data name="language" xml:space="preserve">
-    <value>Language</value>
+    <value>Taal</value>
   </data>
   <data name="list-it" xml:space="preserve">
     <value>List it</value>
   </data>
   <data name="login" xml:space="preserve">
-    <value>Log in</value>
+    <value>Aanmelden</value>
   </data>
   <data name="logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Afmelden</value>
   </data>
   <data name="lowestPrice" xml:space="preserve">
-    <value>lowest Price</value>
+    <value>Laagste prijs</value>
   </data>
   <data name="name" xml:space="preserve">
-    <value>Name</value>
+    <value>Naam</value>
   </data>
   <data name="newPw" xml:space="preserve">
-    <value>New Password</value>
+    <value>Nieuw wachtwoord</value>
   </data>
   <data name="oldPw" xml:space="preserve">
-    <value>Old Password</value>
+    <value>Oud wachtwoord</value>
   </data>
   <data name="ordering" xml:space="preserve">
-    <value>Ordering</value>
+    <value>Sortering</value>
   </data>
   <data name="origin" xml:space="preserve">
-    <value>Origin</value>
+    <value>Herkomst</value>
   </data>
   <data name="picture" xml:space="preserve">
-    <value>Picture</value>
+    <value>Afbeelding</value>
   </data>
   <data name="price" xml:space="preserve">
-    <value>Price</value>
+    <value>Prijs</value>
   </data>
   <data name="pw" xml:space="preserve">
-    <value>Password</value>
+    <value>Wachtwoord</value>
   </data>
   <data name="quantity" xml:space="preserve">
-    <value>Quantity</value>
+    <value>Aantal</value>
   </data>
   <data name="register" xml:space="preserve">
-    <value>Register</value>
+    <value>Registreren</value>
   </data>
   <data name="rename" xml:space="preserve">
-    <value>Rename</value>
+    <value>Hernoemen</value>
   </data>
   <data name="repPW" xml:space="preserve">
-    <value>Repeat Password</value>
+    <value>Wachtwoord herhalen</value>
   </data>
   <data name="save" xml:space="preserve">
-    <value>Save</value>
+    <value>Opslaan</value>
   </data>
   <data name="search" xml:space="preserve">
-    <value>Search</value>
+    <value>Zoeken</value>
   </data>
   <data name="settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Instellingen</value>
   </data>
   <data name="sortBy" xml:space="preserve">
-    <value>Sort by</value>
+    <value>Sorteren op</value>
   </data>
   <data name="start-now" xml:space="preserve">
-    <value>Start now!</value>
+    <value>Begin nu</value>
   </data>
   <data name="store" xml:space="preserve">
-    <value>Store</value>
+    <value>Winkel</value>
   </data>
   <data name="stores" xml:space="preserve">
-    <value>Stores</value>
+    <value>Winkels</value>
   </data>
   <data name="submit" xml:space="preserve">
-    <value>Submit</value>
+    <value>Versturen</value>
   </data>
   <data name="unit" xml:space="preserve">
-    <value>Unit</value>
+    <value>Eenheid</value>
   </data>
   <data name="yourLists" xml:space="preserve">
-    <value>Your Lists</value>
+    <value>Uw lijsten</value>
   </data>
   <data name="yourProfile" xml:space="preserve">
-    <value>Your Profile</value>
+    <value>Uw profiel</value>
   </data>
   <data name="Z-A" xml:space="preserve">
-    <value>Z to A</value>
+    <value>Z tot A</value>
   </data>
 </root>

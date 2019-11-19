@@ -61,11 +61,12 @@
                         @using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { @class = "form-inline" }))
                         {
                             @Lang.language
-                            <select name="lang" class="custom-control">
-                                <option></option>
-                                <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
-                                <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
-                            </select>
+                        <select name="lang" class="custom-control">
+                            <option></option>
+                            <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
+                            <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
+                            <option value="nl-NL" @(Culture == "nl-NL" ? "selected=\"selected\"" : "")>@Lang.dutch</option>
+                        </select>
                             <input type="submit" value="@Lang.submit" />
                         }
                     </div>

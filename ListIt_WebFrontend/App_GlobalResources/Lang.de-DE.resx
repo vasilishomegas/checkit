@@ -153,6 +153,9 @@
   <data name="discover" xml:space="preserve">
     <value>Entdecke!</value>
   </data>
+  <data name="dutch" xml:space="preserve">
+    <value>Niederländisch</value>
+  </data>
   <data name="editProfile" xml:space="preserve">
     <value>Profildaten bearbeiten</value>
   </data>
