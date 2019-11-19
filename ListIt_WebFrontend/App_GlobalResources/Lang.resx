@@ -150,6 +150,9 @@
   <data name="currency" xml:space="preserve">
     <value>Currency</value>
   </data>
+  <data name="danish" xml:space="preserve">
+    <value>Danish</value>
+  </data>
   <data name="default" xml:space="preserve">
     <value>Default</value>
   </data>
@@ -183,11 +186,17 @@
   <data name="forwardToRegister" xml:space="preserve">
     <value>No Account yet? Create a new one here!</value>
   </data>
+  <data name="french" xml:space="preserve">
+    <value>French</value>
+  </data>
   <data name="german" xml:space="preserve">
     <value>German</value>
   </data>
   <data name="highestPrice" xml:space="preserve">
     <value>highest Price</value>
+  </data>
+  <data name="italian" xml:space="preserve">
+    <value>Italian</value>
   </data>
   <data name="itemName" xml:space="preserve">
     <value>Name of item</value>
@@ -197,6 +206,9 @@
   </data>
   <data name="list-it" xml:space="preserve">
     <value>List it</value>
+  </data>
+  <data name="lithuanian" xml:space="preserve">
+    <value>Lithuanian</value>
   </data>
   <data name="login" xml:space="preserve">
     <value>Log in</value>
@@ -224,6 +236,9 @@
   </data>
   <data name="picture" xml:space="preserve">
     <value>Picture</value>
+  </data>
+  <data name="polish" xml:space="preserve">
+    <value>Polish</value>
   </data>
   <data name="price" xml:space="preserve">
     <value>Price</value>

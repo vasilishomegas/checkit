@@ -150,6 +150,9 @@
   <data name="currency" xml:space="preserve">
     <value>Valuta</value>
   </data>
+  <data name="danish" xml:space="preserve">
+    <value>Danski</value>
+  </data>
   <data name="default" xml:space="preserve">
     <value>Zadano</value>
   </data>
@@ -180,11 +183,17 @@
   <data name="forwardToRegister" xml:space="preserve">
     <value>Nemaš korisnički račun? Stvori ga ovdje!</value>
   </data>
+  <data name="french" xml:space="preserve">
+    <value>Francuski</value>
+  </data>
   <data name="german" xml:space="preserve">
     <value>Njemački jezik</value>
   </data>
   <data name="highestPrice" xml:space="preserve">
     <value>Najviša cijena</value>
+  </data>
+  <data name="italian" xml:space="preserve">
+    <value>Talijanski</value>
   </data>
   <data name="itemName" xml:space="preserve">
     <value>Naziv artikla</value>
@@ -194,6 +203,9 @@
   </data>
   <data name="list-it" xml:space="preserve">
     <value>List it</value>
+  </data>
+  <data name="lithuanian" xml:space="preserve">
+    <value>Litvanski</value>
   </data>
   <data name="login" xml:space="preserve">
     <value>Prijavi se</value>
@@ -221,6 +233,9 @@
   </data>
   <data name="picture" xml:space="preserve">
     <value>Slika</value>
+  </data>
+  <data name="polish" xml:space="preserve">
+    <value>Poljski</value>
   </data>
   <data name="price" xml:space="preserve">
     <value>Cijena</value>

@@ -118,180 +118,162 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="A-Z" xml:space="preserve">
-    <value>A tot Z</value>
+    <value>A til Z</value>
   </data>
   <data name="addToList" xml:space="preserve">
-    <value>Aan lijst toevoegen</value>
+    <value>Tilføj til liste</value>
   </data>
   <data name="brand" xml:space="preserve">
-    <value>Merk</value>
+    <value>Mærke</value>
   </data>
   <data name="browseStore" xml:space="preserve">
-    <value>Winkel doorzoeken</value>
+    <value>Gennemsøg butik</value>
   </data>
   <data name="category" xml:space="preserve">
-    <value>Categorie</value>
+    <value>Kategori</value>
   </data>
   <data name="close" xml:space="preserve">
-    <value>Sluiten</value>
+    <value>Lukke</value>
   </data>
   <data name="cnewPw" xml:space="preserve">
-    <value>Nieuw wachtwoord bevestigen</value>
+    <value>Bekræft ny adgangskode</value>
   </data>
   <data name="country" xml:space="preserve">
     <value>Land</value>
   </data>
   <data name="createCat" xml:space="preserve">
-    <value>Categorie toevoegen</value>
-  </data>
-  <data name="croatian" xml:space="preserve">
-    <value>Kroatisch</value>
+    <value>Tilføj kategori</value>
   </data>
   <data name="currency" xml:space="preserve">
-    <value>Valuta</value>
-  </data>
-  <data name="danish" xml:space="preserve">
-    <value>Deens</value>
+    <value>Betalingsmiddel</value>
   </data>
   <data name="default" xml:space="preserve">
-    <value>Standaard</value>
+    <value>Standard</value>
   </data>
   <data name="discover" xml:space="preserve">
-    <value>Ontdek</value>
+    <value>Opdage</value>
   </data>
   <data name="dutch" xml:space="preserve">
-    <value>Nederlands</value>
+    <value>Nederlandske</value>
   </data>
   <data name="editProfile" xml:space="preserve">
-    <value>Profiel bewerken</value>
+    <value>Rediger profil</value>
   </data>
   <data name="editPW" xml:space="preserve">
-    <value>Wachtwoord veranderen</value>
+    <value>Ændre adganskode</value>
   </data>
   <data name="email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="english" xml:space="preserve">
-    <value>Engels</value>
+    <value>Engelsk</value>
   </data>
   <data name="filter" xml:space="preserve">
     <value>Filter</value>
   </data>
   <data name="findItem" xml:space="preserve">
-    <value>Vind een item</value>
+    <value>Søg vare</value>
   </data>
   <data name="findStore" xml:space="preserve">
-    <value>Vind een winkel</value>
+    <value>Søg butik</value>
   </data>
   <data name="forwardToRegister" xml:space="preserve">
-    <value>Nog geen account? Maak er hier een!</value>
-  </data>
-  <data name="french" xml:space="preserve">
-    <value>Frans</value>
+    <value>Ingen konto endnu? Tilmeld dig her!</value>
   </data>
   <data name="german" xml:space="preserve">
-    <value>Duits</value>
+    <value>Tysk</value>
   </data>
   <data name="highestPrice" xml:space="preserve">
-    <value>Hoogste prijs</value>
-  </data>
-  <data name="italian" xml:space="preserve">
-    <value>Italiaans</value>
+    <value>Højeste pris</value>
   </data>
   <data name="itemName" xml:space="preserve">
-    <value>Productnaam</value>
+    <value>Produktnavn</value>
   </data>
   <data name="language" xml:space="preserve">
-    <value>Taal</value>
+    <value>Sprog</value>
   </data>
   <data name="list-it" xml:space="preserve">
     <value>List it</value>
   </data>
-  <data name="lithuanian" xml:space="preserve">
-    <value>Litouws</value>
-  </data>
   <data name="login" xml:space="preserve">
-    <value>Aanmelden</value>
+    <value>Log ind</value>
   </data>
   <data name="logout" xml:space="preserve">
-    <value>Afmelden</value>
+    <value>Log ud</value>
   </data>
   <data name="lowestPrice" xml:space="preserve">
-    <value>Laagste prijs</value>
+    <value>Laveste pris</value>
   </data>
   <data name="name" xml:space="preserve">
-    <value>Naam</value>
+    <value>Navn</value>
   </data>
   <data name="newPw" xml:space="preserve">
-    <value>Nieuw wachtwoord</value>
+    <value>Ny adgangskode</value>
   </data>
   <data name="oldPw" xml:space="preserve">
-    <value>Oud wachtwoord</value>
+    <value>Gammel adgangskode</value>
   </data>
   <data name="ordering" xml:space="preserve">
     <value>Sortering</value>
   </data>
   <data name="origin" xml:space="preserve">
-    <value>Herkomst</value>
+    <value>Oprindelse</value>
   </data>
   <data name="picture" xml:space="preserve">
-    <value>Afbeelding</value>
-  </data>
-  <data name="polish" xml:space="preserve">
-    <value>Pools</value>
+    <value>Billede</value>
   </data>
   <data name="price" xml:space="preserve">
-    <value>Prijs</value>
+    <value>Pris</value>
   </data>
   <data name="pw" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Adgangskode</value>
   </data>
   <data name="quantity" xml:space="preserve">
-    <value>Aantal</value>
+    <value>Antal</value>
   </data>
   <data name="register" xml:space="preserve">
-    <value>Registreren</value>
+    <value>Tilmeld</value>
   </data>
   <data name="rename" xml:space="preserve">
-    <value>Hernoemen</value>
+    <value>Omdøb</value>
   </data>
   <data name="repPW" xml:space="preserve">
-    <value>Wachtwoord herhalen</value>
+    <value>Gentag adgangskode</value>
   </data>
   <data name="save" xml:space="preserve">
-    <value>Opslaan</value>
+    <value>Gemme</value>
   </data>
   <data name="search" xml:space="preserve">
-    <value>Zoeken</value>
+    <value>Søg</value>
   </data>
   <data name="settings" xml:space="preserve">
-    <value>Instellingen</value>
+    <value>Indstillinger</value>
   </data>
   <data name="sortBy" xml:space="preserve">
-    <value>Sorteren op</value>
+    <value>Sorter efter</value>
   </data>
   <data name="start-now" xml:space="preserve">
-    <value>Begin nu</value>
+    <value>Start nu</value>
   </data>
   <data name="store" xml:space="preserve">
-    <value>Winkel</value>
+    <value>Butik</value>
   </data>
   <data name="stores" xml:space="preserve">
-    <value>Winkels</value>
+    <value>Butikker</value>
   </data>
   <data name="submit" xml:space="preserve">
-    <value>Versturen</value>
+    <value>Indsend</value>
   </data>
   <data name="unit" xml:space="preserve">
-    <value>Eenheid</value>
+    <value>Enhed</value>
   </data>
   <data name="yourLists" xml:space="preserve">
-    <value>Uw lijsten</value>
+    <value>Dine lister</value>
   </data>
   <data name="yourProfile" xml:space="preserve">
-    <value>Uw profiel</value>
+    <value>Din profil</value>
   </data>
   <data name="Z-A" xml:space="preserve">
-    <value>Z tot A</value>
+    <value>Z til A</value>
   </data>
 </root>

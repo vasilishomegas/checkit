@@ -300,6 +300,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.de-DE.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Lang.dk-DK.designer.cs">
+      <DependentUpon>Lang.dk-DK.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\Lang.fr-FR.designer.cs">
+      <DependentUpon>Lang.fr-FR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\Lang.hr-HR.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang.hr-HR.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Lang.nl-NL.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -348,6 +363,20 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="App_GlobalResources\Lang.dk-DK.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Lang.dk-DK.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_GlobalResources\Lang.fr-FR.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Lang.fr-FR.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_GlobalResources\Lang.hr-HR.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Lang.hr-HR.designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="App_GlobalResources\Lang.nl-NL.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Lang.nl-NL.Designer.cs</LastGenOutput>
