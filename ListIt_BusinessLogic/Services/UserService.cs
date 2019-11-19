@@ -41,32 +41,30 @@ namespace ListIt_BusinessLogic.Services
             });
         }
 
-        /*
         public override void Update(UserDto userDto)
         {
-            var countryRepository = new CountryRepository();
-            var languageRepository = new LanguageRepository();
 
-            if (userDto.Country == null
-                || userDto.Language == null
-                || languageRepository.Get(userDto.Language.Id) == null
-                || countryRepository.Get(userDto.Country.Id) == null)
-                throw new Exception("Country and/or Language cannot be null value");
+            var inDbUser = _repository.Get(userDto.Id);
+            if (inDbUser == null) throw new KeyNotFoundException("No user with such ID");
 
-            var dateTime = _repository.Get(userDto.Id).Timestamp;
+            if (userDto.Nickname == null) userDto.Nickname = inDbUser.Nickname;
+            if (userDto.Email == null) userDto.Email = inDbUser.Email;
+            if (userDto.PasswordHash == null) userDto.PasswordHash = inDbUser.PasswordHash;
+            userDto.Timestamp = inDbUser.Timestamp;
+            var newCountryId = userDto.Country?.Id ?? inDbUser.Country_Id;
+            var newLanguageId = userDto.Language?.Id ?? inDbUser.Language_Id;
 
             _repository.Update(new User
             {
-                Language_Id = userDto.Language.Id,
-                Country_Id = userDto.Country.Id,
+                Language_Id = newLanguageId,
+                Country_Id = newCountryId,
                 Email = userDto.Email,
                 Id = userDto.Id,
                 PasswordHash = userDto.PasswordHash,
                 Nickname = userDto.Nickname,
-                Timestamp = dateTime
+                Timestamp = userDto.Timestamp
             });
         }
-        */
 
         protected override UserDto ConvertDomainToDto(User entity)
         {
