@@ -7,10 +7,22 @@ a {
     font-style: inherit;
 }
 
+.searchFilterArea {
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
 .searchbar {
+    padding-bottom: 5px;
+}
+
+.filterarea {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.searchresults {
     padding-top: 15px;
-    padding-bottom: 15px;
-    width: 800px;
 }
 
 .carousel {
@@ -34,7 +46,7 @@ a {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 70px;
+    padding-top: 100px;
     width: auto;
 }
 
@@ -115,13 +127,18 @@ img .logo{
     }
 
     #sidebar-wrapper .sidebar-heading {
-        padding: 0.875rem 1.25rem;
+        padding: 1.5rem 1.5rem;
         font-size: 1.2rem;
         opacity: 0;
+        height: 5em;
     }
 
     #sidebar-wrapper .list-group {
         width: 15rem;
+    }
+
+    #sidebar-wrapper .list-group .list-group-item {
+        border: none;
     }
 
     #page-content-wrapper {
@@ -132,6 +149,7 @@ img .logo{
     #wrapper.toggled #sidebar-wrapper {
         margin-left: 0;
     }
+
 
 @media (min-width: 768px) {
     #sidebar-wrapper {
