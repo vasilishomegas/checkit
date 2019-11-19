@@ -144,6 +144,9 @@
   <data name="createCat" xml:space="preserve">
     <value>Categorie toevoegen</value>
   </data>
+  <data name="croatian" xml:space="preserve">
+    <value>Kroatisch</value>
+  </data>
   <data name="currency" xml:space="preserve">
     <value>Valuta</value>
   </data>
