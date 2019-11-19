@@ -121,172 +121,160 @@
     <value>A - Z</value>
   </data>
   <data name="addToList" xml:space="preserve">
-    <value>Dodaj na listu</value>
+    <value>Aggiungi alla lista</value>
   </data>
   <data name="brand" xml:space="preserve">
-    <value>Marka</value>
+    <value>Marca</value>
   </data>
   <data name="browseStore" xml:space="preserve">
-    <value>Pretraži trgovinu</value>
+    <value>Sfoglia il negozio</value>
   </data>
   <data name="category" xml:space="preserve">
-    <value>Kategorija</value>
+    <value>Categoria</value>
   </data>
   <data name="close" xml:space="preserve">
-    <value>Zatvori</value>
+    <value>Chiudi</value>
   </data>
   <data name="cnewPw" xml:space="preserve">
-    <value>Potvrdi novu lozinku</value>
+    <value>Confermare nuova password</value>
   </data>
   <data name="country" xml:space="preserve">
-    <value>Država</value>
+    <value>Stato</value>
   </data>
   <data name="createCat" xml:space="preserve">
-    <value>Stvori novu kategoriju</value>
+    <value>Crei nuova categoria</value>
   </data>
   <data name="croatian" xml:space="preserve">
-    <value>Hrvatski jezik</value>
+    <value>Lingua Croata</value>
   </data>
   <data name="currency" xml:space="preserve">
-    <value>Valuta</value>
-  </data>
-  <data name="danish" xml:space="preserve">
-    <value>Danski jezik</value>
+    <value>La moneta</value>
   </data>
   <data name="default" xml:space="preserve">
-    <value>Zadano</value>
+    <value>Usa predefinito</value>
   </data>
   <data name="discover" xml:space="preserve">
-    <value>Pretraži</value>
+    <value>Scoprire</value>
   </data>
   <data name="editProfile" xml:space="preserve">
-    <value>Uredi profil</value>
+    <value>Modifica Profilo</value>
   </data>
   <data name="editPW" xml:space="preserve">
-    <value>Uredi lozinku</value>
+    <value>Modifica Password</value>
   </data>
   <data name="email" xml:space="preserve">
     <value>E-mail</value>
   </data>
   <data name="english" xml:space="preserve">
-    <value>Engleski jezik</value>
+    <value>Lingua Inglese</value>
   </data>
   <data name="filter" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filtro</value>
   </data>
   <data name="findItem" xml:space="preserve">
-    <value>Pronađi proizvod</value>
+    <value>Trova articolo</value>
   </data>
   <data name="findStore" xml:space="preserve">
-    <value>Pronađi trgovinu</value>
+    <value>Trova negozio</value>
   </data>
   <data name="forwardToRegister" xml:space="preserve">
-    <value>Nemaš korisnički račun? Stvori ga ovdje!</value>
-  </data>
-  <data name="french" xml:space="preserve">
-    <value>Francuski jezik</value>
+    <value>Non hai un account? Crealo qui.</value>
   </data>
   <data name="german" xml:space="preserve">
-    <value>Njemački jezik</value>
+    <value>Lingua Tedesca</value>
   </data>
   <data name="highestPrice" xml:space="preserve">
-    <value>Najviša cijena</value>
+    <value>Il prezzo più alto</value>
   </data>
   <data name="italian" xml:space="preserve">
-    <value>Talijanski jezik</value>
+    <value>Lingua Italiana</value>
   </data>
   <data name="itemName" xml:space="preserve">
-    <value>Naziv proizvod</value>
+    <value>Nome dell'articolo</value>
   </data>
   <data name="language" xml:space="preserve">
-    <value>Jezik</value>
+    <value>Lingua</value>
   </data>
   <data name="list-it" xml:space="preserve">
     <value>List it</value>
   </data>
-  <data name="lithuanian" xml:space="preserve">
-    <value>Litvanski jezik</value>
-  </data>
   <data name="login" xml:space="preserve">
-    <value>Prijavi</value>
+    <value>Accesso</value>
   </data>
   <data name="logout" xml:space="preserve">
-    <value>Odjavi</value>
+    <value>Disconnettersi?</value>
   </data>
   <data name="lowestPrice" xml:space="preserve">
-    <value>Najniža cijena</value>
+    <value>Il prezzo più basso</value>
   </data>
   <data name="name" xml:space="preserve">
-    <value>Ime</value>
+    <value>Nome</value>
   </data>
   <data name="newPw" xml:space="preserve">
-    <value>Nova lozinka</value>
+    <value>Nuova password</value>
   </data>
   <data name="oldPw" xml:space="preserve">
-    <value>Stara lozinka</value>
+    <value>Vecchia password</value>
   </data>
   <data name="ordering" xml:space="preserve">
-    <value>Sortiranje</value>
+    <value>Ordinazione</value>
   </data>
   <data name="origin" xml:space="preserve">
-    <value>Zemlja porijekla</value>
+    <value>Origine</value>
   </data>
   <data name="picture" xml:space="preserve">
-    <value>Slika</value>
-  </data>
-  <data name="polish" xml:space="preserve">
-    <value>Poljski jezik</value>
+    <value>Immagine</value>
   </data>
   <data name="price" xml:space="preserve">
-    <value>Cijena</value>
+    <value>Prezzo</value>
   </data>
   <data name="pw" xml:space="preserve">
-    <value>Lozinka</value>
+    <value>La password</value>
   </data>
   <data name="quantity" xml:space="preserve">
-    <value>Količina</value>
+    <value>Quantità</value>
   </data>
   <data name="register" xml:space="preserve">
-    <value>Registriraj</value>
+    <value>Registrati qui</value>
   </data>
   <data name="rename" xml:space="preserve">
-    <value>Preimenuj</value>
+    <value>Rinominare qui</value>
   </data>
   <data name="repPW" xml:space="preserve">
-    <value>Ponovi lozinku</value>
+    <value>Ripeti la password</value>
   </data>
   <data name="save" xml:space="preserve">
-    <value>Spremi</value>
+    <value>Salva</value>
   </data>
   <data name="search" xml:space="preserve">
-    <value>Pretraži</value>
+    <value>Cercare</value>
   </data>
   <data name="settings" xml:space="preserve">
-    <value>Postavke</value>
+    <value>Impostazioni</value>
   </data>
   <data name="sortBy" xml:space="preserve">
-    <value>Sortiraj</value>
+    <value>Ordina per</value>
   </data>
   <data name="start-now" xml:space="preserve">
-    <value>Započmi</value>
+    <value>Avviare ora</value>
   </data>
   <data name="store" xml:space="preserve">
-    <value>Trgovina</value>
+    <value>Negozio</value>
   </data>
   <data name="stores" xml:space="preserve">
-    <value>Trgovine</value>
+    <value>I Negozi</value>
   </data>
   <data name="submit" xml:space="preserve">
-    <value>Primjeni</value>
+    <value>Sottoscrivi</value>
   </data>
   <data name="unit" xml:space="preserve">
-    <value>Mjerna jedinica</value>
+    <value>Unità di misura</value>
   </data>
   <data name="yourLists" xml:space="preserve">
-    <value>Tvoje liste</value>
+    <value>Tue liste</value>
   </data>
   <data name="yourProfile" xml:space="preserve">
-    <value>Tvoj profil</value>
+    <value>Tuo profilo</value>
   </data>
   <data name="Z-A" xml:space="preserve">
     <value>Z - A</value>
