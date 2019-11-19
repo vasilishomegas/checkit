@@ -51,7 +51,7 @@
 
 
                 <span class="justify-content-center">
-                    @Html.ActionLink("List It", "Lists", "User", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink(Lang.list_it, "Lists", "User", new { area = "" }, new { @class = "navbar-brand" })
                 </span>
 
                 
@@ -69,6 +69,7 @@
                             <option value="nl-NL" @(Culture == "nl-NL" ? "selected=\"selected\"" : "")>@Lang.dutch</option>
                             <option value="hr-HR" @(Culture == "hr-HR" ? "selected=\"selected\"" : "")>@Lang.croatian</option>
                             <option value="fr-FR" @(Culture == "fr-FR" ? "selected=\"selected\"" : "")>@Lang.french</option>
+                            <option value="it-IT" @(Culture == "it-IT" ? "selected=\"selected\"" : "")>@Lang.italian</option>
                         </select>
                             <input type="submit" value="@Lang.submit" />
                         }

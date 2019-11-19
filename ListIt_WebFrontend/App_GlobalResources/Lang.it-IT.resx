@@ -150,11 +150,17 @@
   <data name="currency" xml:space="preserve">
     <value>La moneta</value>
   </data>
+  <data name="danish" xml:space="preserve">
+    <value>Lingua Danese</value>
+  </data>
   <data name="default" xml:space="preserve">
     <value>Usa predefinito</value>
   </data>
   <data name="discover" xml:space="preserve">
     <value>Scoprire</value>
+  </data>
+  <data name="dutch" xml:space="preserve">
+    <value>Lingua Onlandese</value>
   </data>
   <data name="editProfile" xml:space="preserve">
     <value>Modifica Profilo</value>
@@ -180,6 +186,9 @@
   <data name="forwardToRegister" xml:space="preserve">
     <value>Non hai un account? Crealo qui.</value>
   </data>
+  <data name="french" xml:space="preserve">
+    <value>Lingua Francese</value>
+  </data>
   <data name="german" xml:space="preserve">
     <value>Lingua Tedesca</value>
   </data>
@@ -197,6 +206,9 @@
   </data>
   <data name="list-it" xml:space="preserve">
     <value>List it</value>
+  </data>
+  <data name="lithuanian" xml:space="preserve">
+    <value>Lingua Lituana</value>
   </data>
   <data name="login" xml:space="preserve">
     <value>Accesso</value>
@@ -224,6 +236,9 @@
   </data>
   <data name="picture" xml:space="preserve">
     <value>Immagine</value>
+  </data>
+  <data name="polish" xml:space="preserve">
+    <value>Lingua Polacca</value>
   </data>
   <data name="price" xml:space="preserve">
     <value>Prezzo</value>
