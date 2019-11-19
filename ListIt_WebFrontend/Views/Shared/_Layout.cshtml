@@ -23,18 +23,36 @@
             </div>
             <div class="list-group list-group-flush">
                 <!-- ToDo: INSERT AVATAR PIC HERE -->
-                @Html.ActionLink(Lang.yourProfile, "Index", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                <a href="@Url.Action("Index", "User")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-user-circle-o" aria-hidden="true"></span>
+                    @Lang.yourProfile
+                </a>
             </div>
 
             <div class="list-group list-group-flush" aria-orientation="vertical">
-                @Html.ActionLink(Lang.yourLists, "Lists", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
-                @Html.ActionLink(Lang.findItem, "Index", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
-                @Html.ActionLink(Lang.findStore, "FindStore", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
-                @Html.ActionLink(Lang.browseStore, "BrowseStore", "Store", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                <a href="@Url.Action("Lists", "User")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-list" aria-hidden="true"></span>
+                    @Lang.yourLists
+                </a>
+                <a href="@Url.Action("Index", "Store")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-puzzle-piece" aria-hidden="true"></span>
+                    @Lang.findItem
+                </a>
+                <a href="@Url.Action("FindStore", "Store")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-globe" aria-hidden="true"></span>
+                    @Lang.findStore
+                </a>
+                <a href="@Url.Action("BrowseStore", "Store")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-shopping-bag" aria-hidden="true"></span>
+                    @Lang.browseStore
+                </a>
             </div>
 
             <div class="list-group list-group-flush" aria-orientation="vertical">
-                @Html.ActionLink(Lang.settings, "Settings", "User", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+                <a href="@Url.Action("Settings", "User")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-list" aria-hidden="true"></span>
+                    @Lang.settings
+                </a>
             </div>
         </div>
 
@@ -75,8 +93,9 @@
                         }
                     </div>
                     <span>
-
-                        @Html.ActionLink(@Lang.logout, "Logout", "User", new { area = "" }, new { @class = "" })
+                        <a href="@Url.Action("Logout", "User")" class="list-group-item list-group-item-action">
+                            <span class="fa fa-sign-out" aria-hidden="true"></span>
+                        </a>
                     </span>
                     
                 </div>
