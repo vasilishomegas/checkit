@@ -43,9 +43,11 @@
     <div class="d-flex justify-content-center">
         <div class="btn-group-sm">
             <button class="btn btn-outline-dark" id="editProfile" data-toggle="modal" data-target="#modalEditProfile">
+                <i class="fa fa-pencil fa-lg"></i>
                 @Lang.editProfile
             </button>
             <button class="btn btn-outline-dark" id="editPW" data-toggle="modal" data-target="#modalEditPW">
+                <i class="fa fa-lock fa-lg"></i>
                 @Lang.editPW
             </button>
         </div>
@@ -79,8 +81,12 @@
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", value = Lang.email, type = "email", placeholder="steve@smith.com", required = "required" } })
                     </div>
 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Lang.close</button>
-                    <button type="button" class="btn btn-primary">@Lang.save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fa fa-times-circle fa-2x"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-check-circle fa-2x"></i>
+                    </button>
                 }
 
             </div>
@@ -117,8 +123,12 @@
                         @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = Lang.pw, required = "required" } })
                     </div>
 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Lang.close</button>
-                    <button type="button" class="btn btn-primary">@Lang.save</button>
+                    <<button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fa fa-times-circle fa-2x"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-check-circle fa-2x"></i>
+                    </button>
                 }
             </div>
             <div class="modal-footer">

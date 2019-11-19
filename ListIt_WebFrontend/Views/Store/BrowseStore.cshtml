@@ -19,7 +19,9 @@
                     <div class="form-group">
                         @Html.Editor("Search", new { htmlAttributes = new { @class = "form-control", placeholder = Lang.search } })
 
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">@Lang.search</button>
+                        <button class="btn btn-outline-success" type="submit">
+                            <span class="fa fa-search"></span>
+                        </button>
                     </div>
                 }
 
