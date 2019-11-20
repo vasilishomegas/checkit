@@ -7,6 +7,10 @@ a {
     font-style: inherit;
 }
 
+.logout-box {
+    padding-left: 5px;
+}
+
 .searchFilterArea {
     background-color: whitesmoke;
     border-radius: 5px;

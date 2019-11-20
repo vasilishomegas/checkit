@@ -76,28 +76,34 @@
 
 
                 <div class="d-flex justify-content-end">
-                    <div>
+                    <div class="form-inline">
                         @using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { @class = "form-inline" }))
                         {
-                            @Lang.language
-                            <select name="lang" class="custom-control">
-                                <option></option>
-                                <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
-                                <option value="dk-DK" @(Culture == "dk-DK" ? "selected=\"selected\"" : "")>@Lang.danish</option>
-                                <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
-                                <option value="nl-NL" @(Culture == "nl-NL" ? "selected=\"selected\"" : "")>@Lang.dutch</option>
-                                <option value="hr-HR" @(Culture == "hr-HR" ? "selected=\"selected\"" : "")>@Lang.croatian</option>
-                                <option value="fr-FR" @(Culture == "fr-FR" ? "selected=\"selected\"" : "")>@Lang.french</option>
-                                <option value="it-IT" @(Culture == "it-IT" ? "selected=\"selected\"" : "")>@Lang.italian</option>
-                            </select>
-                            <input type="submit" value="@Lang.submit" />
+                            <div class="input-group">
+                                <select name="lang" class="custom-select custom-select-sm bg-light " id="selectLang">
+                                    <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
+                                    <option value="dk-DK" @(Culture == "dk-DK" ? "selected=\"selected\"" : "")>@Lang.danish</option>
+                                    <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
+                                    <option value="nl-NL" @(Culture == "nl-NL" ? "selected=\"selected\"" : "")>@Lang.dutch</option>
+                                    <option value="hr-HR" @(Culture == "hr-HR" ? "selected=\"selected\"" : "")>@Lang.croatian</option>
+                                    <option value="fr-FR" @(Culture == "fr-FR" ? "selected=\"selected\"" : "")>@Lang.french</option>
+                                    <option value="it-IT" @(Culture == "it-IT" ? "selected=\"selected\"" : "")>@Lang.italian</option>
+                                </select>
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-outline-light btn-sm">
+                                        <span class="fa fa-check-circle-o fa-inverse"></span>
+                                    </button>
+                                </div>
+                            </div>                           
+                            
                         }
                     </div>
-                    <span>
+                    <div class="logout-box">
                         <a href="@Url.Action("Logout", "User")" class="list-group-item list-group-item-action">
                             <span class="fa fa-sign-out" aria-hidden="true"></span>
                         </a>
-                    </span>
+                    </div>
 
                 </div>
 
