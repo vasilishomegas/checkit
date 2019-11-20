@@ -70,7 +70,7 @@
                     <div class="form-group">
                         @Html.Label("profilePic", Lang.picture)
                         <!--img src="" /-->
-                        @Html.Editor("profilePic", new { type = "file", @class ="custom-file-input" })
+                        @Html.Editor("profilePic", new { type = "file", @class ="form-control custom-file-input" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Nickname, Lang.name, htmlAttributes: new { @class = "control-label" })
@@ -84,7 +84,7 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                         <i class="fa fa-times-circle fa-2x"></i>
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-dark">
                         <i class="fa fa-check-circle fa-2x"></i>
                     </button>
                 }
@@ -126,7 +126,7 @@
                     <<button type="button" class="btn btn-secondary" data-dismiss="modal">
                         <i class="fa fa-times-circle fa-2x"></i>
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-dark">
                         <i class="fa fa-check-circle fa-2x"></i>
                     </button>
                 }

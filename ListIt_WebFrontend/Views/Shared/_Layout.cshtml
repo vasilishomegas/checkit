@@ -80,7 +80,7 @@
                         @using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { @class = "form-inline" }))
                         {
                             <div class="input-group">
-                                <select name="lang" class="custom-select custom-select-sm bg-light " id="selectLang">
+                                <select name="lang" class="form-control custom-select custom-select-sm bg-light " id="selectLang">
                                     <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
                                     <option value="dk-DK" @(Culture == "dk-DK" ? "selected=\"selected\"" : "")>@Lang.danish</option>
                                     <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
