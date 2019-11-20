@@ -17,9 +17,9 @@
     <div class="d-flex" id="wrapper">
 
         <!-- SIDEBAR -->
-        <div class="bg-dark border-right" id="sidebar-wrapper">
+        <div class="border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">
-                Placeholder
+
             </div>
             <div class="list-group list-group-flush">
                 <!-- ToDo: INSERT AVATAR PIC HERE -->
@@ -50,7 +50,7 @@
 
             <div class="list-group list-group-flush" aria-orientation="vertical">
                 <a href="@Url.Action("Settings", "User")" class="list-group-item list-group-item-action">
-                    <span class="fa fa-list" aria-hidden="true"></span>
+                    <span class="fa fa-gear" aria-hidden="true"></span>
                     @Lang.settings
                 </a>
             </div>
@@ -68,27 +68,28 @@
                 </button>
 
 
-                <span class="justify-content-center">
+                <span class="navbar-brand justify-content-center">
+                    <img src="~/Content/img/logo-white.png" alt="Logo" height="30" class="d-inline-block" />
                     @Html.ActionLink(Lang.list_it, "Lists", "User", new { area = "" }, new { @class = "navbar-brand" })
                 </span>
 
-                
+
 
                 <div class="d-flex justify-content-end">
                     <div>
                         @using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { @class = "form-inline" }))
                         {
                             @Lang.language
-                        <select name="lang" class="custom-control">
-                            <option></option>
-                            <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
-                            <option value="dk-DK" @(Culture == "dk-DK" ? "selected=\"selected\"" : "")>@Lang.danish</option>
-                            <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
-                            <option value="nl-NL" @(Culture == "nl-NL" ? "selected=\"selected\"" : "")>@Lang.dutch</option>
-                            <option value="hr-HR" @(Culture == "hr-HR" ? "selected=\"selected\"" : "")>@Lang.croatian</option>
-                            <option value="fr-FR" @(Culture == "fr-FR" ? "selected=\"selected\"" : "")>@Lang.french</option>
-                            <option value="it-IT" @(Culture == "it-IT" ? "selected=\"selected\"" : "")>@Lang.italian</option>
-                        </select>
+                            <select name="lang" class="custom-control">
+                                <option></option>
+                                <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
+                                <option value="dk-DK" @(Culture == "dk-DK" ? "selected=\"selected\"" : "")>@Lang.danish</option>
+                                <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
+                                <option value="nl-NL" @(Culture == "nl-NL" ? "selected=\"selected\"" : "")>@Lang.dutch</option>
+                                <option value="hr-HR" @(Culture == "hr-HR" ? "selected=\"selected\"" : "")>@Lang.croatian</option>
+                                <option value="fr-FR" @(Culture == "fr-FR" ? "selected=\"selected\"" : "")>@Lang.french</option>
+                                <option value="it-IT" @(Culture == "it-IT" ? "selected=\"selected\"" : "")>@Lang.italian</option>
+                            </select>
                             <input type="submit" value="@Lang.submit" />
                         }
                     </div>
@@ -97,7 +98,7 @@
                             <span class="fa fa-sign-out" aria-hidden="true"></span>
                         </a>
                     </span>
-                    
+
                 </div>
 
             </nav>
@@ -105,10 +106,12 @@
 
 
 
-            <div class="body-content">
-                @RenderBody()
 
-            </div>
+
+        </div>
+
+        <div class="container body-content">
+            @RenderBody()
 
         </div>
     </div>

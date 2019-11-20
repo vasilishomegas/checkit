@@ -12,20 +12,18 @@
         <div class="searchFilterArea">
 
             <!-- SEARCHBAR -->
-            <div class="searchbar">
-                @using (Html.BeginForm(new { @class = "form-inline" }))
-                {
-                    <div class="form-group">
-                        @Html.Editor("Search", new { htmlAttributes = new { @class = "form-control", placeholder = Lang.search } })
+            @using (Html.BeginForm(null, null, FormMethod.Get, new { @class = "" }))
+            {
+                <div class="searchbar input-group">
+                    @Html.Editor("Search", new { htmlAttributes = new { @class = "form-control", placeholder = Lang.search } })
 
+                    <div class="input-group-append">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
                             <span class="fa fa-search"></span>
                         </button>
                     </div>
-                }
-
-
-            </div>
+                </div>
+            }
 
 
             <!-- FILTERAREA -->
@@ -33,9 +31,8 @@
 
                 @using (Html.BeginForm(null, null, FormMethod.Post))
                 {
-                    <div class="form-row">
-                        <div class="col form-group">
-                            <div id="stores">
+                        <div class="d-flex justify-content-center">
+                            <div id="stores d-flex">
                                 <label>@Lang.stores</label>
                                 <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#selectStores" aria-expanded="false" aria-controls="collapseOne">
                                     <!-- Dropdown icon button -->
@@ -82,12 +79,10 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-outline-dark btn-sm" >@Lang.filter</button>
+                            </div>
                         </div>
-                        <div class="col">
-                            <button type="submit" class="btn btn-outline-dark">@Lang.filter</button>
-                        </div>
-                    </div>
                 }
             </div>
 
