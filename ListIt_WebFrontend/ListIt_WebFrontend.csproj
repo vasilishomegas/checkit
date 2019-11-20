@@ -330,6 +330,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="App_GlobalResources\Lang.pl-PL.designer.cs">
+      <DependentUpon>Lang.pl-PL.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="App_GlobalResources\Lang.hr-HR.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -404,6 +409,10 @@
     <Content Include="App_GlobalResources\Lang.it-IT.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Lang.it-IT.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Lang.pl-PL.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Lang.pl-PL.designer.cs</LastGenOutput>
     </Content>
     <EmbeddedResource Include="App_GlobalResources\Lang.nl-NL.resx">
       <Generator>ResXFileCodeGenerator</Generator>
