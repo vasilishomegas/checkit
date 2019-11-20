@@ -32,71 +32,74 @@
 
                 @using (Html.BeginForm(null, null, FormMethod.Post))
                 {
-                    <div class="form-row">
-                        <div class="col form-group">
-                            <select id="sort" class="custom-select custom-select-sm">
-                                <option selected>@Lang.sortBy</option>
-                                <option value="">@Lang.A_Z</option>
-                                <option value="">@Lang.Z_A</option>
-                                <option value="">@Lang.lowestPrice</option>
-                                <option value="">@Lang.highestPrice</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <div class="d-flex justify-content-center">
-                                <div id="stores d-flex">
-                                    <label>@Lang.stores</label>
-                                    <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#selectStores" aria-expanded="false" aria-controls="collapseOne">
-                                        <!-- Dropdown icon button -->
-                                    </button>
+                <div class="form-row">
+                    <div class="col form-group">
+                        <select id="sort" class="custom-select custom-select-sm">
+                            <option selected>@Lang.sortBy</option>
+                            <option value="">@Lang.A_Z</option>
+                            <option value="">@Lang.Z_A</option>
+                            <option value="">@Lang.lowestPrice</option>
+                            <option value="">@Lang.highestPrice</option>
+                        </select>
+                    </div>
+                    <div class="col form-group">
+                        <div class="d-flex justify-content-center">
+                            <div id="stores">
+                                <label>@Lang.stores</label>
+                                <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#selectStores" aria-expanded="false" aria-controls="collapseOne">
+                                    <!-- Dropdown icon button -->
+                                </button>
 
-                                    <div id="selectStores" class="collapse" data-parent="#stores">
+                                <div id="selectStores" class="collapse" data-parent="#stores">
 
-                                        <div class="form-check">
-                                            @Html.CheckBox("fakta", false, htmlAttributes: new { value = "" })
-                                            @Html.Label("fakta", "Fakta")
-                                        </div>
-                                        <div class="form-check">
-                                            @Html.CheckBox("netto", false, htmlAttributes: new { value = "" })
-                                            @Html.Label("netto", "Netto")
-                                        </div>
-                                        <div class="form-check">
-                                            @Html.CheckBox("lidl", false, htmlAttributes: new { value = "" })
-                                            @Html.Label("lidl", "Lidl")
-                                        </div>
-                                        <div class="form-check">
-                                            @Html.CheckBox("aldi", false, htmlAttributes: new { value = "" })
-                                            @Html.Label("aldi", "aldi")
-                                        </div>
-
-                                        <div class="form-check">
-                                            @Html.CheckBox("fotex", false, htmlAttributes: new { value = "" })
-                                            @Html.Label("fotex", "Fotex")
-                                        </div>
-                                        <div class="form-check">
-                                            @Html.CheckBox("bilka", false, htmlAttributes: new { value = "" })
-                                            @Html.Label("bilka", "Bilka")
-                                        </div>
-                                        <div class="form-check">
-                                            @Html.CheckBox("spar", false, htmlAttributes: new { value = "" })
-                                            @Html.Label("spar", "Spar")
-                                        </div>
-                                        <div class="form-check">
-                                            @Html.CheckBox("meny", false, htmlAttributes: new { value = "" })
-                                            @Html.Label("meny", "Meny")
-                                        </div>
-                                        <div class="form-check">
-                                            @Html.CheckBox("rema1000", false, htmlAttributes: new { value = "" })
-                                            @Html.Label("rema1000", "Rema 1000")
-                                        </div>
+                                    <div class="form-check">
+                                        @Html.CheckBox("fakta", false, htmlAttributes: new { value = "" })
+                                        @Html.Label("fakta", "Fakta")
                                     </div>
-                                </div>
-                                <div class="d-flex">
-                                    <button type="submit" class="btn btn-outline-dark btn-sm">@Lang.filter</button>
+                                    <div class="form-check">
+                                        @Html.CheckBox("netto", false, htmlAttributes: new { value = "" })
+                                        @Html.Label("netto", "Netto")
+                                    </div>
+                                    <div class="form-check">
+                                        @Html.CheckBox("lidl", false, htmlAttributes: new { value = "" })
+                                        @Html.Label("lidl", "Lidl")
+                                    </div>
+                                    <div class="form-check">
+                                        @Html.CheckBox("aldi", false, htmlAttributes: new { value = "" })
+                                        @Html.Label("aldi", "aldi")
+                                    </div>
+
+                                    <div class="form-check">
+                                        @Html.CheckBox("fotex", false, htmlAttributes: new { value = "" })
+                                        @Html.Label("fotex", "Fotex")
+                                    </div>
+                                    <div class="form-check">
+                                        @Html.CheckBox("bilka", false, htmlAttributes: new { value = "" })
+                                        @Html.Label("bilka", "Bilka")
+                                    </div>
+                                    <div class="form-check">
+                                        @Html.CheckBox("spar", false, htmlAttributes: new { value = "" })
+                                        @Html.Label("spar", "Spar")
+                                    </div>
+                                    <div class="form-check">
+                                        @Html.CheckBox("meny", false, htmlAttributes: new { value = "" })
+                                        @Html.Label("meny", "Meny")
+                                    </div>
+                                    <div class="form-check">
+                                        @Html.CheckBox("rema1000", false, htmlAttributes: new { value = "" })
+                                        @Html.Label("rema1000", "Rema 1000")
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
+
+                    </div>
+                    <div class="col-3 form-group">
+                        <div class="d-inline-flex">
+                            <button type="submit" class="btn btn-outline-dark btn-sm">@Lang.filter</button>
+                        </div>
+                    </div>
                 </div>
                 }
             </div>
