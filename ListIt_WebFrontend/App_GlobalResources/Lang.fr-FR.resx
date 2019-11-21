@@ -261,6 +261,9 @@
   <data name="save" xml:space="preserve">
     <value>Enregistrer</value>
   </data>
+  <data name="saveTranslation" xml:space="preserve">
+    <value>Enregistrer la traduction</value>
+  </data>
   <data name="search" xml:space="preserve">
     <value>Chercher</value>
   </data>
@@ -281,6 +284,9 @@
   </data>
   <data name="submit" xml:space="preserve">
     <value>Soumettre</value>
+  </data>
+  <data name="translation" xml:space="preserve">
+    <value>Traduction</value>
   </data>
   <data name="unit" xml:space="preserve">
     <value>Unité</value>

@@ -261,6 +261,9 @@
   <data name="save" xml:space="preserve">
     <value>Speichern</value>
   </data>
+  <data name="saveTranslation" xml:space="preserve">
+    <value>Übersetzung anzeigen</value>
+  </data>
   <data name="search" xml:space="preserve">
     <value>Suchen</value>
   </data>
@@ -282,16 +285,16 @@
   <data name="submit" xml:space="preserve">
     <value>Absenden</value>
   </data>
+  <data name="translation" xml:space="preserve">
+    <value>Übersetzung</value>
+  </data>
   <data name="unit" xml:space="preserve">
     <value>Einheit</value>
   </data>
   <data name="yourLists" xml:space="preserve">
     <value>Deine Listen</value>
   </data>
-  <data name="yourProfile" xml:space="preserve">
-    <value>Dein Profil</value>
-  </data>
   <data name="Z-A" xml:space="preserve">
-    <value>Z nach A</value>
+    <value>Z bis A</value>
   </data>
 </root>

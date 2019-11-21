@@ -145,13 +145,13 @@
     <value>Crei nuova categoria</value>
   </data>
   <data name="croatian" xml:space="preserve">
-    <value>Lingua Croata</value>
+    <value>Croata</value>
   </data>
   <data name="currency" xml:space="preserve">
     <value>La moneta</value>
   </data>
   <data name="danish" xml:space="preserve">
-    <value>Lingua Danese</value>
+    <value>Danese</value>
   </data>
   <data name="default" xml:space="preserve">
     <value>Usa predefinito</value>
@@ -160,7 +160,7 @@
     <value>Scoprire</value>
   </data>
   <data name="dutch" xml:space="preserve">
-    <value>Lingua Onlandese</value>
+    <value>Onlandese</value>
   </data>
   <data name="editProfile" xml:space="preserve">
     <value>Modifica Profilo</value>
@@ -172,7 +172,7 @@
     <value>E-mail</value>
   </data>
   <data name="english" xml:space="preserve">
-    <value>Lingua Inglese</value>
+    <value>Inglese</value>
   </data>
   <data name="filter" xml:space="preserve">
     <value>Filtro</value>
@@ -187,16 +187,16 @@
     <value>Non hai un account? Crealo qui.</value>
   </data>
   <data name="french" xml:space="preserve">
-    <value>Lingua Francese</value>
+    <value>Francese</value>
   </data>
   <data name="german" xml:space="preserve">
-    <value>Lingua Tedesca</value>
+    <value>Tedesca</value>
   </data>
   <data name="highestPrice" xml:space="preserve">
     <value>Il prezzo più alto</value>
   </data>
   <data name="italian" xml:space="preserve">
-    <value>Lingua Italiana</value>
+    <value>Italiana</value>
   </data>
   <data name="itemName" xml:space="preserve">
     <value>Nome dell'articolo</value>
@@ -208,7 +208,7 @@
     <value>List it</value>
   </data>
   <data name="lithuanian" xml:space="preserve">
-    <value>Lingua Lituana</value>
+    <value>Lituana</value>
   </data>
   <data name="login" xml:space="preserve">
     <value>Accesso</value>
@@ -223,13 +223,13 @@
     <value>Nome</value>
   </data>
   <data name="newPw" xml:space="preserve">
-    <value>Nuova password</value>
+    <value>Password nuova</value>
   </data>
   <data name="oldPw" xml:space="preserve">
-    <value>Vecchia password</value>
+    <value>Password precedente</value>
   </data>
   <data name="ordering" xml:space="preserve">
-    <value>Ordinazione</value>
+    <value>Smistamento</value>
   </data>
   <data name="origin" xml:space="preserve">
     <value>Origine</value>
@@ -238,7 +238,7 @@
     <value>Immagine</value>
   </data>
   <data name="polish" xml:space="preserve">
-    <value>Lingua Polacca</value>
+    <value>Polacca</value>
   </data>
   <data name="price" xml:space="preserve">
     <value>Prezzo</value>
@@ -261,8 +261,11 @@
   <data name="save" xml:space="preserve">
     <value>Salva</value>
   </data>
+  <data name="saveTranslation" xml:space="preserve">
+    <value>Salva traduzione</value>
+  </data>
   <data name="search" xml:space="preserve">
-    <value>Cercare</value>
+    <value>Cerca</value>
   </data>
   <data name="settings" xml:space="preserve">
     <value>Impostazioni</value>
@@ -277,10 +280,13 @@
     <value>Negozio</value>
   </data>
   <data name="stores" xml:space="preserve">
-    <value>I Negozi</value>
+    <value>Negozi</value>
   </data>
   <data name="submit" xml:space="preserve">
-    <value>Sottoscrivi</value>
+    <value>Sottoporre</value>
+  </data>
+  <data name="translation" xml:space="preserve">
+    <value>Traduzione</value>
   </data>
   <data name="unit" xml:space="preserve">
     <value>Unità di misura</value>

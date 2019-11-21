@@ -261,6 +261,9 @@
   <data name="save" xml:space="preserve">
     <value>Išsaugoti</value>
   </data>
+  <data name="saveTranslation" xml:space="preserve">
+    <value>Išsaugoti vertimą</value>
+  </data>
   <data name="search" xml:space="preserve">
     <value>Paieška</value>
   </data>
@@ -281,6 +284,9 @@
   </data>
   <data name="submit" xml:space="preserve">
     <value>Pateikti</value>
+  </data>
+  <data name="translation" xml:space="preserve">
+    <value>Vertimas</value>
   </data>
   <data name="unit" xml:space="preserve">
     <value>Vienetas</value>

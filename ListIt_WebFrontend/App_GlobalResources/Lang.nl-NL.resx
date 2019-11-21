@@ -261,6 +261,9 @@
   <data name="save" xml:space="preserve">
     <value>Opslaan</value>
   </data>
+  <data name="saveTranslation" xml:space="preserve">
+    <value>Vertaling opslaan</value>
+  </data>
   <data name="search" xml:space="preserve">
     <value>Zoeken</value>
   </data>
@@ -281,6 +284,9 @@
   </data>
   <data name="submit" xml:space="preserve">
     <value>Versturen</value>
+  </data>
+  <data name="translation" xml:space="preserve">
+    <value>Vertaling</value>
   </data>
   <data name="unit" xml:space="preserve">
     <value>Eenheid</value>

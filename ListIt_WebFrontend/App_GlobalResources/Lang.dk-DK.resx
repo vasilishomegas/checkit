@@ -258,6 +258,9 @@
   <data name="save" xml:space="preserve">
     <value>Gemme</value>
   </data>
+  <data name="saveTranslation" xml:space="preserve">
+    <value>Gemme oversættelse</value>
+  </data>
   <data name="search" xml:space="preserve">
     <value>Søg</value>
   </data>
@@ -278,6 +281,9 @@
   </data>
   <data name="submit" xml:space="preserve">
     <value>Indsend</value>
+  </data>
+  <data name="translation" xml:space="preserve">
+    <value>Oversættelse</value>
   </data>
   <data name="unit" xml:space="preserve">
     <value>Enhed</value>

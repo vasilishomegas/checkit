@@ -145,19 +145,22 @@
     <value>Stvori novu kategoriju</value>
   </data>
   <data name="croatian" xml:space="preserve">
-    <value>Hrvatski jezik</value>
+    <value>Hrvatski</value>
   </data>
   <data name="currency" xml:space="preserve">
     <value>Valuta</value>
   </data>
   <data name="danish" xml:space="preserve">
-    <value>Danski jezik</value>
+    <value>Danski</value>
   </data>
   <data name="default" xml:space="preserve">
     <value>Zadano</value>
   </data>
   <data name="discover" xml:space="preserve">
     <value>Pretraži</value>
+  </data>
+  <data name="dutch" xml:space="preserve">
+    <value>Nizozemski</value>
   </data>
   <data name="editProfile" xml:space="preserve">
     <value>Uredi profil</value>
@@ -169,10 +172,10 @@
     <value>E-mail</value>
   </data>
   <data name="english" xml:space="preserve">
-    <value>Engleski jezik</value>
+    <value>Engleski</value>
   </data>
   <data name="filter" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filtar</value>
   </data>
   <data name="findItem" xml:space="preserve">
     <value>Pronađi proizvod</value>
@@ -184,19 +187,19 @@
     <value>Nemaš korisnički račun? Stvori ga ovdje!</value>
   </data>
   <data name="french" xml:space="preserve">
-    <value>Francuski jezik</value>
+    <value>Francuski</value>
   </data>
   <data name="german" xml:space="preserve">
-    <value>Njemački jezik</value>
+    <value>Njemački</value>
   </data>
   <data name="highestPrice" xml:space="preserve">
     <value>Najviša cijena</value>
   </data>
   <data name="italian" xml:space="preserve">
-    <value>Talijanski jezik</value>
+    <value>Talijanski</value>
   </data>
   <data name="itemName" xml:space="preserve">
-    <value>Naziv proizvod</value>
+    <value>Naziv proizvoda</value>
   </data>
   <data name="language" xml:space="preserve">
     <value>Jezik</value>
@@ -205,7 +208,7 @@
     <value>List it</value>
   </data>
   <data name="lithuanian" xml:space="preserve">
-    <value>Litvanski jezik</value>
+    <value>Litvanski</value>
   </data>
   <data name="login" xml:space="preserve">
     <value>Prijavi</value>
@@ -235,7 +238,7 @@
     <value>Slika</value>
   </data>
   <data name="polish" xml:space="preserve">
-    <value>Poljski jezik</value>
+    <value>Poljski</value>
   </data>
   <data name="price" xml:space="preserve">
     <value>Cijena</value>
@@ -258,6 +261,9 @@
   <data name="save" xml:space="preserve">
     <value>Spremi</value>
   </data>
+  <data name="saveTranslation" xml:space="preserve">
+    <value>Spremi prijevod</value>
+  </data>
   <data name="search" xml:space="preserve">
     <value>Pretraži</value>
   </data>
@@ -278,6 +284,9 @@
   </data>
   <data name="submit" xml:space="preserve">
     <value>Primjeni</value>
+  </data>
+  <data name="translation" xml:space="preserve">
+    <value>Prijevod</value>
   </data>
   <data name="unit" xml:space="preserve">
     <value>Mjerna jedinica</value>

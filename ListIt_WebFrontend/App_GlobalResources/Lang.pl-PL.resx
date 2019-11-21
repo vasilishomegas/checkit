@@ -261,6 +261,9 @@
   <data name="save" xml:space="preserve">
     <value>Zapisz</value>
   </data>
+  <data name="saveTranslation" xml:space="preserve">
+    <value>Zapisz tłumaczenie</value>
+  </data>
   <data name="search" xml:space="preserve">
     <value>Wyszukaj</value>
   </data>
@@ -281,6 +284,9 @@
   </data>
   <data name="submit" xml:space="preserve">
     <value>Wybierz</value>
+  </data>
+  <data name="translation" xml:space="preserve">
+    <value>Tłumaczenie</value>
   </data>
   <data name="unit" xml:space="preserve">
     <value>Sztuka</value>
