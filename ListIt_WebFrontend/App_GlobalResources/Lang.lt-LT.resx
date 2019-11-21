@@ -154,10 +154,13 @@
     <value>Danų</value>
   </data>
   <data name="default" xml:space="preserve">
-    <value>Numatytas</value>
+    <value>Numatyta</value>
   </data>
   <data name="discover" xml:space="preserve">
     <value>Atrasti</value>
+  </data>
+  <data name="dutch" xml:space="preserve">
+    <value>Olandų</value>
   </data>
   <data name="editProfile" xml:space="preserve">
     <value>Redaguoti profilį</value>

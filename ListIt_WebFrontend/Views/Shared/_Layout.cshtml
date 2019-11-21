@@ -80,16 +80,18 @@
                         @using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { @class = "form-inline" }))
                         {
                             @Lang.language
-                            <select name="lang" class="custom-control">
-                                <option></option>
-                                <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
-                                <option value="dk-DK" @(Culture == "dk-DK" ? "selected=\"selected\"" : "")>@Lang.danish</option>
-                                <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
-                                <option value="nl-NL" @(Culture == "nl-NL" ? "selected=\"selected\"" : "")>@Lang.dutch</option>
-                                <option value="hr-HR" @(Culture == "hr-HR" ? "selected=\"selected\"" : "")>@Lang.croatian</option>
-                                <option value="fr-FR" @(Culture == "fr-FR" ? "selected=\"selected\"" : "")>@Lang.french</option>
-                                <option value="it-IT" @(Culture == "it-IT" ? "selected=\"selected\"" : "")>@Lang.italian</option>
-                            </select>
+                        <select name="lang" class="custom-control">
+                            <option></option>
+                            <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
+                            <option value="dk-DK" @(Culture == "dk-DK" ? "selected=\"selected\"" : "")>@Lang.danish</option>
+                            <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
+                            <option value="nl-NL" @(Culture == "nl-NL" ? "selected=\"selected\"" : "")>@Lang.dutch</option>
+                            <option value="hr-HR" @(Culture == "hr-HR" ? "selected=\"selected\"" : "")>@Lang.croatian</option>
+                            <option value="fr-FR" @(Culture == "fr-FR" ? "selected=\"selected\"" : "")>@Lang.french</option>
+                            <option value="it-IT" @(Culture == "it-IT" ? "selected=\"selected\"" : "")>@Lang.italian</option>
+                            <option value="pl-PL" @(Culture == "pl-PL" ? "selected=\"selected\"" : "")>@Lang.polish</option>
+                            <option value="lt-LT" @(Culture == "lt-LT" ? "selected=\"selected\"" : "")>@Lang.lithuanian</option>
+                        </select>
                             <input type="submit" value="@Lang.submit" />
                         }
                     </div>

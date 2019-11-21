@@ -159,6 +159,9 @@
   <data name="discover" xml:space="preserve">
     <value>Wyszukaj</value>
   </data>
+  <data name="dutch" xml:space="preserve">
+    <value>Holenderski</value>
+  </data>
   <data name="editProfile" xml:space="preserve">
     <value>Edytuj profil</value>
   </data>
@@ -172,7 +175,7 @@
     <value>Angielski</value>
   </data>
   <data name="filter" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filtruj</value>
   </data>
   <data name="findItem" xml:space="preserve">
     <value>Znajdź produkt</value>
@@ -277,7 +280,7 @@
     <value>Sklepy</value>
   </data>
   <data name="submit" xml:space="preserve">
-    <value>Wyślij</value>
+    <value>Wybierz</value>
   </data>
   <data name="unit" xml:space="preserve">
     <value>Sztuka</value>
