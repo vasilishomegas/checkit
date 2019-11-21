@@ -18,7 +18,7 @@
     <div class="accordion" id="accordionItems">
         <div class="d-flex justify-content-between" id="accordionHeading">
             <div class="d-flex">
-                @Html.Label("name", Lang.name, htmlAttributes: new { @class = "form-text" })
+                @Html.Label("name", Lang.itemName, htmlAttributes: new { @class = "form-text" })
             </div>
             <div class="d-flex">
                 @Html.Label("quantity", Lang.quantity, htmlAttributes: new { @class = "form-text" })
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="form-group col">
                                         <label for="price">@Lang.price</label>
-                                        <input type="number" class="form-control" id="price" placeholder="Insert saved name here">
+                                        <input type="number" class="form-control" id="price" placeholder="Insert price">
                                     </div>
                                 </div>
                                 <div class="form-row">
