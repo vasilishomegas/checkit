@@ -163,7 +163,7 @@
       <Name>ListIt_BusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">
-      <Project>{1FC38C28-DF7B-403E-A99E-D4AF6C044A32}</Project>
+      <Project>{1fc38c28-df7b-403e-a99e-d4af6c044a32}</Project>
       <Name>ListIt_DataAccessModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">

@@ -1,4 +1,5 @@
-﻿@model User
+﻿@model ListIt_DomainModel.DTO.UserDto
+@using System.Web.Mvc.Html
 @using Resources
 
 @{
@@ -123,7 +124,7 @@
                         @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = Lang.pw, required = "required" } })
                     </div>
 
-                    <<button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
                         <i class="fa fa-times-circle fa-2x"></i>
                     </button>
                     <button type="button" class="btn btn-dark">
