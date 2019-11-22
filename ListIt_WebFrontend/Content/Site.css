@@ -1,13 +1,59 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    overflow-x: hidden;
 }
 
-/* Set padding to keep content from hitting the edges */
+a {
+    color: gray;
+    font-style: inherit;
+}
+
+.logout-box {
+    padding-left: 5px;
+}
+
+.searchFilterArea {
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
+.searchbar {
+    padding-bottom: 5px;
+}
+
+.filterarea {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.searchresults {
+    padding-top: 15px;
+}
+
+.carousel {
+    width: 100%;
+    height: auto;
+}
+
+.carousel-inner .carousel-item img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.login-container {
+    margin-top: 50px;
+    background-color: dimgrey;
+    height: 100%;
+    width: auto;
+}
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 100px;
+    width: auto;
 }
+
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -20,5 +66,131 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+   /* max-width: 280px;*/
+}
+
+.navbar-brand {
+    font-size: 30px !important;
+}
+
+.logo-box {
+    padding-left: 20px;
+    width: unset;
+    max-width: 0.6em;
+    height: auto;
+}
+
+img .logo{
+    width: 0.6em !important;
+    height: auto;
+}
+
+/* SINGLE LIST ITEMS */
+
+
+.card {
+    border-left: 0px;
+    border-right: 0px;
+    width: 100%;
+    min-width: 100%;
+}
+
+.check-toggle {
+    cursor: pointer;
+}
+
+#accordionHeading {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: dimgrey;
+    font-size: small;
+}
+
+.crossout {
+    text-decoration: line-through;
+    color: dimgray;
+}
+
+
+.editItem {
+    border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* FORMS FOCUS COLOR */
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+form-control:focus,
+select.form-control:focus,
+.uneditable-input:focus {
+    border-color: rgba(216, 0, 0, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(216, 0, 0, 0.6);
+    outline: 0 none;
+}
+
+
+
+
+
+   /* SIDEBAR TOGGLE */
+    #sidebar-wrapper {
+        min-height: 100vh;
+        margin-left: -15rem;
+        -webkit-transition: margin .25s ease-out;
+        -moz-transition: margin .25s ease-out;
+        -o-transition: margin .25s ease-out;
+        transition: margin .25s ease-out;
+    }
+
+    #sidebar-wrapper .sidebar-heading {
+        padding: 1.5rem 1.5rem;
+        font-size: 1.2rem;
+        opacity: 0;
+        height: 5em;
+    }
+
+    #sidebar-wrapper .list-group {
+        width: 15rem;
+    }
+
+    #sidebar-wrapper .list-group .list-group-item {
+        border: none;
+    }
+
+    #page-content-wrapper {
+        min-width: 100vw;
+        padding-top: 20rem;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+
 }

@@ -1,0 +1,71 @@
+﻿@using Resources
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Lang.settings;
+}
+
+
+    <div class="container-fluid">
+        <h1>@ViewBag.Title</h1>
+
+        <div class="settings-container">
+            @using (Html.BeginForm())
+            {
+                <!--div class="form-group">
+                    <label for="language">Interface Language</label>
+                    <select id="language" class="custom-select custom-select-sm">
+                        <option selected>English</option>
+                        <option value="">Arabic</option>
+                        <option value="">Croatian</option>
+                        <option value="">Danish</option>
+                        <option value="">Dutch</option>
+                        <option value="">English</option>
+                        <option value="">German</option>
+                        <option value="">Lithuanian</option>
+                        <option value="">Polish</option>
+                        <option value="">...</option>
+                    </select>
+                </!--div-->
+                <div class="form-group">
+                    <label for="country">@Lang.country</label>
+                    <select id="country" class="form-control custom-select custom-select-sm">
+                        <option selected>Denmark</option>
+                        <option value="">Australia</option>
+                        <option value="">Austria</option>
+                        <option value="">Bulgaria</option>
+                        <option value="">China</option>
+                        <option value="">Croatia</option>
+                        <option value="">Denmark</option>
+                        <option value="">Lithuania</option>
+                        <option value="">Poland</option>
+                        <option value="">...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="currency">@Lang._default @Lang.currency</label>
+                    <select id="currency" class="form-control custom-select custom-select-sm">
+                        <option selected>DKK</option>
+                        <option value="">EUR</option>
+                        <option value="">GBP</option>
+                        <option value="">SEK</option>
+                        <option value="">...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ordering">@Lang._default @Lang.ordering</label>
+                    <select id="ordering" class="form-control custom-select custom-select-sm">
+                        <option selected>MyOrdering</option>
+                        <option value="">Template Fakta</option>
+                        <option value="">Template Netto</option>
+                        <option value="">Template Fotex</option>
+                        <option value="">...</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-dark">
+                    @Lang.save
+                </button>
+            }
+        </div>
+        
+    </div>

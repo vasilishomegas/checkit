@@ -1,0 +1,216 @@
+﻿@using Resources
+@model ListIt_Backend.Models.ShoppingListEntry
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "List";
+}
+
+<div class="container-fluid">
+
+    <h1>
+        <!-- INSERT LIST NAME HERE -->
+        Single List
+    </h1>
+
+    <!-- LISTING ITEMS IN ACCORDION -->
+    <div class="accordion" id="accordionItems">
+        <div class="d-flex justify-content-between" id="accordionHeading">
+            <div class="d-flex">
+                @Html.Label("name", Lang.itemName, htmlAttributes: new { @class = "form-text" })
+            </div>
+            <div class="d-flex">
+                @Html.Label("quantity", Lang.quantity, htmlAttributes: new { @class = "form-text" })
+            </div>
+            <div class="d-flex">
+                @Html.Label("price", Lang.price, htmlAttributes: new { @class = "form-text" })
+            </div>
+            <div class="d-flex">
+                <button class="btn" type="button" data-toggle="" data-target="" aria-controls="">
+                    <i class="fa fa-sort-amount-asc fa-lg"></i>
+                </button>
+            </div>
+        </div>
+
+
+        <!-- FOREACH LOOP: create card for each item -->
+
+        <div class="card">
+            <div class="card-header check-toggle" id="headingOne">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex form-check-inline">
+                        @Html.CheckBox("checkbox")
+
+                        <input class="form-check-input checkbox" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1" id="preview">
+                            Item 1 <!-- INSERT ITEM NAME HERE-->
+                        </label>
+                    </div>
+                    <div class="d-flex">
+                        <label class="form-text" for="defaultCheck1" id="preview">
+                            <!-- INSERT QUANTITY HERE -->
+                            10 pc.
+                        </label>
+                    </div>
+                    <div class="d-flex">
+                        <label class="form-text" for="defaultCheck1" id="preview">
+                            <!-- INSERT PRICE HERE -->
+                            5 dkk/pc.
+                        </label>
+                    </div>
+                    <div class="d-flex item-dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <!-- Dropdown icon button -->
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionItems">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col editItem">
+                            <!-- EDIT ITEM FORM-->
+                            @using (Html.BeginForm(null, null, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="name">@Lang.itemName</label>
+                                        <input type="text" class="form-control" id="name" placeholder=@Lang.itemName>
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="price">@Lang.price</label>
+                                        <input type="number" class="form-control" id="price" placeholder="Insert price">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col range-slider">
+                                        <label for="quantity">@Lang.quantity </label><output id="rangevalue"></output>
+                                        <input type="text" class="form-control" value="1" id="quantity">
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="unit">@Lang.unit</label>
+                                        <select id="unit" class="custom-select custom-select-sm">
+                                            <option value="" selected>pc</option>
+                                            <option value="">lt</option>
+                                            <option value="">g</option>
+                                            <option value="">kg</option>
+                                            <option value="">pkg</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="category">@Lang.category</label>
+                                        <select id="category" class="custom-select custom-select-sm">
+                                            <option selected>Choose a category</option>
+                                            <option value="">Vegetables</option>
+                                            <option value="">Fruits</option>
+                                            <option value="">Milk products</option>
+                                            <option value="">...</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="createCategory">@Lang.createCat</label>
+                                        <input type="text" class="form-control" id="createCategory" placeholder="MyCategory">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <button class="btn btn-dark" type="submit">
+                                        <i class="fa fa-check-circle fa-lg"></i>
+                                    </button>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="col">
+                            <!-- TRANSLATION -->
+                            <form>
+                                <div class="form-row form-group">
+                                    <label for="translation">Translation</label>
+                                    <select id="translation" class="custom-select custom-select-sm">
+                                        <option selected>Original language</option>
+                                        <option value="">Arabic</option>
+                                        <option value="">Croatian</option>
+                                        <option value="">Danish</option>
+                                        <option value="">Dutch</option>
+                                        <option value="">English</option>
+                                        <option value="">German</option>
+                                        <option value="">Lithuanian</option>
+                                        <option value="">Polish</option>
+                                        <option value="">...</option>
+                                    </select>
+                                    <output>
+                                        <!-- Show translation here -->
+                                        show translation here
+                                    </output>
+                                </div>
+                                <button type="submit" class="btn btn-outline-dark">
+                                    Save translation
+                                </button>
+                            </form>
+                            <hr />
+                            <div>
+                                <label for="currency">Currency Exchange</label>
+                                <select id="currency" class="custom-select custom-select-sm">
+                                    <option selected>DKK</option>
+                                    <option value="">EUR</option>
+                                    <option value="">GBP</option>
+                                    <option value="">SEK</option>
+                                    <option value="">...</option>
+                                </select>
+                                <output>
+                                    <!-- Show calculated price here -->
+                                    show price here
+                                </output>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    jQuery(function ($) {
+
+        $(".check-toggle").on('click', function () {
+            $(this).find(':checkbox').prop('checked', function (i, checked) {
+                return !checked;
+            });
+
+
+            if ($('input.checkbox').is(':checked')) {
+                $('label#preview').addClass('crossout');
+            } else {
+                $('label#preview').removeClass('crossout');
+            }
+        });
+    });
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/gh/RubaXa/Sortable/Sortable.min.js">
+    Sortable.create(
+        accordionItems,
+        {
+            animation: 100,
+            group: 'list-1',
+            draggable: '.card',
+            handle: '.card',
+            sort: true,
+            filter: '.sortable-disabled',
+            chosenClass: 'active'
+        });
+</script>

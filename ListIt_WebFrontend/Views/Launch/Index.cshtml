@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "List It";
+}
+
+@using Resources
+<!DOCTYPE html>
+
+<html>
+<head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/site.css")
+        @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+        <div class="row align-items-center h-100">
+            <div class="col d-flex">
+                <div class="justify-content-center align-items-center logo-box">
+                    
+                    <img src="~/Content/img/logo-black.png" alt="List It Logo" class="logo" />
+                    <h1>@ViewBag.Title</h1>
+
+                    @Html.ActionLink("Register", "Register", "User")
+
+                    @Html.ActionLink("Login", "Login", "User")
+
+                    @Html.ActionLink("User Dashboard", "Lists", "User")
+                </div>                
+            </div>
+            <div class="col">
+                
+                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="~/Content/img/slider_1_v2.jpg" class="d-block w-100" alt="List your items, define them and check them!">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.list_it, "Login", "User")</button>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Content/img/slider_2.jpg" class="d-block w-100" alt="Discover nearby stores and their products!">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.discover, "Login", "User")</button>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Content/img/slider_3.jpg" class="d-block w-100" alt="Share your lists with a household.">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.start_now, "Login", "User")</button>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                
+            </div>
+        </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

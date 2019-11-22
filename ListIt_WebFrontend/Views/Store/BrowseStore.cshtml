@@ -1,0 +1,158 @@
+﻿
+@using Resources
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = @Lang.browseStore;
+}
+
+    <div class="container-fluid">
+        <h1>@ViewBag.Title</h1>
+
+        <!-- SEARCH & FILTER -->
+        <div class="searchFilterArea">
+
+            <!-- SEARCHBAR -->
+            @using (Html.BeginForm(null, null, FormMethod.Get, new { @class = "" }))
+            {
+                <div class="searchbar input-group">
+                    @Html.Editor("Search", new { htmlAttributes = new { @class = "form-control", placeholder = Lang.search } })
+
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </div>
+                </div>
+            }
+
+
+            <!-- FILTERAREA -->
+            <div class="filterarea">
+
+                @using (Html.BeginForm(null, null, FormMethod.Post))
+                {
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <div class="d-flex justify-content-end">
+                                <div id="stores">
+                                    <label>@Lang.stores</label>
+                                    <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#selectStores" aria-expanded="false" aria-controls="collapseOne">
+                                        <!-- Dropdown icon button -->
+                                    </button>
+
+                                    <div id="selectStores" class="collapse" data-parent="#stores">
+
+                                        <div class="form-check">
+                                            @Html.CheckBox("fakta", false, htmlAttributes: new { value = "" })
+                                            @Html.Label("fakta", "Fakta")
+                                        </div>
+                                        <div class="form-check">
+                                            @Html.CheckBox("netto", false, htmlAttributes: new { value = "" })
+                                            @Html.Label("netto", "Netto")
+                                        </div>
+                                        <div class="form-check">
+                                            @Html.CheckBox("lidl", false, htmlAttributes: new { value = "" })
+                                            @Html.Label("lidl", "Lidl")
+                                        </div>
+                                        <div class="form-check">
+                                            @Html.CheckBox("aldi", false, htmlAttributes: new { value = "" })
+                                            @Html.Label("aldi", "Aldi")
+                                        </div>
+
+                                        <div class="form-check">
+                                            @Html.CheckBox("fotex", false, htmlAttributes: new { value = "" })
+                                            @Html.Label("fotex", "Fotex")
+                                        </div>
+                                        <div class="form-check">
+                                            @Html.CheckBox("bilka", false, htmlAttributes: new { value = "" })
+                                            @Html.Label("bilka", "Bilka")
+                                        </div>
+                                        <div class="form-check">
+                                            @Html.CheckBox("spar", false, htmlAttributes: new { value = "" })
+                                            @Html.Label("spar", "Spar")
+                                        </div>
+                                        <div class="form-check">
+                                            @Html.CheckBox("meny", false, htmlAttributes: new { value = "" })
+                                            @Html.Label("meny", "Meny")
+                                        </div>
+                                        <div class="form-check">
+                                            @Html.CheckBox("rema1000", false, htmlAttributes: new { value = "" })
+                                            @Html.Label("rema1000", "Rema 1000")
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col form-group">
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-outline-dark btn-sm">@Lang.filter</button>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+
+        <!-- SEARCH RESULTS -->
+        <div class="searchresults">
+            <!-- CARD DECK-->
+
+            <div class="card-deck">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <!-- insert item name-->
+                            Banana
+                        </h5>
+                        <p class="card-text">
+                            <!-- enter brand here -->
+                            @Lang.brand: Chiquita
+                        </p>
+                        <p class="card-text">
+                            <!-- enter origin here -->
+                            @Lang.origin: Peru
+                        </p>
+                        <p class="card-text">
+                            <!-- enter store here -->
+                            Store: Fakta
+                        </p>
+                        <span class="card-text align-content-end">
+                            <!-- enter price here -->
+                            2.5 DKK/pc
+                        </span>
+                        <button class="btn btn-outline-dark" type="button">
+                            @Lang.addToList
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+

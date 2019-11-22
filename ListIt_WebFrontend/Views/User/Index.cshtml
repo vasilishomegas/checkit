@@ -1,0 +1,139 @@
+﻿@model User
+@using Resources
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Lang.yourProfile;
+}
+
+<div class="container-fluid">
+
+
+    <h1>@ViewBag.Title</h1>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tr>
+                    <td>
+                        @Lang.name
+                    </td>
+                    <td>
+                        <!-- INSERT NICKNAME HERE -->
+                        Steve Smith
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Lang.email
+                    </td>
+                    <td>
+                        <!-- INSERT EMAIL ADRESS HERE -->
+                        steve.smith@ucn.dk
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col">
+            <!-- INSERT PROFILE PIC HERE - IF NO PIC INSERT AVATAR -->
+            <!--img src="" alt="Profile Picture" /-->
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="btn-group-sm">
+            <button class="btn btn-outline-dark" id="editProfile" data-toggle="modal" data-target="#modalEditProfile">
+                <i class="fa fa-pencil fa-lg"></i>
+                @Lang.editProfile
+            </button>
+            <button class="btn btn-outline-dark" id="editPW" data-toggle="modal" data-target="#modalEditPW">
+                <i class="fa fa-lock fa-lg"></i>
+                @Lang.editPW
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal EDIT PROFILE -->
+<div class="modal fade" id="modalEditProfile" tabindex="-1" role="dialog" aria-labelledby="modalEditProfileTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditProfileTitle">@Lang.editProfile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @Html.Label("profilePic", Lang.picture)
+                        <!--img src="" /-->
+                        @Html.Editor("profilePic", new { type = "file", @class ="form-control custom-file-input" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nickname, Lang.name, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control", value = Lang.name, placeholder ="Steve Smith", required = "required" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, Lang.email, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", value = Lang.email, type = "email", placeholder="steve@smith.com", required = "required" } })
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fa fa-times-circle fa-2x"></i>
+                    </button>
+                    <button type="button" class="btn btn-dark">
+                        <i class="fa fa-check-circle fa-2x"></i>
+                    </button>
+                }
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal EDIT PW -->
+<div class="modal fade" id="modalEditPW" tabindex="-1" role="dialog" aria-labelledby="modalEditPWTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditPWTitle">@Lang.editPW</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PasswordHash, Lang.oldPw, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = Lang.pw, required = "required" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PasswordHash, Lang.newPw, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = Lang.pw, required = "required" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PasswordHash, Lang.cnewPw, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = Lang.pw, required = "required" } })
+                    </div>
+
+                    <<button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fa fa-times-circle fa-2x"></i>
+                    </button>
+                    <button type="button" class="btn btn-dark">
+                        <i class="fa fa-check-circle fa-2x"></i>
+                    </button>
+                }
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
