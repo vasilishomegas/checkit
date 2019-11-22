@@ -9,6 +9,9 @@ namespace ListIt_DataAccess
     {
         public ListItContext() : base()
         {
+            // https://stackoverflow.com/questions/14033193/entity-framework-provider-type-could-not-be-loaded
+            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+
 
             // SERIALIZATION ISSUE WITHOUT 2 LINES UNDERNEATH
             // https://stackoverflow.com/questions/23098191/failed-to-serialize-the-response-in-web-api-with-json
