@@ -18,6 +18,11 @@ namespace ListIt_BusinessLogic.Services
 
         }
 
+        public override IEnumerable<LanguageDto> GetAll()
+        {
+            return _repository.GetAll().Select(ConvertDomainToDto).ToList();
+        } 
+
         protected override LanguageDto ConvertDomainToDto(Language entity)
         {
             return StaticDomainToDto(entity);

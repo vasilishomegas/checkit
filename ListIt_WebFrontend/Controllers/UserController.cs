@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ListIt_BusinessLogic;
 
 namespace ListIt_WebFrontend.Controllers
 {
@@ -11,25 +12,28 @@ namespace ListIt_WebFrontend.Controllers
         // GET: User/Profile
         public ActionResult Index()
         {
+            //leads to profile view
             return View();
         }
 
         // GET: Launch/Login
         public ActionResult Login()
         {
+            //leads to login view
             return View();
         }
 
         // GET: Launch/Register
         public ActionResult Register()
         {
+            //leads to register view
             return View();
         }
 
         // GET: Launch/Logout
         public ActionResult Logout()
         {
-            return RedirectToAction("Login", "Launch");
+            return RedirectToAction("Login", "User");
         }
 
         // GET: User/Lists
@@ -68,19 +72,36 @@ namespace ListIt_WebFrontend.Controllers
             return View();
         }
 
-        // POST: User/Create
+        // POST: User/CreateUser
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult CreateUser(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
+                var name = collection["Nickname"];
+                var email = collection["Email"];
+                var pw = collection["PasswordHash"].ToHashSet().ToString();
 
-                return RedirectToAction("Index");
+                ListIt_DomainModel.DTO.UserDto user = new ListIt_DomainModel.DTO.UserDto();
+                user.Nickname = name;
+                user.Email = email;
+                user.PasswordHash = pw;
+
+                //user.Language = 1;
+                //user.Country = 1;
+
+
+
+                //ListIt_BusinessLogic.Services.UserService.Create(user);
+
+                return RedirectToAction("Login");
             }
             catch
             {
-                return View();
+                ViewBag.Error = "Something went wrong. Please try again";
+
+                return View("Register");
             }
         }
 

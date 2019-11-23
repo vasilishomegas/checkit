@@ -9,6 +9,12 @@ namespace ListIt_DataAccess.Repository
 {
     public class LanguageRepository : Repository<Language>
     {
-
+        public IEnumerable<Language> GetAllNames()
+        {
+            using (var context = new ListItContext())
+            {
+                return context.Set<Language>().ToList();
+            }
+        }
     }
 }
