@@ -30,9 +30,15 @@ namespace ListIt_BusinessLogic.Services
 
         public static ShoppingList StaticDtoToDomain(ShoppingListDto dto)
         {
+            //dto.ListAccessTypeId should go to LinkUserToList-Table/Class 
+
             return new ShoppingList
             {
-                //DB-Attribute = dto.Attribute
+                Id = dto.Id,
+                Name = dto.Name,
+                Path = "whatever???",
+                Timestamp = DateTime.Now,
+                ChosenSorting_Id = null,
             };
         }
 
@@ -40,7 +46,11 @@ namespace ListIt_BusinessLogic.Services
         {
             return new ShoppingListDto
             {
-                //dtt-Attribute = list.Attribute
+                Id = list.Id,
+                Name = list.Name,
+                Path = list.Path,
+                //ChosenSortingId = null, //list.ChosenSorting_Id, NULLABLE in ShoppingList
+                //ListAccessTypeId = SomeService.SomeFunction???
             };
         }
     }
