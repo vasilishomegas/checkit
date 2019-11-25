@@ -1,4 +1,4 @@
-﻿@model ListIt_DomainModel.DTO.UserDto
+﻿@model ListIt_WebFrontend.Models.RegisterUser
 @using Resources
 
 @{
@@ -31,7 +31,7 @@
                         <p>
                             @ViewBag.Error
                         </p>
-                    @:</div>    
+                    @:</div>
                 }
 
 
@@ -57,28 +57,22 @@
                                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = Lang.email, type = "email", required = "required" } })
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
-                        </div>
+                        </div>                       
 
-                        <!--div class="form-group">
-                            @Html.Label("Language", Lang.language, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("Select Language" )
-                            </div>
-                        </!--div-->
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.PasswordHash, Lang.pw, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = Lang.pw, required = "required" } })
+                                @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", placeholder = Lang.pw, required = "required" } })
                                 @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.PasswordHash, Lang.repPW, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.PasswordRepeat, Lang.repPW, htmlAttributes: new { @class = "control-label" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = Lang.pw, required = "required" } })
-                                @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.PasswordRepeat, new { htmlAttributes = new { @class = "form-control", placeholder = Lang.pw, required = "required" } })
+                                @Html.ValidationMessageFor(model => model.PasswordRepeat, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -99,9 +93,9 @@
             <div class="col-3"></div>
         </div>
     </div>
-    
 
-    
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

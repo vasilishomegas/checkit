@@ -16,5 +16,8 @@ namespace ListIt_DomainModel.DTO
         public System.DateTime Timestamp { get; set; }
         public virtual CountryDto Country { get; set; }
         public virtual LanguageDto Language { get; set; }
+
+        
+        
     }
 }

@@ -8,6 +8,7 @@ using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
+using System.Security.Cryptography;
 
 namespace ListIt_BusinessLogic.Services
 {
@@ -35,11 +36,31 @@ namespace ListIt_BusinessLogic.Services
                 Country_Id = userDto.Country.Id,
                 Email = userDto.Email,
                 Id = userDto.Id,
-                PasswordHash = userDto.PasswordHash,
+                PasswordHash = HashPassword(userDto.PasswordHash),
                 Nickname = userDto.Nickname,
                 Timestamp = DateTime.Now
-            });
+            }) ;
         }
+
+        public UserDto Login(string email, string pw)
+        {
+            UserRepository repo = new UserRepository();
+            var user = repo.GetUserByEmailAndPasswordHash(email, HashPassword(pw));
+
+            return ConvertDomainToDto(user);
+        }
+
+        public string HashPassword(string pw)
+        {
+            //Password hashing:
+            HashAlgorithm hash = new SHA256CryptoServiceProvider();
+            byte[] buff = System.Text.Encoding.UTF8.GetBytes(pw);
+            byte[] hashed = hash.ComputeHash(buff);
+            string hashedPW = Convert.ToBase64String(hashed);
+
+            return hashedPW;
+
+        }  
 
         public override void Update(UserDto userDto)
         {
