@@ -10,27 +10,20 @@ using ListIt_WebFrontend.Models;
 namespace ListIt_WebFrontend.Controllers
 {
     public class UserController : Controller
-    {
-
-        public ActionResult PVLang()
-        {
-            ListIt_DomainModel.DTO.LanguageDto ldto = new ListIt_DomainModel.DTO.LanguageDto();
-            //IEnumerable<ListIt_DomainModel.DTO.LanguageDto> languages = new ListIt_DomainModel.DTO.LanguageDto[99];
-            ListIt_BusinessLogic.Services.LanguageService languageService = new ListIt_BusinessLogic.Services.LanguageService();
-
-            //for (int x = 0; x == languageService.GetAll().Count(); x++){
-               ldto.LangList = languageService.GetAll().GetEnumerator();
-            //}
-            
-
-            return View(ldto);
-        }
+    {    
 
         // GET: User/Profile
         public ActionResult Index()
         {
             //leads to profile view
-            return View();
+            if (Session["UserId"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         // GET: Launch/Login
@@ -56,31 +49,56 @@ namespace ListIt_WebFrontend.Controllers
         // GET: Launch/Logout
         public ActionResult Logout()
         {
+            //removing Session:
+            Session.Clear();
+            Session.Abandon();
+
             return RedirectToAction("Login", "User");
         }
 
         // GET: User/Lists
         public ActionResult Lists()
         {
-            return View();
+            if (Session["UserId"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         // GET: User/SingleList
         public ActionResult SingleList()
         {
-            return View();
+            if (Session["UserId"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         // GET: User/Trashbin
-        public ActionResult Trashbin()
-        {
-            return View();
-        }
+        //public ActionResult Trashbin()
+        //{
+        //    return View();
+        //}
 
         // GET: User/Settings
         public ActionResult Settings()
         {
-            return View();
+            if (Session["UserId"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         // GET: User/Details/5
