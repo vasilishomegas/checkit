@@ -14,9 +14,11 @@ namespace ListIt_BusinessLogic.Services
 {
     public class UserService : Service<User, UserDto>
     {
+        private readonly UserRepository _userRepository;
         public UserService() : base(new UserRepository())
         {
-
+            
+            _userRepository = (UserRepository)_repository;
         }
 
         public override void Create(UserDto userDto)
@@ -44,9 +46,7 @@ namespace ListIt_BusinessLogic.Services
 
         public UserDto Login(string email, string pw)
         {
-            UserRepository repo = new UserRepository();
-            var user = repo.GetUserByEmailAndPasswordHash(email, HashPassword(pw));
-
+            var user = _userRepository.GetUserByEmailAndPasswordHash(email, HashPassword(pw));
             return ConvertDomainToDto(user);
         }
 
@@ -59,7 +59,6 @@ namespace ListIt_BusinessLogic.Services
             string hashedPW = Convert.ToBase64String(hashed);
 
             return hashedPW;
-
         }  
 
         public override void Update(UserDto userDto)
