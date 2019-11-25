@@ -364,6 +364,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\RegisterUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -481,7 +482,6 @@
     <Content Include="Views\User\Trashbin.cshtml" />
     <Content Include="Views\User\Settings.cshtml" />
     <Content Include="Views\User\SingleList.cshtml" />
-    <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Item.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -493,11 +493,12 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="site.webmanifest" />
+    <Content Include="Views\User\PVLang.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_LocalResources\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
@@ -507,6 +508,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">
+      <Project>{1fc38c28-df7b-403e-a99e-d4af6c044a32}</Project>
+      <Name>ListIt_DataAccessModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
       <Project>{407c3836-2917-427e-8a14-e4125cbc6b20}</Project>
       <Name>ListIt_DomainModel</Name>

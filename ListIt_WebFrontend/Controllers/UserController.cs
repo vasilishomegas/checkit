@@ -1,14 +1,31 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ListIt_BusinessLogic;
+using ListIt_WebFrontend.Models;
 
 namespace ListIt_WebFrontend.Controllers
 {
     public class UserController : Controller
     {
+
+        public ActionResult PVLang()
+        {
+            ListIt_DomainModel.DTO.LanguageDto ldto = new ListIt_DomainModel.DTO.LanguageDto();
+            //IEnumerable<ListIt_DomainModel.DTO.LanguageDto> languages = new ListIt_DomainModel.DTO.LanguageDto[99];
+            ListIt_BusinessLogic.Services.LanguageService languageService = new ListIt_BusinessLogic.Services.LanguageService();
+
+            //for (int x = 0; x == languageService.GetAll().Count(); x++){
+               ldto.LangList = languageService.GetAll().GetEnumerator();
+            //}
+            
+
+            return View(ldto);
+        }
+
         // GET: User/Profile
         public ActionResult Index()
         {
@@ -26,8 +43,14 @@ namespace ListIt_WebFrontend.Controllers
         // GET: Launch/Register
         public ActionResult Register()
         {
+            RegisterUser user = new RegisterUser();
+            ListIt_BusinessLogic.Services.LanguageService langService = new ListIt_BusinessLogic.Services.LanguageService();
+            ListIt_BusinessLogic.Services.CountryService countryService = new ListIt_BusinessLogic.Services.CountryService();
+            user.CountryList = countryService.GetAll().OrderBy(x => x.Name);
+            user.LangList = langService.GetAll().OrderBy(x => x.Name);
+
             //leads to register view
-            return View();
+            return View(user);
         }
 
         // GET: Launch/Logout
@@ -78,28 +101,58 @@ namespace ListIt_WebFrontend.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-                var name = collection["Nickname"];
-                var email = collection["Email"];
-                var pw = collection["PasswordHash"].ToHashSet().ToString();
+                ListIt_DomainModel.DTO.UserDto user = new ListIt_DomainModel.DTO.UserDto();                
 
-                ListIt_DomainModel.DTO.UserDto user = new ListIt_DomainModel.DTO.UserDto();
-                user.Nickname = name;
-                user.Email = email;
-                user.PasswordHash = pw;
+                ListIt_DomainModel.DTO.CountryDto country = new ListIt_DomainModel.DTO.CountryDto();              
+                country.Id = 73;    //Denmark is default
 
-                //user.Language = 1;
-                //user.Country = 1;
+                ListIt_DomainModel.DTO.LanguageDto lang = new ListIt_DomainModel.DTO.LanguageDto();
+                lang.Id = 2;      //English is default
 
+                user.Nickname = collection["Nickname"]; 
+                user.Email = collection["Email"]; 
+                user.PasswordHash = collection["PasswordHash"]; 
+                user.Language = lang;
+                user.Country = country;
 
+                var userService = new ListIt_BusinessLogic.Services.UserService();
+                userService.Create(user);
 
-                //ListIt_BusinessLogic.Services.UserService.Create(user);
+                ViewBag.Message = "You have registered successfully. Now you can login here!";
 
                 return RedirectToAction("Login");
             }
             catch
             {
                 ViewBag.Error = "Something went wrong. Please try again";
+
+                return View("Register");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // User/Login/
+        public ActionResult LoginUser(FormCollection collection)
+        {
+            try
+            {
+                var email = collection["Email"];
+                var pw = collection["PasswordHash"];
+
+                ListIt_BusinessLogic.Services.UserService userService = new ListIt_BusinessLogic.Services.UserService();
+                //UserVM userVM = new UserVM();                
+
+                var user = userService.Login(email, pw);
+
+                Session["UserId"] = user.Id;
+                Session["LanguageId"] = user.Language.Id;               
+
+                return RedirectToAction("Lists");
+            }
+            catch
+            {
+                ViewBag.Error = "Login is not valid! Either Email or Password are wrong.";
 
                 return View("Register");
             }
