@@ -17,7 +17,9 @@ namespace ListIt_BusinessLogic.Services
         private readonly UserRepository _userRepository;
         public UserService() : base(new UserRepository())
         {
-            
+            // Does not create a new instance of UserRepository, but just casts it to a proper variable type,
+            // so we can use methods, which are implemented in UserRepository subclass, without creating another
+            // instance.
             _userRepository = (UserRepository)_repository;
         }
 
