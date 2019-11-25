@@ -18,6 +18,23 @@ namespace ListIt_BusinessLogic.Services
 
         }
 
+        public override void Create(ShoppingListDto dto)
+        {
+            _repository.Create(new ShoppingList
+            {
+                //assign values here
+            });
+        }
+
+        public override void Update(ShoppingListDto dto)
+        {
+            _repository.Update(new ShoppingList
+            {
+                //assign values here
+            });
+        }
+ 
+
         protected override ShoppingListDto ConvertDomainToDto(ShoppingList entity)
         {
             return StaticDomainToDto(entity);

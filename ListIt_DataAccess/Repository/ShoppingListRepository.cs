@@ -10,6 +10,6 @@ namespace ListIt_DataAccess.Repository
 {
     public class ShoppingListRepository : Repository<ShoppingList>
     {
-
+        //Queries come here
     }
 }

@@ -74,7 +74,7 @@ namespace ListIt_BusinessLogic.Services
             userDto.Timestamp = inDbUser.Timestamp;
             var newCountryId = userDto.Country?.Id ?? inDbUser.Country_Id;
             var newLanguageId = userDto.Language?.Id ?? inDbUser.Language_Id;
-
+            
             _repository.Update(new User
             {
                 Language_Id = newLanguageId,
