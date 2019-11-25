@@ -144,6 +144,9 @@
   <data name="createCat" xml:space="preserve">
     <value>Sukurti kategoriją</value>
   </data>
+  <data name="createList" xml:space="preserve">
+    <value>Sudaryti naują sąrašą</value>
+  </data>
   <data name="croatian" xml:space="preserve">
     <value>Kroatų</value>
   </data>
