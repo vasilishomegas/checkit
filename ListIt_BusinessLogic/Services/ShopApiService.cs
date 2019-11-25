@@ -23,24 +23,6 @@ namespace ListIt_BusinessLogic.Services
         // Static methods are needed to be able to convert reference properties in other services
         public static ShopApi StaticDtoToDomain(ShopApiDto shopApiDto)
         {
-            /* OLD BODY
-            int id;
-            string url;
-
-            if (shopApiDto != null)
-            {
-                id = shopApiDto.Id;
-                url = shopApiDto.Url;
-            }
-            else return null;
-
-            return new ShopApi
-            {
-                Id = id,
-                Url = url
-            };
-            */
-
             if (shopApiDto == null) return null;
 
             return new ShopApi

@@ -9,6 +9,6 @@ namespace ListIt_DataAccess.Repository
 {
     public class CountryRepository : Repository<Country>
     {
-
+        // Simple CRUD methods come from generic Repository<T>
     }
 }

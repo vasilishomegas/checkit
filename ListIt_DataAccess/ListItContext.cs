@@ -9,6 +9,8 @@ namespace ListIt_DataAccess
     {
         public ListItContext() : base()
         {
+            // Go to base class to see more details.
+
             // https://stackoverflow.com/questions/14033193/entity-framework-provider-type-could-not-be-loaded
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
 

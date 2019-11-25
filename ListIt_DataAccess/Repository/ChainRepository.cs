@@ -9,12 +9,12 @@ using ListIt_DataAccessModel;
 namespace ListIt_DataAccess.Repository
 {
     public class ChainRepository : Repository<Chain>
-    {
-        // THIS STUPID GET METHODS ARE NECESSARY FOR EAGER LOADING, WHICH MEANS THAT RELATED CLASSES ARE ALSO RETURNED IN WEB API
+    { 
         public override IEnumerable<Chain> GetAll()
         {
             using (var context = new ListItContext())
             {
+                // Load the reference type ShopApi.
                 return context.Chains.Include(x => x.ShopApi).ToList();
             }
         }
@@ -23,6 +23,7 @@ namespace ListIt_DataAccess.Repository
         {
             using (var context = new ListItContext())
             {
+                // Load the reference type ShopApi and get first element (or null/0) which has the same ID as demanded.
                 return context.Chains.Include(x => x.ShopApi).FirstOrDefault(x => x.Id == id);
             }
         }

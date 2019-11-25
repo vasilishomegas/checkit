@@ -10,10 +10,12 @@ namespace ListIt_DataAccess.Repository
 {
     public class UserRepository : Repository<User>
     {
+        
         public override IEnumerable<User> GetAll()
         {
             using (var context = new ListItContext())
             {
+                // Get all users, but include references to Language and Country objects.
                 return context.Users
                     .Include(x => x.Language)
                     .Include(x => x.Country)
@@ -25,6 +27,7 @@ namespace ListIt_DataAccess.Repository
         {
             using (var context = new ListItContext())
             {
+                // Get a user by Id, lambda predicate to filter and get the demanded one.
                 return context.Users
                     .Include(x => x.Language)
                     .Include(x => x.Country)
@@ -36,11 +39,11 @@ namespace ListIt_DataAccess.Repository
         {
             using (var context = new ListItContext())
             {
+                // Get a user by Email and PasswordHash.
                 return context.Users
                     .Include(x => x.Language)
                     .Include(x => x.Country)
                     .SingleOrDefault(x => x.Email == email && x.PasswordHash == passwordHash);
-                //   return context.Users.SingleOrDefault(x => x.Email == email && x.PasswordHash == passwordHash);
             }
         }
 

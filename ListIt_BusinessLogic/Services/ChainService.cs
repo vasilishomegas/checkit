@@ -14,17 +14,25 @@ namespace ListIt_BusinessLogic.Services
 
         public override void Create(ChainDto chainDto)
         {
+            // Chain has a field of ShopApi, so it might be necessary to use ShopApiRepository.
             var shopApiRepository = new ShopApiRepository();
 
+            // Question mark here means that shopApiId can also be null.
             int? shopApiId = null;
+
+            // If ChainDto has assigned ShopApiDto reference...
             if (chainDto.ShopApi != null)
             {
+                // Get such a ShopApi from the database
                 var shopApi = shopApiRepository.Get(chainDto.ShopApi.Id);
+
+                // If it does not exist yet, create an instance of it in the database.
                 if (shopApi == null)
                 {
                     shopApi = ShopApiService.StaticDtoToDomain(chainDto.ShopApi);
                     shopApiRepository.Create(shopApi);
                 }
+
                 shopApiId = shopApi.Id;
             }
 
@@ -37,23 +45,6 @@ namespace ListIt_BusinessLogic.Services
                 // ShopApi = shopApi    Don't link it because every time it creates a new instance
             });
         }
-
-        /* CASCADE DELETE - DELETING CHAIN WILL ALSO DELETE ITS SHOPAPI // IMPLEMENTED IN REPOSITORY CLASS
-        public override void Delete(int id)
-        {
-            var shopApiRepository = new Repository<ShopApi>();
-            Chain chain = _repository.Get(id);
-            ShopApi shopApi = null;
-
-            if(chain != null)
-                shopApi = shopApiRepository.Get(chain.Id);
-            
-            if (shopApi != null)
-                shopApiRepository.Delete(shopApi.Id);
-
-            _repository.Delete(id);
-        } */
-
 
         protected override Chain ConvertDtoToDomain(ChainDto chainDto) 
         {

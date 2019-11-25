@@ -13,6 +13,8 @@ namespace ListIt_DataAccess.Repository
         {
             using (var context = new ListItContext())
             {
+                // Invoke .ToList() method to execute IQueryable. If you returned IQueryable, the ListItContext
+                // would already be disposed by "using" statement, which automatically disposes disposable objects.
                 return context.Set<Language>().ToList();
             }
         }

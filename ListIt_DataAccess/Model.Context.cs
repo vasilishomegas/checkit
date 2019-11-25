@@ -17,15 +17,18 @@ namespace ListIt_DataAccess
     public partial class dmaj0918_1074524Entities1 : DbContext
     {
         public dmaj0918_1074524Entities1()
-            : base("name=dmaj0918_1074524Entities1")
+            : base("name=dmaj0918_1074524Entities1") // Name of connection string saved in Web.config
         {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // prevent changing convention to Code First.
             throw new UnintentionalCodeFirstException();
         }
-    
+        
+        // DbSet for entities generated from Model.edmx. Generated entity classes are stored in DataAccessModel project
+        // inside Model.tt file.
         public virtual DbSet<ApiProduct> ApiProducts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Chain> Chains { get; set; }

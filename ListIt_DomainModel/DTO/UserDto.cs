@@ -18,8 +18,6 @@ namespace ListIt_DomainModel.DTO
         public virtual LanguageDto Language { get; set; }
 
         //FROM LinkUserToList.cs in DataAccessModels:
-        public List<ShoppingListDto> UserLists { get; set; } //List vs IEnumerable ...
-        
-
+        public List<ShoppingListDto> ShoppingLists { get; set; } //List vs IEnumerable ...
     }
 }

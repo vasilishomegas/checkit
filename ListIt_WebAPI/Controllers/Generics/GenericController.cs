@@ -9,9 +9,14 @@ using ListIt_DomainModel.DTO.Interfaces;
 
 namespace ListIt_WebAPI.Controllers.Generics
 {
+    // Controllers are responsible only for handling HTTP requests. They have no business logic and no database
+    // connectivity included - those are delegated to Service and Data Access Layer. Controllers communicate with
+    // database only through service layer.
+
+
     public abstract class GenericController<T, IDTO> : ApiController
-    where T : class
-    where IDTO : class
+    where T : class // T cannot be a primitive type
+    where IDTO : class // IDTO cannot be a primitive type
     {
         protected readonly Service<T, IDTO> _service;
 
