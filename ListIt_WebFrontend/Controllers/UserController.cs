@@ -61,6 +61,9 @@ namespace ListIt_WebFrontend.Controllers
         {
             if (Session["UserId"] != null)
             {
+
+                //TODO: Logic to show all lists of a user
+
                 return View();
             }
             else
@@ -107,9 +110,15 @@ namespace ListIt_WebFrontend.Controllers
             return View();
         }
 
-        // GET: User/Create
-        public ActionResult Create()
+        // GET: User/CreateList
+        [HttpPost]
+        public ActionResult CreateList(FormCollection collection)
         {
+            var name = collection["listname"];
+            var userid = Session["UserId"];
+
+
+
             return View();
         }
 

@@ -493,7 +493,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="site.webmanifest" />
-    <Content Include="Views\User\PVLang.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>

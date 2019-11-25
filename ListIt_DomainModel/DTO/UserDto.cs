@@ -17,7 +17,9 @@ namespace ListIt_DomainModel.DTO
         public virtual CountryDto Country { get; set; }
         public virtual LanguageDto Language { get; set; }
 
+        //FROM LinkUserToList.cs in DataAccessModels:
+        public List<ShoppingListDto> UserLists { get; set; }
         
-        
+
     }
 }
