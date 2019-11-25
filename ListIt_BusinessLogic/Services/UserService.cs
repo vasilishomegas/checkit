@@ -53,12 +53,13 @@ namespace ListIt_BusinessLogic.Services
         public string HashPassword(string pw)
         {
             //Password hashing:
-            HashAlgorithm hash = new SHA256CryptoServiceProvider();
-            byte[] buff = System.Text.Encoding.UTF8.GetBytes(pw);
-            byte[] hashed = hash.ComputeHash(buff);
-            string hashedPW = Convert.ToBase64String(hashed);
-
-            return hashedPW;
+            using (HashAlgorithm hash = new SHA256CryptoServiceProvider())
+            {
+                byte[] buff = System.Text.Encoding.UTF8.GetBytes(pw);
+                byte[] hashed = hash.ComputeHash(buff);
+                string hashedPW = Convert.ToBase64String(hashed);
+                return hashedPW;
+            }
         }  
 
         public override void Update(UserDto userDto)
