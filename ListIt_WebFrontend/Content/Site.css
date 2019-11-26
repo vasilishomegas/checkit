@@ -2,14 +2,27 @@
     overflow-x: hidden;
 }
 
-a {
+#links {
     color: gray;
     font-style: inherit;
+}
+
+h1 .pageheading {
+    text-align: center !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .logout-box {
     padding-left: 5px;
 }
+
+.box {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* SEARHCING AND FILTERING*/
 
 .searchFilterArea {
     background-color: whitesmoke;
@@ -29,22 +42,42 @@ a {
     padding-top: 15px;
 }
 
-.carousel {
-    width: 100%;
-    height: auto;
+/* LANDING PAGE */
+.col .logo-box img {
+    max-height: 15vw !important;
 }
 
-.carousel-inner .carousel-item img{
+
+.col {
     width: 100%;
     height: auto;
-    object-fit: cover;
+    padding: 0;
+    margin: 0;
 }
+
+.carousel-inner .carousel-item img {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    object-fit: scale-down;
+    display: block;
+    
+}
+
+body .launch {
+
+    /*background*/
+}
+
+/* LOGIN & REGISTRATION */
 
 .login-container {
-    margin-top: 50px;
-    background-color: dimgrey;
+    padding-top: 50px;
+    background-color:  lightgrey;
     height: 100%;
     width: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .body-content {
@@ -73,26 +106,13 @@ textarea {
     font-size: 30px !important;
 }
 
-.logo-box {
-    padding-left: 20px;
-    width: unset;
-    max-width: 0.6em;
-    height: auto;
-}
 
-img .logo{
-    width: 0.6em !important;
-    height: auto;
-}
 
 /* SINGLE LIST ITEMS */
 
-
-.card {
-    border-left: 0px;
-    border-right: 0px;
-    width: 100%;
-    min-width: 100%;
+#headingNames {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .check-toggle {

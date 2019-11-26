@@ -8,11 +8,11 @@
 
 
 <div class="container-fluid">
-    <h1>@ViewBag.Title</h1>
+    <h1 class="text-center pageheading">@ViewBag.Title</h1>
 
     @if (ViewBag.Message != null)
     {
-        <div class="alert-success">
+        <div class="alert alert-success" role="alert">
             <p>
                 @ViewBag.Message
             </p>
@@ -30,7 +30,7 @@
                     <!-- RENAME edit ICON -->
                     <i class="fa fa-pencil fa-lg"></i>
                 </button>
-                <button class="btn btn-outline-danger" type="button" onclick="">
+                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#modalDelete">
                     <i class="fa fa-trash-o fa-lg"></i>
                 </button>
             </span>
@@ -100,6 +100,38 @@
                 }
 
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal DELETE -->
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDeleteTitle">Delete List</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("CreateList", "User", FormMethod.Post))
+                {
+                    <div>
+                        <p>
+                            Do you really want to delete this list?
+                        </p>
+                    </div>
+                    <div class="form-group col d-flex justify-content-end">
+                        <button class="btn" type="button">
+                            <i class="fa fa-close fa-lg"></i>
+                        </button>
+                        <button class="btn" type="submit">
+                            <i class="fa fa-check-circle fa-lg"></i>
+                        </button>
+                    </div>
+                }
             </div>
         </div>
     </div>
