@@ -27,11 +27,11 @@
             <div class="col-6">
                 @if (ViewBag.Error != null)
                 {
-                    @:<div class="alert-danger">
+                    <div class="alert-danger">
                         <p>
                             @ViewBag.Error
                         </p>
-                    @:</div>
+                    </div>
                 }
 
 
@@ -57,8 +57,24 @@
                                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = Lang.email, type = "email", required = "required" } })
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
-                        </div>                       
+                        </div>
 
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Country, Lang.country, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(x => x.CountryId, Model.CountryList, htmlAttributes: new { @class = "form-control custom-select" })
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Language, Lang.language, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(x => x.LanguageId, Model.LangList, htmlAttributes: new { @class = "form-control custom-select" })
+
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.PasswordHash, Lang.pw, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -84,15 +100,15 @@
                             </div>
                         </div>
                     </div>
-                }
+                        }
 
-                <div>
-                    @Html.ActionLink(Lang.login, "Login")
+                        <div>
+                            @Html.ActionLink(Lang.login, "Login")
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
                 </div>
             </div>
-            <div class="col-3"></div>
-        </div>
-    </div>
 
 
 

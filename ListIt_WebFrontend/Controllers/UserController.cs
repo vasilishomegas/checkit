@@ -29,6 +29,8 @@ namespace ListIt_WebFrontend.Controllers
         // GET: Launch/Login
         public ActionResult Login()
         {
+            ViewBag.Error = TempData["ErrorMessage"];
+            ViewBag.Message = TempData["SuccessMessage"];
             //leads to login view
             return View();
         }
@@ -39,9 +41,25 @@ namespace ListIt_WebFrontend.Controllers
             RegisterUser user = new RegisterUser();
             ListIt_BusinessLogic.Services.LanguageService langService = new ListIt_BusinessLogic.Services.LanguageService();
             ListIt_BusinessLogic.Services.CountryService countryService = new ListIt_BusinessLogic.Services.CountryService();
-            user.CountryList = countryService.GetAll().OrderBy(x => x.Name);
-            user.LangList = langService.GetAll().OrderBy(x => x.Name);
+            
+            user.CountryId = 73;
+            user.LanguageId = 2;
 
+            user.CountryList = (from item in countryService.GetAll().OrderBy(x => x.Name)
+                        select new SelectListItem()
+                        {
+                            Text = item.Name,
+                            Value = item.Id.ToString()
+                        }).ToList();
+
+            user.LangList = (from item in langService.GetAll().OrderBy(x => x.Name)
+                                select new SelectListItem()
+                                {
+                                    Text = item.Name,
+                                    Value = item.Id.ToString()
+                                }).ToList();
+
+            ViewBag.Error = TempData["ErrorMessage"];
             //leads to register view
             return View(user);
         }
@@ -131,10 +149,11 @@ namespace ListIt_WebFrontend.Controllers
                 ListIt_DomainModel.DTO.UserDto user = new ListIt_DomainModel.DTO.UserDto();                
 
                 ListIt_DomainModel.DTO.CountryDto country = new ListIt_DomainModel.DTO.CountryDto();              
-                country.Id = 73;    //Denmark is default
+                country.Id = int.Parse(collection["CountryId"]);    //Denmark is default
+
 
                 ListIt_DomainModel.DTO.LanguageDto lang = new ListIt_DomainModel.DTO.LanguageDto();
-                lang.Id = 2;      //English is default
+                lang.Id = int.Parse(collection["LanguageId"]);      //English is default
 
                 user.Nickname = collection["Nickname"]; 
                 user.Email = collection["Email"]; 
@@ -145,15 +164,15 @@ namespace ListIt_WebFrontend.Controllers
                 var userService = new ListIt_BusinessLogic.Services.UserService();
                 userService.Create(user);
 
-                ViewBag.Message = "You have registered successfully. Now you can login here!";
+                TempData["SuccessMessage"] = "You have registered successfully. Now you can login here!";
 
                 return RedirectToAction("Login");
             }
             catch
             {
-                ViewBag.Error = "Something went wrong. Please try again";
+                TempData["ErrorMessage"] = "Something went wrong. Please try again";
 
-                return View("Register");
+                return RedirectToAction("Register");
             }
         }
 
@@ -179,9 +198,9 @@ namespace ListIt_WebFrontend.Controllers
             }
             catch
             {
-                ViewBag.Error = "Login is not valid! Either Email or Password are wrong.";
+                TempData["ErrorMessage"] = "Login is not valid! Either Email or Password are wrong.";
 
-                return View("Register");
+                return RedirectToAction("Login");
             }
         }
 

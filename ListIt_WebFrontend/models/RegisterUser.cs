@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using ListIt_DomainModel.DTO;
 using System.ComponentModel.DataAnnotations;
-
+using System.Web.Mvc;
 
 namespace ListIt_WebFrontend.Models
 {
@@ -25,14 +25,15 @@ namespace ListIt_WebFrontend.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare("PasswordHash", ErrorMessage = "Passwords do not match!")]
+        [System.ComponentModel.DataAnnotations.Compare("PasswordHash", ErrorMessage = "Passwords do not match!")]
         public string PasswordRepeat { get; set; }
 
         //public virtual CountryDto Country { get; set; }
         //public virtual LanguageDto Language { get; set; }
 
-        public IEnumerable<LanguageDto> LangList { get; set; }
-        public IEnumerable<CountryDto> CountryList { get; set; }
-
+        public IList<SelectListItem> LangList { get; set; }
+        public IList<SelectListItem> CountryList { get; set; }
+        public int CountryId { get; set; }
+        public int LanguageId { get; set; }
     }
 }
