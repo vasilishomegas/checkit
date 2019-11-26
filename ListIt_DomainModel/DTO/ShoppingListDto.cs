@@ -12,9 +12,10 @@ namespace ListIt_DomainModel.DTO
         public string Name { get; set; }
         public string Path { get; set; }
         public List<ShoppingListEntryDto> Entries { get; set; }
-        public int ChosenSortingId { get; set; }
+        public Nullable<int> ChosenSortingId { get; set; }
 
         //FROM LinkUserToList.cs in DataAccessModels:
         public int ListAccessTypeId { get; set; }
+        public int UserId { get; set; }
     }
 }

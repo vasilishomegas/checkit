@@ -13,16 +13,22 @@ namespace ListIt_BusinessLogic.Services
 {
     public class ShoppingListService : Service<ShoppingList, ShoppingListDto>
     {
+        private readonly ShoppingListRepository _listRepository;
+
         public ShoppingListService() : base(new ShoppingListRepository())
         {
-
+            _listRepository = (ShoppingListRepository)_repository;
         }
 
         public override void Create(ShoppingListDto dto)
         {
             _repository.Create(new ShoppingList
             {
-                //assign values here
+                Id = dto.Id,
+                Name = dto.Name,
+                Path = dto.Path,
+                Timestamp = DateTime.Now,
+                ChosenSorting_Id = dto.ChosenSortingId
             });
         }
 
@@ -34,9 +40,21 @@ namespace ListIt_BusinessLogic.Services
             });
         }
  
+        public IList<ShoppingListDto> GetListsByUserId(int userId)
+        {
+
+
+            return new List<ShoppingListDto>
+            {
+
+            };
+        }
 
         protected override ShoppingListDto ConvertDomainToDto(ShoppingList entity)
         {
+            //var link = _listRepository.GetLinkById(entity.Id, );
+            //int listAccessTypeId = link.ListAccessTypeId;
+
             return StaticDomainToDto(entity);
         }
 
@@ -45,14 +63,22 @@ namespace ListIt_BusinessLogic.Services
             return StaticDtoToDomain(dto);
         }
 
-        public static ShoppingList StaticDtoToDomain(ShoppingListDto dto)
+        public static ShoppingList StaticDtoToDomain(ShoppingListDto listDto)
         {
-            //dto.ListAccessTypeId should go to LinkUserToList-Table/Class 
+            //  AS SOON AS THERE IS A ShoppingList CREATED THERE NEEDS ALSO TO BE 
+            //  A LinkUserToList ENTRY CREATED
+
+            new LinkUserToList
+            {
+                UserId = listDto.UserId,
+                ShoppingListId = listDto.Id,
+                ListAccessTypeId = listDto.ListAccessTypeId,
+            };
 
             return new ShoppingList
             {
-                Id = dto.Id,
-                Name = dto.Name,
+                Id = listDto.Id,
+                Name = listDto.Name,
                 Path = "whatever???",
                 Timestamp = DateTime.Now,
                 ChosenSorting_Id = null,
@@ -61,14 +87,25 @@ namespace ListIt_BusinessLogic.Services
 
         public static ShoppingListDto StaticDomainToDto(ShoppingList list)
         {
+            // EACH ShoppingListDto WILL CONTAIN VALUES FROM LinkUserToList AS WELL
+            foreach(LinkUserToList link in list.LinkUserToLists)
+            {
+                
+            }
+            
             return new ShoppingListDto
             {
                 Id = list.Id,
                 Name = list.Name,
                 Path = list.Path,
                 //ChosenSortingId = null, //list.ChosenSorting_Id, NULLABLE in ShoppingList
-                //ListAccessTypeId = SomeService.SomeFunction???
+                //ListAccessTypeId = list.LinkUserToLists
             };
         }
+
+        //public static List<LinkUserToList> GetLinks(LinkUserToList link)
+        //{
+        //    return 
+        //}
     }
 }

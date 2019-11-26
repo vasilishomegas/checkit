@@ -10,7 +10,14 @@
 <div class="container-fluid">
     <h1>@ViewBag.Title</h1>
 
-
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert-success">
+            <p>
+                @ViewBag.Message
+            </p>
+        </div>
+    }
 
     <ul class="list-group">
 
@@ -83,13 +90,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm(null, null, FormMethod.Post))
+                @using (Html.BeginForm("CreateList", "User", FormMethod.Post))
                 {
                     <div class="form-group">
                         @Html.Editor("listname", new { @class = "form-control", type = "text", value = "", placeholder = "Groceries" })
                     </div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">@Lang.close</button>
-                    <button type="button" class="btn btn-primary">@Lang.save</button>
+                    <button type="submit" class="btn btn-primary">@Lang.save</button>
                 }
 
 

@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using ListIt_BusinessLogic;
 using ListIt_WebFrontend.Models;
+using ListIt_BusinessLogic.Services;
+using ListIt_DomainModel.DTO;
 
 namespace ListIt_WebFrontend.Controllers
 {
@@ -79,8 +81,14 @@ namespace ListIt_WebFrontend.Controllers
         {
             if (Session["UserId"] != null)
             {
-
                 //TODO: Logic to show all lists of a user
+                var userId = Session["UserId"];
+                ShoppingListService listService = new ShoppingListService();
+
+
+                
+                //TODO: Implement Service and Repository
+                //listService.GetListsByUserId(userId);
 
                 return View();
             }
@@ -133,11 +141,21 @@ namespace ListIt_WebFrontend.Controllers
         public ActionResult CreateList(FormCollection collection)
         {
             var name = collection["listname"];
-            var userid = Session["UserId"];
+            var sessionUserId = Session["UserId"];
+            int userid = Int32.Parse(sessionUserId.ToString());
 
+            ShoppingListDto list = new ShoppingListDto();
+            list.Name = name;
+            list.Path = "somerandomPath";
+            list.ListAccessTypeId = 1; //Default owner when creating
+            list.UserId = userid;
+            list.ChosenSortingId = null;
 
+            ShoppingListService listService = new ShoppingListService();
+            listService.Create(list);
 
-            return View();
+            ViewBag.Message = "You successfully created a new shopping list";
+            return View("Lists");
         }
 
         // POST: User/CreateUser
