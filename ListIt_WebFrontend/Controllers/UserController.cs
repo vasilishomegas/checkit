@@ -230,11 +230,12 @@ namespace ListIt_WebFrontend.Controllers
 
         // POST: User/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult EditItem(FormCollection collection)
         {
             try
             {
                 // TODO: Add update logic here
+                // Create a new item if no ID retrieved (edit & create in same form)
 
                 return RedirectToAction("Index");
             }
