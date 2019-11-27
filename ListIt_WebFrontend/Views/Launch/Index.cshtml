@@ -27,7 +27,7 @@
                 <h1 class="text-center">@ViewBag.Title</h1>
 
                 <div class="text-center text-light">
-                    @Html.ActionLink("Register", "Register", "User", htmlAttributes: new { id="links"}) | @Html.ActionLink("Login", "Login", "User", htmlAttributes: new { id="links"}) | @Html.ActionLink("User Dashboard", "Lists", "User", htmlAttributes: new { id="links"})
+                    @Html.ActionLink("Register", "Register", "User", null, htmlAttributes: new { id="links"}) | @Html.ActionLink("Login", "Login", "User", null, htmlAttributes: new { id="links"}) | @Html.ActionLink("User Dashboard", "Lists", "User", null, htmlAttributes: new { id="links"})
                 </div>
             </div>
             <div class="col">
@@ -42,19 +42,19 @@
                         <div class="carousel-item active">
                             <img src="~/Content/img/slider_1_v2.jpg" class="d-block w-100" alt="List your items, define them and check them!">
                             <div class="carousel-caption d-none d-md-block">
-                                <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.list_it, "Login", "User", htmlAttributes: new { id="links"})</button>
+                                <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.list_it, "Login", "User", null, htmlAttributes: new { id="links"})</button>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <img src="~/Content/img/slider_2.jpg" class="d-block w-100" alt="Discover nearby stores and their products!">
                             <div class="carousel-caption d-none d-md-block">
-                                <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.discover, "Login", "User", htmlAttributes: new { id="links"})</button>
+                                <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.discover, "Login", "User", null, htmlAttributes: new { id="links"})</button>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <img src="~/Content/img/slider_3.jpg" class="d-block w-100" alt="Share your lists with a household.">
                             <div class="carousel-caption d-none d-md-block">
-                                <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.start_now, "Login", "User", htmlAttributes: new { id="links"})</button>
+                                <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.start_now, "Login", "User", null, htmlAttributes: new { id="links"})</button>
                             </div>
                         </div>
                     </div>
