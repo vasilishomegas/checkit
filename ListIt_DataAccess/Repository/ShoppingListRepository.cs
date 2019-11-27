@@ -23,29 +23,29 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
-        public LinkUserToList GetLinkById(int listId, int userId)
+        public IEnumerable<LinkUserToList> GetLinkByUserId(int userId)
         {
             using (var context = new ListItContext())
             {
                 return context.LinkUserToLists
-                    .Where(x => x.ShoppingListId == listId)
-                    .SingleOrDefault(x => x.UserId == userId);
+                    .Where(x => x.UserId == userId)
+                    .ToList();
             }
             
         }
 
-        public override ShoppingList Get(int id)
-        {
-            using (var context = new ListItContext())
-            {
-                return context.ShoppingLists
-                    .Include(x => x.LinkUserToLists)
-                    .SingleOrDefault(x => x.Id == id);
-            }
-        }
+        //public override ShoppingList Get(int id)
+        //{
+        //    using (var context = new ListItContext())
+        //    {
+        //        return context.ShoppingLists
+        //            .Include(x => x.LinkUserToLists)
+        //            .SingleOrDefault(x => x.Id == id);
+        //    }
+        //}
 
         
-        /* UPDATING Create() to save ShoppingList and LinkUserToList */
+        /* UPDATING Create() to save ShoppingList AND LinkUserToList */
 
         public void Create(ShoppingList entity, LinkUserToList link)
         {

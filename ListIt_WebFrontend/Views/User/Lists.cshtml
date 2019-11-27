@@ -1,4 +1,5 @@
-﻿@using Resources
+﻿@model ListIt_WebFrontend.Models.ListsVM
+@using Resources
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,52 +8,62 @@
 
 
 
-<div class="container-fluid">
-    <h1 class="text-center pageheading">@ViewBag.Title</h1>
+    <div class="container-fluid">
+        <h1 class="text-center pageheading">@ViewBag.Title</h1>
 
-    @if (ViewBag.Message != null)
-    {
-        <div class="alert alert-success" role="alert">
-            <p>
-                @ViewBag.Message
-            </p>
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <p>
+                    @ViewBag.Message
+                </p>
+            </div>
+        }
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                <p>
+                    @ViewBag.Error
+                </p>
+            </div>
+        }
+
+        <ul class="list-group">
+
+            <!-- CREATE LI-ITEM FOR EACH LIST -->
+            @foreach (var list in Model.AllUserLists)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                    @Html.ActionLink(list.Name, "SingleList", "User", null, htmlAttributes: new { id = "listLinks", value = list.Id })
+                    <span class="badge btn-group-sm">
+                        <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#modalRename">
+                            <!-- RENAME edit ICON -->
+                            <i class="fa fa-pencil fa-lg"></i>
+                        </button>
+                        <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#modalShare">
+                            <!-- SHAER ICON -->
+                            <i class="fa fa-share-alt fa-lg"></i>
+                        </button>
+                        <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#modalDelete">
+                            <i class="fa fa-trash-o fa-lg"></i>
+                        </button>
+                    </span>
+                </li>
+            }
+        </ul>
+
+        <div class="w-100 d-flex justify-content-center box">
+            <button class="btn align-baseline" type="button" data-toggle="modal" data-target="#modalCreateList">
+                <!-- + ADD ICON -->
+                <i class="fa fa-plus-circle fa-3x"></i>
+            </button>
         </div>
-    }
 
-    <ul class="list-group">
 
-        <!-- CREATE LI-ITEM FOR EACH LIST -->
-        <li class="list-group-item d-flex justify-content-between align-items-center">
 
-            @Html.ActionLink("See single List", "SingleList", "User")
-            <span class="badge btn-group-sm">
-                <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#modalRename">
-                    <!-- RENAME edit ICON -->
-                    <i class="fa fa-pencil fa-lg"></i>
-                </button>
-                <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#modalShare">
-                    <!-- SHAER ICON -->
-                    <i class="fa fa-share-alt fa-lg"></i>
-                </button>
-                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#modalDelete">
-                    <i class="fa fa-trash-o fa-lg"></i>
-                </button>
-            </span>
-        </li>
 
-    </ul>
-
-    <div class="w-100 d-flex justify-content-center">
-        <button class="btn align-baseline" type="button" data-toggle="modal" data-target="#modalCreateList">
-            <!-- + ADD ICON -->
-            <i class="fa fa-plus-circle fa-2x"></i>
-        </button>
     </div>
-
-
-
-
-</div>
 
 <!-- Modal RENAME -->
 <div class="modal fade" id="modalRename" tabindex="-1" role="dialog" aria-labelledby="modalRenameTitle" aria-hidden="true">

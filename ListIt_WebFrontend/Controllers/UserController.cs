@@ -81,16 +81,19 @@ namespace ListIt_WebFrontend.Controllers
         {
             if (Session["UserId"] != null)
             {
+                ViewBag.Message = TempData["SuccessMessage"];
+                ViewBag.Error = TempData["ErrorMessage"];
+
                 //TODO: Logic to show all lists of a user
-                var userId = Session["UserId"];
+                int userId = Int32.Parse(Session["UserId"].ToString());
+
                 ShoppingListService listService = new ShoppingListService();
+                var listOfLists = listService.GetListsByUserId(userId);
 
+                ListsVM lists = new ListsVM();
+                lists.AllUserLists = listOfLists;
 
-                
-                //TODO: Implement Service and Repository
-                //listService.GetListsByUserId(userId);
-
-                return View();
+                return View(lists);
             }
             else
             {
@@ -140,22 +143,37 @@ namespace ListIt_WebFrontend.Controllers
         [HttpPost]
         public ActionResult CreateList(FormCollection collection)
         {
-            var name = collection["listname"];
-            var sessionUserId = Session["UserId"];
-            int userid = Int32.Parse(sessionUserId.ToString());
+            try
+            {
+                var name = collection["listname"];
 
-            ShoppingListDto list = new ShoppingListDto();
-            list.Name = name;
-            list.Path = "somerandomPath";
-            list.ListAccessTypeId = 1; //Default owner when creating
-            list.UserId = userid;
-            list.ChosenSortingId = null;
+                if(name == null || name == "")
+                {
+                    throw new Exception("Name cannot be null");
+                }
 
-            ShoppingListService listService = new ShoppingListService();
-            listService.Create(list);
+                var sessionUserId = Session["UserId"];
+                int userid = Int32.Parse(sessionUserId.ToString());
 
-            ViewBag.Message = "You successfully created a new shopping list";
-            return View("Lists");
+                ShoppingListDto list = new ShoppingListDto();
+                list.Name = name;
+                list.Path = "somerandomPath";
+                list.ListAccessTypeId = 1; //Default owner when creating
+                list.UserId = userid;
+                list.ChosenSortingId = null;
+
+                ShoppingListService listService = new ShoppingListService();
+                listService.Create(list);
+
+                TempData["SuccessMessage"] = "You successfully created a new shopping list";
+                return RedirectToAction("Lists");
+            }
+            catch(Exception e)
+            {
+                TempData["ErrorMessage"] = "There went something wrong. Make sure to have a valid Listname entered. Try it again!";
+                return RedirectToAction("Lists");
+            }
+            
         }
 
         // POST: User/CreateUser

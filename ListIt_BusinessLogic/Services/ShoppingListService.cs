@@ -45,18 +45,27 @@ namespace ListIt_BusinessLogic.Services
         {
             _repository.Update(new ShoppingList
             {
-                //assign values here
+                Id = dto.Id,
+                Name = dto.Name,
+                Path = dto.Path,
+                Timestamp = DateTime.Now,
+                ChosenSorting_Id = dto.ChosenSortingId
             });
         }
  
         public IList<ShoppingListDto> GetListsByUserId(int userId)
         {
+            var linkedUserLists = _listRepository.GetLinkByUserId(userId);
+            List<ShoppingListDto> listOfLists = new List<ShoppingListDto>();
 
-
-            return new List<ShoppingListDto>
+            //_repository.GetAll().Select(ConvertDomainToDto).ToList();
+            foreach(LinkUserToList link in linkedUserLists)
             {
+                var list = Get(link.ShoppingListId);
+                listOfLists.Add(list);
+            }
 
-            };
+            return listOfLists;
         }
 
         protected override ShoppingListDto ConvertDomainToDto(ShoppingList entity)
