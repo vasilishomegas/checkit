@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace ListIt_WebFrontend.Models
 {
-    public class RegisterUser : UserDto
+    public class RegisterUserVM : UserDto
     {
         [Required]
         [Display(Name = "Name")]

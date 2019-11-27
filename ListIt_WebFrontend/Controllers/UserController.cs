@@ -40,7 +40,7 @@ namespace ListIt_WebFrontend.Controllers
         // GET: Launch/Register
         public ActionResult Register()
         {
-            RegisterUser user = new RegisterUser();
+            RegisterUserVM user = new RegisterUserVM();
             ListIt_BusinessLogic.Services.LanguageService langService = new ListIt_BusinessLogic.Services.LanguageService();
             ListIt_BusinessLogic.Services.CountryService countryService = new ListIt_BusinessLogic.Services.CountryService();
             
