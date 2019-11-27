@@ -45,6 +45,7 @@ namespace ListIt_DataAccess.Repository
         }
 
         
+        /* UPDATING Create() to save ShoppingList and LinkUserToList */
 
         //public override void Create(ShoppingList entity)
         //{
