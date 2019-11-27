@@ -7,6 +7,12 @@
     {
         Culture = UICulture = Request["lang"];
     }
+    else if(Session["LanguageCode"] != null)
+    {
+        var countryCode = Session["LanguageCode"].ToString().ToUpper();
+        var culture = countryCode + "-" + Session["LanguageCode"].ToString();
+        Culture = UICulture = culture;
+    }
 
     // Linking for Favicon (see https://favicon.io/favicon-converter/):
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

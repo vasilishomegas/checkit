@@ -228,7 +228,7 @@ namespace ListIt_WebFrontend.Controllers
                 var user = userService.Login(email, pw);
 
                 Session["UserId"] = user.Id;
-                Session["LanguageId"] = user.Language.Id;               
+                Session["LanguageCode"] = user.Language.Code;               
 
                 return RedirectToAction("Lists");
             }

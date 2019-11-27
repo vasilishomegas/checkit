@@ -297,6 +297,9 @@
   <data name="yourLists" xml:space="preserve">
     <value>Deine Listen</value>
   </data>
+  <data name="yourProfile" xml:space="preserve">
+    <value>Dein Profil</value>
+  </data>
   <data name="Z-A" xml:space="preserve">
     <value>Z bis A</value>
   </data>
