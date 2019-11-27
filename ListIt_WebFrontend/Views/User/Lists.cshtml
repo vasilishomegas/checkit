@@ -30,6 +30,10 @@
                     <!-- RENAME edit ICON -->
                     <i class="fa fa-pencil fa-lg"></i>
                 </button>
+                <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#modalShare">
+                    <!-- SHAER ICON -->
+                    <i class="fa fa-share fa-lg"></i>
+                </button>
                 <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#modalDelete">
                     <i class="fa fa-trash-o fa-lg"></i>
                 </button>
@@ -132,6 +136,55 @@
                         </button>
                     </div>
                 }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal SHARE -->
+<div class="modal fade" id="modalShare" tabindex="-1" role="dialog" aria-labelledby="modalShareTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalShareTitle">Share your List</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("CreateList", "User", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @Html.Label("Enter the Email-Adresses here:", htmlAttributes: new { @class = "control-label"})
+                        @Html.TextArea("EmailAdresses", null, new { @class = "form-control", placeholder = "steve@smith.com" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Choose type of sharing", htmlAttributes: new { @class = "control-label" })
+                        <select class="custom-select">
+                            <option selected>Read only</option>
+                            <option>Edit</option>
+                        </select>
+                        <!-- INSERT MODEL WITH LIST OF LISTACCESSTYPES -->
+                        @*@Html.DropDownListFor(x => x.ListTypeAccessId, Model.ListTypeAccessList, htmlAttributes: new { @class = "form-control custom-select" })*@
+                    </div>
+
+
+
+                    <div class="form-group col d-flex justify-content-end">
+                        <button class="btn" type="button">
+                            <i class="fa fa-close fa-lg"></i>
+                        </button>
+                        <button class="btn" type="submit">
+                            <i class="fa fa-check-circle fa-lg"></i>
+                        </button>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                This is your generated sharing link:
+                <br />
+                Display link here
             </div>
         </div>
     </div>
