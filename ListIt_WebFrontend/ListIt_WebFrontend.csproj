@@ -364,7 +364,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\RegisterUser.cs" />
+    <Compile Include="Models\ItemsVM.cs" />
+    <Compile Include="Models\ListsVM.cs" />
+    <Compile Include="Models\RegisterUserVM.cs" />
+    <Compile Include="Models\SingleListVM.cs" />
+    <Compile Include="Models\UserSettingsVM.cs" />
+    <Compile Include="Models\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

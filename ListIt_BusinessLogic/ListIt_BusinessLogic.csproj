@@ -50,6 +50,7 @@
     <Compile Include="Services\Generics\Service.cs" />
     <Compile Include="Services\LanguageService.cs" />
     <Compile Include="Services\ShopApiService.cs" />
+    <Compile Include="Services\ShoppingListEntryService.cs" />
     <Compile Include="Services\ShoppingListService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
