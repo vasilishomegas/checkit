@@ -237,4 +237,14 @@ select.form-control:focus,
         margin-left: -15rem;
     }
 
+    button#menu-toggle.navbar-toggler{
+        visibility: hidden;
+    }
+
+}
+
+@media (max-width: 768px) {
+    button#menu-toggle.navbar-toggler {
+        visibility: visible;
+    }
 }
