@@ -22,14 +22,23 @@ namespace ListIt_BusinessLogic.Services
 
         public override void Create(ShoppingListDto dto)
         {
-            _repository.Create(new ShoppingList
+            var list = new ShoppingList
             {
                 Id = dto.Id,
                 Name = dto.Name,
                 Path = dto.Path,
                 Timestamp = DateTime.Now,
                 ChosenSorting_Id = dto.ChosenSortingId
-            });
+            };
+
+            var link = new LinkUserToList
+            {
+                UserId = dto.UserId,
+                ShoppingListId = dto.Id,
+                ListAccessTypeId = dto.ListAccessTypeId,
+            };
+
+            _listRepository.Create(list, link);
         }
 
         public override void Update(ShoppingListDto dto)
@@ -68,12 +77,7 @@ namespace ListIt_BusinessLogic.Services
             //  AS SOON AS THERE IS A ShoppingList CREATED THERE NEEDS ALSO TO BE 
             //  A LinkUserToList ENTRY CREATED
 
-            new LinkUserToList
-            {
-                UserId = listDto.UserId,
-                ShoppingListId = listDto.Id,
-                ListAccessTypeId = listDto.ListAccessTypeId,
-            };
+            StaticListDtoToLinkDB(listDto); //Adding entry in LinkUserToList still needs to be added in Repository
 
             return new ShoppingList
             {
@@ -82,6 +86,16 @@ namespace ListIt_BusinessLogic.Services
                 Path = "whatever???",
                 Timestamp = DateTime.Now,
                 ChosenSorting_Id = null,
+            };
+        }
+
+        public static LinkUserToList StaticListDtoToLinkDB(ShoppingListDto dto)
+        {
+            return new LinkUserToList
+            {
+                UserId = dto.UserId,
+                ShoppingListId = dto.Id,
+                ListAccessTypeId = dto.ListAccessTypeId,
             };
         }
 
@@ -103,9 +117,6 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        //public static List<LinkUserToList> GetLinks(LinkUserToList link)
-        //{
-        //    return 
-        //}
+        
     }
 }

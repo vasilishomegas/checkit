@@ -47,34 +47,33 @@ namespace ListIt_DataAccess.Repository
         
         /* UPDATING Create() to save ShoppingList and LinkUserToList */
 
-        //public override void Create(ShoppingList entity)
-        //{
-        //    using (var context = new ListItContext())
-        //    {
-        //        var result = context.ShoppingLists.Add(entity);
-        //        //var link = context.LinkUserToLists.Add()
-        //        try
-        //        {
-        //            context.SaveChanges();
-        //        }
-        //        catch (System.Data.Entity.Validation.DbEntityValidationException e)
-        //        {
-        //            StringBuilder builder = new StringBuilder();
-        //            foreach (var eve in e.EntityValidationErrors)
-        //            {
-        //                builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
-        //                                                 + " in state " + eve.Entry.State + " has the following" +
-        //                                                 " validation errors:");
-        //                foreach (var ve in eve.ValidationErrors)
-        //                {
-        //                    builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
-        //                }
-        //            }
-
-        //            throw new Exception(builder.ToString());
-        //        }
-        //    }
-        //}
+        public void Create(ShoppingList entity, LinkUserToList link)
+        {
+            using (var context = new ListItContext())
+            {
+                var result = context.ShoppingLists.Add(entity);
+                var linkresult = context.LinkUserToLists.Add(link);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
+                                                         + " in state " + eve.Entry.State + " has the following" +
+                                                         " validation errors:");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
+                        }
+                    }
+                    throw new Exception(builder.ToString());
+                }
+            }
+        }
 
         //public virtual void Update(T entity)
         //{
