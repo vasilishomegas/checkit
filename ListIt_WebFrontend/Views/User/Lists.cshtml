@@ -14,7 +14,7 @@
         @if (ViewBag.Message != null)
         {
             <div class="alert alert-success" role="alert">
-                <p>
+                <p class="text-center">
                     @ViewBag.Message
                 </p>
             </div>
@@ -22,11 +22,12 @@
         @if (ViewBag.Error != null)
         {
             <div class="alert alert-danger" role="alert">
-                <p>
+                <p class="text-center">
                     @ViewBag.Error
                 </p>
             </div>
         }
+        
 
         <ul class="list-group">
 

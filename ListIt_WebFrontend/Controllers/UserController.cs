@@ -90,6 +90,11 @@ namespace ListIt_WebFrontend.Controllers
                 ShoppingListService listService = new ShoppingListService();
                 var listOfLists = listService.GetListsByUserId(userId);
 
+                if(listOfLists.Count() == 0)
+                {
+                    ViewBag.Message = "You don't have any lists yet. Start creating your lists now!";
+                }
+
                 ListsVM lists = new ListsVM();
                 lists.AllUserLists = listOfLists;
 
