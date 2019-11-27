@@ -7,6 +7,8 @@
     font-style: inherit;
 }
 
+
+
 h1 .pageheading {
     text-align: center !important;
     padding-top: 20px;
@@ -21,6 +23,16 @@ h1 .pageheading {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+i{
+    transition-duration: 1s;
+}
+
+i:hover {
+    width: 1.5em;
+    height: 1.5em;
+}
+
 
 /* SEARHCING AND FILTERING*/
 
@@ -104,6 +116,18 @@ textarea {
 
 .navbar-brand {
     font-size: 30px !important;
+}
+
+/* YOUR LISTS */
+
+ul li #listLinks {
+    color: black;
+}
+
+ul li #listLinks:hover {
+    color: rgba(216, 0, 0, 0.6);
+    text-decoration: none;
+    font-weight: 700;
 }
 
 
