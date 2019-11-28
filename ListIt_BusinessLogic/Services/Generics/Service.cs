@@ -17,7 +17,7 @@ namespace ListIt_BusinessLogic.Services.Generics
 
         public virtual IEnumerable<DTO> GetAll()
         {
-            return _repository.GetAll().Select(ConvertDomainToDto).ToList();
+            return _repository.GetAll().Select(ConvertDBToDto).ToList();
         }
         public virtual DTO Get(int id)
         {
@@ -25,16 +25,16 @@ namespace ListIt_BusinessLogic.Services.Generics
 
             return entity == null
                 ? null
-                : ConvertDomainToDto(entity);
+                : ConvertDBToDto(entity);
         }
         public virtual void Create(DTO dto)
         {
-            _repository.Create(ConvertDtoToDomain(dto));
+            _repository.Create(ConvertDtoToDB(dto));
         }
 
         public virtual void Update(DTO dto)
         {
-            _repository.Update(ConvertDtoToDomain(dto));
+            _repository.Update(ConvertDtoToDB(dto));
         }
 
         public virtual void Delete(int id)
@@ -51,7 +51,7 @@ namespace ListIt_BusinessLogic.Services.Generics
             return existing != null;
         }
 
-        protected abstract T ConvertDtoToDomain(DTO dto);
-        protected abstract DTO ConvertDomainToDto(T entity);
+        protected abstract T ConvertDtoToDB(DTO dto);
+        protected abstract DTO ConvertDBToDto(T entity);
     }
 }

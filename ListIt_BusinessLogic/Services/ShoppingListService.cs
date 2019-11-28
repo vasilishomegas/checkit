@@ -58,7 +58,6 @@ namespace ListIt_BusinessLogic.Services
             var linkedUserLists = _listRepository.GetLinkByUserId(userId);
             List<ShoppingListDto> listOfLists = new List<ShoppingListDto>();
 
-            //_repository.GetAll().Select(ConvertDomainToDto).ToList();
             foreach(LinkUserToList link in linkedUserLists)
             {
                 var list = Get(link.ShoppingListId);
@@ -68,20 +67,20 @@ namespace ListIt_BusinessLogic.Services
             return listOfLists;
         }
 
-        protected override ShoppingListDto ConvertDomainToDto(ShoppingList entity)
+        protected override ShoppingListDto ConvertDBToDto(ShoppingList entity)
         {
             //var link = _listRepository.GetLinkById(entity.Id, );
             //int listAccessTypeId = link.ListAccessTypeId;
 
-            return StaticDomainToDto(entity);
+            return StaticDBToDto(entity);
         }
 
-        protected override ShoppingList ConvertDtoToDomain(ShoppingListDto dto)
+        protected override ShoppingList ConvertDtoToDB(ShoppingListDto dto)
         {
-            return StaticDtoToDomain(dto);
+            return StaticDtoToDB(dto);
         }
 
-        public static ShoppingList StaticDtoToDomain(ShoppingListDto listDto)
+        public static ShoppingList StaticDtoToDB(ShoppingListDto listDto)
         {
             //  AS SOON AS THERE IS A ShoppingList CREATED THERE NEEDS ALSO TO BE 
             //  A LinkUserToList ENTRY CREATED
@@ -108,7 +107,7 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        public static ShoppingListDto StaticDomainToDto(ShoppingList list)
+        public static ShoppingListDto StaticDBToDto(ShoppingList list)
         {
             // EACH ShoppingListDto WILL CONTAIN VALUES FROM LinkUserToList AS WELL
             foreach(LinkUserToList link in list.LinkUserToLists)

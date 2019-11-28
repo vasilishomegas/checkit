@@ -41,8 +41,8 @@ namespace ListIt_WebFrontend.Controllers
         public ActionResult Register()
         {
             RegisterUserVM user = new RegisterUserVM();
-            ListIt_BusinessLogic.Services.LanguageService langService = new ListIt_BusinessLogic.Services.LanguageService();
-            ListIt_BusinessLogic.Services.CountryService countryService = new ListIt_BusinessLogic.Services.CountryService();
+            LanguageService langService = new LanguageService();
+            CountryService countryService = new CountryService();
             
             user.CountryId = 73;
             user.LanguageId = 2;
@@ -227,7 +227,7 @@ namespace ListIt_WebFrontend.Controllers
                 var email = collection["Email"];
                 var pw = collection["PasswordHash"];
 
-                ListIt_BusinessLogic.Services.UserService userService = new ListIt_BusinessLogic.Services.UserService();
+                UserService userService = new UserService();
                 //UserVM userVM = new UserVM();                
 
                 var user = userService.Login(email, pw);

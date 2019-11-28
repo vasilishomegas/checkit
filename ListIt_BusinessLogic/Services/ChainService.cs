@@ -22,7 +22,7 @@ namespace ListIt_BusinessLogic.Services
                 var shopApi = shopApiRepository.Get(chainDto.ShopApi.Id);
                 if (shopApi == null)
                 {
-                    shopApi = ShopApiService.StaticDtoToDomain(chainDto.ShopApi);
+                    shopApi = ShopApiService.StaticDtoToDB(chainDto.ShopApi);
                     shopApiRepository.Create(shopApi);
                 }
                 shopApiId = shopApi.Id;
@@ -55,7 +55,7 @@ namespace ListIt_BusinessLogic.Services
         } */
 
 
-        protected override Chain ConvertDtoToDomain(ChainDto chainDto) 
+        protected override Chain ConvertDtoToDB(ChainDto chainDto) 
         {
             int? shopApiId = null;
             ShopApiDto shopApiDto = null;
@@ -72,17 +72,17 @@ namespace ListIt_BusinessLogic.Services
                 Logo = chainDto.Logo,
                 Name = chainDto.Name,
                 ShopApi_Id = shopApiId,
-                ShopApi = ShopApiService.StaticDtoToDomain(shopApiDto)
+                ShopApi = ShopApiService.StaticDtoToDB(shopApiDto)
             };
 
         }
 
-        protected override ChainDto ConvertDomainToDto(Chain chain)
+        protected override ChainDto ConvertDBToDto(Chain chain)
         {
             return new ChainDto
             {
                 Id = chain.Id,
-                ShopApi = ShopApiService.StaticDomainToDto(chain.ShopApi),
+                ShopApi = ShopApiService.StaticDBToDto(chain.ShopApi),
                 Name = chain.Name,
                 Logo = chain.Logo
             };

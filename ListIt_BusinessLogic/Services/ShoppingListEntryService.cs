@@ -33,24 +33,24 @@ namespace ListIt_BusinessLogic.Services
 
             foreach(ShoppingListEntry entry in entryList)
             {
-                entryDtoList.Add(ConvertDomainToDto(entry));
+                entryDtoList.Add(ConvertDBToDto(entry));
             }
 
             return entryDtoList;
         }
 
 
-        protected override ShoppingListEntryDto ConvertDomainToDto(ShoppingListEntry entity)
+        protected override ShoppingListEntryDto ConvertDBToDto(ShoppingListEntry entity)
         {
-            return StaticDomainToDto(entity);
+            return StaticDBToDto(entity);
         }
 
-        protected override ShoppingListEntry ConvertDtoToDomain(ShoppingListEntryDto dto)
+        protected override ShoppingListEntry ConvertDtoToDB(ShoppingListEntryDto dto)
         {
-            return StaticDtoToDomain(dto);
+            return StaticDtoToDB(dto);
         }
 
-        public static ShoppingListEntry StaticDtoToDomain(ShoppingListEntryDto entryDto)
+        public static ShoppingListEntry StaticDtoToDB(ShoppingListEntryDto entryDto)
         {
             // FOR EACH Entry THAT IS CREATED, A UserProduct NEEDS TO BE CREATED AS WELL
            
@@ -64,7 +64,7 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        public static ShoppingListEntryDto StaticDomainToDto(ShoppingListEntry entry)
+        public static ShoppingListEntryDto StaticDBToDto(ShoppingListEntry entry)
         {
             // EACH Entry IS LINKED TO A 
             // PRODUCT: ProductType 

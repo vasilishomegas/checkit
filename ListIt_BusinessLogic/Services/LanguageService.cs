@@ -20,20 +20,20 @@ namespace ListIt_BusinessLogic.Services
 
         public override IEnumerable<LanguageDto> GetAll()
         {
-            return _repository.GetAll().Select(ConvertDomainToDto).ToList();
+            return _repository.GetAll().Select(ConvertDBToDto).ToList();
         } 
 
-        protected override LanguageDto ConvertDomainToDto(Language entity)
+        protected override LanguageDto ConvertDBToDto(Language entity)
         {
-            return StaticDomainToDto(entity);
+            return StaticDBToDto(entity);
         }
 
-        protected override Language ConvertDtoToDomain(LanguageDto dto)
+        protected override Language ConvertDtoToDB(LanguageDto dto)
         {
-            return StaticDtoToDomain(dto);
+            return StaticDtoToDB(dto);
         }
 
-        public static Language StaticDtoToDomain(LanguageDto languageDto)
+        public static Language StaticDtoToDB(LanguageDto languageDto)
         {
             if (languageDto == null) return null;
             return new Language
@@ -44,7 +44,7 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        public static LanguageDto StaticDomainToDto(Language language)
+        public static LanguageDto StaticDBToDto(Language language)
         {
             if (language == null) return null;
             return new LanguageDto
