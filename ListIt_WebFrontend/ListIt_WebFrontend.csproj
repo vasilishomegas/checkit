@@ -359,6 +359,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\LaunchController.cs" />
+    <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -478,7 +479,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Lists.cshtml" />
+    <Content Include="Views\List\Lists.cshtml" />
     <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Store\FindStore.cshtml" />
     <Content Include="Views\Store\BrowseStore.cshtml" />
@@ -486,8 +487,8 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Trashbin.cshtml" />
     <Content Include="Views\User\Settings.cshtml" />
-    <Content Include="Views\User\SingleList.cshtml" />
-    <Content Include="Views\User\Item.cshtml" />
+    <Content Include="Views\List\SingleList.cshtml" />
+    <Content Include="Views\List\Item.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />

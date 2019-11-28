@@ -112,10 +112,95 @@
     </ul>
 
     <div class="w-100 d-flex justify-content-center">
-        <button class="btn align-baseline" type="button" data-toggle="modal" data-target="#modalEditItem">
+        <button class="btn align-baseline" type="button" data-toggle="modal" data-target="#modalCreateItem">
             <!-- + ADD ICON -->
             <i class="fa fa-plus-circle fa-2x"></i>
         </button>
+    </div>
+</div>
+
+<!-- Modal CREATE ITEM -->
+<div class="modal fade" id="modalCreateItem" tabindex="-1" role="dialog" aria-labelledby="modalCreateTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCreateTitle">Create Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("CreateItem", "List", FormMethod.Post))
+                {
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="name">@Lang.itemName *</label>
+                            <input type="text" class="form-control" id="name" placeholder=@Lang.itemName required>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            @Html.CheckBox("UserProduct")
+                            @Html.Label("UserProduct", "I want to reuse this item")
+                        </div>
+                        <div class="form-group col">
+                            <label for="price">@Lang.price</label>
+                            <input type="number" class="form-control" id="price" placeholder="Insert price">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col range-slider">
+                            <label for="quantity">@Lang.quantity </label><output id="rangevalue"></output>
+                            <input type="text" class="form-control" value="1" id="quantity">
+                        </div>
+                        <div class="form-group col">
+                            <label for="unit">@Lang.unit</label>
+                            <select id="unit" class="custom-select custom-select-sm">
+                                <option value="" selected>pc</option>
+                                <option value="">lt</option>
+                                <option value="">g</option>
+                                <option value="">kg</option>
+                                <option value="">pkg</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="category">@Lang.category</label>
+                            <select id="category" class="custom-select custom-select-sm">
+                                <option selected>Choose a category</option>
+                                <option value="">Vegetables</option>
+                                <option value="">Fruits</option>
+                                <option value="">Milk products</option>
+                                <option value="">...</option>
+                            </select>
+                        </div>
+                        <div class="form-group col">
+                            <label for="createCategory">@Lang.createCat</label>
+                            <input type="text" class="form-control" id="createCategory" placeholder="MyCategory">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col d-flex">
+                            <button type="button" onclick="" class="btn btn-dark">
+                                translate item
+                            </button>
+                        </div>
+                        <div class="form-group col d-flex justify-content-end">
+                            <button class="btn" type="reset">
+                                <i class="fa fa-close fa-lg"></i>
+                            </button>
+                            <button class="btn" type="submit">
+                                <i class="fa fa-check-circle fa-lg"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </div>
 
@@ -130,18 +215,19 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("EditItem", "User", FormMethod.Post))
+                @using (Html.BeginForm("EditItem", "List", FormMethod.Post))
                 {
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="name">@Lang.itemName</label>
-                            <input type="text" class="form-control" id="name" placeholder=@Lang.itemName>
+                            <label for="name">@Lang.itemName *</label>
+                            <input type="text" class="form-control" id="name" placeholder=@Lang.itemName required>
                         </div>
                         <div class="form-group col">
                             <label for="price">@Lang.price</label>
                             <input type="number" class="form-control" id="price" placeholder="Insert price">
                         </div>
                     </div>
+                    
                     <div class="form-row">
                         <div class="form-group col range-slider">
                             <label for="quantity">@Lang.quantity </label><output id="rangevalue"></output>

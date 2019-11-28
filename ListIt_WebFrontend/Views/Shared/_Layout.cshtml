@@ -30,7 +30,7 @@
             </div>
 
             <div class="list-group list-group-flush" aria-orientation="vertical">
-                <a href="@Url.Action("Lists", "User")" class="list-group-item list-group-item-action">
+                <a href="@Url.Action("Lists", "List")" class="list-group-item list-group-item-action">
                     <span class="fa fa-list" aria-hidden="true"></span>
                     @Lang.yourLists
                 </a>
@@ -70,7 +70,7 @@
 
                     <span class="d-flex navbar-brand justify-content-center align-items-center" >
                         <img src="~/Content/img/logo-white.png" alt="Logo" height="30" class="d-inline-block" />
-                        @Html.ActionLink(Lang.list_it, "Lists", "User", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink(Lang.list_it, "Lists", "List", new { area = "" }, new { @class = "navbar-brand" })
                     </span>
 
 

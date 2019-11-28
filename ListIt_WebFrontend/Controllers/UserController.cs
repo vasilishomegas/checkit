@@ -76,48 +76,7 @@ namespace ListIt_WebFrontend.Controllers
             return RedirectToAction("Login", "User");
         }
 
-        // GET: User/Lists
-        public ActionResult Lists()
-        {
-            if (Session["UserId"] != null)
-            {
-                ViewBag.Message = TempData["SuccessMessage"];
-                ViewBag.Error = TempData["ErrorMessage"];
-
-                //TODO: Logic to show all lists of a user
-                int userId = Int32.Parse(Session["UserId"].ToString());
-
-                ShoppingListService listService = new ShoppingListService();
-                var listOfLists = listService.GetListsByUserId(userId);
-
-                if(listOfLists.Count() == 0)
-                {
-                    ViewBag.Message = "You don't have any lists yet. Start creating your lists now!";
-                }
-
-                ListsVM lists = new ListsVM();
-                lists.AllUserLists = listOfLists;
-
-                return View(lists);
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
-        }
-
-        // GET: User/SingleList
-        public ActionResult SingleList()
-        {
-            if (Session["UserId"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
-        }
+        
 
         // GET: User/Trashbin
         //public ActionResult Trashbin()
@@ -142,44 +101,7 @@ namespace ListIt_WebFrontend.Controllers
         public ActionResult Details(int id)
         {
             return View();
-        }
-
-        // GET: User/CreateList
-        [HttpPost]
-        public ActionResult CreateList(FormCollection collection)
-        {
-            try
-            {
-                var name = collection["listname"];
-
-                if(name == null || name == "")
-                {
-                    throw new Exception("Name cannot be null");
-                }
-
-                var sessionUserId = Session["UserId"];
-                int userid = Int32.Parse(sessionUserId.ToString());
-
-                ShoppingListDto list = new ShoppingListDto();
-                list.Name = name;
-                list.Path = "somerandomPath";
-                list.ListAccessTypeId = 1; //Default owner when creating
-                list.UserId = userid;
-                list.ChosenSortingId = null;
-
-                ShoppingListService listService = new ShoppingListService();
-                listService.Create(list);
-
-                TempData["SuccessMessage"] = "You successfully created a new shopping list";
-                return RedirectToAction("Lists");
-            }
-            catch(Exception e)
-            {
-                TempData["ErrorMessage"] = "There went something wrong. Make sure to have a valid Listname entered. Try it again!";
-                return RedirectToAction("Lists");
-            }
-            
-        }
+        }        
 
         // POST: User/CreateUser
         [HttpPost]
@@ -251,22 +173,7 @@ namespace ListIt_WebFrontend.Controllers
             return View();
         }
 
-        // POST: User/Edit/5
-        [HttpPost]
-        public ActionResult EditItem(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-                // Create a new item if no ID retrieved (edit & create in same form)
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         // GET: User/Delete/5
         public ActionResult Delete(int id)
