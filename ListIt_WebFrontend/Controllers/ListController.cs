@@ -115,8 +115,35 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         // GET: List/Details/5
-        public ActionResult Details(int id)
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult CreateItem(FormCollection collection)
         {
+            var name = collection["Name"];
+            var reusable = collection["UserProduct"];
+            var price = collection["Price"];
+            var qty = Int32.Parse(collection["Quantity"]);
+            var unitType = collection["unit"];
+            var cat = collection["category"];
+            var userCat = collection["UserCategory"];
+            var prodType = 4;   //Default non reusable UserProduct
+            var listId = Int32.Parse(collection["ShoppingList_Id"]);
+
+            //if(reusable == checked)
+            //{
+            //    prodType = 3;
+            //}
+
+
+            ShoppingListEntryDto entry = new ShoppingListEntryDto();
+            entry.Quantity = qty;
+            entry.ProductTypeId = prodType;
+            entry.ShoppingList_Id = listId;
+            entry.State_Id = 1; //Default is unchecked
+
+
+            ShoppingListEntryService entryService = new ShoppingListEntryService();
+            entryService.Create(entry);
+
             return View();
         }
 

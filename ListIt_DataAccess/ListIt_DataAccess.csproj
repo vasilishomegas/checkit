@@ -105,6 +105,7 @@
     <Compile Include="Repository\CountryRepository.cs" />
     <Compile Include="Repository\Generics\Repository.cs" />
     <Compile Include="Repository\LanguageRepository.cs" />
+    <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\ShopApiRepository.cs" />
     <Compile Include="Repository\ShoppingListEntryRepository.cs" />
     <Compile Include="Repository\ShoppingListRepository.cs" />

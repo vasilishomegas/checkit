@@ -1,5 +1,5 @@
 ﻿@using Resources
-@model ListIt_DomainModel.DTO.ShoppingListEntryDto
+@model ListIt_WebFrontend.Models.SingleListVM
 
 
 @{
@@ -134,10 +134,9 @@
                 {
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="name">@Lang.itemName *</label>
-                            <input type="text" class="form-control" id="name" placeholder=@Lang.itemName required>
+                            @Html.LabelFor(model => model.Name, Lang.itemName, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = Lang.name, required = "required" } })
                         </div>
-
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
@@ -145,14 +144,14 @@
                             @Html.Label("UserProduct", "I want to reuse this item")
                         </div>
                         <div class="form-group col">
-                            <label for="price">@Lang.price</label>
-                            <input type="number" class="form-control" id="price" placeholder="Insert price">
+                            @Html.LabelFor(model => model.Price, Lang.price, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price } })
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col range-slider">
-                            <label for="quantity">@Lang.quantity </label><output id="rangevalue"></output>
-                            <input type="text" class="form-control" value="1" id="quantity">
+                        <div class="form-group col">
+                            @Html.LabelFor(model => model.Quantity, Lang.quantity, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Quantity } })
                         </div>
                         <div class="form-group col">
                             <label for="unit">@Lang.unit</label>
@@ -177,10 +176,13 @@
                             </select>
                         </div>
                         <div class="form-group col">
-                            <label for="createCategory">@Lang.createCat</label>
-                            <input type="text" class="form-control" id="createCategory" placeholder="MyCategory">
+                            @Html.LabelFor(model => model.UserCategory, Lang.createCat, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.UserCategory, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.UserCategory } })
                         </div>
                     </div>
+
+                    @Html.EditorFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id, type="hidden" } })
+
 
                     <div class="form-row">
                         <div class="form-group col d-flex">

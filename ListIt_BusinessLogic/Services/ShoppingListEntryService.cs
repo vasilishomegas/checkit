@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 
 namespace ListIt_BusinessLogic.Services
 {
-    class ShoppingListEntryService : Service<ShoppingListEntry, ShoppingListEntryDto>
+    public class ShoppingListEntryService : Service<ShoppingListEntry, ShoppingListEntryDto>
     {
         private readonly ShoppingListEntryRepository _entryRepository;
 
@@ -21,8 +21,30 @@ namespace ListIt_BusinessLogic.Services
         }
 
         //If a new Entry is created, the update function of the SortingService must be called as well
-        // public override Create() ??
+        
+        public override void Create(ShoppingListEntryDto dto)
+        {
+            var entry = new ShoppingListEntry
+            {
+                Id = dto.Id,
+                Quantity = dto.Quantity,
+                Product_Id = dto.Product_Id,
+                ShoppingList_Id = dto.ShoppingList_Id,
+                State_Id = dto.State_Id
+            };
 
+            var product = new Product
+            {
+                Id = dto.Product_Id,
+                Timestamp = DateTime.Now,
+                ProductType_Id = dto.ProductTypeId
+            };
+
+            _entryRepository.CreateListEntry(entry, product);
+
+            //sorting.Update() !! 
+        }
+       
 
         public IList<ShoppingListEntryDto> GetEntriesByListId(int listId)
         {
@@ -50,10 +72,21 @@ namespace ListIt_BusinessLogic.Services
             return StaticDtoToDB(dto);
         }
 
+        //public static Product StaticDtoToProductDB(ShoppingListEntryDto dto)
+        //{
+        //    return new Product
+        //    {
+        //        Id = dto.ProductTypeId,
+        //        Timestamp = DateTime.Now,
+        //        ProductType_Id = dto.ProductTypeId,
+        //    };
+        //}
+
         public static ShoppingListEntry StaticDtoToDB(ShoppingListEntryDto entryDto)
         {
             // FOR EACH Entry THAT IS CREATED, A UserProduct NEEDS TO BE CREATED AS WELL
-           
+            //StaticDtoToProductDB(entryDto);
+
             return new ShoppingListEntry
             {
                Id = entryDto.Id,
@@ -78,9 +111,6 @@ namespace ListIt_BusinessLogic.Services
                 Product_Id = entry.Product_Id,
                 ShoppingList_Id = entry.ShoppingList_Id,
                 State_Id = entry.State_Id
-                //Name = from APiProducts/UserProducts/DefaultProducts -> TranslationFile
-                //Quantity = from APiProducts/UserProducts/DefaultProducts
-                //Price: from APiProducts/UserProducts/DefaultProducts
             };
         }
     }

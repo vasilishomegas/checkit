@@ -14,8 +14,15 @@ namespace ListIt_DomainModel.DTO
         public int ShoppingList_Id { get; set; }
         public int State_Id { get; set; }
 
-        //Adding (State and) Product here?? OR linking and retrieving values only in ViewModel??
-        public ProductDto Product { get; set; }
+
+        //FORM Product Table
+        public int ProductTypeId { get; set; }
+
+        
+
+
+
+
         //public UserProductDto UserProduct
         //public APIProductDto APiProduct
         //public DefaultProductDto DefaultProduct
