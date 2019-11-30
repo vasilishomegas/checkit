@@ -16,5 +16,14 @@ namespace ListIt_DataAccess.Repository
                 return context.Set<Language>().ToList();
             }
         }
+
+        public Language GetByCode(string code)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.Languages
+                        .SingleOrDefault(x => x.Code == code);
+            }
+        }
     }
 }

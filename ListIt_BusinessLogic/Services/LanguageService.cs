@@ -13,15 +13,28 @@ namespace ListIt_BusinessLogic.Services
 {
     public class LanguageService : Service<Language, LanguageDto>
     {
+        private readonly LanguageRepository _langRepository;
         public LanguageService() : base(new LanguageRepository())
         {
-
+            _langRepository = (LanguageRepository)_repository;
         }
 
         public override IEnumerable<LanguageDto> GetAll()
         {
             return _repository.GetAll().Select(ConvertDBToDto).ToList();
         } 
+
+        public LanguageDto GetByCode(string code)
+        {
+            var lang = _langRepository.GetByCode(code);
+
+            return new LanguageDto
+            {
+                Id = lang.Id,
+                Name = lang.Name,
+                Code = lang.Code
+            };
+        }
 
         protected override LanguageDto ConvertDBToDto(Language entity)
         {
