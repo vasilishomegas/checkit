@@ -38,15 +38,15 @@
 
                     @Html.ActionLink(list.Name, "SingleList", "List", null, htmlAttributes: new { id = "listLinks", value = list.Id })
                     <span class="badge btn-group-sm">
-                        <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#modalRename">
+                        <button class="btn btn-outline-dark rename" type="button" data-listName=@list.Name data-listId=@list.Id data-toggle="modal" data-target="#modalRename">
                             <!-- RENAME edit ICON -->
                             <i class="fa fa-pencil fa-lg"></i>
                         </button>
-                        <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#modalShare">
+                        <button class="btn btn-outline-dark share" type="button" data-listName="@list.Name" data-listId="@list.Id" data-toggle="modal" data-target="#modalShare">
                             <!-- SHAER ICON -->
                             <i class="fa fa-share-alt fa-lg"></i>
                         </button>
-                        <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#modalDelete">
+                        <button class="btn btn-outline-danger delete" type="button" data-listName="@list.Name" data-listId="@list.Id" data-toggle="modal" data-target="#modalDelete">
                             <i class="fa fa-trash-o fa-lg"></i>
                         </button>
                     </span>
@@ -77,19 +77,19 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm(null, null, FormMethod.Post))
+                @using (Html.BeginForm("RenameList", "List", FormMethod.Post))
                 {
                     <div class="form-group">
-                        @Html.Editor("rename", new { @class = "form-control", type = "text", value = "", placeholder = "Groceries" })
+                        @Html.LabelFor(model => model.Name, "New Name", new { @class = "control-label" })
+                        @*@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",  id = "rename", type = "text", value = "", placeholder = "Groceries", required = "required" } })*@
+                        <input type="text" id="rename" class = "rename" value ="" required />
                     </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Lang.close</button>
-                    <button type="button" class="btn btn-primary">@Lang.save</button>
+                    <input type="hidden" id="listId" class="id" value=""/>
+                    @*@Html.Editor("listId", new { type = "hidden", id = "listId" })*@
+
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">@Lang.close</button>
+                    <button type="submit" class="btn btn-dark">@Lang.save</button>
                 }
-
-
-            </div>
-            <div class="modal-footer">
-
             </div>
         </div>
     </div>
@@ -110,12 +110,11 @@
                 {
                     <div class="form-group">
                         @Html.Editor("listname", new { @class = "form-control", type = "text", value = "", placeholder = "Groceries" })
+                        
                     </div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">@Lang.close</button>
                     <button type="submit" class="btn btn-primary">@Lang.save</button>
                 }
-
-
             </div>
         </div>
     </div>
@@ -132,9 +131,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("", "List", FormMethod.Post))
+                @using (Html.BeginForm("DeleteList", "List", FormMethod.Post))
                 {
                     <div>
+                        <input type="hidden" id="listId" />
+                        @*@Html.Editor("listId", new { type = "hidden", id = "listId" })*@
                         <p>
                             Do you really want to delete this list?
                         </p>
@@ -180,9 +181,6 @@
                         <!-- INSERT MODEL WITH LIST OF LISTACCESSTYPES -->
                         @*@Html.DropDownListFor(x => x.ListTypeAccessId, Model.ListTypeAccessList, htmlAttributes: new { @class = "form-control custom-select" })*@
                     </div>
-
-
-
                     <div class="form-group col d-flex justify-content-end">
                         <button class="btn" type="button">
                             <i class="fa fa-close fa-lg"></i>
@@ -204,3 +202,29 @@
     </div>
 </div>
 
+<script>
+    /*JQuery script to get listID from button and send to modal*/
+
+    //$(document).ready(function () {
+
+         // for rename:
+        $('#modalRename').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var listId = button.data('listId') // Extract info from data-* attributes
+            var listName = button.data('listName')
+            var modal = $(this)
+            modal.find('.modal-body .rename').val(listName)
+            modal.find('.modal-body .id').val(listId)
+
+            //$(event.currentTarget).find('input["rename"]').val(listName);
+        });
+
+        $('#modalDelete').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var listId = button.data('listId') // Extract info from data-* attributes
+          var modal = $(this)
+          modal.find('.modal-body input #listId').val(listId)
+        })
+    //})
+    
+</script>

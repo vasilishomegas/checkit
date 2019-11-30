@@ -37,7 +37,7 @@ namespace ListIt_WebFrontend.Controllers
             }
             else
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "User");
             }
         }
 
@@ -50,7 +50,7 @@ namespace ListIt_WebFrontend.Controllers
             }
             else
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "User");
             }
         }
 
@@ -90,6 +90,64 @@ namespace ListIt_WebFrontend.Controllers
             }
 
         }
+
+        //Post: User/List/Rename
+        [HttpPost]
+        public ActionResult RenameList(FormCollection collection)
+        {
+            try
+            {
+                var newName = collection["Name"];
+                int listId = Int32.Parse(collection["listId"].ToString());
+
+                ShoppingListService listService = new ShoppingListService();
+                var dbList = listService.Get(listId);
+
+                if(newName == dbList.Name)
+                {
+                    throw new Exception("The name of the list is the same as before.");
+                }
+
+                ShoppingListDto list = new ShoppingListDto();
+                list.Id = listId;
+                list.Name = newName;
+
+                listService.Update(list);
+
+                TempData["SuccessMessage"] = "The listname was successfully updated";
+                return RedirectToAction("Lists");
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Updating the listname wasn't successful";
+                return RedirectToAction("Lists");
+            }
+        }
+
+        //Post: User/List/Rename
+        [HttpPost]
+        public ActionResult DeleteList(FormCollection collection)
+        {
+            try
+            {
+                int listId = Int32.Parse(collection["listId"].ToString());
+
+                ShoppingListService listService = new ShoppingListService();
+                //var dbList = listService.Get(listId);
+
+                //TO DO: delete all related entries (ShoppingListEntry)
+                listService.Delete(listId);
+
+                TempData["SuccessMessage"] = "The list was successfully deleted";
+                return RedirectToAction("Lists");
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Deleting the list wasn't successful";
+                return RedirectToAction("Lists");
+            }
+        }
+
 
         // POST: User/Edit/5
         [HttpPost]
