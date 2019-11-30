@@ -20,7 +20,17 @@ namespace ListIt_WebFrontend.Controllers
             //leads to profile view
             if (Session["UserId"] != null)
             {
-                return View();
+                ViewBag.Error = TempData["ErrorMessage"];
+                ViewBag.Message = TempData["SuccessMessage"];
+
+                UserService service = new UserService();
+                var user = service.Get(Int32.Parse(Session["UserId"].ToString()));
+                UserVM userVM = new UserVM();
+                userVM.Nickname = user.Nickname;
+                userVM.Email = user.Email;
+                userVM.PasswordHash = user.PasswordHash;
+
+                return View(userVM);
             }
             else
             {
@@ -96,12 +106,7 @@ namespace ListIt_WebFrontend.Controllers
                 return RedirectToAction("Login");
             }
         }
-
-        // GET: User/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }        
+      
 
         // POST: User/CreateUser
         [HttpPost]
@@ -157,7 +162,7 @@ namespace ListIt_WebFrontend.Controllers
                 Session["UserId"] = user.Id;
                 Session["LanguageCode"] = user.Language.Code;               
 
-                return RedirectToAction("Lists");
+                return RedirectToAction("Lists", "List");
             }
             catch
             {
@@ -167,34 +172,33 @@ namespace ListIt_WebFrontend.Controllers
             }
         }
 
-        // GET: User/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        
-
-        // GET: User/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult EditProfile(FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                int id = Int32.Parse(Session["UserId"].ToString());
+                var newName = collection["Nickname"];
+                var newMail = collection["Email"];
 
+                UserService service = new UserService();
+                UserDto user = new UserDto();
+                user.Id = id;
+                user.Nickname = newName;
+                user.Email = newMail;
+
+                service.Update(user);
+
+                TempData["SuccessMessage"] = "Your profile has been updated successfully";
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                TempData["ErrorMessage"] = "There was an error while updating the profile. Please try again.";
+                return RedirectToAction("Index");
             }
         }
+
+        
     }
 }
