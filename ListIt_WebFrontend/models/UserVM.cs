@@ -19,5 +19,14 @@ namespace ListIt_WebFrontend.Models
         [DataType(DataType.Password)]
         [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "Passwords do not match!")]
         public string PasswordRepeat { get; set; }
+
+
+        //Settings Attributes:
+        public IList<SelectListItem> CountryList { get; set; }
+        public int CountryId { get; set; }
+        public IList<SelectListItem> CurrencyList { get; set; }
+        public int CurrencyId { get; set; }
+        public IList<SelectListItem> SortingsList { get; set; }
+        public int SortingId { get; set; }
     }
 }
