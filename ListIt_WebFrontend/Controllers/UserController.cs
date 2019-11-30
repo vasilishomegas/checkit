@@ -28,7 +28,6 @@ namespace ListIt_WebFrontend.Controllers
                 UserVM userVM = new UserVM();
                 userVM.Nickname = user.Nickname;
                 userVM.Email = user.Email;
-                userVM.PasswordHash = user.PasswordHash;
 
                 return View(userVM);
             }
@@ -199,6 +198,42 @@ namespace ListIt_WebFrontend.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult EditPw(FormCollection collection)
+        {
+            try
+            {
+                int id = Int32.Parse(Session["UserId"].ToString());
+                var oldPw = collection["PasswordHash"];
+                var newPW = collection["NewPassword"];
+
+                UserService service = new UserService();
+
+                //Verify old password
+                if(service.HashPassword(oldPw) != service.Get(id).PasswordHash)
+                {
+                    TempData["ErrorMessage"] = "The old Password doesn't match!";
+                    throw new Exception("Old PW doesn't match");
+                }
+
+                UserDto user = new UserDto();
+                user.Id = id;
+                user.PasswordHash = service.HashPassword(newPW);
+
+                service.Update(user);
+
+                TempData["SuccessMessage"] = "Your password has been updated successfully";
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                if(TempData["ErrorMessage"] == null)
+                {
+                    TempData["ErrorMessage"] = "There was an error while updating the password. Please try again.";
+                }
+                return RedirectToAction("Index");
+            }
+        }
         
     }
 }
