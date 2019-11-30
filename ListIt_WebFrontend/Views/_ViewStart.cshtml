@@ -10,7 +10,7 @@
     else if(Session["LanguageCode"] != null)
     {
         var countryCode = Session["LanguageCode"].ToString().ToUpper();
-        var culture = countryCode + "-" + Session["LanguageCode"].ToString();
+        var culture = Session["LanguageCode"].ToString() + "-" + countryCode;
         Culture = UICulture = culture;
     }
 
