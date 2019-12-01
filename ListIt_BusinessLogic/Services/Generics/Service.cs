@@ -21,7 +21,7 @@ namespace ListIt_BusinessLogic.Services.Generics
         {
             // Get all entities. In select statement specify which data you want to retrieve.
             // Here I gave a reference to a method which specifies what and how will be returned.
-            return _repository.GetAll().Select(ConvertDomainToDto).ToList();
+            return _repository.GetAll().Select(ConvertDamToDto).ToList();
         }
 
         public virtual DTO Get(int id)
@@ -31,20 +31,20 @@ namespace ListIt_BusinessLogic.Services.Generics
             // If entity equals null, then return null, otherwise return converted into DTO object.
             return entity == null
                 ? null
-                : ConvertDomainToDto(entity);
+                : ConvertDamToDto(entity);
         }
         
         // When you want to create an object, you create a simple DTO object. Service layer converts it into
         // Data Access Model.
         public virtual void Create(DTO dto)
         {
-            _repository.Create(ConvertDtoToDomain(dto));
+            _repository.Create(ConvertDtoToDam(dto));
         }
 
         // You update with a simple DTO object. Service layer converts it into Data Access Model.
         public virtual void Update(DTO dto)
         {
-            _repository.Update(ConvertDtoToDomain(dto));
+            _repository.Update(ConvertDtoToDam(dto));
         }
 
         public virtual void Delete(int id)
@@ -56,7 +56,7 @@ namespace ListIt_BusinessLogic.Services.Generics
 
         // Each of service subclasses will specify rules of converting Data Transfer Object
         // into Data Access Model. Methods are protected so they can be overriden in subclasses.
-        protected abstract T ConvertDtoToDomain(DTO dto);
-        protected abstract DTO ConvertDomainToDto(T entity);
+        protected abstract T ConvertDtoToDam(DTO dto);
+        protected abstract DTO ConvertDamToDto(T entity);
     }
 }

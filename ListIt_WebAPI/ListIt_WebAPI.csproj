@@ -130,6 +130,7 @@
     <Compile Include="Controllers\Generics\GenericController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ShopApisController.cs" />
+    <Compile Include="Controllers\ShopsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -151,6 +152,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Generic\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\Shops\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

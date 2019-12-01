@@ -1,4 +1,4 @@
-﻿using ListIt_DomainModel.DTO.Interfaces;
+﻿ using ListIt_DomainModel.DTO.Interfaces;
 
 namespace ListIt_DomainModel.DTO
 {

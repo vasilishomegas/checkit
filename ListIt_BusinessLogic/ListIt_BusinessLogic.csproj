@@ -51,6 +51,7 @@
     <Compile Include="Services\LanguageService.cs" />
     <Compile Include="Services\ShopApiService.cs" />
     <Compile Include="Services\ShoppingListService.cs" />
+    <Compile Include="Services\ShopService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
