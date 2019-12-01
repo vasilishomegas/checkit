@@ -35,17 +35,17 @@ namespace ListIt_BusinessLogic.Services
         }
  
 
-        protected override ShoppingListDto ConvertDomainToDto(ShoppingList entity)
+        protected override ShoppingListDto ConvertDamToDto(ShoppingList entity)
         {
-            return StaticDomainToDto(entity);
+            return StaticDamToDto(entity);
         }
 
-        protected override ShoppingList ConvertDtoToDomain(ShoppingListDto dto)
+        protected override ShoppingList ConvertDtoToDam(ShoppingListDto dto)
         {
-            return StaticDtoToDomain(dto);
+            return StaticDtoToDam(dto);
         }
 
-        public static ShoppingList StaticDtoToDomain(ShoppingListDto dto)
+        public static ShoppingList StaticDtoToDam(ShoppingListDto dto)
         {
             //dto.ListAccessTypeId should go to LinkUserToList-Table/Class 
 
@@ -59,7 +59,7 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        public static ShoppingListDto StaticDomainToDto(ShoppingList list)
+        public static ShoppingListDto StaticDamToDto(ShoppingList list)
         {
             return new ShoppingListDto
             {

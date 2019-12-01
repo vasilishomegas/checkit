@@ -1,4 +1,5 @@
-﻿using ListIt_BusinessLogic.Services.Generics;
+﻿using System;
+using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
@@ -29,7 +30,7 @@ namespace ListIt_BusinessLogic.Services
                 // If it does not exist yet, create an instance of it in the database.
                 if (shopApi == null)
                 {
-                    shopApi = ShopApiService.StaticDtoToDomain(chainDto.ShopApi);
+                    shopApi = ShopApiService.StaticDtoToDam(chainDto.ShopApi);
                     shopApiRepository.Create(shopApi);
                 }
 
@@ -46,7 +47,7 @@ namespace ListIt_BusinessLogic.Services
             });
         }
 
-        protected override Chain ConvertDtoToDomain(ChainDto chainDto) 
+        protected override Chain ConvertDtoToDam(ChainDto chainDto) 
         {
             int? shopApiId = null;
             ShopApiDto shopApiDto = null;
@@ -63,20 +64,30 @@ namespace ListIt_BusinessLogic.Services
                 Logo = chainDto.Logo,
                 Name = chainDto.Name,
                 ShopApi_Id = shopApiId,
-                ShopApi = ShopApiService.StaticDtoToDomain(shopApiDto)
+                ShopApi = ShopApiService.StaticDtoToDam(shopApiDto)
             };
 
         }
 
-        protected override ChainDto ConvertDomainToDto(Chain chain)
+        protected override ChainDto ConvertDamToDto(Chain chain)
         {
             return new ChainDto
             {
                 Id = chain.Id,
-                ShopApi = ShopApiService.StaticDomainToDto(chain.ShopApi),
+                ShopApi = ShopApiService.StaticDamToDto(chain.ShopApi),
                 Name = chain.Name,
                 Logo = chain.Logo
             };
+        }
+
+        internal static Chain StaticDtoToDam(ChainDto chain)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static ChainDto StaticDamToDto(Chain chain)
+        {
+            throw new NotImplementedException();
         }
     }
 }

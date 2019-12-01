@@ -21,7 +21,7 @@ namespace ListIt_BusinessLogic.Services
         }
         // Overriden methods are created to move the logic to generic Service class
         // Static methods are needed to be able to convert reference properties in other services
-        public static ShopApi StaticDtoToDomain(ShopApiDto shopApiDto)
+        public static ShopApi StaticDtoToDam(ShopApiDto shopApiDto)
         {
             if (shopApiDto == null) return null;
 
@@ -32,7 +32,7 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        public static ShopApiDto StaticDomainToDto(ShopApi shopApi)
+        public static ShopApiDto StaticDamToDto(ShopApi shopApi)
         {
             if (shopApi == null) return null;
 
@@ -43,14 +43,14 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        protected override ShopApi ConvertDtoToDomain(ShopApiDto shopApiDto)
+        protected override ShopApi ConvertDtoToDam(ShopApiDto shopApiDto)
         {
-            return StaticDtoToDomain(shopApiDto);
+            return StaticDtoToDam(shopApiDto);
         }
 
-        protected override ShopApiDto ConvertDomainToDto(ShopApi shopApi)
+        protected override ShopApiDto ConvertDamToDto(ShopApi shopApi)
         {
-            return StaticDomainToDto(shopApi);
+            return StaticDamToDto(shopApi);
         }
         
     }

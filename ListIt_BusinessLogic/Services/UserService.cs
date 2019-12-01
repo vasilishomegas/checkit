@@ -49,7 +49,7 @@ namespace ListIt_BusinessLogic.Services
         public UserDto Login(string email, string pw)
         {
             var user = _userRepository.GetUserByEmailAndPasswordHash(email, HashPassword(pw));
-            return ConvertDomainToDto(user);
+            return ConvertDamToDto(user);
         }
 
         public string HashPassword(string pw)
@@ -89,26 +89,26 @@ namespace ListIt_BusinessLogic.Services
             });
         }
 
-        protected override UserDto ConvertDomainToDto(User entity)
+        protected override UserDto ConvertDamToDto(User entity)
         {
-            return StaticDomainToDto(entity);
+            return StaticDamToDto(entity);
         }
 
-        protected override User ConvertDtoToDomain(UserDto dto)
+        protected override User ConvertDtoToDam(UserDto dto)
         {
-            return StaticDtoToDomain(dto);
+            return StaticDtoToDam(dto);
         }
 
-        public static User StaticDtoToDomain(UserDto userDto)
+        public static User StaticDtoToDam(UserDto userDto)
         {
             /* USER HAS TO HAVE COUNTRY AND LANGUAGE, SO COUNTRY_ID / LANGUAGE_ID IS NOT NULLABLE,
             SO I OMIT CHECKS*/
             
             return new User 
                 {
-                Language = LanguageService.StaticDtoToDomain(userDto.Language),
+                Language = LanguageService.StaticDtoToDam(userDto.Language),
                 Language_Id = userDto.Language.Id,
-                Country = CountryService.StaticDtoToDomain(userDto.Country),
+                Country = CountryService.StaticDtoToDam(userDto.Country),
                 Country_Id = userDto.Country.Id,
                 Email = userDto.Email,
                 Id = userDto.Id,
@@ -118,12 +118,12 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        public static UserDto StaticDomainToDto(User user)
+        public static UserDto StaticDamToDto(User user)
         {
             return new UserDto
             {
-                Language = LanguageService.StaticDomainToDto(user.Language),
-                Country = CountryService.StaticDomainToDto(user.Country),
+                Language = LanguageService.StaticDamToDto(user.Language),
+                Country = CountryService.StaticDamToDto(user.Country),
                 Email = user.Email,
                 Id = user.Id,
                 PasswordHash = user.PasswordHash,

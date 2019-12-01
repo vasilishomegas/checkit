@@ -18,17 +18,17 @@ namespace ListIt_BusinessLogic.Services
 
         }
 
-        protected override CountryDto ConvertDomainToDto(Country entity)
+        protected override CountryDto ConvertDamToDto(Country entity)
         {
-            return StaticDomainToDto(entity);
+            return StaticDamToDto(entity);
         }
 
-        protected override Country ConvertDtoToDomain(CountryDto dto)
+        protected override Country ConvertDtoToDam(CountryDto dto)
         {
-            return StaticDtoToDomain(dto);
+            return StaticDtoToDam(dto);
         }
 
-        public static Country StaticDtoToDomain(CountryDto countryDto)
+        public static Country StaticDtoToDam(CountryDto countryDto)
         {
             if (countryDto == null) return null;
             return new Country
@@ -39,7 +39,7 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        public static CountryDto StaticDomainToDto(Country country)
+        public static CountryDto StaticDamToDto(Country country)
         {
             if (country == null) return null;
             return new CountryDto
