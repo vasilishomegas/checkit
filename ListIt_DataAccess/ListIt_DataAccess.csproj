@@ -102,9 +102,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ChainRepository.cs" />
     <Compile Include="Repository\CountryRepository.cs" />
+    <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\Generics\Repository.cs" />
     <Compile Include="Repository\LanguageRepository.cs" />
     <Compile Include="Repository\ShopApiRepository.cs" />
+    <Compile Include="Repository\ShoppingListEntryRepository.cs" />
     <Compile Include="Repository\ShoppingListRepository.cs" />
     <Compile Include="Repository\ShopRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />

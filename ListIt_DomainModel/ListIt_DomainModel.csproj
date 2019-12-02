@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="DTO\ChainDto.cs" />
     <Compile Include="DTO\CountryDto.cs" />
+    <Compile Include="DTO\StateDto.cs" />
     <Compile Include="DTO\Interfaces\IDto.cs" />
     <Compile Include="DTO\LanguageDto.cs" />
     <Compile Include="DTO\ShopDto.cs" />
