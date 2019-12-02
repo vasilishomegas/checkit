@@ -81,18 +81,18 @@
                 <div class="row">
                     <div class="col-md-8 d-flex justify-content-between check-toggle">
                         <div class="form-text">
-                            @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = "checkbox" })
-                            <label id="itemData" for="checkbox">
+                            @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = "1" })
+                            <label for="checkbox" class="item1">
                                 Apple <!-- INSERT ITEM NAME HERE -->
                             </label>
                         </div>
                         <div class="form-text">
-                            <label id="itemData" for="checkbox">
+                            <label for="checkbox" class="item1">
                                 5pc.
                             </label>
                         </div>
                         <div class="form-text">
-                            <label id="itemData" for="checkbox">
+                            <label for="checkbox" class="item1">
                                 2 dkk/pc.
                             </label>
                         </div>
@@ -112,20 +112,20 @@
 
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-md-8 d-flex justify-content-between check-toggle">
+                    <div class="col-md-8 d-flex justify-content-between check-toggle" id="item2">
                         <div class="form-text">
-                            @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = "checkbox" })
-                            <label id="itemData" for="checkbox">
+                            @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = "2" })
+                            <label for="checkbox" class="item2">
                                 Banana <!-- INSERT ITEM NAME HERE -->
                             </label>
                         </div>
                         <div class="form-text">
-                            <label id="itemData" for="checkbox">
+                            <label for="checkbox" class="item2">
                                 5pc.
                             </label>
                         </div>
                         <div class="form-text">
-                            <label id="itemData" for="checkbox">
+                            <label for="checkbox" class="item2">
                                 2 dkk/pc.
                             </label>
                         </div>
@@ -435,17 +435,18 @@
 
 <script>
     jQuery(function ($) {
-
         $(".check-toggle").on('click', function () {
             $(this).find(':checkbox').prop('checked', function (i, checked) {
                 return !checked;
             });
 
+            var checkbox = $(this).find('.checkbox');
+            var getCheckboxId = checkbox.attr('id');
 
-            if ($('input.checkbox').is(':checked')) {
-                $('label#itemData').addClass('crossout');
+            if (checkbox.is(':checked')) {
+                $('label.item' + getCheckboxId).addClass('crossout');
             } else {
-                $('label#itemData').removeClass('crossout');
+                $('label.item' + getCheckboxId).removeClass('crossout');
             }
         });
     });
