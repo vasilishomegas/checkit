@@ -120,11 +120,11 @@ textarea {
 
 /* YOUR LISTS */
 
-ul li #listLinks {
+ul li .listLinks {
     color: black;
 }
 
-ul li #listLinks:hover {
+ul li .listLinks:hover {
     color: rgba(216, 0, 0, 0.6);
     text-decoration: none;
     font-weight: 700;
@@ -133,6 +133,16 @@ ul li #listLinks:hover {
 
 
 /* SINGLE LIST ITEMS */
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    
+}
+
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+    margin-top: 0;
+}    
+
 
 #headingNames {
     padding-left: 15px;

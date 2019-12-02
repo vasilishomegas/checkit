@@ -369,7 +369,6 @@
     <Compile Include="Models\ListsVM.cs" />
     <Compile Include="Models\RegisterUserVM.cs" />
     <Compile Include="Models\SingleListVM.cs" />
-    <Compile Include="Models\UserSettingsVM.cs" />
     <Compile Include="Models\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
