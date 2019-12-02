@@ -42,11 +42,27 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         // GET: User/SingleList
-        public ActionResult SingleList()
+        public ActionResult SingleList(int? id)
         {
-            if (Session["UserId"] != null)
+            if (Session["UserId"] != null && id != null)
             {
-                return View();
+                ViewBag.Message = TempData["SuccessMessage"];
+                ViewBag.Error = TempData["ErrorMessage"];
+
+                SingleListVM list = new SingleListVM();
+                list.ListId = (int)id;
+
+                ShoppingListService listService = new ShoppingListService();
+                list.ListName = listService.Get(list.ListId).Name;
+                list.ListAccessTypeId = listService.Get(list.ListId).ListAccessTypeId;
+
+                //TODO: if listaccesstype == readonly then disable edit/delete buttons
+
+                ShoppingListEntryService entryService = new ShoppingListEntryService();
+
+                //TODO: get all entries
+
+                return View(list);
             }
             else
             {
@@ -97,8 +113,8 @@ namespace ListIt_WebFrontend.Controllers
         {
             try
             {
-                var newName = collection["Name"];
-                int listId = Int32.Parse(collection["listId"].ToString());
+                var newName = collection["ListName"];
+                int listId = Int32.Parse(collection["ListId"].ToString());
 
                 ShoppingListService listService = new ShoppingListService();
                 var dbList = listService.Get(listId);
@@ -115,12 +131,12 @@ namespace ListIt_WebFrontend.Controllers
                 listService.Update(list);
 
                 TempData["SuccessMessage"] = "The listname was successfully updated";
-                return RedirectToAction("Lists");
+                return Redirect(Request.UrlReferrer.ToString());
             }
             catch
             {
                 TempData["ErrorMessage"] = "Updating the listname wasn't successful";
-                return RedirectToAction("Lists");
+                return Redirect(Request.UrlReferrer.ToString());
             }
         }
 
