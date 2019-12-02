@@ -49,20 +49,39 @@ namespace ListIt_WebFrontend.Controllers
                 ViewBag.Message = TempData["SuccessMessage"];
                 ViewBag.Error = TempData["ErrorMessage"];
 
-                SingleListVM list = new SingleListVM();
-                list.ListId = (int)id;
-
                 ShoppingListService listService = new ShoppingListService();
-                list.ListName = listService.Get(list.ListId).Name;
-                list.ListAccessTypeId = listService.Get(list.ListId).ListAccessTypeId;
+                var userLists = listService.GetListsByUserId(Int32.Parse(Session["UserId"].ToString()));
+                var requestedList = listService.Get((int)id);
 
-                //TODO: if listaccesstype == readonly then disable edit/delete buttons
+                //checking whether the list the user tries to access is his or if he has access rights
+                foreach(ShoppingListDto x in userLists)
+                {
+                    if(x.Id == requestedList.Id)
+                    {
+                        SingleListVM list = new SingleListVM();
+                        list.ListId = (int)id;
 
-                ShoppingListEntryService entryService = new ShoppingListEntryService();
 
-                //TODO: get all entries
+                        list.ListName = listService.Get(list.ListId).Name;
+                        list.ListAccessTypeId = listService.Get(list.ListId).ListAccessTypeId;
 
-                return View(list);
+                        //TODO: if listaccesstype == readonly then disable edit/delete buttons
+
+                        ShoppingListEntryService entryService = new ShoppingListEntryService();
+
+                        //TODO: get all entries
+
+                        return View(list);
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "The list you tried to access isn't yours!!";
+                        return RedirectToAction("Lists", "List");
+                    }
+                }
+
+                return Redirect(Request.UrlReferrer.ToString());
+
             }
             else
             {
