@@ -204,7 +204,8 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         // GET: List/Details/5
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateItem(FormCollection collection)
         {
             var name = collection["Name"];

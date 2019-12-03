@@ -166,6 +166,7 @@
             <div class="modal-body">
                 @using (Html.BeginForm("RenameList", "List", FormMethod.Post))
                 {
+                    @Html.AntiForgeryToken()
                     <div class="form-group">
                         @Html.LabelFor(model => model.ListName, Lang.name, new { @class = "control-label" })
                         @Html.EditorFor(model => model.ListName, new { htmlAttributes = new { @class = "form-control",  id = "rename", type = "text", value = Model.ListName, placeholder = "Groceries", required = "required" } })
@@ -195,6 +196,8 @@
             <div class="modal-body">
                 @using (Html.BeginForm("CreateItem", "List", FormMethod.Post))
                 {
+                    @Html.AntiForgeryToken()
+
                     <div class="form-row">
                         <div class="form-group col">
                             @Html.LabelFor(model => model.Name, Lang.itemName, htmlAttributes: new { @class = "control-label" })
@@ -282,6 +285,8 @@
             <div class="modal-body">
                 @using (Html.BeginForm("EditItem", "List", FormMethod.Post))
                 {
+                    @Html.AntiForgeryToken()
+
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="name">@Lang.itemName *</label>
@@ -361,6 +366,7 @@
             <div class="modal-body">
                 @using (Html.BeginForm("DeleteList", "List", FormMethod.Post))
                 {
+                    @Html.AntiForgeryToken()
                     <div>
                         @*@Html.Editor("listId", new { type = "hidden", id = "listId" })*@
                         <p>
@@ -394,6 +400,7 @@
             <div class="modal-body">
                 @using (Html.BeginForm("", "List", FormMethod.Post))
                 {
+                    @Html.AntiForgeryToken()
                     <div class="form-group">
                         @Html.Label("Enter the Email-Adresses here:", htmlAttributes: new { @class = "control-label" })
                         @Html.TextArea("EmailAdresses", null, new { @class = "form-control", placeholder = "steve@smith.com" })
