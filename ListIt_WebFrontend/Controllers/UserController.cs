@@ -128,6 +128,7 @@ namespace ListIt_WebFrontend.Controllers
 
         // POST: User/CreateUser
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateUser(FormCollection collection)
         {
             try
@@ -191,6 +192,7 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditProfile(FormCollection collection)
         {
             try
@@ -218,6 +220,7 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditPw(FormCollection collection)
         {
             try
@@ -255,6 +258,7 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditSettings(FormCollection collection)
         {
             try
@@ -283,6 +287,7 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SaveLang(FormCollection collection)
         {
             try

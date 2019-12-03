@@ -87,6 +87,7 @@ namespace ListIt_WebFrontend.Controllers
 
         // GET: User/CreateList
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateList(FormCollection collection)
         {
             try
@@ -124,6 +125,7 @@ namespace ListIt_WebFrontend.Controllers
 
         //Post: User/List/Rename
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult RenameList(FormCollection collection)
         {
             try
@@ -157,6 +159,7 @@ namespace ListIt_WebFrontend.Controllers
 
         //Post: User/List/Rename
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteList(FormCollection collection)
         {
             try
@@ -182,6 +185,7 @@ namespace ListIt_WebFrontend.Controllers
 
         // POST: User/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditItem(FormCollection collection)
         {
             try

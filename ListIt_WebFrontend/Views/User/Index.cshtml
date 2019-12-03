@@ -85,6 +85,7 @@
             <div class="modal-body">
                 @using (Html.BeginForm("EditProfile", "User", FormMethod.Post))
                 {
+                    @Html.AntiForgeryToken()
                     <div class="form-group">
                         @Html.Label("profilePic", Lang.picture)
                         <!--img src="" /-->
@@ -129,6 +130,7 @@
             <div class="modal-body">
                 @using (Html.BeginForm("EditPw", "User", FormMethod.Post))
                 {
+                    @Html.AntiForgeryToken()
                     <div class="form-group">
                         @Html.LabelFor(model => model.PasswordHash, Lang.oldPw, htmlAttributes: new { @class = "control-label" })
                         @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type = "password", required = "required" } })
