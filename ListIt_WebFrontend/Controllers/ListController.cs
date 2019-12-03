@@ -73,14 +73,10 @@ namespace ListIt_WebFrontend.Controllers
 
                         return View(list);
                     }
-                    else
-                    {
-                        TempData["ErrorMessage"] = "The list you tried to access isn't yours!!";
-                        return RedirectToAction("Lists", "List");
-                    }
                 }
 
-                return Redirect(Request.UrlReferrer.ToString());
+                TempData["ErrorMessage"] = "The list you tried to access isn't yours!!";
+                return RedirectToAction("Lists", "List");
 
             }
             else
