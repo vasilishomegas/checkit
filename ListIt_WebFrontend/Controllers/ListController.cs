@@ -49,27 +49,55 @@ namespace ListIt_WebFrontend.Controllers
                 ViewBag.Message = TempData["SuccessMessage"];
                 ViewBag.Error = TempData["ErrorMessage"];
 
-                ShoppingListService listService = new ShoppingListService();
+                ShoppingListService listService = new ShoppingListService();                
                 var userLists = listService.GetListsByUserId(Int32.Parse(Session["UserId"].ToString()));
                 var requestedList = listService.Get((int)id);
 
                 //checking whether the list the user tries to access is his or if he has access rights
                 foreach(ShoppingListDto x in userLists)
                 {
-                    if(x.Id == requestedList.Id)
+                    if (x.Id == requestedList.Id)
                     {
                         SingleListVM list = new SingleListVM();
-                        list.ListId = (int)id;
+                        list.ShoppingList_Id = requestedList.Id;
 
+                        list.ListName = listService.Get(list.ShoppingList_Id).Name;
+                        list.ListAccessTypeId = listService.Get(list.ShoppingList_Id).ListAccessTypeId;
 
-                        list.ListName = listService.Get(list.ListId).Name;
-                        list.ListAccessTypeId = listService.Get(list.ListId).ListAccessTypeId;
-
-                        //TODO: if listaccesstype == readonly then disable edit/delete buttons
+                        //TODO: if listaccesstype == readonly then disable edit/delete buttons --> in VIEW
 
                         ShoppingListEntryService entryService = new ShoppingListEntryService();
+                        list.Entries = entryService.GetEntriesByListId(requestedList.Id);
 
-                        //TODO: get all entries
+                        LanguageService languageService = new LanguageService();
+                        var langId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;
+
+                        UnitTypeService unitTypeService = new UnitTypeService();
+                        list.UnitTypesListId = 1; //default value
+                        list.UnitTypesList = (from item in unitTypeService.GetUnitTypesByLanguage(langId)
+                                              select new SelectListItem()
+                                              {
+                                                  Text = item.Name,
+                                                  Value = item.Id.ToString()
+                                              }).ToList();
+
+                        CurrencyService currencyService = new CurrencyService();
+                        list.CurrencyListId = 5; //default DKK
+                        list.CurrencyList = (from item in currencyService.GetAll()
+                                             select new SelectListItem()
+                                             {
+                                                 Text = item.Code,
+                                                 Value = item.Id.ToString()
+                                             }).ToList();
+
+                        CategoryService categoryService = new CategoryService();
+                        list.CategoryListId = 20; //default category: others
+                        list.CategoryList = (from item in categoryService.GetCategories(langId, int.Parse(Session["UserId"].ToString()))
+                                             select new SelectListItem()
+                                             {
+                                                 Text = item.Name,
+                                                 Value = item.Id.ToString()
+                                             }).ToList();
 
                         return View(list);
                     }
@@ -212,33 +240,59 @@ namespace ListIt_WebFrontend.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateItem(FormCollection collection)
         {
-            var name = collection["Name"];
-            var reusable = collection["UserProduct"];
-            var price = collection["Price"];
-            var qty = Int32.Parse(collection["Quantity"]);
-            var unitType = collection["unit"];
-            var cat = collection["category"];
-            var userCat = collection["UserCategory"];
-            var prodType = 4;   //Default non reusable UserProduct
-            var listId = Int32.Parse(collection["ShoppingList_Id"]);
+            try
+            {
+                var name = collection["Name"];
+                var reusable = collection["UserProduct"];
+                var price = decimal.Parse(collection["Price"]);
+                var listId = int.Parse(collection["ShoppingList_Id"]);
+                var qty = int.Parse(collection["quantity"]);
+                var unitTypeId = int.Parse(collection["unit"]);  //TODO: create lists in view and get id (like for countries/languages)
+                var catId = int.Parse(collection["category"]);
+                var userCat = collection["UserCategory"];
+                var currencyId = int.Parse(collection["Currency"]);
+                var prodType = 4;   //Default non reusable UserProduct             
 
-            //if(reusable == checked)
-            //{
-            //    prodType = 3;
-            //}
+                ShoppingListEntryDto entry = new ShoppingListEntryDto();
+                entry.Quantity = qty;
+                entry.ProductTypeId = prodType;
+                entry.ShoppingList_Id = listId;
+                entry.State_Id = 2; //Default is unchecked
 
+                ShoppingListEntryService entryService = new ShoppingListEntryService();
+                var prodId = entryService.Create(entry); //Creates Product and ShoppingListEntry, returns created ProductId
 
-            ShoppingListEntryDto entry = new ShoppingListEntryDto();
-            entry.Quantity = qty;
-            entry.ProductTypeId = prodType;
-            entry.ShoppingList_Id = listId;
-            entry.State_Id = 1; //Default is unchecked
+                if (reusable == "true")
+                {
+                    prodType = 3;   //3 = UserProduct = reusable
+                }
 
+                if(prodType == 3    //reusable UserProduct
+                    || prodType == 4)   //one-time/one-list UserListProduct
+                {
+                    UserProductDto userProduct = new UserProductDto();
+                    userProduct.Id = prodId;
+                    userProduct.Name = name;
+                    userProduct.Category_Id = catId;
+                    userProduct.User_Id = int.Parse(Session["UserId"].ToString());
+                    userProduct.Unit_Id = unitTypeId;
+                    userProduct.Price = price;
+                    userProduct.Currency_Id = currencyId;
 
-            ShoppingListEntryService entryService = new ShoppingListEntryService();
-            entryService.Create(entry);
+                    entryService.Create(userProduct);
+                }
 
-            return View();
+                //TODO: add logic to add default products to list
+
+                TempData["SuccessMessage"] = "Successfully created a new item";
+                return RedirectToAction("SingleList", new { @id = listId});
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "There was an error while creating a new item";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+
         }
 
         // GET: List/Create
