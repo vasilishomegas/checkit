@@ -34,6 +34,17 @@ namespace ListIt_DataAccess.Repository
             
         }
 
+        //getting single link entry
+        public LinkUserToList GetLink(int id, int userid)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.LinkUserToLists
+                    .Where(x => x.ShoppingListId == id)
+                    .SingleOrDefault(x => x.UserId == userid);
+            }
+        }
+
         //public override ShoppingList Get(int id)
         //{
         //    using (var context = new ListItContext())
@@ -44,7 +55,7 @@ namespace ListIt_DataAccess.Repository
         //    }
         //}
 
-        
+
         /* UPDATING Create() to save ShoppingList AND LinkUserToList */
 
         public void Create(ShoppingList entity, LinkUserToList link)
@@ -52,6 +63,32 @@ namespace ListIt_DataAccess.Repository
             using (var context = new ListItContext())
             {
                 var result = context.ShoppingLists.Add(entity);
+                var linkresult = context.LinkUserToLists.Add(link);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
+                                                         + " in state " + eve.Entry.State + " has the following" +
+                                                         " validation errors:");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
+                        }
+                    }
+                    throw new Exception(builder.ToString());
+                }
+            }
+        }
+        public void Create(LinkUserToList link)
+        {
+            using (var context = new ListItContext())
+            {
                 var linkresult = context.LinkUserToLists.Add(link);
                 try
                 {

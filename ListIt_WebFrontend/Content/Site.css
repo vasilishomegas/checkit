@@ -130,6 +130,27 @@ ul li .listLinks:hover {
     font-weight: 700;
 }
 
+ul li .listLinksReadonly {
+    color: dodgerblue;
+}
+
+    ul li .listLinksReadonly:hover {
+        color: #101c82;
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+ul li .listLinksWrite {
+    color: forestgreen;
+}
+
+    ul li .listLinksWrite:hover {
+        color: forestgreen;
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+
 
 
 /* SINGLE LIST ITEMS */

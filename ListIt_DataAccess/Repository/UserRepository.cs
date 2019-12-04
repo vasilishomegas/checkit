@@ -44,5 +44,15 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
+        public int GetIdByEmail(string email)
+        {
+            using (var context = new ListItContext())
+            {
+                var user = context.Users
+                    .SingleOrDefault(x => x.Email == email);
+                return user.Id;
+            }
+        }
+
     }
 }

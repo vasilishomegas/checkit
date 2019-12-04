@@ -23,7 +23,7 @@ namespace ListIt_WebFrontend.Controllers
                 int userId = Int32.Parse(Session["UserId"].ToString());
 
                 ShoppingListService listService = new ShoppingListService();
-                var listOfLists = listService.GetListsByUserId(userId);
+                var listOfLists = listService.GetListsByUserId(userId).OrderBy(x => x.Name).ToList();
 
                 if (listOfLists.Count() == 0)
                 {
@@ -159,7 +159,7 @@ namespace ListIt_WebFrontend.Controllers
             try
             {
                 var newName = collection["ListName"];
-                int listId = Int32.Parse(collection["ListId"].ToString());
+                int listId = int.Parse(collection["ShoppingList_Id"]);
 
                 ShoppingListService listService = new ShoppingListService();
                 var dbList = listService.Get(listId);
@@ -175,12 +175,12 @@ namespace ListIt_WebFrontend.Controllers
 
                 listService.Update(list);
 
-                TempData["SuccessMessage"] = "The listname was successfully updated";
+                TempData["SuccessMessage"] = "The list's name was successfully updated.";
                 return Redirect(Request.UrlReferrer.ToString());
             }
             catch
             {
-                TempData["ErrorMessage"] = "Updating the listname wasn't successful";
+                TempData["ErrorMessage"] = "Updating the list's name wasn't successful.";
                 return Redirect(Request.UrlReferrer.ToString());
             }
         }
@@ -301,6 +301,34 @@ namespace ListIt_WebFrontend.Controllers
             //    return Redirect(Request.UrlReferrer.ToString());
             //}
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ShareList(FormCollection collection)
+        {
+            try
+            {
+                var emailAddress = collection["EmailAddress"];
+                var type = int.Parse(collection["Type"]);
+                var listId = int.Parse(collection["ShoppingList_Id"]);
+                UserService userService = new UserService();
+                var userId = userService.GetIdByEmail(emailAddress);
+                ShoppingListDto shoppingListDto = new ShoppingListDto();
+                shoppingListDto.UserId = userId;
+                shoppingListDto.Id = listId;
+                shoppingListDto.ListAccessTypeId = type;
+                ShoppingListService listService = new ShoppingListService();
+                listService.CreateLink(shoppingListDto);
+                TempData["SuccessMessage"] = "You successfully shared your list!";
+                return RedirectToAction("SingleList", new { @id = listId });
+            }
+            catch
+            {
+                var listId = int.Parse(collection["ShoppingList_Id"]);
+                TempData["ErrorMessage"] = "An error occured and Your list hasn't been shared.";
+                return RedirectToAction("SingleList", new { @id = listId });
+            }
         }
 
         // GET: List/Create

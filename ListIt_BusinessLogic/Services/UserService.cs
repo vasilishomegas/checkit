@@ -14,9 +14,12 @@ namespace ListIt_BusinessLogic.Services
 {
     public class UserService : Service<User, UserDto>
     {
+
+        private readonly UserRepository _userRepository;
+
         public UserService() : base(new UserRepository())
         {
-
+            _userRepository = (UserRepository)_repository;
         }
 
         public override void Create(UserDto userDto)
@@ -85,6 +88,11 @@ namespace ListIt_BusinessLogic.Services
                 Nickname = userDto.Nickname,
                 Timestamp = userDto.Timestamp
             });
+        }
+
+        public int GetIdByEmail(string email)
+        {
+            return _userRepository.GetIdByEmail(email);
         }
 
         protected override UserDto ConvertDBToDto(User entity)

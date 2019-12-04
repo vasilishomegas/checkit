@@ -389,23 +389,25 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("", "List", FormMethod.Post))
+                @using (Html.BeginForm("ShareList", "List", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <div class="form-group">
-                        @Html.Label("Enter the Email-Adresses here:", htmlAttributes: new { @class = "control-label" })
-                        @Html.TextArea("EmailAdresses", null, new { @class = "form-control", placeholder = "steve@smith.com" })
+                        @Html.Label("Enter the Email-Address here:", htmlAttributes: new { @class = "control-label" })
+                        @Html.Editor("EmailAddress", null, new { @class = "form-control", placeholder = "steve@smith.com", type = "email" })
                     </div>
 
                     <div class="form-group">
                         @Html.Label("Choose type of sharing", htmlAttributes: new { @class = "control-label" })
-                        <select class="custom-select">
-                            <option selected>Read only</option>
-                            <option>Edit</option>
+                        <select class="custom-select" name="Type">
+                            <option value="3" selected>Read only </option>
+                            <option value="4"> Edit </option>
                         </select>
                         <!-- INSERT MODEL WITH LIST OF LISTACCESSTYPES -->
                         @*@Html.DropDownListFor(x => x.ListTypeAccessId, Model.ListTypeAccessList, htmlAttributes: new { @class = "form-control custom-select" })*@
                     </div>
+                    @Html.HiddenFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id } })
+
                     <div class="form-group col d-flex justify-content-end">
                         <button class="btn" type="button">
                             <i class="fa fa-close fa-lg"></i>

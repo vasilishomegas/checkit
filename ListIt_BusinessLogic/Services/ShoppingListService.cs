@@ -41,6 +41,18 @@ namespace ListIt_BusinessLogic.Services
             _listRepository.Create(list, link);
         }
 
+        public void CreateLink (ShoppingListDto dto)
+        {
+            var link = new LinkUserToList
+            {
+                UserId = dto.UserId,
+                ShoppingListId = dto.Id,
+                ListAccessTypeId = dto.ListAccessTypeId,
+            };
+
+            _listRepository.Create(link);
+        }
+
         public override void Update(ShoppingListDto dto)
         {
             var dbList = _listRepository.Get(dto.Id);
@@ -68,11 +80,25 @@ namespace ListIt_BusinessLogic.Services
 
             foreach(LinkUserToList link in linkedUserLists)
             {
-                var list = Get(link.ShoppingListId);
+                var list = Get(link.ShoppingListId, userId);
                 listOfLists.Add(list);
             }
 
             return listOfLists;
+        }
+        public ShoppingListDto Get(int id, int userid)
+        {
+            var entity = _repository.Get(id);
+            var link = _listRepository.GetLink(id, userid);
+
+            return entity == null
+                ? null
+                : ConvertDBToDtoWithListAccessType(link, entity);
+        }
+
+        protected ShoppingListDto ConvertDBToDtoWithListAccessType(LinkUserToList link, ShoppingList list)
+        {
+            return StaticLinkDBToDto(link, list);
         }
 
         protected override ShoppingListDto ConvertDBToDto(ShoppingList entity)
@@ -115,21 +141,33 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
+        public static ShoppingListDto StaticLinkDBToDto(LinkUserToList link, ShoppingList list)
+        {
+            return new ShoppingListDto
+            {
+                Id = list.Id,
+                Name = list.Name,
+                Path = list.Path,
+                ChosenSortingId = list.ChosenSorting_Id,
+                ListAccessTypeId = link.ListAccessTypeId
+            };
+        }
+
         public static ShoppingListDto StaticDBToDto(ShoppingList list)
         {
             // EACH ShoppingListDto WILL CONTAIN VALUES FROM LinkUserToList AS WELL
-            foreach(LinkUserToList link in list.LinkUserToLists)
-            {
-                
-            }
+            //foreach(LinkUserToList link in list.LinkUserToLists)
+            //{
+            //    link.ListAccessTypeId
+            //}
             
             return new ShoppingListDto
             {
                 Id = list.Id,
                 Name = list.Name,
                 Path = list.Path,
-                //ChosenSortingId = null, //list.ChosenSorting_Id, NULLABLE in ShoppingList
-                //ListAccessTypeId = list.LinkUserToLists
+                ChosenSortingId = list.ChosenSorting_Id
+                //ListAccessTypeId = link.ListAccessTypeId
             };
         }
 
