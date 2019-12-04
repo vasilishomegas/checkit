@@ -22,17 +22,8 @@ namespace ListIt_BusinessLogic.Services
 
         //If a new Entry is created, the update function of the SortingService must be called as well
         
-        public override void Create(ShoppingListEntryDto dto)
-        {
-            var entry = new ShoppingListEntry
-            {
-                Id = dto.Id,
-                Quantity = dto.Quantity,
-                Product_Id = dto.Product_Id,
-                ShoppingList_Id = dto.ShoppingList_Id,
-                State_Id = dto.State_Id
-            };
-
+        public new int Create(ShoppingListEntryDto dto)
+        {          
             var product = new Product
             {
                 Id = dto.Product_Id,
@@ -40,11 +31,45 @@ namespace ListIt_BusinessLogic.Services
                 ProductType_Id = dto.ProductTypeId
             };
 
-            _entryRepository.CreateListEntry(entry, product);
+            var prodId = _entryRepository.CreateProduct(product);
+            // = _entryRepository.GetIdOfProduct(product);
+
+            var entry = new ShoppingListEntry
+            {
+                Id = dto.Id,
+                Quantity = dto.Quantity,
+                Product_Id = prodId,
+                ShoppingList_Id = dto.ShoppingList_Id,
+                State_Id = dto.State_Id
+            };
+
+            _entryRepository.Create(entry);
+
 
             //sorting.Update() !! 
+
+            return prodId;
         }
-       
+
+        public void Create(UserProductDto userProduct)
+        {
+            //checking all nullable values to avoid FK-Errors if value == 0
+            if (userProduct.Category_Id == 0) userProduct.Category_Id = null;
+            if (userProduct.Currency_Id == 0) userProduct.Currency_Id = null;
+            if (userProduct.Unit_Id == 0) userProduct.Unit_Id = null;
+            //if (userProduct.Price == 0) userProduct.Price = null;
+
+            _entryRepository.CreateUserProduct(new UserProduct
+            {
+                Id = userProduct.Id,
+                Category_Id = userProduct.Category_Id,
+                Currency_Id = userProduct.Currency_Id,
+                UnitType_Id = userProduct.Unit_Id,
+                User_Id = userProduct.User_Id,
+                Name = userProduct.Name,
+                Price = userProduct.Price
+            });
+        }
 
         public IList<ShoppingListEntryDto> GetEntriesByListId(int listId)
         {
@@ -71,16 +96,6 @@ namespace ListIt_BusinessLogic.Services
         {
             return StaticDtoToDB(dto);
         }
-
-        //public static Product StaticDtoToProductDB(ShoppingListEntryDto dto)
-        //{
-        //    return new Product
-        //    {
-        //        Id = dto.ProductTypeId,
-        //        Timestamp = DateTime.Now,
-        //        ProductType_Id = dto.ProductTypeId,
-        //    };
-        //}
 
         public static ShoppingListEntry StaticDtoToDB(ShoppingListEntryDto entryDto)
         {

@@ -80,6 +80,7 @@
                         <div class="form-inline">
                             @using (Html.BeginForm("SaveLang", "User", FormMethod.Post, htmlAttributes: new { @class = "form-inline" }))
                             {
+                                @Html.AntiForgeryToken()
                                 <div class="input-group">
                                     <select name="lang" id ="lang" class="custom-select">
                                         <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
