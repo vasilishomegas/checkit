@@ -31,8 +31,8 @@ namespace ListIt_BusinessLogic.Services
                 ProductType_Id = dto.ProductTypeId
             };
 
-            _entryRepository.CreateProduct(product);
-            var prodId = _entryRepository.GetIdOfProduct(product);
+            var prodId = _entryRepository.CreateProduct(product);
+            // = _entryRepository.GetIdOfProduct(product);
 
             var entry = new ShoppingListEntry
             {
@@ -53,6 +53,12 @@ namespace ListIt_BusinessLogic.Services
 
         public void Create(UserProductDto userProduct)
         {
+            //checking all nullable values to avoid FK-Errors if value == 0
+            if (userProduct.Category_Id == 0) userProduct.Category_Id = null;
+            if (userProduct.Currency_Id == 0) userProduct.Currency_Id = null;
+            if (userProduct.Unit_Id == 0) userProduct.Unit_Id = null;
+            //if (userProduct.Price == 0) userProduct.Price = null;
+
             _entryRepository.CreateUserProduct(new UserProduct
             {
                 Id = userProduct.Id,

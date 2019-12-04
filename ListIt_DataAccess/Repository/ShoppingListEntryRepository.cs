@@ -40,19 +40,19 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
-        public int GetIdOfProduct(Product product)
-        {
-            using (var context = new ListItContext())
-            {
-                var prod = context.Products
-                    .Where(x => x.ProductType_Id == product.ProductType_Id)
-                    .SingleOrDefault(x => x.Timestamp == product.Timestamp);
+        //public int GetIdOfProduct(Product product)
+        //{
+        //    using (var context = new ListItContext())
+        //    {
+        //        var prod = context.Products
+        //            .Where(x => x.ProductType_Id == product.ProductType_Id)
+        //            .SingleOrDefault(x => x.Timestamp == product.Timestamp);
 
-                return prod.Id;
-            }
-        }
+        //        return prod.Id;
+        //    }
+        //}
 
-        public void CreateProduct(Product product)
+        public int CreateProduct(Product product)
         {
             using (var context = new ListItContext())
             {
@@ -61,6 +61,7 @@ namespace ListIt_DataAccess.Repository
                 try
                 {
                     context.SaveChanges();
+                    return prod.Id;
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException e)
                 {

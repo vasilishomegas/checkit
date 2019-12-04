@@ -240,18 +240,28 @@ namespace ListIt_WebFrontend.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateItem(FormCollection collection)
         {
-            try
-            {
+            //try
+            //{
                 var name = collection["Name"];
                 var reusable = collection["UserProduct"];
                 var price = decimal.Parse(collection["Price"]);
                 var listId = int.Parse(collection["ShoppingList_Id"]);
                 var qty = int.Parse(collection["quantity"]);
-                var unitTypeId = int.Parse(collection["unit"]);  //TODO: create lists in view and get id (like for countries/languages)
-                var catId = int.Parse(collection["category"]);
+                var unitTypeId = int.Parse(collection["UnitTypesListId"]);  //TODO: create lists in view and get id (like for countries/languages)
+                var catId = int.Parse(collection["CategoryListId"]);
                 var userCat = collection["UserCategory"];
-                var currencyId = int.Parse(collection["Currency"]);
-                var prodType = 4;   //Default non reusable UserProduct             
+                var currencyId = int.Parse(collection["CurrencyListId"]);
+                var prodType = 4;   //Default non reusable UserProduct
+
+                if (reusable == "false")
+                {
+                    prodType = 4;   //4 = UserListProduct = non reusable
+                }
+                else
+                {
+                    prodType = 3;   
+                }
+                                
 
                 ShoppingListEntryDto entry = new ShoppingListEntryDto();
                 entry.Quantity = qty;
@@ -262,16 +272,13 @@ namespace ListIt_WebFrontend.Controllers
                 ShoppingListEntryService entryService = new ShoppingListEntryService();
                 var prodId = entryService.Create(entry); //Creates Product and ShoppingListEntry, returns created ProductId
 
-                if (reusable == "true")
-                {
-                    prodType = 3;   //3 = UserProduct = reusable
-                }
+                
 
                 if(prodType == 3    //reusable UserProduct
                     || prodType == 4)   //one-time/one-list UserListProduct
                 {
                     UserProductDto userProduct = new UserProductDto();
-                    userProduct.Id = prodId;
+                    //userProduct. = prodId;
                     userProduct.Name = name;
                     userProduct.Category_Id = catId;
                     userProduct.User_Id = int.Parse(Session["UserId"].ToString());
@@ -280,18 +287,19 @@ namespace ListIt_WebFrontend.Controllers
                     userProduct.Currency_Id = currencyId;
 
                     entryService.Create(userProduct);
+                    //ERROR while saving UserProduct
                 }
 
                 //TODO: add logic to add default products to list
 
                 TempData["SuccessMessage"] = "Successfully created a new item";
                 return RedirectToAction("SingleList", new { @id = listId});
-            }
-            catch
-            {
-                TempData["ErrorMessage"] = "There was an error while creating a new item";
-                return Redirect(Request.UrlReferrer.ToString());
-            }
+            //}
+            //catch
+            //{
+            //    TempData["ErrorMessage"] = "There was an error while creating a new item";
+            //    return Redirect(Request.UrlReferrer.ToString());
+            //}
 
         }
 
