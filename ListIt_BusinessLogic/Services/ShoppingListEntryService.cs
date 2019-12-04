@@ -21,9 +21,9 @@ namespace ListIt_BusinessLogic.Services
         }
 
         //If a new Entry is created, the update function of the SortingService must be called as well
-        
+
         public new int Create(ShoppingListEntryDto dto)
-        {          
+        {
             var product = new Product
             {
                 Id = dto.Product_Id,
@@ -31,8 +31,8 @@ namespace ListIt_BusinessLogic.Services
                 ProductType_Id = dto.ProductTypeId
             };
 
-            var prodId = _entryRepository.CreateProduct(product);
-            // = _entryRepository.GetIdOfProduct(product);
+            var prodId  = _entryRepository.CreateProduct(product);
+            ///= _entryRepository.GetIdOfProduct(product);
 
             var entry = new ShoppingListEntry
             {
@@ -53,12 +53,6 @@ namespace ListIt_BusinessLogic.Services
 
         public void Create(UserProductDto userProduct)
         {
-            //checking all nullable values to avoid FK-Errors if value == 0
-            if (userProduct.Category_Id == 0) userProduct.Category_Id = null;
-            if (userProduct.Currency_Id == 0) userProduct.Currency_Id = null;
-            if (userProduct.Unit_Id == 0) userProduct.Unit_Id = null;
-            //if (userProduct.Price == 0) userProduct.Price = null;
-
             _entryRepository.CreateUserProduct(new UserProduct
             {
                 Id = userProduct.Id,
@@ -78,7 +72,7 @@ namespace ListIt_BusinessLogic.Services
             List<ShoppingListEntryDto> entryDtoList = new List<ShoppingListEntryDto>();
 
 
-            foreach(ShoppingListEntry entry in entryList)
+            foreach (ShoppingListEntry entry in entryList)
             {
                 entryDtoList.Add(ConvertDBToDto(entry));
             }
@@ -104,11 +98,11 @@ namespace ListIt_BusinessLogic.Services
 
             return new ShoppingListEntry
             {
-               Id = entryDto.Id,
-               Quantity = entryDto.Quantity,
-               Product_Id = entryDto.Product_Id,
-               ShoppingList_Id = entryDto.ShoppingList_Id,
-               State_Id = entryDto.State_Id
+                Id = entryDto.Id,
+                Quantity = entryDto.Quantity,
+                Product_Id = entryDto.Product_Id,
+                ShoppingList_Id = entryDto.ShoppingList_Id,
+                State_Id = entryDto.State_Id
             };
         }
 

@@ -376,6 +376,31 @@
     <Content Include="android-chrome-192x192.png" />
     <Content Include="android-chrome-512x512.png" />
     <Content Include="apple-touch-icon.png" />
+    <Content Include="bin\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\System.AppContext.dll" />
+    <Content Include="bin\System.Console.dll" />
+    <Content Include="bin\System.Diagnostics.Tracing.dll" />
+    <Content Include="bin\System.Globalization.Calendars.dll" />
+    <Content Include="bin\System.IO.Compression.dll" />
+    <Content Include="bin\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\System.IO.dll" />
+    <Content Include="bin\System.IO.FileSystem.dll" />
+    <Content Include="bin\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\System.Linq.dll" />
+    <Content Include="bin\System.Linq.Expressions.dll" />
+    <Content Include="bin\System.Net.Http.dll" />
+    <Content Include="bin\System.Net.Sockets.dll" />
+    <Content Include="bin\System.Reflection.dll" />
+    <Content Include="bin\System.Runtime.dll" />
+    <Content Include="bin\System.Runtime.Extensions.dll" />
+    <Content Include="bin\System.Runtime.InteropServices.dll" />
+    <Content Include="bin\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\System.Text.RegularExpressions.dll" />
+    <Content Include="bin\System.Xml.ReaderWriter.dll" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -502,6 +527,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\bin\nl-NL\" />
+    <Folder Include="bin\nl-NL\" />
+    <Folder Include="bin\roslyn\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
@@ -509,20 +537,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">
-      <Project>{1fc38c28-df7b-403e-a99e-d4af6c044a32}</Project>
-      <Name>ListIt_DataAccessModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
-      <Project>{407c3836-2917-427e-8a14-e4125cbc6b20}</Project>
-      <Name>ListIt_DomainModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ListIt_BusinessLogic\ListIt_BusinessLogic.csproj">
-      <Project>{e2d539f0-dbb0-4235-bd0f-9b048d7ff8bb}</Project>
-      <Name>ListIt_BusinessLogic</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -541,6 +555,20 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ListIt_BusinessLogic\ListIt_BusinessLogic.csproj">
+      <Project>{e2d539f0-dbb0-4235-bd0f-9b048d7ff8bb}</Project>
+      <Name>ListIt_BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">
+      <Project>{1fc38c28-df7b-403e-a99e-d4af6c044a32}</Project>
+      <Name>ListIt_DataAccessModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
+      <Project>{6be169c0-8627-42cf-a723-9b545cfef07b}</Project>
+      <Name>ListIt_DomainModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
