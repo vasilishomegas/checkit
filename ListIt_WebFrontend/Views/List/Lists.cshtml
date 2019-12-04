@@ -36,7 +36,7 @@
         @foreach (var list in Model.AllUserLists)
         {
            
-        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <li class="list-group-item d-flex justify-content-center">
             @if (list.ListAccessTypeId == 3)
             {
                 @Html.ActionLink(list.Name, "SingleList", "List", new { @id = list.Id }, htmlAttributes: new { @class = "listLinksReadonly" })
@@ -50,20 +50,6 @@
                 @Html.ActionLink(list.Name, "SingleList", "List", new { @id = list.Id }, htmlAttributes: new { @class = "listLinks" })
 
             }
-
-            <span class="badge btn-group-sm">
-                <button class="btn btn-outline-dark rename" type="button" data-listName=@list.Name data-listId=@list.Id data-toggle="modal" data-target="#modalRename">
-                    <!-- RENAME edit ICON -->
-                    <i class="fa fa-pencil fa-lg"></i>
-                </button>
-                <button class="btn btn-outline-dark share" type="button" data-listName="@list.Name" data-listId="@list.Id" data-toggle="modal" data-target="#modalShare">
-                    <!-- SHAER ICON -->
-                    <i class="fa fa-share-alt fa-lg"></i>
-                </button>
-                <button class="btn btn-outline-danger delete" type="button" data-listName="@list.Name" data-listId="@list.Id" data-toggle="modal" data-target="#modalDelete">
-                    <i class="fa fa-trash-o fa-lg"></i>
-                </button>
-            </span>
         </li>
         }
     </ul>

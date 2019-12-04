@@ -56,7 +56,7 @@ namespace ListIt_BusinessLogic.Services
         public override void Update(ShoppingListDto dto)
         {
             var dbList = _listRepository.Get(dto.Id);
-            if (dbList == null) throw new KeyNotFoundException("No list with this id found");
+            if (dbList == null) throw new KeyNotFoundException("No list with this ID was found.");
 
             if (dto.Name == null) dto.Name = dbList.Name;
             if (dto.Path == null) dto.Path = dbList.Path;
@@ -148,6 +148,7 @@ namespace ListIt_BusinessLogic.Services
                 Id = list.Id,
                 Name = list.Name,
                 Path = list.Path,
+                TimeStamp = list.Timestamp,
                 ChosenSortingId = list.ChosenSorting_Id,
                 ListAccessTypeId = link.ListAccessTypeId
             };
@@ -166,6 +167,7 @@ namespace ListIt_BusinessLogic.Services
                 Id = list.Id,
                 Name = list.Name,
                 Path = list.Path,
+                TimeStamp = list.Timestamp,
                 ChosenSortingId = list.ChosenSorting_Id
                 //ListAccessTypeId = link.ListAccessTypeId
             };

@@ -16,16 +16,21 @@
                     @Model.ListName
                 </h1>
             </li>
-            <li class="dropdown">
-                <button class="btn" href="#" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-ellipsis-v fa-lg"></i>
-                </button>
-                <div class="dropdown-menu">
-                    @Html.ActionLink(Lang.rename, "RenameList", "List", null, htmlAttributes: new { @class = "dropdown-item", data_toggle = "modal", data_target = "#modalRename" })
-                    @Html.ActionLink("Delete List", "DeleteList", "List", null, htmlAttributes: new { @class = "dropdown-item", data_toggle = "modal", data_target = "#modalDelete" })
-                    @Html.ActionLink("ShareList", "ShareList", "List", null, htmlAttributes: new { @class = "dropdown-item", data_toggle = "modal", data_target = "#modalShare" })
-                </div>
-            </li>
+
+            @if (Model.ListAccessTypeId == 1)
+            {
+                <li class="dropdown">
+                    <button class="btn" href="#" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-ellipsis-v fa-lg"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        @Html.ActionLink(Lang.rename, "RenameList", "List", null, htmlAttributes: new { @class = "dropdown-item", data_toggle = "modal", data_target = "#modalRename" })
+                        @Html.ActionLink("Delete List", "DeleteList", "List", null, htmlAttributes: new { @class = "dropdown-item", data_toggle = "modal", data_target = "#modalDelete" })
+                        @Html.ActionLink("ShareList", "ShareList", "List", null, htmlAttributes: new { @class = "dropdown-item", data_toggle = "modal", data_target = "#modalShare" })
+                    </div>
+                </li>
+            }
+
         </ul>
 
         @if (ViewBag.Message != null)
@@ -92,16 +97,20 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-4 d-flex justify-content-end">
-                        <span class="btn-group d-flex justify-content-end">
-                            <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                            <button class="btn" type="button" id="deleteItem">
-                                <i class="fa fa-close"></i>
-                            </button>
-                        </span>
-                    </div>
+                    @if (Model.ListAccessTypeId == 1 || Model.ListAccessTypeId == 4)
+                    {
+                        <div class="col-md-4 d-flex justify-content-end">
+                            <span class="btn-group d-flex justify-content-end">
+                                <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button class="btn" type="button" id="deleteItem">
+                                    <i class="fa fa-close"></i>
+                                </button>
+                            </span>
+                        </div>
+                    }
+
                 </div>
             </li>
 
@@ -125,16 +134,19 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-4 d-flex justify-content-end">
-                        <span class="btn-group d-flex justify-content-end">
-                            <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                            <button class="btn" type="button" id="deleteItem">
-                                <i class="fa fa-close"></i>
-                            </button>
-                        </span>
-                    </div>
+                    @if (Model.ListAccessTypeId == 1 || Model.ListAccessTypeId == 4)
+                    {
+                        <div class="col-md-4 d-flex justify-content-end">
+                            <span class="btn-group d-flex justify-content-end">
+                                <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button class="btn" type="button" id="deleteItem">
+                                    <i class="fa fa-close"></i>
+                                </button>
+                            </span>
+                        </div>
+                    }
                 </div>
             </li>
 
