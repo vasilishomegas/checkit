@@ -278,7 +278,7 @@ namespace ListIt_WebFrontend.Controllers
                     || prodType == 4)   //one-time/one-list UserListProduct
                 {
                     UserProductDto userProduct = new UserProductDto();
-                    //userProduct. = prodId;
+                    userProduct.ProductId = prodId;
                     userProduct.Name = name;
                     userProduct.Category_Id = catId;
                     userProduct.User_Id = int.Parse(Session["UserId"].ToString());

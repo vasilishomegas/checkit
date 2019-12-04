@@ -7,15 +7,18 @@
     ViewBag.Title = "List";
 }
 
-    <div class="container-fluid">
+<div class="container-fluid">
 
-        <ul class="nav justify-content-center align-items-center">
-            <li class="nav-item">
-                <h1 class="text-center pageheading">
-                    <!-- INSERT LIST NAME HERE -->
-                    @Model.ListName
-                </h1>
-            </li>
+    <ul class="nav justify-content-center align-items-center">
+        <li class="nav-item">
+            <h1 class="text-center pageheading">
+                <!-- INSERT LIST NAME HERE -->
+                @Model.ListName
+            </h1>
+        </li>
+
+        @if (Model.ListAccessTypeId == 1)
+        {
             <li class="dropdown">
                 <button class="btn" href="#" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-ellipsis-v fa-lg"></i>
@@ -26,132 +29,136 @@
                     @Html.ActionLink("ShareList", "ShareList", "List", null, htmlAttributes: new { @class = "dropdown-item", data_toggle = "modal", data_target = "#modalShare" })
                 </div>
             </li>
-        </ul>
-
-        @if (ViewBag.Message != null)
-        {
-            <div class="alert alert-success" role="alert">
-                <p class="text-center">
-                    @ViewBag.Message
-                </p>
-            </div>
-        }
-        @if (ViewBag.Error != null)
-        {
-            <div class="alert alert-danger" role="alert">
-                <p class="text-center">
-                    @ViewBag.Error
-                </p>
-            </div>
         }
 
+    </ul>
 
-
-
-        <!-- HEADING -->
-        <div class="row" id="accordionHeading">
-            <div class="col-md-8 d-flex justify-content-between" id="headingNames">
-                <span class="form-text">
-                    @Lang.itemName
-                </span>
-                <span class="form-text">
-                    @Lang.quantity
-                </span>
-                <span class="form-text">
-                    @Lang.price
-                </span>
-            </div>
-            <div class="col-md-4 d-flex justify-content-end">
-                <span>
-                    <button class="btn" type="button">
-                        <i class="fa fa-sort-amount-asc fa-lg"></i>
-                    </button>
-                </span>
-            </div>
-
-
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <p class="text-center">
+                @ViewBag.Message
+            </p>
         </div>
+    }
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <p class="text-center">
+                @ViewBag.Error
+            </p>
+        </div>
+    }
 
-        <!-- LIST ITEMS IN LIST GROUP -->
-        <ul class="list-group" id="itemsList">
-
-
-            <!-- FOREACH LI LIST ITEM -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-md-8 d-flex justify-content-between check-toggle">
-                        <div class="form-text">
-                            @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = "1" })
-                            <label for="checkbox" class="item1">
-                                Apple <!-- INSERT ITEM NAME HERE -->
-                            </label>
-                        </div>
-                        <div class="form-text">
-                            <label for="checkbox" class="item1">
-                                5pc.
-                            </label>
-                        </div>
-                        <div class="form-text">
-                            <label for="checkbox" class="item1">
-                                2 dkk/pc.
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4 d-flex justify-content-end">
-                        <span class="btn-group d-flex justify-content-end">
-                            <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                            <button class="btn" type="button" id="deleteItem">
-                                <i class="fa fa-close"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-md-8 d-flex justify-content-between check-toggle" id="item2">
-                        <div class="form-text">
-                            @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = "2" })
-                            <label for="checkbox" class="item2">
-                                Banana <!-- INSERT ITEM NAME HERE -->
-                            </label>
-                        </div>
-                        <div class="form-text">
-                            <label for="checkbox" class="item2">
-                                5pc.
-                            </label>
-                        </div>
-                        <div class="form-text">
-                            <label for="checkbox" class="item2">
-                                2 dkk/pc.
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4 d-flex justify-content-end">
-                        <span class="btn-group d-flex justify-content-end">
-                            <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                            <button class="btn" type="button" id="deleteItem">
-                                <i class="fa fa-close"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-            </li>
-
-        </ul>
-
-        <div class="w-100 d-flex justify-content-center">
-            <button class="btn align-baseline" type="button" data-toggle="modal" data-target="#modalCreateItem">
-                <!-- + ADD ICON -->
-                <i class="fa fa-plus-circle fa-2x"></i>
-            </button>
+    <!-- HEADING -->
+    <div class="row" id="accordionHeading">
+        <div class="col-md-8 d-flex justify-content-between" id="headingNames">
+            <span class="form-text">
+                @Lang.itemName
+            </span>
+            <span class="form-text">
+                @Lang.quantity
+            </span>
+            <span class="form-text">
+                @Lang.price
+            </span>
+        </div>
+        <div class="col-md-4 d-flex justify-content-end">
+            <span>
+                <button class="btn" type="button">
+                    <i class="fa fa-sort-amount-asc fa-lg"></i>
+                </button>
+            </span>
         </div>
     </div>
+
+    <!-- LIST ITEMS IN LIST GROUP -->
+    <ul class="list-group" id="itemsList">
+
+
+        <!-- FOREACH LI LIST ITEM -->
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-8 d-flex justify-content-between check-toggle">
+                    <div class="form-text">
+                        @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = "1" })
+                        <label for="checkbox" class="item1">
+                            Apple <!-- INSERT ITEM NAME HERE -->
+                        </label>
+                    </div>
+                    <div class="form-text">
+                        <label for="checkbox" class="item1">
+                            5pc.
+                        </label>
+                    </div>
+                    <div class="form-text">
+                        <label for="checkbox" class="item1">
+                            2 dkk/pc.
+                        </label>
+                    </div>
+                </div>
+                @if (Model.ListAccessTypeId == 1 || Model.ListAccessTypeId == 4)
+                {
+                    <div class="col-md-4 d-flex justify-content-end">
+                        <span class="btn-group d-flex justify-content-end">
+                            <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button class="btn" type="button" id="deleteItem">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </span>
+                    </div>
+                }
+
+            </div>
+        </li>
+
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-8 d-flex justify-content-between check-toggle" id="item2">
+                    <div class="form-text">
+                        @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = "2" })
+                        <label for="checkbox" class="item2">
+                            Banana <!-- INSERT ITEM NAME HERE -->
+                        </label>
+                    </div>
+                    <div class="form-text">
+                        <label for="checkbox" class="item2">
+                            5pc.
+                        </label>
+                    </div>
+                    <div class="form-text">
+                        <label for="checkbox" class="item2">
+                            2 dkk/pc.
+                        </label>
+                    </div>
+                </div>
+                @if (Model.ListAccessTypeId == 1 || Model.ListAccessTypeId == 4)
+                {
+                    <div class="col-md-4 d-flex justify-content-end">
+                        <span class="btn-group d-flex justify-content-end">
+                            <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button class="btn" type="button" id="deleteItem">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </span>
+                    </div>
+                }
+            </div>
+        </li>
+
+    </ul>
+
+    <div class="w-100 d-flex justify-content-center">
+        <button class="btn align-baseline" type="button" data-toggle="modal" data-target="#modalCreateItem">
+            <!-- + ADD ICON -->
+            <i class="fa fa-plus-circle fa-2x"></i>
+        </button>
+    </div>
+</div>
 
 <!-- Modal RENAME LIST -->
 <div class="modal fade" id="modalRename" tabindex="-1" role="dialog" aria-labelledby="modalRenameTitle" aria-hidden="true">
@@ -169,11 +176,11 @@
                     @Html.AntiForgeryToken()
                     <div class="form-group">
                         @Html.LabelFor(model => model.ListName, Lang.name, new { @class = "control-label" })
-                        @Html.EditorFor(model => model.ListName, new { htmlAttributes = new { @class = "form-control",  id = "rename", type = "text", value = Model.ListName, placeholder = "Groceries", required = "required" } })
-                        
+                        @Html.EditorFor(model => model.ListName, new { htmlAttributes = new { @class = "form-control", id = "rename", type = "text", value = Model.ListName, placeholder = "Groceries", required = "required" } })
+
                     </div>
                     @*@Html.Editor("listId", new { type = "hidden", id = "listId" })*@
-                    @Html.HiddenFor(model => model.ListId, htmlAttributes: new { value = Model.ListId})
+                    @Html.HiddenFor(model => model.ShoppingList_Id, htmlAttributes: new { value = Model.ShoppingList_Id })
 
                     <button type="button" class="btn btn-outline-dark" data-dismiss="modal">@Lang.close</button>
                     <button type="submit" class="btn btn-dark">@Lang.save</button>
@@ -203,16 +210,22 @@
                             @Html.LabelFor(model => model.Name, Lang.itemName, htmlAttributes: new { @class = "control-label" })
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = Lang.name, required = "required" } })
                         </div>
-                    </div>
-                    <div class="form-row">
                         <div class="form-group col">
                             @Html.CheckBox("UserProduct")
                             @Html.Label("UserProduct", "I want to reuse this item")
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col">
                             @Html.LabelFor(model => model.Price, Lang.price, htmlAttributes: new { @class = "control-label" })
                             @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price } })
                         </div>
+                        <div class="form-group col">
+                            @Html.LabelFor(model => model.CurrencyListId, Lang.currency, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(x => x.CurrencyListId, Model.CurrencyList, htmlAttributes: new { @class = "form-control custom-select" })
+
+                        </div>
+
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
@@ -220,26 +233,16 @@
                             @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Quantity } })
                         </div>
                         <div class="form-group col">
-                            <label for="unit">@Lang.unit</label>
-                            <select id="unit" class="custom-select custom-select-sm">
-                                <option value="" selected>pc</option>
-                                <option value="">lt</option>
-                                <option value="">g</option>
-                                <option value="">kg</option>
-                                <option value="">pkg</option>
-                            </select>
+                            @Html.LabelFor(model => model.UnitTypesListId, Lang.unit, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(x => x.UnitTypesListId, Model.UnitTypesList, htmlAttributes: new { @class = "form-control custom-select" })
+
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="category">@Lang.category</label>
-                            <select id="category" class="custom-select custom-select-sm">
-                                <option selected>Choose a category</option>
-                                <option value="">Vegetables</option>
-                                <option value="">Fruits</option>
-                                <option value="">Milk products</option>
-                                <option value="">...</option>
-                            </select>
+                            @Html.LabelFor(model => model.CategoryListId, Lang.category, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(x => x.CategoryListId, Model.CategoryList, htmlAttributes: new { @class = "form-control custom-select" })
+
                         </div>
                         <div class="form-group col">
                             @Html.LabelFor(model => model.UserCategory, Lang.createCat, htmlAttributes: new { @class = "control-label" })
@@ -247,8 +250,8 @@
                         </div>
                     </div>
 
-                    @Html.EditorFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id, type = "hidden" } })
-
+                    @*@Html.EditorFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id, type = "hidden" } })*@
+                    @Html.HiddenFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id } })
 
                     <div class="form-row">
                         <div class="form-group col d-flex">
@@ -398,23 +401,25 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("", "List", FormMethod.Post))
+                @using (Html.BeginForm("ShareList", "List", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <div class="form-group">
-                        @Html.Label("Enter the Email-Adresses here:", htmlAttributes: new { @class = "control-label" })
-                        @Html.TextArea("EmailAdresses", null, new { @class = "form-control", placeholder = "steve@smith.com" })
+                        @Html.Label("Enter the Email-Address here:", htmlAttributes: new { @class = "control-label" })
+                        @Html.Editor("EmailAddress", null, new { @class = "form-control", placeholder = "steve@smith.com", type = "email" })
                     </div>
 
                     <div class="form-group">
                         @Html.Label("Choose type of sharing", htmlAttributes: new { @class = "control-label" })
-                        <select class="custom-select">
-                            <option selected>Read only</option>
-                            <option>Edit</option>
+                        <select class="custom-select" name="Type">
+                            <option value="3" selected>Read only </option>
+                            <option value="4"> Edit </option>
                         </select>
                         <!-- INSERT MODEL WITH LIST OF LISTACCESSTYPES -->
                         @*@Html.DropDownListFor(x => x.ListTypeAccessId, Model.ListTypeAccessList, htmlAttributes: new { @class = "form-control custom-select" })*@
                     </div>
+                    @Html.HiddenFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id } })
+
                     <div class="form-group col d-flex justify-content-end">
                         <button class="btn" type="button">
                             <i class="fa fa-close fa-lg"></i>
@@ -446,10 +451,8 @@
             $(this).find(':checkbox').prop('checked', function (i, checked) {
                 return !checked;
             });
-
             var checkbox = $(this).find('.checkbox');
             var getCheckboxId = checkbox.attr('id');
-
             if (checkbox.is(':checked')) {
                 $('label.item' + getCheckboxId).addClass('crossout');
             } else {
@@ -457,8 +460,6 @@
             }
         });
     });
-
-
 </script>
 
 <script src="https://cdn.jsdelivr.net/gh/RubaXa/Sortable/Sortable.min.js">

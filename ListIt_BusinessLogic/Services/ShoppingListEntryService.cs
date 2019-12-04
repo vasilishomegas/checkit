@@ -56,6 +56,7 @@ namespace ListIt_BusinessLogic.Services
             _entryRepository.CreateUserProduct(new UserProduct
             {
                 Id = userProduct.Id,
+                Product_Id = userProduct.ProductId,
                 Category_Id = userProduct.Category_Id,
                 Currency_Id = userProduct.Currency_Id,
                 UnitType_Id = userProduct.Unit_Id,
