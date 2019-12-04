@@ -18,6 +18,11 @@ namespace ListIt_DomainModel.DTO
         //FORM Product Table
         public int ProductTypeId { get; set; }
 
+        
+
+
+
+
         //public UserProductDto UserProduct
         //public APIProductDto APiProduct
         //public DefaultProductDto DefaultProduct

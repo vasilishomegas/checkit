@@ -45,6 +45,9 @@
             </div>
         }
 
+
+
+
         <!-- HEADING -->
         <div class="row" id="accordionHeading">
             <div class="col-md-8 d-flex justify-content-between" id="headingNames">
@@ -65,6 +68,8 @@
                     </button>
                 </span>
             </div>
+
+
         </div>
 
         <!-- LIST ITEMS IN LIST GROUP -->
@@ -168,7 +173,7 @@
                         
                     </div>
                     @*@Html.Editor("listId", new { type = "hidden", id = "listId" })*@
-                    @Html.HiddenFor(model => model.ShoppingList_Id, htmlAttributes: new { value = Model.ShoppingList_Id})
+                    @Html.HiddenFor(model => model.ListId, htmlAttributes: new { value = Model.ListId})
 
                     <button type="button" class="btn btn-outline-dark" data-dismiss="modal">@Lang.close</button>
                     <button type="submit" class="btn btn-dark">@Lang.save</button>
@@ -198,22 +203,16 @@
                             @Html.LabelFor(model => model.Name, Lang.itemName, htmlAttributes: new { @class = "control-label" })
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = Lang.name, required = "required" } })
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col">
                             @Html.CheckBox("UserProduct")
                             @Html.Label("UserProduct", "I want to reuse this item")
                         </div>
-                    </div>
-                    <div class="form-row">                        
                         <div class="form-group col">
                             @Html.LabelFor(model => model.Price, Lang.price, htmlAttributes: new { @class = "control-label" })
                             @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price } })
                         </div>
-                        <div class="form-group col">
-                            @Html.LabelFor(model => model.CurrencyListId, Lang.currency, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(x => x.CurrencyListId, Model.CurrencyList, htmlAttributes: new { @class = "form-control custom-select" })
-
-                        </div>
-
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
@@ -221,16 +220,26 @@
                             @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Quantity } })
                         </div>
                         <div class="form-group col">
-                            @Html.LabelFor(model => model.UnitTypesListId, Lang.unit, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(x => x.UnitTypesListId, Model.UnitTypesList, htmlAttributes: new { @class = "form-control custom-select" })
-                            
+                            <label for="unit">@Lang.unit</label>
+                            <select id="unit" class="custom-select custom-select-sm">
+                                <option value="" selected>pc</option>
+                                <option value="">lt</option>
+                                <option value="">g</option>
+                                <option value="">kg</option>
+                                <option value="">pkg</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
-                            @Html.LabelFor(model => model.CategoryListId, Lang.category, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(x => x.CategoryListId, Model.CategoryList, htmlAttributes: new { @class = "form-control custom-select" })
-
+                            <label for="category">@Lang.category</label>
+                            <select id="category" class="custom-select custom-select-sm">
+                                <option selected>Choose a category</option>
+                                <option value="">Vegetables</option>
+                                <option value="">Fruits</option>
+                                <option value="">Milk products</option>
+                                <option value="">...</option>
+                            </select>
                         </div>
                         <div class="form-group col">
                             @Html.LabelFor(model => model.UserCategory, Lang.createCat, htmlAttributes: new { @class = "control-label" })
@@ -238,8 +247,8 @@
                         </div>
                     </div>
 
-                    @*@Html.EditorFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id, type = "hidden" } })*@
-                    @Html.HiddenFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id } })
+                    @Html.EditorFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id, type = "hidden" } })
+
 
                     <div class="form-row">
                         <div class="form-group col d-flex">

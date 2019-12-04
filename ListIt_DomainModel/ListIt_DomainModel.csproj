@@ -70,17 +70,14 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\CategoryDto.cs" />
     <Compile Include="DTO\ChainDTO.cs" />
     <Compile Include="DTO\CountryDto.cs" />
-    <Compile Include="DTO\CurrencyDto.cs" />
     <Compile Include="DTO\Interfaces\IDto.cs" />
     <Compile Include="DTO\LanguageDto.cs" />
     <Compile Include="DTO\ProductDto.cs" />
     <Compile Include="DTO\ShoppingListDto.cs" />
     <Compile Include="DTO\ShopApiDto.cs" />
     <Compile Include="DTO\ShoppingListEntryDto.cs" />
-    <Compile Include="DTO\UnitTypesDto.cs" />
     <Compile Include="DTO\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

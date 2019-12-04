@@ -93,7 +93,7 @@ namespace ListIt_BusinessLogic.Services
             //  AS SOON AS THERE IS A ShoppingList CREATED THERE NEEDS ALSO TO BE 
             //  A LinkUserToList ENTRY CREATED
 
-            StaticListDtoToLinkDB(listDto); 
+            StaticListDtoToLinkDB(listDto); //Adding entry in LinkUserToList still needs to be added in Repository
 
             return new ShoppingList
             {

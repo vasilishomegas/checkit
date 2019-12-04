@@ -22,8 +22,17 @@ namespace ListIt_BusinessLogic.Services
 
         //If a new Entry is created, the update function of the SortingService must be called as well
         
-        public new int Create(ShoppingListEntryDto dto)
-        {          
+        public override void Create(ShoppingListEntryDto dto)
+        {
+            var entry = new ShoppingListEntry
+            {
+                Id = dto.Id,
+                Quantity = dto.Quantity,
+                Product_Id = dto.Product_Id,
+                ShoppingList_Id = dto.ShoppingList_Id,
+                State_Id = dto.State_Id
+            };
+
             var product = new Product
             {
                 Id = dto.Product_Id,
@@ -31,39 +40,11 @@ namespace ListIt_BusinessLogic.Services
                 ProductType_Id = dto.ProductTypeId
             };
 
-            _entryRepository.CreateProduct(product);
-            var prodId = _entryRepository.GetIdOfProduct(product);
-
-            var entry = new ShoppingListEntry
-            {
-                Id = dto.Id,
-                Quantity = dto.Quantity,
-                Product_Id = prodId,
-                ShoppingList_Id = dto.ShoppingList_Id,
-                State_Id = dto.State_Id
-            };
-
-            _entryRepository.Create(entry);
-
+            _entryRepository.CreateListEntry(entry, product);
 
             //sorting.Update() !! 
-
-            return prodId;
         }
-
-        public void Create(UserProductDto userProduct)
-        {
-            _entryRepository.CreateUserProduct(new UserProduct
-            {
-                Id = userProduct.Id,
-                Category_Id = userProduct.Category_Id,
-                Currency_Id = userProduct.Currency_Id,
-                UnitType_Id = userProduct.Unit_Id,
-                User_Id = userProduct.User_Id,
-                Name = userProduct.Name,
-                Price = userProduct.Price
-            });
-        }
+       
 
         public IList<ShoppingListEntryDto> GetEntriesByListId(int listId)
         {
@@ -90,6 +71,16 @@ namespace ListIt_BusinessLogic.Services
         {
             return StaticDtoToDB(dto);
         }
+
+        //public static Product StaticDtoToProductDB(ShoppingListEntryDto dto)
+        //{
+        //    return new Product
+        //    {
+        //        Id = dto.ProductTypeId,
+        //        Timestamp = DateTime.Now,
+        //        ProductType_Id = dto.ProductTypeId,
+        //    };
+        //}
 
         public static ShoppingListEntry StaticDtoToDB(ShoppingListEntryDto entryDto)
         {

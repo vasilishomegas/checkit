@@ -32,30 +32,11 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
-        public new Product Get(int id)
+        public void CreateListEntry(ShoppingListEntry entry, Product product)
         {
             using (var context = new ListItContext())
             {
-                return context.Set<Product>().Find(id);
-            }
-        }
-
-        public int GetIdOfProduct(Product product)
-        {
-            using (var context = new ListItContext())
-            {
-                var prod = context.Products
-                    .Where(x => x.ProductType_Id == product.ProductType_Id)
-                    .SingleOrDefault(x => x.Timestamp == product.Timestamp);
-
-                return prod.Id;
-            }
-        }
-
-        public void CreateProduct(Product product)
-        {
-            using (var context = new ListItContext())
-            {
+                var result = context.Set<ShoppingListEntry>().Add(entry);
                 var prod = context.Set<Product>().Add(product);
 
                 try
@@ -81,34 +62,5 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
-        public void CreateUserProduct(UserProduct product)
-        {
-            using (var context = new ListItContext())
-            {
-                var result = context.Set<UserProduct>().Add(product);
-
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException e)
-                {
-                    StringBuilder builder = new StringBuilder();
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
-                                                         + " in state " + eve.Entry.State + " has the following" +
-                                                         " validation errors:");
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
-                        }
-                    }
-
-                    throw new Exception(builder.ToString());
-                }
-            }
-
-        }
     }
 }
