@@ -17,6 +17,7 @@
           <Property Name="Endpoint" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Product_Id" Type="int" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -59,6 +60,7 @@
           <Property Name="Currency_Id" Type="int" Nullable="false" />
           <Property Name="UnitType_Id" Type="int" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Product_Id" Type="int" />
         </EntityType>
         <EntityType Name="EntryStates">
           <Key>
@@ -235,6 +237,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Id" Type="int" Nullable="false" />
           <Property Name="Category_Id" Type="int" />
           <Property Name="Currency_Id" Type="int" />
           <Property Name="UnitType_Id" Type="int" />
@@ -253,7 +256,46 @@
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
           <Property Name="Country_Id" Type="int" Nullable="false" />
           <Property Name="Language_Id" Type="int" Nullable="false" />
+          <Property Name="ProfilePicPath" Type="nvarchar(max)" />
+          <Property Name="DefaultCurrency_Id" Type="int" />
+          <Property Name="DefaultSorting_Id" Type="int" />
         </EntityType>
+        <Association Name="FK__Users__DefaultCu__4CF5691D">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="DefaultCurrency_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__DefaultSo__4DE98D56">
+          <End Role="UserListSortings" Type="Self.UserListSortings" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserListSortings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="DefaultSorting_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApiProductsProductId_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ApiProducts" Type="Self.ApiProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_ApiProducts_dbo_Currencies_Currency_Id">
           <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
           <End Role="ApiProducts" Type="Self.ApiProducts" Multiplicity="*" />
@@ -275,18 +317,6 @@
             </Principal>
             <Dependent Role="ApiProducts">
               <PropertyRef Name="DefaultProduct_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_ApiProducts_dbo_Products_Id">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="ApiProducts" Type="Self.ApiProducts" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ApiProducts">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -347,18 +377,6 @@
             </Principal>
             <Dependent Role="DefaultProducts">
               <PropertyRef Name="Currency_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_DefaultProducts_dbo_Products_Id">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="DefaultProducts" Type="Self.DefaultProducts" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DefaultProducts">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -722,18 +740,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_UserProducts_dbo_Products_Id">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProducts">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id">
           <End Role="UnitTypes" Type="Self.UnitTypes" Multiplicity="0..1" />
           <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
@@ -782,6 +788,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserProductsProductId_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dmaj0918_1074524ModelStoreContainer">
           <EntitySet Name="ApiProducts" EntityType="Self.ApiProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
@@ -811,16 +829,24 @@
           <EntitySet Name="UserListSortings" EntityType="Self.UserListSortings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProducts" EntityType="Self.UserProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Users__DefaultCu__4CF5691D" Association="Self.FK__Users__DefaultCu__4CF5691D">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__DefaultSo__4DE98D56" Association="Self.FK__Users__DefaultSo__4DE98D56">
+            <End Role="UserListSortings" EntitySet="UserListSortings" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApiProductsProductId_ProductId" Association="Self.FK_ApiProductsProductId_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_ApiProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_ApiProducts_dbo_Currencies_Currency_Id">
             <End Role="Currencies" EntitySet="Currencies" />
             <End Role="ApiProducts" EntitySet="ApiProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id" Association="Self.FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id">
             <End Role="DefaultProducts" EntitySet="DefaultProducts" />
-            <End Role="ApiProducts" EntitySet="ApiProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_ApiProducts_dbo_Products_Id" Association="Self.FK_dbo_ApiProducts_dbo_Products_Id">
-            <End Role="Products" EntitySet="Products" />
             <End Role="ApiProducts" EntitySet="ApiProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id" Association="Self.FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id">
@@ -841,10 +867,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id">
             <End Role="Currencies" EntitySet="Currencies" />
-            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_DefaultProducts_dbo_Products_Id" Association="Self.FK_dbo_DefaultProducts_dbo_Products_Id">
-            <End Role="Products" EntitySet="Products" />
             <End Role="DefaultProducts" EntitySet="DefaultProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id" Association="Self.FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id">
@@ -967,10 +989,6 @@
             <End Role="Currencies" EntitySet="Currencies" />
             <End Role="UserProducts" EntitySet="UserProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_UserProducts_dbo_Products_Id" Association="Self.FK_dbo_UserProducts_dbo_Products_Id">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="UserProducts" EntitySet="UserProducts" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id" Association="Self.FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id">
             <End Role="UnitTypes" EntitySet="UnitTypes" />
             <End Role="UserProducts" EntitySet="UserProducts" />
@@ -986,6 +1004,10 @@
           <AssociationSet Name="FK_dbo_Users_dbo_Languages_Language_Id" Association="Self.FK_dbo_Users_dbo_Languages_Language_Id">
             <End Role="Languages" EntitySet="Languages" />
             <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProductsProductId_ProductId" Association="Self.FK_UserProductsProductId_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1005,9 +1027,10 @@
           <Property Name="Endpoint" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Product_Id" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ApiProductsProductId_ProductId" FromRole="ApiProducts" ToRole="Products" />
           <NavigationProperty Name="Currency" Relationship="Self.FK_dbo_ApiProducts_dbo_Currencies_Currency_Id" FromRole="ApiProducts" ToRole="Currencies" />
           <NavigationProperty Name="DefaultProduct" Relationship="Self.FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id" FromRole="ApiProducts" ToRole="DefaultProducts" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_ApiProducts_dbo_Products_Id" FromRole="ApiProducts" ToRole="Products" />
           <NavigationProperty Name="ShopApi" Relationship="Self.FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id" FromRole="ApiProducts" ToRole="ShopApis" />
           <NavigationProperty Name="UnitType" Relationship="Self.FK_dbo_ApiProducts_dbo_UnitTypes_Unit_Id" FromRole="ApiProducts" ToRole="UnitTypes" />
         </EntityType>
@@ -1051,6 +1074,7 @@
           <Property Name="Sign" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ApiProducts" Relationship="Self.FK_dbo_ApiProducts_dbo_Currencies_Currency_Id" FromRole="Currencies" ToRole="ApiProducts" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__DefaultCu__4CF5691D" FromRole="Currencies" ToRole="Users" />
           <NavigationProperty Name="DefaultProducts" Relationship="Self.FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id" FromRole="Currencies" ToRole="DefaultProducts" />
           <NavigationProperty Name="UserProducts" Relationship="Self.FK_dbo_UserProducts_dbo_Currencies_Currency_Id" FromRole="Currencies" ToRole="UserProducts" />
         </EntityType>
@@ -1062,9 +1086,9 @@
           <Property Name="Currency_Id" Type="Int32" Nullable="false" />
           <Property Name="UnitType_Id" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Product_Id" Type="Int32" />
           <NavigationProperty Name="ApiProducts" Relationship="Self.FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id" FromRole="DefaultProducts" ToRole="ApiProducts" />
           <NavigationProperty Name="Currency" Relationship="Self.FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id" FromRole="DefaultProducts" ToRole="Currencies" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_DefaultProducts_dbo_Products_Id" FromRole="DefaultProducts" ToRole="Products" />
           <NavigationProperty Name="UnitType" Relationship="Self.FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id" FromRole="DefaultProducts" ToRole="UnitTypes" />
           <NavigationProperty Name="LinkUserToDefaultProducts" Relationship="Self.FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId" FromRole="DefaultProducts" ToRole="LinkUserToDefaultProduct" />
           <NavigationProperty Name="Categories" Relationship="Self.LinkDefaultProductToCategory" FromRole="DefaultProducts" ToRole="Categories" />
@@ -1126,13 +1150,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ProductType_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ApiProduct" Relationship="Self.FK_dbo_ApiProducts_dbo_Products_Id" FromRole="Products" ToRole="ApiProducts" />
-          <NavigationProperty Name="DefaultProduct" Relationship="Self.FK_dbo_DefaultProducts_dbo_Products_Id" FromRole="Products" ToRole="DefaultProducts" />
+          <NavigationProperty Name="ApiProducts" Relationship="Self.FK_ApiProductsProductId_ProductId" FromRole="Products" ToRole="ApiProducts" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_dbo_Products_dbo_ProductTypes_ProductType_Id" FromRole="Products" ToRole="ProductTypes" />
           <NavigationProperty Name="ShoppingListEntries" Relationship="Self.FK_dbo_ShoppingListEntries_dbo_Products_Product_Id" FromRole="Products" ToRole="ShoppingListEntries" />
           <NavigationProperty Name="TemplateSortedProducts" Relationship="Self.FK_dbo_TemplateSortedProducts_dbo_Products_ProductId" FromRole="Products" ToRole="TemplateSortedProducts" />
           <NavigationProperty Name="TranslationOfProducts" Relationship="Self.FK_dbo_TranslationOfProducts_dbo_Products_Product_Id" FromRole="Products" ToRole="TranslationOfProducts" />
-          <NavigationProperty Name="UserProduct" Relationship="Self.FK_dbo_UserProducts_dbo_Products_Id" FromRole="Products" ToRole="UserProducts" />
+          <NavigationProperty Name="UserProducts" Relationship="Self.FK_UserProductsProductId_ProductId" FromRole="Products" ToRole="UserProducts" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -1285,12 +1308,14 @@
           <NavigationProperty Name="ShoppingList" Relationship="Self.FK_dbo_UserListSortings_dbo_ShoppingList_Id" FromRole="UserListSortings" ToRole="ShoppingLists" />
           <NavigationProperty Name="Shop" Relationship="Self.FK_dbo_UserListSortings_dbo_Shops_Shop_Id" FromRole="UserListSortings" ToRole="Shops" />
           <NavigationProperty Name="UserEntrySortings" Relationship="Self.FK_dbo_UserEntrySortings_dbo_UserListSortings_UserListSorting_Id" FromRole="UserListSortings" ToRole="UserEntrySortings" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__DefaultSo__4DE98D56" FromRole="UserListSortings" ToRole="Users" />
         </EntityType>
         <EntityType Name="UserProduct">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Int32" Nullable="false" />
           <Property Name="Category_Id" Type="Int32" />
           <Property Name="Currency_Id" Type="Int32" />
           <Property Name="UnitType_Id" Type="Int32" />
@@ -1299,7 +1324,7 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="Category" Relationship="Self.FK_dbo_UserProducts_dbo_Categories_Category_Id" FromRole="UserProducts" ToRole="Categories" />
           <NavigationProperty Name="Currency" Relationship="Self.FK_dbo_UserProducts_dbo_Currencies_Currency_Id" FromRole="UserProducts" ToRole="Currencies" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_UserProducts_dbo_Products_Id" FromRole="UserProducts" ToRole="Products" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_UserProductsProductId_ProductId" FromRole="UserProducts" ToRole="Products" />
           <NavigationProperty Name="UnitType" Relationship="Self.FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id" FromRole="UserProducts" ToRole="UnitTypes" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_UserProducts_dbo_Users_User_Id" FromRole="UserProducts" ToRole="Users" />
         </EntityType>
@@ -1314,12 +1339,29 @@
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Country_Id" Type="Int32" Nullable="false" />
           <Property Name="Language_Id" Type="Int32" Nullable="false" />
+          <Property Name="ProfilePicPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultCurrency_Id" Type="Int32" />
+          <Property Name="DefaultSorting_Id" Type="Int32" />
           <NavigationProperty Name="Categories" Relationship="Self.FK_dbo_Categories_dbo_Users_User_Id" FromRole="Users" ToRole="Categories" />
           <NavigationProperty Name="Country" Relationship="Self.FK_dbo_Users_dbo_Countries_Country_Id" FromRole="Users" ToRole="Countries" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK__Users__DefaultCu__4CF5691D" FromRole="Users" ToRole="Currencies" />
           <NavigationProperty Name="Language" Relationship="Self.FK_dbo_Users_dbo_Languages_Language_Id" FromRole="Users" ToRole="Languages" />
           <NavigationProperty Name="LinkUserToDefaultProducts" Relationship="Self.FK_dbo_LinkUserToDefaultProduct_dbo_Users_UserId" FromRole="Users" ToRole="LinkUserToDefaultProduct" />
+          <NavigationProperty Name="UserListSorting" Relationship="Self.FK__Users__DefaultSo__4DE98D56" FromRole="Users" ToRole="UserListSortings" />
           <NavigationProperty Name="UserProducts" Relationship="Self.FK_dbo_UserProducts_dbo_Users_User_Id" FromRole="Users" ToRole="UserProducts" />
         </EntityType>
+        <Association Name="FK_ApiProductsProductId_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ApiProducts" Type="Self.ApiProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiProducts">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_ApiProducts_dbo_Currencies_Currency_Id">
           <End Role="Currencies" Type="Self.Currency" Multiplicity="1" />
           <End Role="ApiProducts" Type="Self.ApiProduct" Multiplicity="*" />
@@ -1341,18 +1383,6 @@
             </Principal>
             <Dependent Role="ApiProducts">
               <PropertyRef Name="DefaultProduct_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_ApiProducts_dbo_Products_Id">
-          <End Role="Products" Type="Self.Product" Multiplicity="1" />
-          <End Role="ApiProducts" Type="Self.ApiProduct" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ApiProducts">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1452,6 +1482,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Users__DefaultCu__4CF5691D">
+          <End Role="Currencies" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="DefaultCurrency_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id">
           <End Role="Currencies" Type="Self.Currency" Multiplicity="1" />
           <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
@@ -1473,18 +1515,6 @@
             </Principal>
             <Dependent Role="UserProducts">
               <PropertyRef Name="Currency_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_DefaultProducts_dbo_Products_Id">
-          <End Role="Products" Type="Self.Product" Multiplicity="1" />
-          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DefaultProducts">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1656,15 +1686,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_UserProducts_dbo_Products_Id">
+        <Association Name="FK_UserProductsProductId_ProductId">
           <End Role="Products" Type="Self.Product" Multiplicity="1" />
-          <End Role="UserProducts" Type="Self.UserProduct" Multiplicity="0..1" />
+          <End Role="UserProducts" Type="Self.UserProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserProducts">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Product_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1812,6 +1842,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Users__DefaultSo__4DE98D56">
+          <End Role="UserListSortings" Type="Self.UserListSorting" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserListSortings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="DefaultSorting_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_UserProducts_dbo_Users_User_Id">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="UserProducts" Type="Self.UserProduct" Multiplicity="*" />
@@ -1828,7 +1870,7 @@
           <End Role="Categories" Type="Self.Category" Multiplicity="*" />
           <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="dmaj0918_1074524Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dmaj0918_1074524Entity" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ApiProducts" EntityType="Self.ApiProduct" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Chains" EntityType="Self.Chain" />
@@ -1856,16 +1898,16 @@
           <EntitySet Name="UserListSortings" EntityType="Self.UserListSorting" />
           <EntitySet Name="UserProducts" EntityType="Self.UserProduct" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_ApiProductsProductId_ProductId" Association="Self.FK_ApiProductsProductId_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_ApiProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_ApiProducts_dbo_Currencies_Currency_Id">
             <End Role="Currencies" EntitySet="Currencies" />
             <End Role="ApiProducts" EntitySet="ApiProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id" Association="Self.FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id">
             <End Role="DefaultProducts" EntitySet="DefaultProducts" />
-            <End Role="ApiProducts" EntitySet="ApiProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_ApiProducts_dbo_Products_Id" Association="Self.FK_dbo_ApiProducts_dbo_Products_Id">
-            <End Role="Products" EntitySet="Products" />
             <End Role="ApiProducts" EntitySet="ApiProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id" Association="Self.FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id">
@@ -1900,6 +1942,10 @@
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="FK__Users__DefaultCu__4CF5691D" Association="Self.FK__Users__DefaultCu__4CF5691D">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id">
             <End Role="Currencies" EntitySet="Currencies" />
             <End Role="DefaultProducts" EntitySet="DefaultProducts" />
@@ -1907,10 +1953,6 @@
           <AssociationSet Name="FK_dbo_UserProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_UserProducts_dbo_Currencies_Currency_Id">
             <End Role="Currencies" EntitySet="Currencies" />
             <End Role="UserProducts" EntitySet="UserProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_DefaultProducts_dbo_Products_Id" Association="Self.FK_dbo_DefaultProducts_dbo_Products_Id">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id" Association="Self.FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id">
             <End Role="UnitTypes" EntitySet="UnitTypes" />
@@ -1968,7 +2010,7 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="TranslationOfProducts" EntitySet="TranslationOfProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_UserProducts_dbo_Products_Id" Association="Self.FK_dbo_UserProducts_dbo_Products_Id">
+          <AssociationSet Name="FK_UserProductsProductId_ProductId" Association="Self.FK_UserProductsProductId_ProductId">
             <End Role="Products" EntitySet="Products" />
             <End Role="UserProducts" EntitySet="UserProducts" />
           </AssociationSet>
@@ -2020,6 +2062,10 @@
             <End Role="UserListSortings" EntitySet="UserListSortings" />
             <End Role="UserEntrySortings" EntitySet="UserEntrySortings" />
           </AssociationSet>
+          <AssociationSet Name="FK__Users__DefaultSo__4DE98D56" Association="Self.FK__Users__DefaultSo__4DE98D56">
+            <End Role="UserListSortings" EntitySet="UserListSortings" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_UserProducts_dbo_Users_User_Id" Association="Self.FK_dbo_UserProducts_dbo_Users_User_Id">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserProducts" EntitySet="UserProducts" />
@@ -2034,7 +2080,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entities1">
+        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entity">
           <EntitySetMapping Name="ApiProducts">
             <EntityTypeMapping TypeName="dmaj0918_1074524Model.ApiProduct">
               <MappingFragment StoreEntitySet="ApiProducts">
@@ -2046,6 +2092,7 @@
                 <ScalarProperty Name="Endpoint" ColumnName="Endpoint" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2093,6 +2140,7 @@
                 <ScalarProperty Name="Currency_Id" ColumnName="Currency_Id" />
                 <ScalarProperty Name="UnitType_Id" ColumnName="UnitType_Id" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2274,6 +2322,7 @@
             <EntityTypeMapping TypeName="dmaj0918_1074524Model.UserProduct">
               <MappingFragment StoreEntitySet="UserProducts">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
                 <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
                 <ScalarProperty Name="Currency_Id" ColumnName="Currency_Id" />
                 <ScalarProperty Name="UnitType_Id" ColumnName="UnitType_Id" />
@@ -2293,6 +2342,9 @@
                 <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
                 <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
                 <ScalarProperty Name="Language_Id" ColumnName="Language_Id" />
+                <ScalarProperty Name="ProfilePicPath" ColumnName="ProfilePicPath" />
+                <ScalarProperty Name="DefaultCurrency_Id" ColumnName="DefaultCurrency_Id" />
+                <ScalarProperty Name="DefaultSorting_Id" ColumnName="DefaultSorting_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -19,6 +19,7 @@ namespace ListIt_DataAccessModel
         {
             this.ShoppingLists = new HashSet<ShoppingList>();
             this.UserEntrySortings = new HashSet<UserEntrySorting>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,7 @@ namespace ListIt_DataAccessModel
         public virtual Shop Shop { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserEntrySorting> UserEntrySortings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

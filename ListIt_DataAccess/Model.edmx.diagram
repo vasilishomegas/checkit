@@ -4,37 +4,37 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fc0d5116bb2e4a288f434e522d5dca5c" Name="Diagram1">
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.ApiProduct" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.Category" Width="1.5" PointX="6" PointY="25.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.Chain" Width="1.5" PointX="1.5" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.Country" Width="1.5" PointX="1.5" PointY="24.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.Currency" Width="1.5" PointX="3" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.DefaultProduct" Width="1.5" PointX="8.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.EntryState" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.Language" Width="1.5" PointX="1.5" PointY="27" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.LinkUserToDefaultProduct" Width="1.5" PointX="10.5" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.LinkUserToList" Width="1.5" PointX="8.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.ListAccessType" Width="1.5" PointX="6" PointY="21.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.Product" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.ProductType" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.ShopApi" Width="1.5" PointX="1.5" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.ShoppingListEntry" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.ShoppingList" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.Shop" Width="1.5" PointX="1.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.TemplateListOrdering" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.TemplateSortedProduct" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.TranslationOfCategory" Width="1.5" PointX="8.25" PointY="26.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.TranslationOfProduct" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.TranslationOfUnitType" Width="1.5" PointX="8.25" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.UnitType" Width="1.5" PointX="6" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.UserEntrySorting" Width="1.5" PointX="10.5" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.UserListSorting" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.UserProduct" Width="1.5" PointX="8.25" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dmaj0918_1074524Model.User" Width="1.5" PointX="3.75" PointY="25.25" IsExpanded="true" />
+      <Diagram DiagramId="1105e55358194ddd946efa6d1e88949e" Name="Diagram1">
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.ApiProduct" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.Category" Width="1.5" PointX="8.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.Chain" Width="1.5" PointX="1.5" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.Country" Width="1.5" PointX="3.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.Currency" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.DefaultProduct" Width="1.5" PointX="10.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.EntryState" Width="1.5" PointX="7.5" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.Language" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.LinkUserToDefaultProduct" Width="1.5" PointX="12.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.LinkUserToList" Width="1.5" PointX="6.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.ListAccessType" Width="1.5" PointX="4.5" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.Product" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.ProductType" Width="1.5" PointX="1.5" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.ShopApi" Width="1.5" PointX="1.5" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.ShoppingListEntry" Width="1.5" PointX="9.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.ShoppingList" Width="1.5" PointX="1.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.Shop" Width="1.5" PointX="1.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.TemplateListOrdering" Width="1.5" PointX="3.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.TemplateSortedProduct" Width="1.5" PointX="6" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.TranslationOfCategory" Width="1.5" PointX="13.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.TranslationOfProduct" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.TranslationOfUnitType" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.UnitType" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.UserEntrySorting" Width="1.5" PointX="12" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.UserListSorting" Width="1.5" PointX="3.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.UserProduct" Width="1.5" PointX="10.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmaj0918_1074524Model.User" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="dmaj0918_1074524Model.FK_ApiProductsProductId_ProductId" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_ApiProducts_dbo_Currencies_Currency_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_ApiProducts_dbo_Products_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_ApiProducts_dbo_ShopApis_ShopApi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_ApiProducts_dbo_UnitTypes_Unit_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_Categories_dbo_Users_User_Id" ManuallyRouted="false" />
@@ -43,9 +43,9 @@
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_Chains_dbo_ShopApi_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_Shops_dbo_Chains_Chain_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_Users_dbo_Countries_Country_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="dmaj0918_1074524Model.FK__Users__DefaultCu__4CF5691D" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_UserProducts_dbo_Currencies_Currency_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_DefaultProducts_dbo_Products_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id" ManuallyRouted="false" />
@@ -60,7 +60,7 @@
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_ShoppingListEntries_dbo_Products_Product_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_TemplateSortedProducts_dbo_Products_ProductId" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_TranslationOfProducts_dbo_Products_Product_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_UserProducts_dbo_Products_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="dmaj0918_1074524Model.FK_UserProductsProductId_ProductId" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_ShoppingListEntries_dbo_ShoppingLists_ShoppingList_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_NextEntryId_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_UserEntrySortings_dbo_ShoppingListEntries_PrevEntryId_Id" ManuallyRouted="false" />
@@ -73,6 +73,7 @@
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_TranslationOfUnitTypes_dbo_UnitTypes_UnitType_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_UserProducts_dbo_UnitTypes_UnitType_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_UserEntrySortings_dbo_UserListSortings_UserListSorting_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="dmaj0918_1074524Model.FK__Users__DefaultSo__4DE98D56" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.FK_dbo_UserProducts_dbo_Users_User_Id" ManuallyRouted="false" />
         <AssociationConnector Association="dmaj0918_1074524Model.LinkDefaultProductToCategory" ManuallyRouted="false" />
       </Diagram>

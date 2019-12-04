@@ -22,10 +22,11 @@ namespace ListIt_DataAccessModel
         public string Endpoint { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
+        public Nullable<int> Product_Id { get; set; }
     
+        public virtual Product Product { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual DefaultProduct DefaultProduct { get; set; }
-        public virtual Product Product { get; set; }
         public virtual ShopApi ShopApi { get; set; }
         public virtual UnitType UnitType { get; set; }
     }
