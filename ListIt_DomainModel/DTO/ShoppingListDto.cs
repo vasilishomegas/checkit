@@ -11,6 +11,7 @@ namespace ListIt_DomainModel.DTO
         public int Id { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
+        public DateTime TimeStamp { get; set; }
         public List<ShoppingListEntryDto> Entries { get; set; }
         public Nullable<int> ChosenSortingId { get; set; }
 
