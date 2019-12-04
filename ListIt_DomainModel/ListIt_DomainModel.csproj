@@ -77,6 +77,7 @@
     <Compile Include="DTO\Interfaces\IDto.cs" />
     <Compile Include="DTO\LanguageDto.cs" />
     <Compile Include="DTO\ProductDto.cs" />
+    <Compile Include="DTO\ProductTypeDto.cs" />
     <Compile Include="DTO\ShoppingListDto.cs" />
     <Compile Include="DTO\ShopApiDto.cs" />
     <Compile Include="DTO\ShoppingListEntryDto.cs" />

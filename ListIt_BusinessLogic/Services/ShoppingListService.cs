@@ -127,7 +127,7 @@ namespace ListIt_BusinessLogic.Services
                 Name = listDto.Name,
                 Path = "whatever???",
                 Timestamp = DateTime.Now,
-                ChosenSorting_Id = null,
+                ChosenSorting_Id = null
             };
         }
 
@@ -137,7 +137,7 @@ namespace ListIt_BusinessLogic.Services
             {
                 UserId = dto.UserId,
                 ShoppingListId = dto.Id,
-                ListAccessTypeId = dto.ListAccessTypeId,
+                ListAccessTypeId = dto.ListAccessTypeId
             };
         }
 

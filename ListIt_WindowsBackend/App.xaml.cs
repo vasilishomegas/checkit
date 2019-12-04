@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ListIt_WindowsFrontend
+namespace ListIt_WindowsBackend
 {
     /// <summary>
     /// Interaction logic for App.xaml
