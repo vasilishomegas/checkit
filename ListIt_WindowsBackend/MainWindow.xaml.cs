@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ListIt_WindowsFrontend
+namespace ListIt_WindowsBackend
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +23,9 @@ namespace ListIt_WindowsFrontend
         public MainWindow()
         {
             InitializeComponent();
+            AddProduct addProduct = new AddProduct();
+            addProduct.Show();
+            this.Close();
         }
     }
 }

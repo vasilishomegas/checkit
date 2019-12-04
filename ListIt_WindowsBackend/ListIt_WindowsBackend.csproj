@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0404B010-98CF-4613-AA85-27875597FD02}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ListIt_WindowsFrontend</RootNamespace>
-    <AssemblyName>ListIt_WindowsFrontend</AssemblyName>
+    <RootNamespace>ListIt_WindowsBackend</RootNamespace>
+    <AssemblyName>ListIt_WindowsBackend</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -105,6 +105,10 @@
     <ProjectReference Include="..\ListIt_BusinessLogic\ListIt_BusinessLogic.csproj">
       <Project>{e2d539f0-dbb0-4235-bd0f-9b048d7ff8bb}</Project>
       <Name>ListIt_BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">
+      <Project>{1FC38C28-DF7B-403E-A99E-D4AF6C044A32}</Project>
+      <Name>ListIt_DataAccessModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
       <Project>{6be169c0-8627-42cf-a723-9b545cfef07b}</Project>

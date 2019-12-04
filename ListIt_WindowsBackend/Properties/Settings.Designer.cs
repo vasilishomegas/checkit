@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ListIt_WindowsFrontend.Properties
+namespace ListIt_WindowsBackend.Properties
 {
 
 
