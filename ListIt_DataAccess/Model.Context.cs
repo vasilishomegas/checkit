@@ -14,10 +14,10 @@ namespace ListIt_DataAccess
     using System.Data.Entity.Infrastructure;
     using ListIt_DataAccessModel;
     
-    public partial class dmaj0918_1074524Entity : DbContext
+    public partial class dmaj0918_1074524Entities : DbContext
     {
-        public dmaj0918_1074524Entity()
-            : base("name=dmaj0918_1074524Entity")
+        public dmaj0918_1074524Entities()
+            : base("name=dmaj0918_1074524Entities")
         {
         }
     
@@ -26,6 +26,7 @@ namespace ListIt_DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<ApiProduct> ApiProducts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Chain> Chains { get; set; }
