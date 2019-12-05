@@ -8,7 +8,8 @@ namespace ListIt_WebFrontend.Models
 {
         public class SingleListVM : ShoppingListEntryDto
     {
-        public IList<ShoppingListEntryDto> Entries { get; set; }
+        //public IList<ShoppingListEntryDto> Entries { get; set; }
+        public IList<ProductDto> ListEntries { get; set; } 
 
         //FROM either UserProduct or APIProduct or DefaultProduct
         [Required]

@@ -25,6 +25,20 @@ namespace ListIt_BusinessLogic.Services
             _prodRepository.Create(StaticDtoToDB(dto));
         }
 
+        //Getting all shoppinglistentries and converting to ProductDto
+        //public IList<ProductDto> GetEntriesAsProducts() 
+        //{
+        //    //need to get Product, ShoppingListEntry and UserProduct for each entry
+        //    return 
+        //}
+
+
+
+        protected ProductDto ConvertDBToDto(Product entity, UserProduct userProduct, ShoppingListEntry entry)
+        {
+            return StaticDBToDto(entity, userProduct, entry);
+        }
+
         protected override ProductDto ConvertDBToDto(Product entity)
         {
             return StaticDBToDto(entity);
@@ -56,11 +70,11 @@ namespace ListIt_BusinessLogic.Services
             {
                 Id = userProduct.Id,
                 Name = userProduct.Name,
-                Currency_Id = userProduct.Currency_Id,
-                Unit_Id = userProduct.UnitType_Id,
+                Currency_Id = (int)userProduct.Currency_Id,
+                Unit_Id = (int)userProduct.UnitType_Id,
                 //Quantity = from ProductTable
-                Price = userProduct.Price,
-                Category_Id = userProduct.Category_Id,
+                Price = (int)userProduct.Price,
+                Category_Id = (int)userProduct.Category_Id,
                 User_Id = userProduct.User_Id,
                 //ProductTypeId = from ProductTable
             };
@@ -76,12 +90,28 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        public static ProductDto StaticDBToDto(Product entry)
+        public static ProductDto StaticDBToDto(Product product)
         {
             return new ProductDto
             {
-                Id = entry.Id,
-                ProductTypeId = entry.ProductType_Id
+                Id = product.Id,
+                ProductTypeId = product.ProductType_Id
+            };
+        }
+
+        public static ProductDto StaticDBToDto(Product product, UserProduct userProduct, ShoppingListEntry entry)
+        {
+            return new ProductDto
+            {
+                Id = product.Id,
+                ProductTypeId = product.ProductType_Id,
+                Name = userProduct.Name,
+                Currency_Id = (int)userProduct.Currency_Id,
+                Unit_Id = (int)userProduct.UnitType_Id,
+                Quantity = (int)entry.Quantity,
+                Price = (decimal)userProduct.Price,
+                ProductId = product.Id,
+                Category_Id = userProduct.Category_Id
             };
         }
     }

@@ -11,6 +11,36 @@ namespace ListIt_DataAccess.Repository
 {
     public class ProductRepository : Repository<Product>
     {
+        public int CreateProduct(Product product)
+        {
+            using (var context = new ListItContext())
+            {
+                var prod = context.Set<Product>().Add(product);
+
+                try
+                {
+                    context.SaveChanges();
+                    return prod.Id;
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
+                                                         + " in state " + eve.Entry.State + " has the following" +
+                                                         " validation errors:");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
+                        }
+                    }
+
+                    throw new Exception(builder.ToString());
+                }
+            }
+        }
+
 
         public void Create(UserProduct entity)
         {

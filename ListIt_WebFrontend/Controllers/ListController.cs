@@ -69,7 +69,12 @@ namespace ListIt_WebFrontend.Controllers
                         //TODO: if listaccesstype == readonly then disable edit/delete buttons --> in VIEW
 
                         ShoppingListEntryService entryService = new ShoppingListEntryService();
-                        list.Entries = entryService.GetEntriesByListId(requestedList.Id);
+                        //list.ListEntries = entryService.GetEntriesByListId(requestedList.Id);
+
+                        //foreach()
+
+
+
 
                         LanguageService languageService = new LanguageService();
                         var langId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;

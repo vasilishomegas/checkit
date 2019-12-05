@@ -19,6 +19,7 @@ namespace ListIt_DomainModel.DTO
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public int ProductId { get; set; }
+        public Nullable<int> Category_Id { get; set; }
     }
 
     public class ApiProductDto : ProductDto
@@ -31,18 +32,17 @@ namespace ListIt_DomainModel.DTO
 
     public class UserProductDto : ProductDto
     {
-        //public int Id { get; set; }
-        public Nullable<int> Category_Id { get; set; }
-        public new Nullable<int> Currency_Id { get; set; }
-        public new Nullable<int> Unit_Id { get; set; }
-        public new Nullable<decimal> Price { get; set; }
+        //public int Id { get; set; }        
+        //public Nullable<int> Currency_Id { get; set; }
+        //public new Nullable<int> Unit_Id { get; set; }
+        //public new Nullable<decimal> Price { get; set; }
         public int User_Id { get; set; }
 
     }
 
     public class DefaultProductDto : ProductDto
     {
-        public int Category_Id { get; set; }
+        //public int Category_Id { get; set; }
 
         //Own table for names and categories
 

@@ -31,8 +31,8 @@ namespace ListIt_BusinessLogic.Services
                 ProductType_Id = dto.ProductTypeId
             };
 
-            var prodId  = _entryRepository.CreateProduct(product);
-            ///= _entryRepository.GetIdOfProduct(product);
+            ProductRepository productRepository = new ProductRepository();
+            var prodId  = productRepository.CreateProduct(product);
 
             var entry = new ShoppingListEntry
             {
@@ -53,7 +53,8 @@ namespace ListIt_BusinessLogic.Services
 
         public void Create(UserProductDto userProduct)
         {
-            _entryRepository.CreateUserProduct(new UserProduct
+            ProductRepository productRepository = new ProductRepository();
+            productRepository.Create(new UserProduct
             {
                 Id = userProduct.Id,
                 Product_Id = userProduct.ProductId,
