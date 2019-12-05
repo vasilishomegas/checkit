@@ -10,25 +10,31 @@ using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
 using System.Security.Cryptography;
 using ListIt_BusinessLogic.Services.Converters;
+using ListIt_DomainInterface.Interfaces.Converter;
+using ListIt_DomainInterface.Interfaces.Repository;
+using ListIt_DomainInterface.Interfaces.Service;
 
 namespace ListIt_BusinessLogic.Services
 {
-    public class UserService : Service<User, UserDto>
+    public class UserService : Service<User, UserDto>, IUserService
     {
-        public UserService() : base(new UserRepository(), new UserConverter())
-        {
+        private readonly ICountryRepository _countryRepository;
+        private readonly ILanguageRepository _languageRepository;
 
+        public UserService(IUserRepository userRepository, IUserConverter userConverter, ICountryRepository countryRepository, ILanguageRepository languageRepository) 
+            : base(userRepository, userConverter)
+        {
+            _countryRepository = countryRepository;
+            _languageRepository = languageRepository;
         }
 
         public override void Create(UserDto userDto)
         {
-            var countryRepository = new CountryRepository();
-            var languageRepository = new LanguageRepository();
 
-            if (userDto.Country == null 
-                || userDto.Language == null 
-                || languageRepository.Get(userDto.Language.Id) == null 
-                || countryRepository.Get(userDto.Country.Id) == null)
+            if (userDto.Country == null
+                || userDto.Language == null
+                || _languageRepository.Get(userDto.Language.Id) == null 
+                || _countryRepository.Get(userDto.Country.Id) == null)
                 throw new Exception("Country and/or Language cannot be null value");
 
             _repository.Create(new User

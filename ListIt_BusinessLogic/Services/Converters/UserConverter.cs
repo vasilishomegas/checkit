@@ -5,7 +5,7 @@ using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class UserConverter : IDtoDbConverter<User, UserDto>, IUserConverter
+    public class UserConverter : IUserConverter
     {
         private readonly LanguageConverter _languageConverter = new LanguageConverter();
         private readonly CountryConverter _countryConverter = new CountryConverter();

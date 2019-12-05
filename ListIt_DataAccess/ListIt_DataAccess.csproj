@@ -105,7 +105,6 @@
     <Compile Include="Repository\ChainRepository.cs" />
     <Compile Include="Repository\CountryRepository.cs" />
     <Compile Include="Repository\CurrencyRepository.cs" />
-    <Compile Include="Repository\Generics\IRepository.cs" />
     <Compile Include="Repository\Generics\Repository.cs" />
     <Compile Include="Repository\LanguageRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
@@ -138,6 +137,10 @@
     <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">
       <Project>{1fc38c28-df7b-403e-a99e-d4af6c044a32}</Project>
       <Name>ListIt_DataAccessModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ListIt_DomainInterface\ListIt_DomainInterface.csproj">
+      <Project>{59EF25CB-F5C7-4678-ACAE-91D0F446BED2}</Project>
+      <Name>ListIt_DomainInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

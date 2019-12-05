@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace ListIt_BusinessLogic.Services.Generics
+namespace ListIt_DomainInterface.Interfaces.Service
 {
     public interface IService<DTO>
         where DTO : class

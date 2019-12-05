@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ListIt_DataAccess.Repository.Generics
+namespace ListIt_DomainInterface.Interfaces.Repository
 {
     public interface IRepository<T> where T : class
     {

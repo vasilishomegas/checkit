@@ -1,4 +1,4 @@
-﻿namespace ListIt_BusinessLogic.Services.Generics
+﻿namespace ListIt_DomainInterface.Interfaces.Converter
 {
     public interface IDtoDbConverter<T, DTO>
     where T : class

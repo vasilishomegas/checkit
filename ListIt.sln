@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListIt_DomainModel", "ListI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListIt_BusinessLogic_Tests_Unit", "ListIt_BusinessLogic_Tests_Unit\ListIt_BusinessLogic_Tests_Unit.csproj", "{947C0599-399C-44E4-9585-3971464C526E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListIt_DomainInterface", "ListIt_DomainInterface\ListIt_DomainInterface.csproj", "{59EF25CB-F5C7-4678-ACAE-91D0F446BED2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{947C0599-399C-44E4-9585-3971464C526E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{947C0599-399C-44E4-9585-3971464C526E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{947C0599-399C-44E4-9585-3971464C526E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59EF25CB-F5C7-4678-ACAE-91D0F446BED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59EF25CB-F5C7-4678-ACAE-91D0F446BED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59EF25CB-F5C7-4678-ACAE-91D0F446BED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59EF25CB-F5C7-4678-ACAE-91D0F446BED2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
