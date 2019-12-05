@@ -20,7 +20,7 @@ namespace ListIt_WebFrontend.Controllers
                 ViewBag.Error = TempData["ErrorMessage"];
 
                 //TODO: Logic to show all lists of a user
-                int userId = Int32.Parse(Session["UserId"].ToString());
+                int userId = int.Parse(Session["UserId"].ToString());
 
                 ShoppingListService listService = new ShoppingListService();
                 var listOfLists = listService.GetListsByUserId(userId).OrderByDescending(x => x.TimeStamp).ToList();
@@ -133,7 +133,7 @@ namespace ListIt_WebFrontend.Controllers
                 }
 
                 var sessionUserId = Session["UserId"];
-                int userid = Int32.Parse(sessionUserId.ToString());
+                int userid = int.Parse(sessionUserId.ToString());
 
                 ShoppingListDto list = new ShoppingListDto();
                 list.Name = name;
@@ -197,7 +197,7 @@ namespace ListIt_WebFrontend.Controllers
         {
             try
             {
-                int listId = Int32.Parse(collection["listId"].ToString());
+                int listId = int.Parse(collection["listId"].ToString());
 
                 ShoppingListService listService = new ShoppingListService();
                 //var dbList = listService.Get(listId);

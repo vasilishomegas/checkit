@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="AddProduct" Height="450" Width="800">
     <Grid>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="103,116,0,0" VerticalAlignment="Top" Name="NameLabel"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="160,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="15" Name="NameField"/>
         <Label Content="Type" HorizontalAlignment="Left" Margin="110,76,0,0" VerticalAlignment="Top" Name="TypeLabel"/>
         <ComboBox HorizontalAlignment="Left" Margin="160,80,0,0" VerticalAlignment="Top" Width="120" Name="TypeBox"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="103,116,0,0" VerticalAlignment="Top" Name="NameLabel"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="160,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="15" Name="NameField"/>
         <Label Content="Unit" HorizontalAlignment="Left" Margin="113,157,0,0" VerticalAlignment="Top" Name="UnitLabel"/>
         <ComboBox HorizontalAlignment="Left" Margin="160,161,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.844,-0.779" Name="UnitBox"/>
         <Label Content="Language" HorizontalAlignment="Left" Margin="88,196,0,0" VerticalAlignment="Top" x:Name="LanguageLabel"/>
