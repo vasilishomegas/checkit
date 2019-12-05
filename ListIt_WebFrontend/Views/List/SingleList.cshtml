@@ -76,79 +76,49 @@
         <ul class="list-group" id="itemsList">
 
 
-            <!-- FOREACH LI LIST ITEM -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-md-8 d-flex justify-content-between check-toggle">
-                        <div class="form-text">
-                            @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = "1" })
-                            <label for="checkbox" class="item1">
-                                Apple <!-- INSERT ITEM NAME HERE -->
-                            </label>
-                        </div>
-                        <div class="form-text">
-                            <label for="checkbox" class="item1">
-                                5pc.
-                            </label>
-                        </div>
-                        <div class="form-text">
-                            <label for="checkbox" class="item1">
-                                2 dkk/pc.
-                            </label>
-                        </div>
-                    </div>
-                    @if (Model.ListAccessTypeId == 1 || Model.ListAccessTypeId == 4)
-                    {
-                        <div class="col-md-4 d-flex justify-content-end">
-                            <span class="btn-group d-flex justify-content-end">
-                                <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                                <button class="btn" type="button" id="deleteItem">
-                                    <i class="fa fa-close"></i>
-                                </button>
-                            </span>
-                        </div>
-                    }
+            @foreach (var entry in Model.ListEntries)
+            {
+                var identifier = "item" + entry.ProductId;
 
-                </div>
-            </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-8 d-flex justify-content-between check-toggle">
+                            <div class="form-text">
+                                @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = entry.ProductId })
+                                <label for="checkbox" class="@identifier">
+                                    @entry.Name <!-- INSERT ITEM NAME HERE -->
+                                </label>
+                            </div>
+                            <div class="form-text">
+                                <label for="checkbox" class="@identifier">
+                                    @entry.Quantity pc.
+                                    <!-- TODO: get UnitTypeName -->
+                                </label>
+                            </div>
+                            <div class="form-text">
+                                <label for="checkbox" class="@identifier">
+                                    @entry.Price dkk/pc.
+                                    <!-- TODO: get CurrencyName -->
+                                </label>
+                            </div>
+                        </div>
+                        @if (Model.ListAccessTypeId == 1 || Model.ListAccessTypeId == 4)
+                        {
+                            <div class="col-md-4 d-flex justify-content-end">
+                                <span class="btn-group d-flex justify-content-end">
+                                    <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <button class="btn" type="button" id="deleteItem">
+                                        <i class="fa fa-close"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        }
 
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-md-8 d-flex justify-content-between check-toggle" id="item2">
-                        <div class="form-text">
-                            @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = "2" })
-                            <label for="checkbox" class="item2">
-                                Banana <!-- INSERT ITEM NAME HERE -->
-                            </label>
-                        </div>
-                        <div class="form-text">
-                            <label for="checkbox" class="item2">
-                                5pc.
-                            </label>
-                        </div>
-                        <div class="form-text">
-                            <label for="checkbox" class="item2">
-                                2 dkk/pc.
-                            </label>
-                        </div>
                     </div>
-                    @if (Model.ListAccessTypeId == 1 || Model.ListAccessTypeId == 4)
-                    {
-                        <div class="col-md-4 d-flex justify-content-end">
-                            <span class="btn-group d-flex justify-content-end">
-                                <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                                <button class="btn" type="button" id="deleteItem">
-                                    <i class="fa fa-close"></i>
-                                </button>
-                            </span>
-                        </div>
-                    }
-                </div>
-            </li>
+                </li>
+            }
 
         </ul>
 

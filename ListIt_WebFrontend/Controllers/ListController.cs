@@ -71,7 +71,11 @@ namespace ListIt_WebFrontend.Controllers
 
                         ProductService productService = new ProductService();
                         list.ListEntries = productService.GetEntriesAsProducts(list.ShoppingList_Id, langId);
-                                               
+
+                        if (list.ListEntries.Count() == 0)
+                        {
+                            ViewBag.Message = "You don't have any entries yet. Start creating your entries now!";
+                        }
 
                         UnitTypeService unitTypeService = new UnitTypeService();
                         list.UnitTypesListId = 1; //default value
