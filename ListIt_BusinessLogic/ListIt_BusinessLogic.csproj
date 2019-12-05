@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\ChainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,7 +53,7 @@
     <Compile Include="Services\Generics\Service.cs" />
     <Compile Include="Services\LanguageService.cs" />
     <Compile Include="Services\ProductService.cs" />
-	<Compile Include="Services\ProductTypeService.cs" />
+    <Compile Include="Services\ProductTypeService.cs" />
     <Compile Include="Services\ShopApiService.cs" />
     <Compile Include="Services\ShoppingListEntryService.cs" />
     <Compile Include="Services\ShoppingListService.cs" />
