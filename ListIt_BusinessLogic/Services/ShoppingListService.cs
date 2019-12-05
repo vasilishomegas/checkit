@@ -68,7 +68,7 @@ namespace ListIt_BusinessLogic.Services
                 Id = dto.Id,
                 Name = dto.Name,
                 Path = dto.Path,
-                Timestamp = dbList.Timestamp,
+                Timestamp = DateTime.Now,
                 ChosenSorting_Id = dto.ChosenSortingId
             });
         }

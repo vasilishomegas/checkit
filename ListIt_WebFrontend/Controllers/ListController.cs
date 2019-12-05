@@ -245,8 +245,8 @@ namespace ListIt_WebFrontend.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateItem(FormCollection collection)
         {
-            //try
-            //{
+            try
+            {
                 var name = collection["Name"];
                 var reusable = collection["UserProduct"];
                 var price = decimal.Parse(collection["Price"]);
@@ -297,16 +297,23 @@ namespace ListIt_WebFrontend.Controllers
 
                 //TODO: add logic to add default products to list
 
+
+                //Update ShoppingList to update Timestamp:
+                ShoppingListDto shoppingList = new ShoppingListDto();
+                shoppingList.Id = listId;
+                ShoppingListService listService = new ShoppingListService();
+                listService.Update(shoppingList);
+
                 TempData["SuccessMessage"] = "Successfully created a new item";
                 return RedirectToAction("SingleList", new { @id = listId});
-            //}
-            //catch
-            //{
-            //    TempData["ErrorMessage"] = "There was an error while creating a new item";
-            //    return Redirect(Request.UrlReferrer.ToString());
-            //}
-
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "There was an error while creating a new item";
+                return Redirect(Request.UrlReferrer.ToString());
         }
+
+}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
