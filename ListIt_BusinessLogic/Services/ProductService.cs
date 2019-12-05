@@ -19,18 +19,23 @@ namespace ListIt_BusinessLogic.Services
         {
             _prodRepository = (ProductRepository)_repository;
         }
+		
+        public void Create(DefaultProductDto dto)
+        {
+            _prodRepository.Create(StaticDtoToDB(dto));
+        }
 
         public void Create(UserProductDto dto)
         {
             _prodRepository.Create(StaticDtoToDB(dto));
         }
-
-        public void Update(UserProductDto dto)
+		
+		public void Update(UserProductDto dto)
         {
             _prodRepository.Update(ConvertDtoToDB(dto));
         }
-
-        public int GetUserProductId(int productId)
+		
+		 public int GetUserProductId(int productId)
         {
             var userProduct =  _prodRepository.GetUserProduct(productId);
             return userProduct.Id;
@@ -46,13 +51,13 @@ namespace ListIt_BusinessLogic.Services
             ShoppingListEntryRepository entryRepository = new ShoppingListEntryRepository();
             var entriesList = entryRepository.GetEntriesByListId(listId);
 
-            foreach(ShoppingListEntry entry in entriesList)
+            foreach (ShoppingListEntry entry in entriesList)
             {
                 //2. get Products
                 var product = _prodRepository.Get(entry.Product_Id);
 
                 //3. get UserProduct
-                if(product.ProductType_Id == 3 || product.ProductType_Id == 4) //UserProducts
+                if (product.ProductType_Id == 3 || product.ProductType_Id == 4) //UserProducts
                 {
                     var userProduct = _prodRepository.GetUserProduct(entry.Product_Id);
 
@@ -60,7 +65,7 @@ namespace ListIt_BusinessLogic.Services
                     var productDto = ConvertUserProductDBToDto(product, userProduct, entry);
                     productDtoList.Add(productDto);
                 }
-                else if(product.ProductType_Id == 1) //DefaultProduct
+                else if (product.ProductType_Id == 1) //DefaultProduct
                 {
                     var defaultProduct = _prodRepository.GetDefaultProduct(entry.Product_Id);
                     var translation = _prodRepository.GetProductTranslation(langId, entry.Product_Id);
@@ -69,7 +74,7 @@ namespace ListIt_BusinessLogic.Services
                     var productDto = ConvertDefaultProductDBToDto(product, defaultProduct, entry, translation);
                     productDtoList.Add(productDto);
                 }
-                else if(product.ProductType_Id == 2) //ApiProduct
+                else if (product.ProductType_Id == 2) //ApiProduct
                 {
                     var apiProduct = _prodRepository.GetApiProduct(entry.Product_Id);
                     var translation = _prodRepository.GetProductTranslation(langId, entry.Product_Id);
@@ -77,14 +82,12 @@ namespace ListIt_BusinessLogic.Services
                     //4. Create ProductDto and add to list
                     var productDto = ConvertApiProductDBToDto(product, apiProduct, entry, translation);
                     productDtoList.Add(productDto);
-                }               
-                
+                }
             }
-
             return productDtoList;
         }
-
-        public ProductDto Get(int langId, int id)
+		
+		public ProductDto Get(int langId, int id)
         {
             var product = _repository.Get(id);
             var translation = _prodRepository.GetProductTranslation(langId, id);
@@ -101,7 +104,7 @@ namespace ListIt_BusinessLogic.Services
 
             return productDto;
         }
-
+		
         protected ProductDto ConvertUserProductDBToDto(Product entity, UserProduct userProduct, ShoppingListEntry entry)
         {
             return StaticDBToDto(entity, userProduct, entry);
@@ -111,11 +114,21 @@ namespace ListIt_BusinessLogic.Services
         {
             return StaticDBToDto(entity, defaultProduct, entry, translation);
         }
+		
         protected ProductDto ConvertApiProductDBToDto(Product entity, ApiProduct apiProduct, ShoppingListEntry entry, TranslationOfProduct translation)
         {
             return StaticDBToDto(entity, apiProduct, entry, translation);
         }
 
+        protected DefaultProductDto ConvertDBToDto(DefaultProduct entity)
+        {
+            return StaticDBToDto(entity);
+        }
+
+        protected DefaultProduct ConvertDtoToDB(DefaultProductDto dto)
+        {
+            return StaticDtoToDB(dto);
+        }
 
         protected override ProductDto ConvertDBToDto(Product entity)
         {
@@ -126,10 +139,38 @@ namespace ListIt_BusinessLogic.Services
         {
             return StaticDtoToDB(dto);
         }
-
-        protected UserProduct ConvertDtoToDB(UserProductDto dto)
+		
+		protected UserProduct ConvertDtoToDB(UserProductDto dto)
         {
             return StaticDtoToDB(dto);
+        }
+
+        public static DefaultProduct StaticDtoToDB(DefaultProductDto dto)
+        {
+            return new DefaultProduct
+            {
+                Product_Id = dto.ProductTypeId,
+                //Category_Id = dto.Category_Id,
+                Currency_Id = dto.Currency_Id,
+                UnitType_Id = dto.Unit_Id,
+                //Name = dto.Name,
+                Price = dto.Price
+            };
+        }
+
+        public static DefaultProductDto StaticDBToDto(DefaultProduct defaultProduct)
+        {
+            return new DefaultProductDto
+            {
+                Id = defaultProduct.Id,
+                //Name = defaultProduct.Name,
+                Currency_Id = defaultProduct.Currency_Id,
+                Unit_Id = defaultProduct.UnitType_Id,
+                Price = defaultProduct.Price,
+                //Category_Id = defaultProduct.Category_Id,
+                //ProductTypeId = from ProductTable
+                ProductId = (int)defaultProduct.Product_Id
+            };
         }
 
         public static UserProduct StaticDtoToDB(UserProductDto dto)
@@ -148,7 +189,6 @@ namespace ListIt_BusinessLogic.Services
 
         public static UserProductDto StaticDBToDto(UserProduct userProduct)
         {    
-
             return new UserProductDto
             {
                 Id = userProduct.Id,
@@ -157,7 +197,7 @@ namespace ListIt_BusinessLogic.Services
                 Unit_Id = (int)userProduct.UnitType_Id,
                 //Quantity = from ProductTable
                 Price = (int)userProduct.Price,
-                Category_Id = (int)userProduct.Category_Id,
+                Category_Id = userProduct.Category_Id,
                 User_Id = userProduct.User_Id,
                 //ProductTypeId = from ProductTable
             };
@@ -228,6 +268,6 @@ namespace ListIt_BusinessLogic.Services
                 ProductId = product.Id,
                 //Category_Id = defaultProduct.Category_Id
             };
-        }
+        }   
     }
 }
