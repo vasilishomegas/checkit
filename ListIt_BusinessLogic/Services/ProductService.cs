@@ -120,6 +120,67 @@ namespace ListIt_BusinessLogic.Services
             return StaticDBToDto(entity, apiProduct, entry, translation);
         }
 
+        //Getting all shoppinglistentries and converting to ProductDto
+        public IList<ProductDto> GetEntriesAsProducts(int listId, int langId)
+        {
+            //need to get Product, ShoppingListEntry and UserProduct for each entry
+            List<ProductDto> productDtoList = new List<ProductDto>();
+
+            //1. get ShoppingListEntries
+            ShoppingListEntryRepository entryRepository = new ShoppingListEntryRepository();
+            var entriesList = entryRepository.GetEntriesByListId(listId);
+
+            foreach (ShoppingListEntry entry in entriesList)
+            {
+                //2. get Products
+                var product = _prodRepository.Get(entry.Product_Id);
+
+                //3. get UserProduct
+                if (product.ProductType_Id == 3 || product.ProductType_Id == 4) //UserProducts
+                {
+                    var userProduct = _prodRepository.GetUserProduct(entry.Product_Id);
+
+                    //4. Create ProductDto and add to list
+                    var productDto = ConvertUserProductDBToDto(product, userProduct, entry);
+                    productDtoList.Add(productDto);
+                }
+                else if (product.ProductType_Id == 1) //DefaultProduct
+                {
+                    var defaultProduct = _prodRepository.GetDefaultProduct(entry.Product_Id);
+                    var translation = _prodRepository.GetProductTranslation(langId, entry.Product_Id);
+
+                    //4. Create ProductDto and add to list
+                    var productDto = ConvertDefaultProductDBToDto(product, defaultProduct, entry, translation);
+                    productDtoList.Add(productDto);
+                }
+                else if (product.ProductType_Id == 2) //ApiProduct
+                {
+                    var apiProduct = _prodRepository.GetApiProduct(entry.Product_Id);
+                    var translation = _prodRepository.GetProductTranslation(langId, entry.Product_Id);
+
+                    //4. Create ProductDto and add to list
+                    var productDto = ConvertApiProductDBToDto(product, apiProduct, entry, translation);
+                    productDtoList.Add(productDto);
+                }
+
+            }
+
+            return productDtoList;
+        }
+        protected ProductDto ConvertUserProductDBToDto(Product entity, UserProduct userProduct, ShoppingListEntry entry)
+        {
+            return StaticDBToDto(entity, userProduct, entry);
+        }
+
+        protected ProductDto ConvertDefaultProductDBToDto(Product entity, DefaultProduct defaultProduct, ShoppingListEntry entry, TranslationOfProduct translation)
+        {
+            return StaticDBToDto(entity, defaultProduct, entry, translation);
+        }
+        protected ProductDto ConvertApiProductDBToDto(Product entity, ApiProduct apiProduct, ShoppingListEntry entry, TranslationOfProduct translation)
+        {
+            return StaticDBToDto(entity, apiProduct, entry, translation);
+        }
+
         protected DefaultProductDto ConvertDBToDto(DefaultProduct entity)
         {
             return StaticDBToDto(entity);
