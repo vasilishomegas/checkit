@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ListIt_BusinessLogic.Services;
+using ListIt_DomainModel.DTO;
 
 namespace ListIt_WindowsBackend
 {
@@ -28,30 +29,39 @@ namespace ListIt_WindowsBackend
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            float price;
-            string error = "";
-            if (NameField.Text == "")
-            {
-                error += "Fill in a product name\n";
-                
-            }
-            if (PriceField.Text == "")
-            {
-                error += "Fill in a price\n";
-                
-            }
-            if (!float.TryParse(PriceField.Text, out price))
-            {
-                error += "Price is not a number";
-            }
-            if (error != "") MessageBox.Show(error);
             // TODO:
-            // Validate input
-            // If not gud, tell user
+            // -- Validate input
+            // -- If not gud, tell user
             // Send to DB
             // Verify response
             // Inform user of response
             // Clear form for next product
+
+            float price;
+            string error = "";
+            if (NameField.Text == "")
+                error += "Fill in a product name\n";
+            if (PriceField.Text == "")
+                error += "Fill in a price\n";
+            if (!float.TryParse(PriceField.Text, out price))
+                error += "Price is not a number";
+            if (error != "") MessageBox.Show(error);
+            else
+            {
+                ProductService productService = new ProductService();
+                //if (TypeBox.SelectedItem == 1)
+                productService.Create(new ProductDto
+                {
+                    ProductTypeId = (int)TypeBox.SelectedValue,
+                    Name = NameField.Text,
+                    Currency_Id = (int)CurrencyBox.SelectedValue,
+                    Unit_Id = (int)UnitBox.SelectedValue,
+                    Price = (decimal)price
+                });
+                // Create Product
+                // Create linked DefaultProduct
+                //productService.Create(new DefaultProductDto { })
+            }
         }
 
         private void Load_Data()
