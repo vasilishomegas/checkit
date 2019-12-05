@@ -109,8 +109,8 @@
                         @if (Model.ListAccessTypeId == 1 || Model.ListAccessTypeId == 4)
                         {
                             <div class="col-md-4 d-flex justify-content-end">
-                                <span class="btn-group d-flex justify-content-end">
-                                    <button class="btn" type="button" id="editItem" data-toggle="modal" data-target="#modalEditItem">
+                                <span class="btn-group d-flex justify-content-end">                                    
+                                    <button class="btn" type="button" id="editItem" onclick="location.href='@Url.Action("Item", "List", new { @id = entry.ProductId, @listId = Model.ShoppingList_Id })'">
                                         <i class="fa fa-pencil"></i>
                                     </button>
                                     <button class="btn" type="button" id="deleteItem">
@@ -153,7 +153,6 @@
                         @Html.EditorFor(model => model.ListName, new { htmlAttributes = new { @class = "form-control",  id = "rename", type = "text", value = Model.ListName, placeholder = "Groceries", required = "required" } })
                         
                     </div>
-                    @*@Html.Editor("listId", new { type = "hidden", id = "listId" })*@
                     @Html.HiddenFor(model => model.ShoppingList_Id, htmlAttributes: new { value = Model.ShoppingList_Id})
 
                     <button type="button" class="btn btn-outline-dark" data-dismiss="modal">@Lang.close</button>
@@ -224,7 +223,6 @@
                         </div>
                     </div>
 
-                    @*@Html.EditorFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id, type = "hidden" } })*@
                     @Html.HiddenFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id } })
 
                     <div class="form-row">
@@ -249,86 +247,6 @@
     </div>
 </div>
 
-<!-- Modal EDIT ITEM -->
-<div class="modal fade" id="modalEditItem" tabindex="-1" role="dialog" aria-labelledby="modalEditTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalEditTitle">Edit Item</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @using (Html.BeginForm("EditItem", "List", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label for="name">@Lang.itemName *</label>
-                            <input type="text" class="form-control" id="name" placeholder=@Lang.itemName required>
-                        </div>
-                        <div class="form-group col">
-                            <label for="price">@Lang.price</label>
-                            <input type="number" class="form-control" id="price" placeholder="Insert price">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col range-slider">
-                            <label for="quantity">@Lang.quantity </label><output id="rangevalue"></output>
-                            <input type="text" class="form-control" value="1" id="quantity">
-                        </div>
-                        <div class="form-group col">
-                            <label for="unit">@Lang.unit</label>
-                            <select id="unit" class="custom-select custom-select-sm">
-                                <option value="" selected>pc</option>
-                                <option value="">lt</option>
-                                <option value="">g</option>
-                                <option value="">kg</option>
-                                <option value="">pkg</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label for="category">@Lang.category</label>
-                            <select id="category" class="custom-select custom-select-sm">
-                                <option selected>Choose a category</option>
-                                <option value="">Vegetables</option>
-                                <option value="">Fruits</option>
-                                <option value="">Milk products</option>
-                                <option value="">...</option>
-                            </select>
-                        </div>
-                        <div class="form-group col">
-                            <label for="createCategory">@Lang.createCat</label>
-                            <input type="text" class="form-control" id="createCategory" placeholder="MyCategory">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col d-flex">
-                            <button type="button" onclick="" class="btn btn-dark">
-                                translate item
-                            </button>
-                        </div>
-                        <div class="form-group col d-flex justify-content-end">
-                            <button class="btn" type="reset">
-                                <i class="fa fa-close fa-lg"></i>
-                            </button>
-                            <button class="btn" type="submit">
-                                <i class="fa fa-check-circle fa-lg"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Modal DELETE LIST -->
 <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteTitle" aria-hidden="true">

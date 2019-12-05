@@ -25,6 +25,17 @@ namespace ListIt_BusinessLogic.Services
             _prodRepository.Create(StaticDtoToDB(dto));
         }
 
+        public void Update(UserProductDto dto)
+        {
+            _prodRepository.Update(ConvertDtoToDB(dto));
+        }
+
+        public int GetUserProductId(int productId)
+        {
+            var userProduct =  _prodRepository.GetUserProduct(productId);
+            return userProduct.Id;
+        }
+
         //Getting all shoppinglistentries and converting to ProductDto
         public IList<ProductDto> GetEntriesAsProducts(int listId, int langId)
         {
@@ -73,7 +84,23 @@ namespace ListIt_BusinessLogic.Services
             return productDtoList;
         }
 
+        public ProductDto Get(int langId, int id)
+        {
+            var product = _repository.Get(id);
+            var translation = _prodRepository.GetProductTranslation(langId, id);
 
+            ProductDto productDto = new ProductDto();
+            ShoppingListEntryRepository entryRepository = new ShoppingListEntryRepository();
+            var entry = entryRepository.GetByProductId(id);
+
+            if (product.ProductType_Id == 3 || product.ProductType_Id == 4) //UserProducts
+            {
+                var userProduct = _prodRepository.GetUserProduct(id);
+                productDto = ConvertUserProductDBToDto(product, userProduct, entry);
+            }
+
+            return productDto;
+        }
 
         protected ProductDto ConvertUserProductDBToDto(Product entity, UserProduct userProduct, ShoppingListEntry entry)
         {
@@ -96,6 +123,11 @@ namespace ListIt_BusinessLogic.Services
         }
 
         protected override Product ConvertDtoToDB(ProductDto dto)
+        {
+            return StaticDtoToDB(dto);
+        }
+
+        protected UserProduct ConvertDtoToDB(UserProductDto dto)
         {
             return StaticDtoToDB(dto);
         }

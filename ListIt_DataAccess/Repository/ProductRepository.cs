@@ -165,5 +165,33 @@ namespace ListIt_DataAccess.Repository
                 }
             }
         }
+
+        public void Update(UserProduct entity)
+        {
+            using (var context = new ListItContext())
+            {
+                context.Set<UserProduct>().Attach(entity);
+                context.Entry(entity).State = EntityState.Modified;
+
+                bool saveFailed;
+
+                do
+                {
+                    saveFailed = false;
+
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException e)
+                    {
+                        saveFailed = true;
+                        e.Entries.Single().Reload();
+                        //throw new KeyNotFoundException(e.Message, e.InnerException);
+                    }
+                } while (saveFailed);
+                
+            }
+        }
     }
 }

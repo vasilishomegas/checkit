@@ -32,8 +32,14 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
-      
-
+        public ShoppingListEntry GetByProductId(int productId)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.ShoppingListEntries
+                    .SingleOrDefault(x => x.Product_Id == productId);
+            }
+        }
 
         
     }

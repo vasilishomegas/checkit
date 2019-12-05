@@ -118,6 +118,80 @@ namespace ListIt_WebFrontend.Controllers
             }
         }
 
+        //GET List/Item -> EditItemView
+        public ActionResult Item(int? id, int? listId)
+        {
+            if (Session["UserId"] != null)
+            {
+                ViewBag.Message = TempData["SuccessMessage"];
+                ViewBag.Error = TempData["ErrorMessage"];
+
+                ItemsVM item = new ItemsVM();
+                item.ListId = (int)listId;
+                item.ProductId = (int)id;
+
+                LanguageService languageService = new LanguageService();
+                var langId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;
+
+                ProductService productService = new ProductService();
+                var entry = productService.Get(langId, (int)id); //Gets productDto by langId(for translation if default or api product) and ProductId
+                
+                if(entry == null)
+                {
+                    TempData["ErrorMessage"] = "You can't edit default or api products.";
+                    return Redirect(Request.UrlReferrer.ToString());
+                }
+
+                item.Id = entry.Id;
+                item.Name = entry.Name;
+                item.Price = entry.Price;
+                item.Quantity = entry.Quantity;
+                item.Unit_Id = entry.Unit_Id;
+                item.Currency_Id = entry.Currency_Id;
+                item.Category_Id = entry.Category_Id;
+                item.ProductTypeId = entry.ProductTypeId;                
+
+                UnitTypeService unitTypeService = new UnitTypeService();
+                item.UnitTypesListId = item.Unit_Id; //saved value from db entry
+                item.UnitTypesList = (from x in unitTypeService.GetUnitTypesByLanguage(langId)
+                                      select new SelectListItem()
+                                      {
+                                          Text = x.Name,
+                                          Value = x.Id.ToString()
+                                      }).ToList();
+
+                CurrencyService currencyService = new CurrencyService();
+                item.CurrencyListId = item.Currency_Id; //saved value from db entry
+                item.CurrencyList = (from x in currencyService.GetAll()
+                                     select new SelectListItem()
+                                     {
+                                         Text = x.Code,
+                                         Value = x.Id.ToString()
+                                     }).ToList();
+
+                CategoryService categoryService = new CategoryService();
+                item.CategoryListId = (int)item.Category_Id; //saved value from db entry
+                item.CategoryList = (from x in categoryService.GetCategories(langId, int.Parse(Session["UserId"].ToString()))
+                                     select new SelectListItem()
+                                     {
+                                         Text = x.Name,
+                                         Value = x.Id.ToString()
+                                     }).ToList();
+
+
+                return View(item);
+            }
+            else if(id == 0 || listId == 0)
+            {
+                TempData["ErrorMessage"] = "There is no item of a specific list selected to edit.";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+        }
+
         // GET: User/CreateList
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -221,17 +295,80 @@ namespace ListIt_WebFrontend.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditItem(FormCollection collection)
         {
-            try
-            {
-                // TODO: Add update logic here
-                // Create a new item if no ID retrieved (edit & create in same form)
+            //try
+            //{
+                var name = collection["Name"];
+                var reusable = collection["UserProduct"];
+                var price = decimal.Parse(collection["Price"]);
+                var listId = int.Parse(collection["ListId"]);
+                var qty = int.Parse(collection["Quantity"]);
+                var unitTypeId = int.Parse(collection["UnitTypesListId"]); 
+                var catId = int.Parse(collection["CategoryListId"]);
+                var userCat = collection["UserCategory"];
+                var currencyId = int.Parse(collection["CurrencyListId"]);
+                var prodType = int.Parse(collection["ProductTypeId"]);
+                var prodId = int.Parse(collection["ProductId"]);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                if (reusable == "false")
+                {
+                    prodType = 4;   //4 = UserListProduct = non reusable
+                }
+                else
+                {
+                    prodType = 3;
+                }
+
+                /* UPDATING ShoppingListEntry */
+
+                ShoppingListEntryService entryService = new ShoppingListEntryService();
+                ShoppingListEntryDto entry = new ShoppingListEntryDto();
+                entry.Id = entryService.GetEntryId(prodId);
+                entry.Quantity = qty;
+                entry.ProductTypeId = prodType;
+                entry.ShoppingList_Id = listId;
+                entry.Product_Id = prodId;
+                entry.State_Id = 2; //Default is unchecked
+
+                
+                entryService.Update(entry); //updates ShoppingListEntry
+
+                /* UPDATING UserProduct */
+
+                ProductService productService = new ProductService();
+                UserProductDto userProduct = new UserProductDto();
+                userProduct.Id = productService.GetUserProductId(prodId);
+                userProduct.ProductId = prodId;
+                userProduct.Name = name;
+                userProduct.Category_Id = catId;
+                userProduct.User_Id = int.Parse(Session["UserId"].ToString());
+                userProduct.Unit_Id = unitTypeId;
+                userProduct.Price = price;
+                userProduct.Currency_Id = currencyId;
+
+                productService.Update(userProduct);
+
+                /* UPDATING Product -> for new Timestamp*/
+
+                ProductDto productDto = new ProductDto();
+                productDto.Id = prodId;
+                productDto.ProductTypeId = prodType;
+                productService.Update(productDto);
+
+                /* UPDATING ShoppingList -> for new Timestamp: */
+
+                ShoppingListDto shoppingList = new ShoppingListDto();
+                shoppingList.Id = listId;
+                ShoppingListService listService = new ShoppingListService();
+                listService.Update(shoppingList);
+
+                TempData["SuccessMessage"] = "Successfully created a new item";
+                return RedirectToAction("SingleList", new { @id = listId });
+            //}
+            //catch
+            //{
+            //    TempData["ErrorMessage"] = "There was an error while editing the item";
+            //    return Redirect(Request.UrlReferrer.ToString());
+            //}
         }
 
         // GET: List

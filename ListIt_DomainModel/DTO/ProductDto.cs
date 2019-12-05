@@ -8,8 +8,9 @@ namespace ListIt_DomainModel.DTO
 {
     public class ProductDto : IDto
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
         public int ProductTypeId { get; set; }
+
         
 
         //Generic Values

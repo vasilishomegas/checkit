@@ -20,7 +20,10 @@ namespace ListIt_BusinessLogic.Services
             _entryRepository = (ShoppingListEntryRepository)_repository;
         }
 
-        //If a new Entry is created, the update function of the SortingService must be called as well
+        public int GetEntryId(int productId)
+        {
+            return _entryRepository.GetByProductId(productId).Id;
+        }
 
         public new int Create(ShoppingListEntryDto dto)
         {
@@ -50,6 +53,7 @@ namespace ListIt_BusinessLogic.Services
 
             return prodId;
         }
+               
 
         public void Create(UserProductDto userProduct)
         {
@@ -80,9 +84,6 @@ namespace ListIt_BusinessLogic.Services
 
         public static ShoppingListEntry StaticDtoToDB(ShoppingListEntryDto entryDto)
         {
-            // FOR EACH Entry THAT IS CREATED, A UserProduct NEEDS TO BE CREATED AS WELL
-            //StaticDtoToProductDB(entryDto);
-
             return new ShoppingListEntry
             {
                 Id = entryDto.Id,
