@@ -1,5 +1,6 @@
 ﻿using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Converter;
 using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters

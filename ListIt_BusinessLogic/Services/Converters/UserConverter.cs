@@ -1,16 +1,18 @@
 ﻿using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Converter;
 using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class UserConverter : IDtoDbConverter<User, UserDto>
+    public class UserConverter : IDtoDbConverter<User, UserDto>, IUserConverter
     {
         private readonly LanguageConverter _languageConverter = new LanguageConverter();
         private readonly CountryConverter _countryConverter = new CountryConverter();
 
         public UserDto ConvertDBToDto(User user)
         {
+            if (user == null) return null;
             return new UserDto
             {
                 Language = _languageConverter.ConvertDBToDto(user.Language),
@@ -25,6 +27,7 @@ namespace ListIt_BusinessLogic.Services.Converters
 
         public User ConvertDtoToDB(UserDto userDto)
         {
+            if (userDto == null) return null;
             return new User
             {
                 Language = _languageConverter.ConvertDtoToDB(userDto.Language),

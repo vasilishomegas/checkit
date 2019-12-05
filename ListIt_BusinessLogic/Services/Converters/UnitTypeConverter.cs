@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Converter;
 using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
@@ -13,6 +14,7 @@ namespace ListIt_BusinessLogic.Services.Converters
     {
         public UnitTypeDto ConvertDBToDto(UnitType unit)
         {
+            if (unit == null) return null;
             return new UnitTypeDto
             {
                 Id = unit.Id

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Converter;
 using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
@@ -14,6 +15,7 @@ namespace ListIt_BusinessLogic.Services.Converters
         private readonly ShopApiConverter _shopApiConverter = new ShopApiConverter();
         public ChainDto ConvertDBToDto(Chain chain)
         {
+            if (chain == null) return null;
             return new ChainDto
             {
                 Id = chain.Id,
@@ -25,6 +27,8 @@ namespace ListIt_BusinessLogic.Services.Converters
 
         public Chain ConvertDtoToDB(ChainDto chainDto)
         {
+            if (chainDto == null) return null;
+
             int? shopApiId = null;
             ShopApiDto shopApiDto = null;
 
