@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Generics\ServiceTests.cs" />
+    <Compile Include="Services\Generics\UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -84,9 +85,17 @@
       <Project>{e2d539f0-dbb0-4235-bd0f-9b048d7ff8bb}</Project>
       <Name>ListIt_BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">
+      <Project>{1FC38C28-DF7B-403E-A99E-D4AF6C044A32}</Project>
+      <Name>ListIt_DataAccessModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ListIt_DataAccess\ListIt_DataAccess.csproj">
       <Project>{6d072a3b-84d4-4b44-a13c-40a0d4c63062}</Project>
       <Name>ListIt_DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
+      <Project>{6BE169C0-8627-42CF-A723-9B545CFEF07B}</Project>
+      <Name>ListIt_DomainModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
