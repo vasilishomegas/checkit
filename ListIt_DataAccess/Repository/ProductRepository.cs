@@ -20,6 +20,34 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
+        public DefaultProduct GetDefaultProduct(int id)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.DefaultProducts
+                    .SingleOrDefault(x => x.Product_Id == id);
+            }
+        }
+
+        public ApiProduct GetApiProduct(int id)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.ApiProducts
+                    .SingleOrDefault(x => x.Product_Id == id);
+            }
+        }
+
+        public TranslationOfProduct GetProductTranslation(int langId, int productId)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.TranslationOfProducts
+                    .Where(x => x.Language_Id == langId)
+                    .SingleOrDefault(x => x.Product_Id == productId);
+            }
+        }
+
         public int CreateProduct(Product product)
         {
             using (var context = new ListItContext())

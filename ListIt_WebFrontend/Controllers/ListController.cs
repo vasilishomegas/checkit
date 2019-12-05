@@ -66,11 +66,12 @@ namespace ListIt_WebFrontend.Controllers
                         list.ListName = listObj.Name;
                         list.ListAccessTypeId = listObj.ListAccessTypeId;
 
-                        ProductService productService = new ProductService();
-                        list.ListEntries = productService.GetEntriesAsProducts(list.ShoppingList_Id);
-
                         LanguageService languageService = new LanguageService();
                         var langId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;
+
+                        ProductService productService = new ProductService();
+                        list.ListEntries = productService.GetEntriesAsProducts(list.ShoppingList_Id, langId);
+                                               
 
                         UnitTypeService unitTypeService = new UnitTypeService();
                         list.UnitTypesListId = 1; //default value

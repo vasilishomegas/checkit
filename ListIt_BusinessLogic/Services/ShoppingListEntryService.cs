@@ -65,22 +65,7 @@ namespace ListIt_BusinessLogic.Services
                 Name = userProduct.Name,
                 Price = userProduct.Price
             });
-        }
-
-        public IList<ShoppingListEntryDto> GetEntriesByListId(int listId)
-        {
-            ShoppingListEntryRepository repo = new ShoppingListEntryRepository();
-            var entryList = repo.GetEntriesByListId(listId);
-            List<ShoppingListEntryDto> entryDtoList = new List<ShoppingListEntryDto>();
-
-
-            foreach (ShoppingListEntry entry in entryList)
-            {
-                entryDtoList.Add(ConvertDBToDto(entry));
-            }
-
-            return entryDtoList;
-        }
+        }       
 
 
         protected override ShoppingListEntryDto ConvertDBToDto(ShoppingListEntry entity)
