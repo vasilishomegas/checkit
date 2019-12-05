@@ -26,21 +26,27 @@
                 <div class="">
                     <h1 class="text-center pageheading">@ViewBag.Title</h1>
 
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <p class="text-center mb-0">
+                                @ViewBag.Message
+                            </p>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
                     @if (ViewBag.Error != null)
                     {
-                        <div class="alert alert-danger" role="alert">
-                            <p>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <p class="text-center mb-0">
                                 @ViewBag.Error
                             </p>
                         </div>
-                    }
-                    @if (ViewBag.Message != null)
-                    {
-                        <div class="alert alert-success" role="alert">
-                            <p>
-                                @ViewBag.Message
-                            </p>
-                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     }
 
                     <div class="">
@@ -52,7 +58,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Email, Lang.email, new { @class = "control-label" })
                                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "email", placeholder = "steve.smith@ucn.dk", required = "required" } })
-                                
+
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.PasswordHash, Lang.pw, htmlAttributes: new { @class = "control-label" })
@@ -64,7 +70,7 @@
                         <div class="box">
                             <p>
                                 @Html.ActionLink(Lang.forwardToRegister, "Register", "User")
-                            </p>                            
+                            </p>
                         </div>
                     </div>
                 </div>

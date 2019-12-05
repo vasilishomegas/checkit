@@ -8,44 +8,50 @@
 }
 
     <div class="container-fluid">
-            <h1 class="text-center pageheading">
-                <!-- INSERT LIST NAME HERE -->
-                @Model.ListName
-            </h1>
+        <h1 class="text-center pageheading">
+            <!-- INSERT LIST NAME HERE -->
+            @Model.ListName
+        </h1>
 
-            @if (Model.ListAccessTypeId == 1)
-            {
-                <div class="d-flex justify-content-center">
-                    <div class="btn-group">
-                        <button class="btn" type="button" data-toggle="modal" data-target="#modalRename">
-                            <i class="fa fa-pencil"></i>
-                        </button>
-                        <button class="btn" type="button" data-toggle="modal" data-target="#modalShare">
-                            <i class="fa fa-share-alt-square"></i>
-                        </button>
-                        <button class="btn" type="button" data-toggle="modal" data-target="#modalDelete">
-                            <i class="fa fa-trash-o"></i>
-                        </button>
-                    </div>
+        @if (Model.ListAccessTypeId == 1)
+        {
+            <div class="d-flex justify-content-center">
+                <div class="btn-group">
+                    <button class="btn" type="button" data-toggle="modal" data-target="#modalRename">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn" type="button" data-toggle="modal" data-target="#modalShare">
+                        <i class="fa fa-share-alt-square"></i>
+                    </button>
+                    <button class="btn" type="button" data-toggle="modal" data-target="#modalDelete">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
                 </div>
-            }
+            </div>
+        }
 
 
         @if (ViewBag.Message != null)
         {
-            <div class="alert alert-success" role="alert">
-                <p class="text-center">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <p class="text-center mb-0">
                     @ViewBag.Message
                 </p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         }
         @if (ViewBag.Error != null)
         {
-            <div class="alert alert-danger" role="alert">
-                <p class="text-center">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="text-center mb-0">
                     @ViewBag.Error
                 </p>
             </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         }
 
         <!-- HEADING -->

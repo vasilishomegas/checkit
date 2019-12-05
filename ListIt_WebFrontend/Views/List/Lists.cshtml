@@ -9,62 +9,68 @@
 
 
 
-<div class="container-fluid">
-    <h1 class="text-center pageheading">@ViewBag.Title</h1>
+    <div class="container-fluid">
+        <h1 class="text-center pageheading">@ViewBag.Title</h1>
 
-    @if (ViewBag.Message != null)
-    {
-        <div class="alert alert-success" role="alert">
-            <p class="text-center">
-                @ViewBag.Message
-            </p>
-        </div>
-    }
-    @if (ViewBag.Error != null)
-    {
-        <div class="alert alert-danger" role="alert">
-            <p class="text-center">
-                @ViewBag.Error
-            </p>
-        </div>
-    }
-
-
-    <ul class="list-group">
-
-        <!-- CREATE LI-ITEM FOR EACH LIST -->
-        @foreach (var list in Model.AllUserLists)
+        @if (ViewBag.Message != null)
         {
-           
-        <li class="list-group-item d-flex justify-content-center">
-            @if (list.ListAccessTypeId == 3)
-            {
-                @Html.ActionLink(list.Name, "SingleList", "List", new { @id = list.Id }, htmlAttributes: new { @class = "listLinksReadonly" })
-            }
-            else if (list.ListAccessTypeId == 4)
-            {
-                @Html.ActionLink(list.Name, "SingleList", "List", new { @id = list.Id }, htmlAttributes: new { @class = "listLinksWrite" })
-            }
-            else
-            {
-                @Html.ActionLink(list.Name, "SingleList", "List", new { @id = list.Id }, htmlAttributes: new { @class = "listLinks" })
-
-            }
-        </li>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <p class="text-center mb-0">
+                    @ViewBag.Message
+                </p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         }
-    </ul>
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="text-center mb-0">
+                    @ViewBag.Error
+                </p>
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        }
 
-    <div class="w-100 d-flex justify-content-center box">
-        <button class="btn align-baseline" type="button" data-toggle="modal" data-target="#modalCreateList">
-            <!-- + ADD ICON -->
-            <i class="fa fa-plus-circle fa-3x"></i>
-        </button>
+
+        <ul class="list-group">
+
+            <!-- CREATE LI-ITEM FOR EACH LIST -->
+            @foreach (var list in Model.AllUserLists)
+            {
+
+                <li class="list-group-item d-flex justify-content-center">
+                    @if (list.ListAccessTypeId == 3)
+                    {
+                        @Html.ActionLink(list.Name, "SingleList", "List", new { @id = list.Id }, htmlAttributes: new { @class = "listLinksReadonly" })
+                    }
+                    else if (list.ListAccessTypeId == 4)
+                    {
+                        @Html.ActionLink(list.Name, "SingleList", "List", new { @id = list.Id }, htmlAttributes: new { @class = "listLinksWrite" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink(list.Name, "SingleList", "List", new { @id = list.Id }, htmlAttributes: new { @class = "listLinks" })
+
+                    }
+                </li>
+            }
+        </ul>
+
+        <div class="w-100 d-flex justify-content-center box">
+            <button class="btn align-baseline" type="button" data-toggle="modal" data-target="#modalCreateList">
+                <!-- + ADD ICON -->
+                <i class="fa fa-plus-circle fa-3x"></i>
+            </button>
+        </div>
+
+
+
+
     </div>
-
-
-
-
-</div>
 
 <!-- Modal RENAME -->
 <div class="modal fade" id="modalRename" tabindex="-1" role="dialog" aria-labelledby="modalRenameTitle" aria-hidden="true">
