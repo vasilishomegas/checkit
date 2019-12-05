@@ -44,13 +44,13 @@ namespace ListIt_WindowsBackend
             if (PriceField.Text == "")
                 error += "Fill in a price\n";
             if (!float.TryParse(PriceField.Text, out price))
-                error += "Price is not a number";
+                error += "Invalid price";
             if (error != "") MessageBox.Show(error);
             else
             {
                 ProductService productService = new ProductService();
                 //if (TypeBox.SelectedItem == 1)
-                productService.Create(new ProductDto
+                productService.Create(new DefaultProductDto
                 {
                     ProductTypeId = (int)TypeBox.SelectedValue,
                     Name = NameField.Text,

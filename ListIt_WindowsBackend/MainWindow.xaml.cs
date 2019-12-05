@@ -23,8 +23,8 @@ namespace ListIt_WindowsBackend
         public MainWindow()
         {
             InitializeComponent();
-            AdminLogin adminLogin = new AdminLogin();
-            adminLogin.Show();
+            AddProduct addProduct = new AddProduct();
+            addProduct.Show();
             this.Close();
         }
     }
