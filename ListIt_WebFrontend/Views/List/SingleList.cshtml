@@ -8,30 +8,28 @@
 }
 
     <div class="container-fluid">
-
-        <ul class="nav justify-content-center align-items-center">
-            <li class="nav-item">
-                <h1 class="text-center pageheading">
-                    <!-- INSERT LIST NAME HERE -->
-                    @Model.ListName
-                </h1>
-            </li>
+            <h1 class="text-center pageheading">
+                <!-- INSERT LIST NAME HERE -->
+                @Model.ListName
+            </h1>
 
             @if (Model.ListAccessTypeId == 1)
             {
-                <li class="dropdown">
-                    <button class="btn" href="#" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-ellipsis-v fa-lg"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        @Html.ActionLink(Lang.rename, "RenameList", "List", null, htmlAttributes: new { @class = "dropdown-item", data_toggle = "modal", data_target = "#modalRename" })
-                        @Html.ActionLink("Delete List", "DeleteList", "List", null, htmlAttributes: new { @class = "dropdown-item", data_toggle = "modal", data_target = "#modalDelete" })
-                        @Html.ActionLink("ShareList", "ShareList", "List", null, htmlAttributes: new { @class = "dropdown-item", data_toggle = "modal", data_target = "#modalShare" })
+                <div class="d-flex justify-content-center">
+                    <div class="btn-group">
+                        <button class="btn" type="button" data-toggle="modal" data-target="#modalRename">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button class="btn" type="button" data-toggle="modal" data-target="#modalShare">
+                            <i class="fa fa-share-alt-square"></i>
+                        </button>
+                        <button class="btn" type="button" data-toggle="modal" data-target="#modalDelete">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
                     </div>
-                </li>
+                </div>
             }
 
-        </ul>
 
         @if (ViewBag.Message != null)
         {
