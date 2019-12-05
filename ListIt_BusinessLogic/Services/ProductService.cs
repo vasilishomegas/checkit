@@ -19,6 +19,10 @@ namespace ListIt_BusinessLogic.Services
         {
             _prodRepository = (ProductRepository)_repository;
         }
+        public void Create(DefaultProductDto dto)
+        {
+            _prodRepository.Create(StaticDtoToDB(dto));
+        }
 
         public void Create(UserProductDto dto)
         {
@@ -98,6 +102,35 @@ namespace ListIt_BusinessLogic.Services
         protected override Product ConvertDtoToDB(ProductDto dto)
         {
             return StaticDtoToDB(dto);
+        }
+
+        public static DefaultProduct StaticDtoToDB(DefaultProductDto dto)
+        {
+            return new DefaultProduct
+            {
+                Product_Id = dto.ProductTypeId,
+                //Category_Id = dto.Category_Id,
+                Currency_Id = dto.Currency_Id,
+                UnitType_Id = dto.Unit_Id,
+                //Name = dto.Name,
+                Price = dto.Price
+            };
+        }
+
+        public static DefaultProductDto StaticDBToDto(DefaultProduct defaultProduct)
+        {
+
+            return new DefaultProductDto
+            {
+                Id = defaultProduct.Id,
+                //Name = defaultProduct.Name,
+                Currency_Id = defaultProduct.Currency_Id,
+                Unit_Id = defaultProduct.UnitType_Id,
+                Price = defaultProduct.Price,
+                //Category_Id = defaultProduct.Category_Id,
+                //ProductTypeId = from ProductTable
+                ProductId = (int)defaultProduct.Product_Id
+            };
         }
 
         public static UserProduct StaticDtoToDB(UserProductDto dto)
