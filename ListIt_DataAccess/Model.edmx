@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="dmaj0918_1074524Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
         <EntityType Name="ApiProducts">
           <Key>
             <PropertyRef Name="Id" />
@@ -801,6 +808,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="dmaj0918_1074524ModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApiProducts" EntityType="Self.ApiProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Chains" EntityType="Self.Chains" Schema="dbo" store:Type="Tables" />
@@ -1015,6 +1023,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dmaj0918_1074524Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityType Name="ApiProduct">
           <Key>
             <PropertyRef Name="Id" />
@@ -1870,7 +1885,8 @@
           <End Role="Categories" Type="Self.Category" Multiplicity="*" />
           <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="dmaj0918_1074524Entity" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dmaj0918_1074524Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="ApiProducts" EntityType="Self.ApiProduct" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Chains" EntityType="Self.Chain" />
@@ -2080,7 +2096,15 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entity">
+        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ApiProducts">
             <EntityTypeMapping TypeName="dmaj0918_1074524Model.ApiProduct">
               <MappingFragment StoreEntitySet="ApiProducts">
