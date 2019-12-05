@@ -10,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ListIt_WindowsBackend
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddChain.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddChain : Window
     {
-        public MainWindow()
+        public AddChain()
         {
             InitializeComponent();
-            AddChain addChain= new AddChain();
-            addChain.Show();
-            this.Close();
         }
     }
 }

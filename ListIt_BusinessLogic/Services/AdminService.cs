@@ -10,8 +10,8 @@ using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services
 {
-    public class AdminService : Service <Admin, AdminDto>
-    {
+    //    public class AdminService : Service <Admin, AdminDto>
+    //    {
 
-    }
+    //    }
 }

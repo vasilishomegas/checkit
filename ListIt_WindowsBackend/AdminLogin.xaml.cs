@@ -37,10 +37,10 @@ namespace ListIt_WindowsBackend
             else
             {
                 AdminLogin adminLogin = new AdminLogin();
-                adminService.Create(new AdminDto
-                {
+                //adminService.Create(new AdminDto
+                //{
 
-                })
+                //});
             }
         }
     }
