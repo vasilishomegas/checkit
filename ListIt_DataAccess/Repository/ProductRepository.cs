@@ -11,6 +11,15 @@ namespace ListIt_DataAccess.Repository
 {
     public class ProductRepository : Repository<Product>
     {
+        public UserProduct GetUserProduct(int id)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.UserProducts
+                    .SingleOrDefault(x => x.Product_Id == id);
+            }
+        }
+
         public int CreateProduct(Product product)
         {
             using (var context = new ListItContext())

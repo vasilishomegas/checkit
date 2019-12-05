@@ -26,11 +26,33 @@ namespace ListIt_BusinessLogic.Services
         }
 
         //Getting all shoppinglistentries and converting to ProductDto
-        //public IList<ProductDto> GetEntriesAsProducts() 
-        //{
-        //    //need to get Product, ShoppingListEntry and UserProduct for each entry
-        //    return 
-        //}
+        public IList<ProductDto> GetEntriesAsProducts(int listId)
+        {
+            //need to get Product, ShoppingListEntry and UserProduct for each entry
+            List<ProductDto> productDtoList = new List<ProductDto>();
+
+            //1. get ShoppingListEntries
+            ShoppingListEntryService entryService = new ShoppingListEntryService();
+            var entriesList = entryService.GetEntriesByListId(listId);
+
+            foreach(ShoppingListEntryDto entry in entriesList)
+            {
+                //2. get Products
+                var product = _prodRepository.Get(entry.Product_Id);
+
+                //3. get UserProduct
+                if(product.ProductType_Id == 3 || product.ProductType_Id == 4)
+                {
+                    var userProduct = _prodRepository.GetUserProduct(entry.Product_Id);
+                }
+
+                //4. Create ProductDto and add to list
+                var productDto = ConvertDBToDto(product, userProduct:, entry);
+                productDtoList.Add(productDto);
+            }
+
+            return productDtoList;
+        }
 
 
 
