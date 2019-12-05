@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ListIt_BusinessLogic.Services;
+using ListIt_DomainModel.DTO;
 
 namespace ListIt_WindowsBackend
 {
@@ -26,7 +28,20 @@ namespace ListIt_WindowsBackend
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string error = "";
+            if (UsernameField.Text == "")
+                error += "Fill in the username.\n";
+            if (PasswordField.Password == "")
+                error += "Fill in the password.\n";
+            if (error != "") MessageBox.Show(error);
+            else
+            {
+                AdminLogin adminLogin = new AdminLogin();
+                adminService.Create(new AdminDto
+                {
 
+                })
+            }
         }
     }
 }

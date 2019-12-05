@@ -88,6 +88,6 @@ namespace ListIt_WindowsBackend
             CurrencyBox.SelectedValuePath = "Id";
             CurrencyBox.DisplayMemberPath = "Name";
             CurrencyBox.SelectedIndex = 0;
-        }
+        }        
     }
 }

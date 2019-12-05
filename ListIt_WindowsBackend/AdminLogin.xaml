@@ -13,9 +13,9 @@
         </Grid.RowDefinitions>
         <Rectangle Fill="Gray" Stroke="Black" Margin="160,79,150,49.8" Grid.RowSpan="2" Height="300" VerticalAlignment="Center"/>
         <Label Content="Username: " HorizontalAlignment="Left" Margin="201,147,0,32.4" Width="110" FontSize="18" RenderTransformOrigin="0.496,0.989"/>
-        <TextBox HorizontalAlignment="Left" Height="35" Margin="329,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="18" BorderThickness="1" BorderBrush="Black" />
+        <TextBox Name="UsernameField" HorizontalAlignment="Left" Height="35" Margin="329,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="18" BorderThickness="1" BorderBrush="Black" />
         <Label Content="Password:" HorizontalAlignment="Left" Height="35" Margin="201,204,0,0" VerticalAlignment="Top" Width="110" FontSize="18" Grid.RowSpan="2"/>
-        <PasswordBox HorizontalAlignment="Left" Height="35" Margin="329,204,0,0" VerticalAlignment="Top" Width="200" TextOptions.TextFormattingMode="Ideal" FontSize="18" BorderThickness="1" BorderBrush="Black" Grid.RowSpan="2"/>
+        <PasswordBox Name="PasswordField" HorizontalAlignment="Left" Height="35" Margin="329,204,0,0" VerticalAlignment="Top" Width="200" TextOptions.TextFormattingMode="Ideal" FontSize="18" BorderThickness="1" BorderBrush="Black" Grid.RowSpan="2"/>
         <Label Content="Admin login" HorizontalAlignment="Center" Margin="329,94,323,0" Width="138" FontSize="23" RenderTransformOrigin="0.73,0.465" Height="40" VerticalAlignment="Top"/>
         <Button Content="Login" HorizontalAlignment="Left" Height="32" Margin="334,75.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="138" FontSize="19" BorderThickness="2" BorderBrush="Blue" Click="Button_Click"/>
 
