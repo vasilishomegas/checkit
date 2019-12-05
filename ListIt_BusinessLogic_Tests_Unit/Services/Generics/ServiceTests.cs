@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository.Generics;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Converter;
+using ListIt_DomainInterface.Interfaces.Repository;
 using ListIt_DomainModel.DTO;
 using Moq;
 using NUnit.Framework;
@@ -28,6 +30,7 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services.Generics
         public void GetAll_ShouldReturnTheSameNumberOfElements([Values(0, 1, 2)] int elements)
         {
             // Arrange
+            if (elements < 0) elements = 0;
             var repository = RepositoryMockFactory<T>.GetMock(elements);
             var converter = ConvertDBtoDtoFactory<T, DTO>.GetMock();
             var service = new Service<T, DTO>(repository.Object, converter.Object); // Create an instance of tested class.
@@ -37,6 +40,32 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services.Generics
 
             // Assert
             Assert.AreEqual(elements, result.Count());
+        }
+
+        [Test]
+        public void Get_ElementExists()
+        {
+            var repository = RepositoryMockFactory<T>.GetMock(1);
+            repository.Setup(x => x.Get(It.IsAny<int>())).Returns(new T());
+            var converter = ConvertDBtoDtoFactory<T, DTO>.GetMock();
+            var service = new Service<T, DTO>(repository.Object, converter.Object);
+
+            var result = service.Get(1);
+
+            Assert.NotNull(result);
+        }
+
+        [Test]
+        public void Get_ElementNotExists()
+        {
+            var repository = RepositoryMockFactory<T>.GetMock(1);
+            repository.Setup(x => x.Get(It.IsAny<int>())).Returns(() => null);
+            var converter = ConvertDBtoDtoFactory<T, DTO>.GetMock();
+            var service = new Service<T, DTO>(repository.Object, converter.Object);
+
+            var result = service.Get(1);
+
+            Assert.Null(result);
         }
     }
 }
