@@ -70,8 +70,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\AdminDto.cs" />
     <Compile Include="DTO\CategoryDto.cs" />
-    <Compile Include="DTO\ChainDTO.cs" />
+    <Compile Include="DTO\ChainDto.cs" />
     <Compile Include="DTO\CountryDto.cs" />
     <Compile Include="DTO\CurrencyDto.cs" />
     <Compile Include="DTO\Interfaces\IDto.cs" />
