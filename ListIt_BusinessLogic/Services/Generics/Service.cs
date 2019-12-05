@@ -4,20 +4,29 @@ using ListIt_DataAccess.Repository.Generics;
 
 namespace ListIt_BusinessLogic.Services.Generics
 {
-    public abstract class Service<T, DTO> 
+
+    public class Service<T, DTO> : IService<DTO> 
         where T : class
         where DTO : class
     {
-        protected Repository<T> _repository;
 
-        protected Service(Repository<T> repository)
+        // Here is the problem that I encountered when creating tests:
+        // https://stackoverflow.com/questions/243274/how-to-unit-test-abstract-classes-extend-with-stubs
+        // Therefore I extracted convert methods to new class.
+        // It is a great example why TDD leads to better design.
+
+        protected IRepository<T> _repository;
+        protected IDtoDbConverter<T, DTO> _converter;
+
+        public Service(IRepository<T> repository, IDtoDbConverter<T, DTO> converter)
         {
             _repository = repository;
+            _converter = converter;
         }
 
         public virtual IEnumerable<DTO> GetAll()
         {
-            return _repository.GetAll().Select(ConvertDBToDto).ToList();
+            return _repository.GetAll().Select(_converter.ConvertDBToDto).ToList();
         }
         public virtual DTO Get(int id)
         {
@@ -25,33 +34,21 @@ namespace ListIt_BusinessLogic.Services.Generics
 
             return entity == null
                 ? null
-                : ConvertDBToDto(entity);
+                : _converter.ConvertDBToDto(entity);
         }
         public virtual void Create(DTO dto)
         {
-            _repository.Create(ConvertDtoToDB(dto));
+            _repository.Create(_converter.ConvertDtoToDB(dto));
         }
 
         public virtual void Update(DTO dto)
         {
-            _repository.Update(ConvertDtoToDB(dto));
+            _repository.Update(_converter.ConvertDtoToDB(dto));
         }
 
         public virtual void Delete(int id)
         {
             _repository.Delete(id);
         }
-
-        // =========================================================================
-        // =========================================================================
-
-        protected bool CheckIfExists(int id)
-        {
-            var existing = _repository.Get(id);
-            return existing != null;
-        }
-
-        protected abstract T ConvertDtoToDB(DTO dto);
-        protected abstract DTO ConvertDBToDto(T entity);
     }
 }

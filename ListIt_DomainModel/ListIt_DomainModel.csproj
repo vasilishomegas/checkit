@@ -80,7 +80,7 @@
     <Compile Include="DTO\ShoppingListDto.cs" />
     <Compile Include="DTO\ShopApiDto.cs" />
     <Compile Include="DTO\ShoppingListEntryDto.cs" />
-    <Compile Include="DTO\UnitTypesDto.cs" />
+    <Compile Include="DTO\UnitTypeDto.cs" />
     <Compile Include="DTO\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,31 +8,24 @@ using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
 using System.Security.Cryptography;
+using ListIt_BusinessLogic.Services.Converters;
 
 namespace ListIt_BusinessLogic.Services
 {
     public class ProductService : Service<Product, ProductDto>
     {
-        private readonly ProductRepository _prodRepository;
+        private readonly ProductRepository _productRepository;
+        private readonly ProductConverter _productConverter;
 
-        public ProductService() : base(new ProductRepository())
+        public ProductService() : base(new ProductRepository(), new ProductConverter())
         {
-            _prodRepository = (ProductRepository)_repository;
+            _productRepository = (ProductRepository)_repository;
+            _productConverter = (ProductConverter) _converter;
         }
 
         public void Create(UserProductDto dto)
         {
-            _prodRepository.Create(StaticDtoToDB(dto));
-        }
-
-        protected override ProductDto ConvertDBToDto(Product entity)
-        {
-            return StaticDBToDto(entity);
-        }
-
-        protected override Product ConvertDtoToDB(ProductDto dto)
-        {
-            return StaticDtoToDB(dto);
+            _productRepository.Create(StaticDtoToDB(dto));
         }
 
         public static UserProduct StaticDtoToDB(UserProductDto dto)
@@ -63,25 +56,6 @@ namespace ListIt_BusinessLogic.Services
                 Category_Id = userProduct.Category_Id,
                 User_Id = userProduct.User_Id,
                 //ProductTypeId = from ProductTable
-            };
-        }
-
-        public static Product StaticDtoToDB(ProductDto dto)
-        {
-            return new Product
-            {
-                Id = dto.ProductTypeId,
-                Timestamp = DateTime.Now,
-                ProductType_Id = dto.ProductTypeId,
-            };
-        }
-
-        public static ProductDto StaticDBToDto(Product entry)
-        {
-            return new ProductDto
-            {
-                Id = entry.Id,
-                ProductTypeId = entry.ProductType_Id
             };
         }
     }

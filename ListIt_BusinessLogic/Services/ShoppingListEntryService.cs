@@ -8,16 +8,19 @@ using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
 using System.Security.Cryptography;
+using ListIt_BusinessLogic.Services.Converters;
 
 namespace ListIt_BusinessLogic.Services
 {
     public class ShoppingListEntryService : Service<ShoppingListEntry, ShoppingListEntryDto>
     {
         private readonly ShoppingListEntryRepository _entryRepository;
+        private readonly ShoppingListEntryConverter _shoppingListEntryConverter;
 
-        public ShoppingListEntryService() : base(new ShoppingListEntryRepository())
+        public ShoppingListEntryService() : base(new ShoppingListEntryRepository(), new ShoppingListEntryConverter())
         {
             _entryRepository = (ShoppingListEntryRepository)_repository;
+            _shoppingListEntryConverter = (ShoppingListEntryConverter) _converter;
         }
 
         //If a new Entry is created, the update function of the SortingService must be called as well
@@ -75,53 +78,10 @@ namespace ListIt_BusinessLogic.Services
 
             foreach (ShoppingListEntry entry in entryList)
             {
-                entryDtoList.Add(ConvertDBToDto(entry));
+                entryDtoList.Add(_shoppingListEntryConverter.ConvertDBToDto(entry));
             }
 
             return entryDtoList;
-        }
-
-
-        protected override ShoppingListEntryDto ConvertDBToDto(ShoppingListEntry entity)
-        {
-            return StaticDBToDto(entity);
-        }
-
-        protected override ShoppingListEntry ConvertDtoToDB(ShoppingListEntryDto dto)
-        {
-            return StaticDtoToDB(dto);
-        }
-
-        public static ShoppingListEntry StaticDtoToDB(ShoppingListEntryDto entryDto)
-        {
-            // FOR EACH Entry THAT IS CREATED, A UserProduct NEEDS TO BE CREATED AS WELL
-            //StaticDtoToProductDB(entryDto);
-
-            return new ShoppingListEntry
-            {
-                Id = entryDto.Id,
-                Quantity = entryDto.Quantity,
-                Product_Id = entryDto.Product_Id,
-                ShoppingList_Id = entryDto.ShoppingList_Id,
-                State_Id = entryDto.State_Id
-            };
-        }
-
-        public static ShoppingListEntryDto StaticDBToDto(ShoppingListEntry entry)
-        {
-            // EACH Entry IS LINKED TO A 
-            // PRODUCT: ProductType 
-            // -> APiProducts/UserProducts/DefaultProducts: GET DETAILS HERE 
-            // -> NameTranslationTable -> GET NAME HERE
-
-            return new ShoppingListEntryDto
-            {
-                Id = entry.Id,
-                Quantity = entry.Quantity,
-                Product_Id = entry.Product_Id,
-                ShoppingList_Id = entry.ShoppingList_Id,
-                State_Id = entry.State_Id
-            };
         }
     }
 }

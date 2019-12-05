@@ -1,4 +1,5 @@
-﻿using ListIt_BusinessLogic.Services.Generics;
+﻿using ListIt_BusinessLogic.Services.Converters;
+using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
@@ -7,7 +8,7 @@ namespace ListIt_BusinessLogic.Services
 {
     public class ChainService : Service<Chain, ChainDto>
     {
-        public ChainService() : base(new ChainRepository())
+        public ChainService() : base(new ChainRepository(), new ChainConverter())
         {
 
         }
@@ -22,7 +23,9 @@ namespace ListIt_BusinessLogic.Services
                 var shopApi = shopApiRepository.Get(chainDto.ShopApi.Id);
                 if (shopApi == null)
                 {
-                    shopApi = ShopApiService.StaticDtoToDB(chainDto.ShopApi);
+                    ShopApiConverter shopApiConverter = new ShopApiConverter();
+
+                    shopApi = shopApiConverter.ConvertDtoToDB(chainDto.ShopApi);
                     shopApiRepository.Create(shopApi);
                 }
                 shopApiId = shopApi.Id;
@@ -53,39 +56,5 @@ namespace ListIt_BusinessLogic.Services
 
             _repository.Delete(id);
         } */
-
-
-        protected override Chain ConvertDtoToDB(ChainDto chainDto) 
-        {
-            int? shopApiId = null;
-            ShopApiDto shopApiDto = null;
-
-            if (chainDto.ShopApi != null)
-            {
-                shopApiId = chainDto.ShopApi.Id;
-                shopApiDto = chainDto.ShopApi;
-            }
-
-            return new Chain()
-            {
-                Id = chainDto.Id,
-                Logo = chainDto.Logo,
-                Name = chainDto.Name,
-                ShopApi_Id = shopApiId,
-                ShopApi = ShopApiService.StaticDtoToDB(shopApiDto)
-            };
-
-        }
-
-        protected override ChainDto ConvertDBToDto(Chain chain)
-        {
-            return new ChainDto
-            {
-                Id = chain.Id,
-                ShopApi = ShopApiService.StaticDBToDto(chain.ShopApi),
-                Name = chain.Name,
-                Logo = chain.Logo
-            };
-        }
     }
 }

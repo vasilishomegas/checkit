@@ -9,12 +9,13 @@ using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
 using System.Security.Cryptography;
+using ListIt_BusinessLogic.Services.Converters;
 
 namespace ListIt_BusinessLogic.Services
 {
     public class UserService : Service<User, UserDto>
     {
-        public UserService() : base(new UserRepository())
+        public UserService() : base(new UserRepository(), new UserConverter())
         {
 
         }
@@ -47,7 +48,7 @@ namespace ListIt_BusinessLogic.Services
             UserRepository repo = new UserRepository();
             var user = repo.GetUserByEmailAndPasswordHash(email, HashPassword(pw));
 
-            return ConvertDBToDto(user);
+            return _converter.ConvertDBToDto(user);
         }
 
         public string HashPassword(string pw)
@@ -85,49 +86,6 @@ namespace ListIt_BusinessLogic.Services
                 Nickname = userDto.Nickname,
                 Timestamp = userDto.Timestamp
             });
-        }
-
-        protected override UserDto ConvertDBToDto(User entity)
-        {
-            return StaticDBToDto(entity);
-        }
-
-        protected override User ConvertDtoToDB(UserDto dto)
-        {
-            return StaticDtoToDB(dto);
-        }
-
-        public static User StaticDtoToDB(UserDto userDto)
-        {
-            /* USER HAS TO HAVE COUNTRY AND LANGUAGE, SO COUNTRY_ID / LANGUAGE_ID IS NOT NULLABLE,
-            SO I OMIT CHECKS*/
-            
-            return new User 
-                {
-                Language = LanguageService.StaticDtoToDB(userDto.Language),
-                Language_Id = userDto.Language.Id,
-                Country = CountryService.StaticDtoToDB(userDto.Country),
-                Country_Id = userDto.Country.Id,
-                Email = userDto.Email,
-                Id = userDto.Id,
-                PasswordHash = userDto.PasswordHash,
-                Nickname = userDto.Nickname,
-                Timestamp = userDto.Timestamp
-            };
-        }
-
-        public static UserDto StaticDBToDto(User user)
-        {
-            return new UserDto
-            {
-                Language = LanguageService.StaticDBToDto(user.Language),
-                Country = CountryService.StaticDBToDto(user.Country),
-                Email = user.Email,
-                Id = user.Id,
-                PasswordHash = user.PasswordHash,
-                Nickname = user.Nickname,
-                Timestamp = user.Timestamp
-            };
         }
     }
 }

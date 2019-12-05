@@ -8,16 +8,19 @@ using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
 using System.Security.Cryptography;
+using ListIt_BusinessLogic.Services.Converters;
 
 namespace ListIt_BusinessLogic.Services
 {
     public class ShoppingListService : Service<ShoppingList, ShoppingListDto>
     {
         private readonly ShoppingListRepository _listRepository;
+        private readonly ShoppingListConverter _shoppingListConverter;
 
-        public ShoppingListService() : base(new ShoppingListRepository())
+        public ShoppingListService() : base(new ShoppingListRepository(), new ShoppingListConverter())
         {
             _listRepository = (ShoppingListRepository)_repository;
+            _shoppingListConverter = (ShoppingListConverter) _converter;
         }
 
         public override void Create(ShoppingListDto dto)
@@ -75,19 +78,7 @@ namespace ListIt_BusinessLogic.Services
             return listOfLists;
         }
 
-        protected override ShoppingListDto ConvertDBToDto(ShoppingList entity)
-        {
-            //var link = _listRepository.GetLinkById(entity.Id, );
-            //int listAccessTypeId = link.ListAccessTypeId;
-
-            return StaticDBToDto(entity);
-        }
-
-        protected override ShoppingList ConvertDtoToDB(ShoppingListDto dto)
-        {
-            return StaticDtoToDB(dto);
-        }
-
+        /* moved to ShoppingListConverter
         public static ShoppingList StaticDtoToDB(ShoppingListDto listDto)
         {
             //  AS SOON AS THERE IS A ShoppingList CREATED THERE NEEDS ALSO TO BE 
@@ -105,6 +96,9 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
+
+
+        // Probably not this way
         public static LinkUserToList StaticListDtoToLinkDB(ShoppingListDto dto)
         {
             return new LinkUserToList
@@ -114,25 +108,8 @@ namespace ListIt_BusinessLogic.Services
                 ListAccessTypeId = dto.ListAccessTypeId,
             };
         }
-
-        public static ShoppingListDto StaticDBToDto(ShoppingList list)
-        {
-            // EACH ShoppingListDto WILL CONTAIN VALUES FROM LinkUserToList AS WELL
-            foreach(LinkUserToList link in list.LinkUserToLists)
-            {
-                
-            }
-            
-            return new ShoppingListDto
-            {
-                Id = list.Id,
-                Name = list.Name,
-                Path = list.Path,
-                //ChosenSortingId = null, //list.ChosenSorting_Id, NULLABLE in ShoppingList
-                //ListAccessTypeId = list.LinkUserToLists
-            };
-        }
-
         
+        */
+
     }
 }

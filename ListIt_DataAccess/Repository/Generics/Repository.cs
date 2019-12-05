@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ListIt_DataAccess.Repository.Generics
 {
-    public abstract class Repository<T> where T : class
+    public abstract class Repository<T> : IRepository<T> where T : class
     {
         public virtual IEnumerable<T> GetAll()
         {

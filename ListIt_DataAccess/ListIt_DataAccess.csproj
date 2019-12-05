@@ -105,6 +105,7 @@
     <Compile Include="Repository\ChainRepository.cs" />
     <Compile Include="Repository\CountryRepository.cs" />
     <Compile Include="Repository\CurrencyRepository.cs" />
+    <Compile Include="Repository\Generics\IRepository.cs" />
     <Compile Include="Repository\Generics\Repository.cs" />
     <Compile Include="Repository\LanguageRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />

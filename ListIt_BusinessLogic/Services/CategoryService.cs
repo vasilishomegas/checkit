@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ListIt_BusinessLogic.Services.Converters;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
@@ -14,7 +15,7 @@ namespace ListIt_BusinessLogic.Services
     public class CategoryService : Service<Category, CategoryDto>
     {
         private readonly CategoryRepository _catRepository;
-        public CategoryService() : base(new CategoryRepository())
+        public CategoryService() : base(new CategoryRepository(), new CategoryConverter())
         {
             _catRepository = (CategoryRepository)_repository;
         }
@@ -45,36 +46,6 @@ namespace ListIt_BusinessLogic.Services
         protected CategoryDto ConvertDBToDto(TranslationOfCategory translation)
         {
             return StaticDBtranslationToDto(translation);
-        }
-
-        protected override CategoryDto ConvertDBToDto(Category entity)
-        {
-            return StaticDBToDto(entity);
-        }
-
-        protected override Category ConvertDtoToDB(CategoryDto dto)
-        {
-            return StaticDtoToDB(dto);
-        }
-
-        public static Category StaticDtoToDB(CategoryDto dto)
-        {
-            if (dto == null) return null;
-            return new Category
-            {
-                Id = dto.Id,
-                User_Id = dto.UserId
-            };
-        }
-
-        public static CategoryDto StaticDBToDto(Category cat)
-        {
-            if (cat == null) return null;
-            return new CategoryDto
-            {
-                Id = cat.Id,
-                UserId = cat.User_Id
-            };
         }
 
         public static CategoryDto StaticDBtranslationToDto(TranslationOfCategory translation)

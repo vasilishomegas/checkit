@@ -6,7 +6,7 @@ using ListIt_DomainModel.DTO.Interfaces;
 
 namespace ListIt_DomainModel.DTO
 {
-    public class UnitTypesDto : IDto
+    public class UnitTypeDto : IDto
     {
         public int Id { get; set; }
 

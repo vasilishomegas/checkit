@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ListIt_BusinessLogic.Services.Converters;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
@@ -11,18 +12,21 @@ using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services
 {
-    public class UnitTypeService : Service<UnitType, UnitTypesDto>
+    public class UnitTypeService : Service<UnitType, UnitTypeDto>
     {
-        private readonly UnitTypesRepository _unitRepository;
-        public UnitTypeService() : base(new UnitTypesRepository())
+        private readonly UnitTypesRepository _unitTypeRepository;
+        private readonly UnitTypeConverter _unitTypeConverter;
+
+        public UnitTypeService() : base(new UnitTypesRepository(), new UnitTypeConverter())
         {
-            _unitRepository = (UnitTypesRepository)_repository;
+            _unitTypeRepository = (UnitTypesRepository)_repository;
+            _unitTypeConverter = (UnitTypeConverter) _converter;
         }
 
-        public IList<UnitTypesDto> GetUnitTypesByLanguage(int langId)
+        public IList<UnitTypeDto> GetUnitTypesByLanguage(int langId)
         {
-            var unitList = _unitRepository.GetUnitTypesByLanguage(langId);
-            List<UnitTypesDto> unitTypes = new List<UnitTypesDto>();
+            var unitList = _unitTypeRepository.GetUnitTypesByLanguage(langId);
+            List<UnitTypeDto> unitTypes = new List<UnitTypeDto>();
 
             foreach(TranslationOfUnitType translation in unitList)
             {
@@ -33,46 +37,19 @@ namespace ListIt_BusinessLogic.Services
             return unitTypes;
         }
 
-        protected UnitTypesDto ConvertDBToDto(TranslationOfUnitType translation)
+        protected UnitTypeDto ConvertDBToDto(TranslationOfUnitType translation)
         {
             return StaticDBtranslationToDto(translation);
         }
 
-        protected override UnitTypesDto ConvertDBToDto(UnitType entity)
-        {
-            return StaticDBToDto(entity);
-        }
-
-        protected override UnitType ConvertDtoToDB(UnitTypesDto dto)
-        {
-            return StaticDtoToDB(dto);
-        }
-
-        public static UnitType StaticDtoToDB(UnitTypesDto dto)
-        {
-            if (dto == null) return null;
-            return new UnitType
-            {
-                Id = dto.Id
-            };
-        }
-
-        public static UnitTypesDto StaticDBtranslationToDto(TranslationOfUnitType translation)
+        public static UnitTypeDto StaticDBtranslationToDto(TranslationOfUnitType translation)
         {
             if (translation == null) return null;
-            return new UnitTypesDto
+            return new UnitTypeDto
             {
                 Id = translation.UnitType_Id,
                 Name = translation.Translation,
                 LanguageId =  translation.Language_Id
-            };
-        }
-
-        public static UnitTypesDto StaticDBToDto(UnitType unit)
-        {
-            return new UnitTypesDto
-            {
-                Id = unit.Id
             };
         }
     }
