@@ -40,8 +40,18 @@ namespace ListIt_WindowsBackend
             // Input validation (and parsing)
             float price = 0;
             string error = "";
+            if (TypeBox.SelectedIndex < 0)
+                error += "Select a product type\n";
             if (NameField.Text == "")
                 error += "Fill in a product name\n";
+            if (CategoryBox.SelectedIndex < 0)
+                error += "Select a category\n";
+            if (UnitBox.SelectedIndex < 0)
+                error += "Select a unit\n";
+            if (LanguageBox.SelectedIndex < 0)
+                error += "Select a language\n";
+            if (CurrencyBox.SelectedIndex < 0)
+                error += "Select a currency\n";
             if (PriceField.Text == "")
                 error += "Fill in a price\n";
             else if (!float.TryParse(PriceField.Text, out price))
@@ -85,6 +95,7 @@ namespace ListIt_WindowsBackend
             UnitTypeService unitService = new UnitTypeService();
             LanguageService languageService = new LanguageService();
             CurrencyService currencyService = new CurrencyService();
+            CategoryService categoryService = new CategoryService();
 
             TypeBox.ItemsSource = productTypeService.GetAll();
             TypeBox.SelectedValuePath = "Id";
@@ -102,6 +113,9 @@ namespace ListIt_WindowsBackend
             CurrencyBox.SelectedValuePath = "Id";
             CurrencyBox.DisplayMemberPath = "Name";
             CurrencyBox.SelectedIndex = 0;
+            CategoryBox.ItemsSource = categoryService.GetCategories(2);
+            CategoryBox.SelectedValuePath = "Id";
+            CategoryBox.DisplayMemberPath = "Name";
         }        
     }
 }
