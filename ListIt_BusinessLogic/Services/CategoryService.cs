@@ -19,6 +19,14 @@ namespace ListIt_BusinessLogic.Services
             _catRepository = (CategoryRepository)_repository;
         }
 
+        public new int Create(CategoryDto dto)
+        {
+            dto.Id = _catRepository.Create(ConvertDtoToDB(dto));
+            _catRepository.Create(ConvertDtoToTranslationDB(dto));
+
+            return dto.Id;
+        }
+
         //Returns a list of default categories and user categories
         public IEnumerable<CategoryDto> GetCategories(int langId, int userId)
         {        
@@ -45,6 +53,11 @@ namespace ListIt_BusinessLogic.Services
         protected CategoryDto ConvertDBToDto(TranslationOfCategory translation)
         {
             return StaticDBtranslationToDto(translation);
+        }
+
+        protected TranslationOfCategory ConvertDtoToTranslationDB(CategoryDto dto)
+        {
+            return StaticDtoToTranslationDB(dto);
         }
 
         protected override CategoryDto ConvertDBToDto(Category entity)
@@ -85,6 +98,16 @@ namespace ListIt_BusinessLogic.Services
                 Id = translation.Category_Id,
                 Name = translation.Translation,
                 LanguageId = translation.Language_Id
+            };
+        }
+
+        public static TranslationOfCategory StaticDtoToTranslationDB(CategoryDto dto)
+        {
+            return new TranslationOfCategory
+            {
+                Category_Id = dto.Id,
+                Language_Id = dto.LanguageId,
+                Translation = dto.Name
             };
         }
     }

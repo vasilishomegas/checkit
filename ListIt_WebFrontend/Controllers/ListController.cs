@@ -77,6 +77,14 @@ namespace ListIt_WebFrontend.Controllers
                             ViewBag.Message = "You don't have any entries yet. Start creating your entries now!";
                         }
 
+                        list.ChosenProductId = 0;  //By default no defaultProduct should be selected
+                        list.ChooseProductsList = (from item in productService.GetDefaultAndReusableProductsByLanguage(langId)
+                                                    select new SelectListItem()
+                                                    {
+                                                        Text = item.Name,
+                                                        Value = item.ProductId.ToString()
+                                                    }).ToList();
+
                         UnitTypeService unitTypeService = new UnitTypeService();
                         list.UnitTypesListId = 1; //default value
                         list.UnitTypesList = (from item in unitTypeService.GetUnitTypesByLanguage(langId)
@@ -97,7 +105,7 @@ namespace ListIt_WebFrontend.Controllers
 
                         CategoryService categoryService = new CategoryService();
                         list.CategoryListId = 20; //default category: others
-                        list.CategoryList = (from item in categoryService.GetCategories(langId, int.Parse(Session["UserId"].ToString()))
+                        list.CategoryList = (from item in categoryService.GetUserCategories(langId, int.Parse(Session["UserId"].ToString()))
                                              select new SelectListItem()
                                              {
                                                  Text = item.Name,
@@ -171,7 +179,7 @@ namespace ListIt_WebFrontend.Controllers
 
                 CategoryService categoryService = new CategoryService();
                 item.CategoryListId = (int)item.Category_Id; //saved value from db entry
-                item.CategoryList = (from x in categoryService.GetCategories(langId, int.Parse(Session["UserId"].ToString()))
+                item.CategoryList = (from x in categoryService.GetUserCategories(langId, int.Parse(Session["UserId"].ToString()))
                                      select new SelectListItem()
                                      {
                                          Text = x.Name,
@@ -392,48 +400,83 @@ namespace ListIt_WebFrontend.Controllers
                 var unitTypeId = int.Parse(collection["UnitTypesListId"]);  //TODO: create lists in view and get id (like for countries/languages)
                 var catId = int.Parse(collection["CategoryListId"]);
                 var userCat = collection["UserCategory"];
+                int userCatId = 0;
                 var currencyId = int.Parse(collection["CurrencyListId"]);
-                var prodType = 4;   //Default non reusable UserProduct
+                int prodType; 
+                var chosenProductId = int.Parse(collection["ChosenProductId"]); //gets defaultProductId from dropdown
 
-                if (reusable == "false")
+                if(name != "" && chosenProductId != 0) //Name filled in and defaultProduct chosen
                 {
-                    prodType = 4;   //4 = UserListProduct = non reusable
+                    throw new Exception("You can either create a new item or choose from the default products, but not both!");
                 }
-                else
+
+                if(userCat != "")
                 {
-                    prodType = 3;   
+                    LanguageService languageService = new LanguageService();
+
+                    CategoryDto category = new CategoryDto();
+                    category.Name = userCat;
+                    category.LanguageId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;
+                    category.UserId = int.Parse(Session["UserId"].ToString());
+
+                    CategoryService categoryService = new CategoryService();
+                    userCatId = categoryService.Create(category);
                 }
-                                
-
-                ShoppingListEntryDto entry = new ShoppingListEntryDto();
-                entry.Quantity = qty;
-                entry.ProductTypeId = prodType;
-                entry.ShoppingList_Id = listId;
-                entry.State_Id = 2; //Default is unchecked
-
+             
                 ShoppingListEntryService entryService = new ShoppingListEntryService();
-                var prodId = entryService.Create(entry); //Creates Product and ShoppingListEntry, returns created ProductId
+                ProductService productService = new ProductService();
 
-                
-
-                if(prodType == 3    //reusable UserProduct
-                    || prodType == 4)   //one-time/one-list UserListProduct
+                if (name != "") //IF UserProduct -> create Product - ShoppingListEntry - UserProduct
                 {
+                    if (reusable == "false")
+                    {
+                        prodType = 4;   //4 = UserListProduct = non reusable
+                    }
+                    else
+                    {
+                        prodType = 3;   //reusable UserProduct
+                    }
+
+                    //create a new Product
+                    ProductDto productDto = new ProductDto();
+                    productDto.ProductTypeId = prodType;
+                    var prodId = productService.Create(productDto);
+
+                    //create new UserProduct
                     UserProductDto userProduct = new UserProductDto();
                     userProduct.ProductId = prodId;
                     userProduct.Name = name;
-                    userProduct.Category_Id = catId;
+                    if (userCat != "") userProduct.Category_Id = userCatId;
+                    else userProduct.Category_Id = catId;
                     userProduct.User_Id = int.Parse(Session["UserId"].ToString());
                     userProduct.Unit_Id = unitTypeId;
                     userProduct.Price = price;
                     userProduct.Currency_Id = currencyId;
 
                     entryService.Create(userProduct);
-                    //ERROR while saving UserProduct
+                }
+                else /*if(name == "" && chosenProductId != 0)   */  //IF DefaultProduct -> create ShoppingListEntry & LinkDefaultProductToUser
+                {
+                    //check if chosen defaultProduct or reusable UserProduct
+                    prodType = productService.GetProductTypeId(chosenProductId);
+
+                    if(prodType == 1)    //if DefaultProduct: create Link entry
+                    {
+                        DefaultProductDto defaultProductDto = new DefaultProductDto();
+                        defaultProductDto.Id = productService.GetDefaultProductId(chosenProductId);
+                        productService.CreateLink(defaultProductDto, int.Parse(Session["UserId"].ToString()));
+                    }                    
+
+                    //if reusable UserProduct: only create ShoppingListEntry
                 }
 
-                //TODO: add logic to add default products to list
-
+                //create Entry
+                ShoppingListEntryDto entry = new ShoppingListEntryDto();
+                entry.Quantity = qty;
+                entry.ProductTypeId = prodType;
+                entry.ShoppingList_Id = listId;
+                entry.State_Id = 2; //Default is unchecked
+                entryService.Create(entry); 
 
                 //Update ShoppingList to update Timestamp:
                 ShoppingListDto shoppingList = new ShoppingListDto();
@@ -446,7 +489,7 @@ namespace ListIt_WebFrontend.Controllers
             }
             catch
             {
-                TempData["ErrorMessage"] = "There was an error while creating a new item";
+                TempData["ErrorMessage"] = "There was an error while creating a new item. Be aware that you can only create either a new item or choose from the dropdown list of default products and your own reusable items, but you can't do both.";
                 return Redirect(Request.UrlReferrer.ToString());
         }
 
