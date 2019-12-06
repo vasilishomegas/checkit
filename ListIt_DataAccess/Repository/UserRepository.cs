@@ -53,6 +53,5 @@ namespace ListIt_DataAccess.Repository
                 return user.Id;
             }
         }
-
     }
 }
