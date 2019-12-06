@@ -23,8 +23,8 @@ namespace ListIt_WindowsBackend
         public MainWindow()
         {
             InitializeComponent();
-            AddChain addChain= new AddChain();
-            addChain.Show();
+            var window = new AddProduct();
+            window.Show();
             this.Close();
         }
     }

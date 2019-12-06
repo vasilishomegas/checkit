@@ -37,29 +37,44 @@ namespace ListIt_WindowsBackend
             // Inform user of response
             // Clear form for next product
 
-            float price;
+            // Input validation (and parsing)
+            float price = 0;
             string error = "";
             if (NameField.Text == "")
                 error += "Fill in a product name\n";
             if (PriceField.Text == "")
                 error += "Fill in a price\n";
-            if (!float.TryParse(PriceField.Text, out price))
+            else if (!float.TryParse(PriceField.Text, out price))
                 error += "Invalid price";
             if (error != "") MessageBox.Show(error);
+            // Normal execution if no errors occurred
             else
             {
                 ProductService productService = new ProductService();
                 //if (TypeBox.SelectedItem == 1)
-                productService.Create(new DefaultProductDto
+                try
                 {
-                    ProductTypeId = (int)TypeBox.SelectedValue,
-                    Name = NameField.Text,
-                    Currency_Id = (int)CurrencyBox.SelectedValue,
-                    Unit_Id = (int)UnitBox.SelectedValue,
-                    Price = (decimal)price
-                });
-                // Create Product
-                // Create linked DefaultProduct
+                   // Create Product
+                    productService.Create(new DefaultProductDto
+                    {
+                        ProductTypeId = (int)TypeBox.SelectedValue,
+                        Name = NameField.Text,
+                        Currency_Id = (int)CurrencyBox.SelectedValue,
+                        Unit_Id = (int)UnitBox.SelectedValue,
+                        Price = (decimal)price
+                    });
+                    MessageBox.Show("Product added!");
+                    TypeBox.SelectedIndex = 0;
+                    NameField.Text = "";
+                    UnitBox.SelectedIndex = -1;
+                    LanguageBox.SelectedIndex = 0;
+                    CurrencyBox.SelectedIndex = 0;
+                    PriceField.Text = "";
+                }
+                catch
+                {
+                    MessageBox.Show("Failed to add product");
+                }
                 //productService.Create(new DefaultProductDto { })
             }
         }
@@ -71,7 +86,6 @@ namespace ListIt_WindowsBackend
             LanguageService languageService = new LanguageService();
             CurrencyService currencyService = new CurrencyService();
 
-            //IList<ListIt_DomainModel.DTO.ProductTypeDto> productTypes = productTypeService.GetAll().ToList();
             TypeBox.ItemsSource = productTypeService.GetAll();
             TypeBox.SelectedValuePath = "Id";
             TypeBox.DisplayMemberPath = "Name";
@@ -79,7 +93,7 @@ namespace ListIt_WindowsBackend
             UnitBox.ItemsSource = unitService.GetUnitTypesByLanguage(2);
             UnitBox.SelectedValuePath = "Id";
             UnitBox.DisplayMemberPath = "Name";
-            UnitBox.SelectedIndex = 0;
+            //UnitBox.SelectedIndex = 0;
             LanguageBox.ItemsSource = languageService.GetAll();
             LanguageBox.SelectedValuePath = "Id";
             LanguageBox.DisplayMemberPath = "Name";
