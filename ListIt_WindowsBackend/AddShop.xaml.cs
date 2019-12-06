@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ListIt_BusinessLogic.Services;
+using ListIt_DomainModel.DTO.Interfaces;
 
 namespace ListIt_WindowsBackend
 {
@@ -22,6 +24,20 @@ namespace ListIt_WindowsBackend
         public AddShop()
         {
             InitializeComponent();
+            Load_Data();
         }
+
+        private void Load_Data()
+        {
+            ShopApiService shopApiService = new ShopApiService();
+            ShopApiDropdown.ItemsSource = shopApiService.GetAll();
+            ShopApiDropdown.SelectedValuePath = "Id";
+            ShopApiDropdown.DisplayMemberPath = "Url";
+        }
+        //
+      //  private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+       // {
+
+        //}
     }
 }
