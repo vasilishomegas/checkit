@@ -5,24 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListIt_WindowsBackend"
         mc:Ignorable="d"
-        Title="AddShop" Height="450" Width="800">
+        Title="AddShop" Height="505.2" Width="800">
     <Grid>
-        <Grid Margin="0,0,0,0">
-            <Label Content="Add a shop" HorizontalAlignment="Center" Height="45" VerticalAlignment="Top" Width="165" FontSize="25" FontWeight="Bold" Margin="240,0,0,0"/>
-            <Label Content="Shop name:" HorizontalAlignment="Left" Height="40" Margin="0,85,0,0" VerticalAlignment="Top" Width="130" FontSize="20" />
-            <Label Content="Street: " HorizontalAlignment="Left" Height="40" Margin="0,145,0,0" VerticalAlignment="Top" Width="130" FontSize="20" />
-            <Label Content="Street number: " HorizontalAlignment="Left" Height="40" Margin="0,205,0,0" VerticalAlignment="Top" Width="145" FontSize="20" />
-            <Label Content="Zipcode: " HorizontalAlignment="Left" Height="40" Margin="0,265,0,0" VerticalAlignment="Top" Width="130" FontSize="20" />
-            <Label Content="City: " HorizontalAlignment="Left" Height="40" Margin="0,325,0,0" VerticalAlignment="Top" Width="130" FontSize="20" />
-            <TextBox HorizontalAlignment="Right" Height="35" Margin="240,145,0,0" TextWrapping="Wrap" Text="K F C  GOES HERE" VerticalAlignment="Top" Width="240" FontSize="18" BorderThickness="1" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Right" Height="35" Margin="240,205,0,0" TextWrapping="Wrap" Text="K F C  GOES HERE" VerticalAlignment="Top" Width="240" FontSize="18" BorderThickness="1" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Right" Height="35" Margin="240,270,0,0" TextWrapping="Wrap" Text="K F C  GOES HERE" VerticalAlignment="Top" Width="240" FontSize="18" BorderThickness="1" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Right" Height="35" Margin="240,325,0,0" TextWrapping="Wrap" Text="K F C  GOES HERE" VerticalAlignment="Top" Width="240" FontSize="18" BorderThickness="1" BorderBrush="Black"/>
-            <Button Content="Save changes" HorizontalAlignment="Right" Height="40" Margin="525,130,0,0" VerticalAlignment="Top" Width="155" FontSize="20" FontWeight="DemiBold"/>
-            <Button Content="Discard changes" HorizontalAlignment="Right" Height="40" Margin="525,290,0,0" VerticalAlignment="Top" Width="160" FontSize="20" FontWeight="DemiBold"/>
-            <ComboBox HorizontalAlignment="Left" Height="45" Margin="240,80,0,0" VerticalAlignment="Top" Width="240" x:Name="APIdropdown" FontSize="20" />
-
-        </Grid>
-
+        <!--Margin="3,5,19.6,0" HorizontalAlignment="Center" Width="771">-->
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Add a shop" HorizontalAlignment="Center" Width="165" FontSize="25" FontWeight="Bold" Margin="320,10,308.6,0" Height="41" VerticalAlignment="Top"/>
+        <Label Content="Street:" FontSize="20" Margin="130,125,500,0" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center" Width="170" />
+        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" Text="Street name" VerticalAlignment="Top" Width="220" FontSize="18" BorderThickness="1" BorderBrush="Black" Margin="306,125,267.6,0" Height="35"/>
+        <Label Content="Street number:" FontSize="20" Margin="127,175,497.6,0" Height="40" VerticalAlignment="Top" HorizontalAlignment="Center" Width="169" />
+        <TextBox TextWrapping="Wrap" Text="Street #" FontSize="18" BorderThickness="1" BorderBrush="Black" Margin="307,175,266.6,0" HorizontalAlignment="Center" Width="220" Height="35" VerticalAlignment="Top"/>
+        <Label Content="Shop name:" FontSize="20" Margin="130,75,500,0" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center" Width="170" />
+        <ComboBox Name="ShopApiDropdown" FontSize="20" Margin="300,75,260,0" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="220" />
+        <Label Content="Zipcode:" FontSize="20" Margin="128,225,515.6,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Center" Width="150" />
+        <TextBox TextWrapping="Wrap" Text="Zipcode" FontSize="18" BorderThickness="1" BorderBrush="Black" Margin="307,225,266.6,0" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center" Width="220"/>
+        <Label Content="City:" FontSize="20" RenderTransformOrigin="0.5,0.5" Margin="127,275,515.6,0" Height="38" VerticalAlignment="Top" HorizontalAlignment="Center" Width="151" />
+        <TextBox TextWrapping="Wrap" Text="City yes" FontSize="18" BorderThickness="1" BorderBrush="Black" Margin="308,275,265.6,0" HorizontalAlignment="Center" Width="220" Height="35" VerticalAlignment="Top"/>
+        <Button Content="Save changes" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="160" FontSize="20" FontWeight="DemiBold" Margin="223,360,410.6,0"/>
+        <Button Content="Discard changes" HorizontalAlignment="Center" Height="35" Margin="433,360,200.6,0" VerticalAlignment="Top" Width="160" FontSize="20" FontWeight="DemiBold" RenderTransformOrigin="-0.31,-5.703"/>
     </Grid>
 </Window>
