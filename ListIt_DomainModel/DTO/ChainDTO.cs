@@ -5,6 +5,7 @@ namespace ListIt_DomainModel.DTO
     public class ChainDto : IDto
     {
         public int Id { get; set; }
+        public int ShopApi_Id { get; set; }
         public ShopApiDto ShopApi { get; set; }
         public string Name { get; set; }
         public string Logo { get; set; }
