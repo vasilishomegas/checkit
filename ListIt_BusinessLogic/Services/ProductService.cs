@@ -167,6 +167,7 @@ namespace ListIt_BusinessLogic.Services
 
             return productDtoList;
         }
+		
         protected ProductDto ConvertUserProductDBToDto(Product entity, UserProduct userProduct, ShoppingListEntry entry)
         {
             return StaticDBToDto(entity, userProduct, entry);
@@ -176,6 +177,7 @@ namespace ListIt_BusinessLogic.Services
         {
             return StaticDBToDto(entity, defaultProduct, entry, translation);
         }
+		
         protected ProductDto ConvertApiProductDBToDto(Product entity, ApiProduct apiProduct, ShoppingListEntry entry, TranslationOfProduct translation)
         {
             return StaticDBToDto(entity, apiProduct, entry, translation);
