@@ -24,7 +24,7 @@ namespace ListIt_WebFrontend.Controllers
                 ViewBag.Message = TempData["SuccessMessage"];
 
                 UserService service = new UserService();
-                var user = service.Get(Int32.Parse(Session["UserId"].ToString()));
+                var user = service.Get(int.Parse(Session["UserId"].ToString()));
                 UserVM userVM = new UserVM();
                 userVM.Nickname = user.Nickname;
                 userVM.Email = user.Email;

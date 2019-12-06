@@ -23,8 +23,8 @@ namespace ListIt_WindowsBackend
         public MainWindow()
         {
             InitializeComponent();
-            AddShop addShop = new AddShop();
-            addShop.Show();
+            var window = new AdminLogin();
+            window.Show();
             this.Close();
         }
     }

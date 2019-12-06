@@ -36,11 +36,18 @@ namespace ListIt_WindowsBackend
             if (error != "") MessageBox.Show(error);
             else
             {
-                AdminLogin adminLogin = new AdminLogin();
-                //adminService.Create(new AdminDto
-                //{
-
-                //});
+                AdminService adminService = new AdminService();
+                try
+                {
+                    adminService.Login(UsernameField.Text, PasswordField.Password);
+                    var window = new AddProduct();
+                    window.Show();
+                    this.Close();
+                }
+                catch
+                {
+                    MessageBox.Show("Invalid credentials");
+                }
             }
         }
     }
