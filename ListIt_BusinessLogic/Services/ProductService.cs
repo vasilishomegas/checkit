@@ -19,27 +19,178 @@ namespace ListIt_BusinessLogic.Services
         {
             _prodRepository = (ProductRepository)_repository;
         }
-		
-        public void Create(DefaultProductDto dto)
+
+        #region PRODUCT
+
+        public ProductDto Get(int langId, int id)
         {
-            _prodRepository.Create(StaticDtoToDB(dto));
+            var product = _repository.Get(id);
+            var translation = _prodRepository.GetProductTranslation(langId, id);
+
+            ProductDto productDto = new ProductDto();
+            ShoppingListEntryRepository entryRepository = new ShoppingListEntryRepository();
+            var entry = entryRepository.GetByProductId(id);
+
+            if (product.ProductType_Id == 3 || product.ProductType_Id == 4) //UserProducts
+            {
+                var userProduct = _prodRepository.GetUserProduct(id);
+                productDto = ConvertUserProductDBToDto(product, userProduct, entry);
+            }
+
+            return productDto;
         }
 
+
+        protected override ProductDto ConvertDBToDto(Product entity)
+        {
+            return StaticDBToDto(entity);
+        }
+
+        protected override Product ConvertDtoToDB(ProductDto dto)
+        {
+            return StaticDtoToDB(dto);
+        }
+        #endregion PRODUCT
+
+        #region DEFAULTPRODUCT
+
+        public void Create(DefaultProductDto dto)
+        {
+            var product = new Product
+            {
+                Id = dto.ProductId,
+                Timestamp = DateTime.Now,
+                ProductType_Id = dto.ProductTypeId
+            };
+            var prodId = _prodRepository.CreateProduct(product);
+
+            var defaultProduct = new DefaultProduct
+            {
+                Id = dto.Id,
+                Product_Id = prodId,
+                Currency_Id = dto.Currency_Id,
+                UnitType_Id = dto.Unit_Id,
+                Price = dto.Price,
+            };
+
+            _prodRepository.Create(defaultProduct);
+
+            // Link category
+        }
+
+        protected DefaultProductDto ConvertDBToDto(DefaultProduct entity)
+        {
+            return StaticDBToDto(entity);
+        }
+
+        protected DefaultProduct ConvertDtoToDB(DefaultProductDto dto)
+        {
+            return StaticDtoToDB(dto);
+        }
+        public static DefaultProduct StaticDtoToDB(DefaultProductDto dto)
+        {
+            return new DefaultProduct
+            {
+                Product_Id = dto.ProductTypeId,
+                //Category_Id = dto.Category_Id,
+                Currency_Id = dto.Currency_Id,
+                UnitType_Id = dto.Unit_Id,
+                //Name = dto.Name,
+                Price = dto.Price
+            };
+        }
+        public static DefaultProductDto StaticDBToDto(DefaultProduct defaultProduct)
+        {
+            return new DefaultProductDto
+            {
+                Id = defaultProduct.Id,
+                //Name = defaultProduct.Name,
+                Currency_Id = defaultProduct.Currency_Id,
+                Unit_Id = defaultProduct.UnitType_Id,
+                Price = defaultProduct.Price,
+                //Category_Id = defaultProduct.Category_Id,
+                //ProductTypeId = from ProductTable
+                ProductId = (int)defaultProduct.Product_Id
+            };
+        }
+        public static Product StaticDtoToDB(ProductDto dto)
+        {
+            return new Product
+            {
+                Id = dto.ProductTypeId,
+                Timestamp = DateTime.Now,
+                ProductType_Id = dto.ProductTypeId,
+            };
+        }
+
+        public static ProductDto StaticDBToDto(Product product)
+        {
+            return new ProductDto
+            {
+                Id = product.Id,
+                ProductTypeId = product.ProductType_Id
+            };
+        }
+
+        #endregion DEFAULTPRODUCT
+
+        #region APIPRODUCT
+
+        #endregion APIPRODUCT
+
+        #region USERPRODUCT
         public void Create(UserProductDto dto)
         {
             _prodRepository.Create(StaticDtoToDB(dto));
         }
-		
-		public void Update(UserProductDto dto)
+
+        public void Update(UserProductDto dto)
         {
             _prodRepository.Update(ConvertDtoToDB(dto));
         }
-		
-		 public int GetUserProductId(int productId)
+        public int GetUserProductId(int productId)
         {
-            var userProduct =  _prodRepository.GetUserProduct(productId);
+            var userProduct = _prodRepository.GetUserProduct(productId);
             return userProduct.Id;
         }
+        protected UserProduct ConvertDtoToDB(UserProductDto dto)
+        {
+            return StaticDtoToDB(dto);
+        }
+
+        public static UserProduct StaticDtoToDB(UserProductDto dto)
+        {
+            return new UserProduct
+            {
+                Id = dto.ProductTypeId,
+                Category_Id = dto.Category_Id,
+                Currency_Id = dto.Currency_Id,
+                UnitType_Id = dto.Unit_Id,
+                User_Id = dto.User_Id,
+                Name = dto.Name,
+                Price = dto.Price
+            };
+        }
+
+        public static UserProductDto StaticDBToDto(UserProduct userProduct)
+        {
+            return new UserProductDto
+            {
+                Id = userProduct.Id,
+                Name = userProduct.Name,
+                Currency_Id = (int)userProduct.Currency_Id,
+                Unit_Id = (int)userProduct.UnitType_Id,
+                //Quantity = from ProductTable
+                Price = (int)userProduct.Price,
+                Category_Id = userProduct.Category_Id,
+                User_Id = userProduct.User_Id,
+                //ProductTypeId = from ProductTable
+            };
+        }
+
+        #endregion USERPRODUCT
+
+        #region SHOPPINGLIST
 
         //Getting all shoppinglistentries and converting to ProductDto
         public IList<ProductDto> GetEntriesAsProducts(int listId, int langId)
@@ -86,142 +237,6 @@ namespace ListIt_BusinessLogic.Services
             }
             return productDtoList;
         }
-		
-		public ProductDto Get(int langId, int id)
-        {
-            var product = _repository.Get(id);
-            var translation = _prodRepository.GetProductTranslation(langId, id);
-
-            ProductDto productDto = new ProductDto();
-            ShoppingListEntryRepository entryRepository = new ShoppingListEntryRepository();
-            var entry = entryRepository.GetByProductId(id);
-
-            if (product.ProductType_Id == 3 || product.ProductType_Id == 4) //UserProducts
-            {
-                var userProduct = _prodRepository.GetUserProduct(id);
-                productDto = ConvertUserProductDBToDto(product, userProduct, entry);
-            }
-
-            return productDto;
-        }
-		
-        protected ProductDto ConvertUserProductDBToDto(Product entity, UserProduct userProduct, ShoppingListEntry entry)
-        {
-            return StaticDBToDto(entity, userProduct, entry);
-        }
-
-        protected ProductDto ConvertDefaultProductDBToDto(Product entity, DefaultProduct defaultProduct, ShoppingListEntry entry, TranslationOfProduct translation)
-        {
-            return StaticDBToDto(entity, defaultProduct, entry, translation);
-        }
-		
-        protected ProductDto ConvertApiProductDBToDto(Product entity, ApiProduct apiProduct, ShoppingListEntry entry, TranslationOfProduct translation)
-        {
-            return StaticDBToDto(entity, apiProduct, entry, translation);
-        }
-
-        protected DefaultProductDto ConvertDBToDto(DefaultProduct entity)
-        {
-            return StaticDBToDto(entity);
-        }
-
-        protected DefaultProduct ConvertDtoToDB(DefaultProductDto dto)
-        {
-            return StaticDtoToDB(dto);
-        }
-
-        protected override ProductDto ConvertDBToDto(Product entity)
-        {
-            return StaticDBToDto(entity);
-        }
-
-        protected override Product ConvertDtoToDB(ProductDto dto)
-        {
-            return StaticDtoToDB(dto);
-        }
-		
-		protected UserProduct ConvertDtoToDB(UserProductDto dto)
-        {
-            return StaticDtoToDB(dto);
-        }
-
-        public static DefaultProduct StaticDtoToDB(DefaultProductDto dto)
-        {
-            return new DefaultProduct
-            {
-                Product_Id = dto.ProductTypeId,
-                //Category_Id = dto.Category_Id,
-                Currency_Id = dto.Currency_Id,
-                UnitType_Id = dto.Unit_Id,
-                //Name = dto.Name,
-                Price = dto.Price
-            };
-        }
-
-        public static DefaultProductDto StaticDBToDto(DefaultProduct defaultProduct)
-        {
-            return new DefaultProductDto
-            {
-                Id = defaultProduct.Id,
-                //Name = defaultProduct.Name,
-                Currency_Id = defaultProduct.Currency_Id,
-                Unit_Id = defaultProduct.UnitType_Id,
-                Price = defaultProduct.Price,
-                //Category_Id = defaultProduct.Category_Id,
-                //ProductTypeId = from ProductTable
-                ProductId = (int)defaultProduct.Product_Id
-            };
-        }
-
-        public static UserProduct StaticDtoToDB(UserProductDto dto)
-        {
-            return new UserProduct
-            {
-                Id = dto.ProductTypeId,
-                Category_Id = dto.Category_Id,
-                Currency_Id = dto.Currency_Id,
-                UnitType_Id = dto.Unit_Id,
-                User_Id = dto.User_Id,
-                Name = dto.Name,
-                Price = dto.Price
-            };
-        }
-
-        public static UserProductDto StaticDBToDto(UserProduct userProduct)
-        {    
-            return new UserProductDto
-            {
-                Id = userProduct.Id,
-                Name = userProduct.Name,
-                Currency_Id = (int)userProduct.Currency_Id,
-                Unit_Id = (int)userProduct.UnitType_Id,
-                //Quantity = from ProductTable
-                Price = (int)userProduct.Price,
-                Category_Id = userProduct.Category_Id,
-                User_Id = userProduct.User_Id,
-                //ProductTypeId = from ProductTable
-            };
-        }
-
-        public static Product StaticDtoToDB(ProductDto dto)
-        {
-            return new Product
-            {
-                Id = dto.ProductTypeId,
-                Timestamp = DateTime.Now,
-                ProductType_Id = dto.ProductTypeId,
-            };
-        }
-
-        public static ProductDto StaticDBToDto(Product product)
-        {
-            return new ProductDto
-            {
-                Id = product.Id,
-                ProductTypeId = product.ProductType_Id
-            };
-        }
-
         public static ProductDto StaticDBToDto(Product product, UserProduct userProduct, ShoppingListEntry entry)
         {
             return new ProductDto
@@ -268,6 +283,23 @@ namespace ListIt_BusinessLogic.Services
                 ProductId = product.Id,
                 //Category_Id = defaultProduct.Category_Id
             };
-        }   
+        }
+        protected ProductDto ConvertUserProductDBToDto(Product entity, UserProduct userProduct, ShoppingListEntry entry)
+        {
+            return StaticDBToDto(entity, userProduct, entry);
+        }
+
+        protected ProductDto ConvertDefaultProductDBToDto(Product entity, DefaultProduct defaultProduct, ShoppingListEntry entry, TranslationOfProduct translation)
+        {
+            return StaticDBToDto(entity, defaultProduct, entry, translation);
+        }
+
+        protected ProductDto ConvertApiProductDBToDto(Product entity, ApiProduct apiProduct, ShoppingListEntry entry, TranslationOfProduct translation)
+        {
+            return StaticDBToDto(entity, apiProduct, entry, translation);
+        }
+
+        #endregion SHOPPINGLIST
+
     }
 }
