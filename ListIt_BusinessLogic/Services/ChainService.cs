@@ -1,36 +1,44 @@
-﻿using ListIt_BusinessLogic.Services.Converters;
+﻿using System;
+using ListIt_BusinessLogic.Services.Converters;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Converter;
+using ListIt_DomainInterface.Interfaces.Repository;
+using ListIt_DomainInterface.Interfaces.Service;
 using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services
 {
-    public class ChainService : Service<Chain, ChainDto>
+    public class ChainService : Service<Chain, ChainDto>, IChainService
     {
-        public ChainService() : base(new ChainRepository(), new ChainConverter())
-        {
+        private readonly IShopApiRepository _shopApiRepository;
 
+        public ChainService(IChainRepository chainRepository, IChainConverter chainConverter, IShopApiRepository shopApiRepository) : base(chainRepository, chainConverter)
+        {
+            _shopApiRepository = shopApiRepository;
         }
+
 
         public override void Create(ChainDto chainDto)
         {
-            var shopApiRepository = new ShopApiRepository();
+            if (chainDto.Name == null || chainDto.Logo == null)
+                throw new Exception("Name and Logo cannot be empty");
 
             int? shopApiId = null;
             if (chainDto.ShopApi != null)
             {
-                var shopApi = shopApiRepository.Get(chainDto.ShopApi.Id);
+                var shopApi = _shopApiRepository.Get(chainDto.ShopApi.Id);
                 if (shopApi == null)
                 {
                     ShopApiConverter shopApiConverter = new ShopApiConverter();
 
                     shopApi = shopApiConverter.ConvertDtoToDB(chainDto.ShopApi);
-                    shopApiRepository.Create(shopApi);
+                    _shopApiRepository.Create(shopApi);
                 }
                 shopApiId = shopApi.Id;
             }
-
+            
             _repository.Create(new Chain
             {
                 Id = chainDto.Id,
@@ -40,7 +48,20 @@ namespace ListIt_BusinessLogic.Services
                 // ShopApi = shopApi    Don't link it because every time it creates a new instance
             });
         }
+        /*public override void Create(ChainDto chainDto)
+        {
 
+            if (chainDto.Name == null || chainDto.Logo == null)
+            throw new Exception("Chain has to have a name and a logo");
+
+            _repository.Create(new Chain
+            {
+                Name = chainDto.Name,
+                Id = chainDto.Id,
+                Logo = chainDto.Logo,
+                ShopApi_Id = chainDto.ShopApi.Id,
+            });
+        }*/
         /* CASCADE DELETE - DELETING CHAIN WILL ALSO DELETE ITS SHOPAPI // IMPLEMENTED IN REPOSITORY CLASS
         public override void Delete(int id)
         {

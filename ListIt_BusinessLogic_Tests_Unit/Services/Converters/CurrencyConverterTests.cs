@@ -31,6 +31,7 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services.Converters
             var currency = converter.ConvertDtoToDB(currencyDto);
 
             Assert.IsNull(currency);
+            
         }
 
         [Test]

@@ -41,12 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\Converter\IChainConverter.cs" />
     <Compile Include="Interfaces\Converter\IUserConverter.cs" />
+    <Compile Include="Interfaces\Repository\IChainRepository.cs" />
     <Compile Include="Interfaces\Repository\ICountryRepository.cs" />
     <Compile Include="Interfaces\Repository\ILanguageRepository.cs" />
     <Compile Include="Interfaces\Repository\IRepository.cs" />
+    <Compile Include="Interfaces\Repository\IShopApiRepository.cs" />
     <Compile Include="Interfaces\Repository\IUserRepository.cs" />
     <Compile Include="Interfaces\Converter\IDtoDbConverter.cs" />
+    <Compile Include="Interfaces\Service\IChainService.cs" />
     <Compile Include="Interfaces\Service\IService.cs" />
     <Compile Include="Interfaces\Service\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

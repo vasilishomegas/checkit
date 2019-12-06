@@ -4,10 +4,11 @@ using System.Linq;
 using System.Web;
 using ListIt_DataAccess.Repository.Generics;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Repository;
 
 namespace ListIt_DataAccess.Repository
 {
-    public class ShopApiRepository : Repository<ShopApi>
+    public class ShopApiRepository : Repository<ShopApi>, IShopApiRepository
     {
         public override void Delete(int id)
         {
