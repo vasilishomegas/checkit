@@ -54,7 +54,7 @@ namespace ListIt_BusinessLogic.Services
 
         #region DEFAULTPRODUCT
 
-        public void Create(DefaultProductDto dto)
+        public void Create(DefaultProductDto dto, int langId)
         {
             var product = new Product
             {
@@ -74,6 +74,15 @@ namespace ListIt_BusinessLogic.Services
             };
 
             _prodRepository.Create(defaultProduct);
+
+            // Save name
+            var translation = new TranslationOfProduct
+            {
+                Language_Id = langId,
+                Product_Id = prodId,
+                Translation = dto.Name
+                };
+            _prodRepository.SaveDefaultProductName(translation);
 
             // Link category
         }

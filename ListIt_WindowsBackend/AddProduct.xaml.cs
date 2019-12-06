@@ -72,7 +72,7 @@ namespace ListIt_WindowsBackend
                         Currency_Id = (int)CurrencyBox.SelectedValue,
                         Unit_Id = (int)UnitBox.SelectedValue,
                         Price = (decimal)price
-                    });
+                    }, (int)LanguageBox.SelectedValue);
                     MessageBox.Show("Product added!");
                     TypeBox.SelectedIndex = 0;
                     NameField.Text = "";
