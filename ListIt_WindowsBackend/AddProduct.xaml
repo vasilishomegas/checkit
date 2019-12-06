@@ -7,21 +7,23 @@
         mc:Ignorable="d"
         Title="AddProduct" Height="450" Width="800">
     <Grid>
-        <Label Content="Add Product" HorizontalAlignment="Left" Margin="88,19,0,0" VerticalAlignment="Top" Height="52" Width="192" FontSize="30"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="110,76,0,0" VerticalAlignment="Top" Name="TypeLabel"/>
-        <ComboBox HorizontalAlignment="Left" Margin="160,80,0,0" VerticalAlignment="Top" Width="120" Name="TypeBox"/>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="103,116,0,0" VerticalAlignment="Top" Name="NameLabel"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="160,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="15" Name="NameField"/>
-        <Label Content="Unit" HorizontalAlignment="Left" Margin="113,196,0,0" VerticalAlignment="Top" Name="UnitLabel"/>
-        <ComboBox HorizontalAlignment="Left" Margin="160,200,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.844,-0.779" Name="UnitBox"/>
-        <Label Content="Language" HorizontalAlignment="Left" Margin="88,236,0,0" VerticalAlignment="Top" x:Name="LanguageLabel"/>
-        <ComboBox HorizontalAlignment="Left" Margin="160,240,0,0" VerticalAlignment="Top" Width="120" x:Name="LanguageBox"/>
-        <Label Content="Currency" HorizontalAlignment="Left" Margin="88,276,0,0" VerticalAlignment="Top" Name="CurrencyLabel"/>
-        <ComboBox HorizontalAlignment="Left" Margin="160,280,0,0" VerticalAlignment="Top" Width="120" Name="CurrencyBox"/>
-        <Label Content="Price" HorizontalAlignment="Left" Margin="109,318,0,0" VerticalAlignment="Top" Name="PriceLabel"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="160,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="7" Name="PriceField"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="160,380,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Name="AddButton"/>
-        <ComboBox HorizontalAlignment="Left" Margin="160,161,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.844,-0.779" x:Name="CategoryBox"/>
-        <Label Content="Category" HorizontalAlignment="Left" Margin="87,157,0,0" VerticalAlignment="Top" x:Name="CategoryLabel" RenderTransformOrigin="0.547,-1.038"/>
+        <Grid Margin="80,0,80,0">
+            <Label Content="Add Product" HorizontalAlignment="Center" Margin="224,11,217.6,0" VerticalAlignment="Top" Height="52" Width="192" FontSize="25"/>
+            <Label Content="Type" HorizontalAlignment="Center" Margin="178,70,353.6,0" VerticalAlignment="Top" x:Name="TypeLabel" Width="102" FontSize="18" Height="35"/>
+            <ComboBox HorizontalAlignment="Center" Margin="362,70,113.6,0" VerticalAlignment="Top" Width="158" x:Name="TypeBox" FontSize="18" Height="35"/>
+            <Label Content="Name" HorizontalAlignment="Center" Margin="178,120,353.6,0" VerticalAlignment="Top" x:Name="NameLabel" FontSize="18" Height="35" Width="102"/>
+            <TextBox HorizontalAlignment="Center" Height="35" Margin="362,120,113.6,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" MaxLength="15" x:Name="NameField" FontSize="18"/>
+            <Label Content="Unit" HorizontalAlignment="Center" Margin="178,220,353.6,0" VerticalAlignment="Top" x:Name="UnitLabel" FontSize="18" Width="102" Height="35"/>
+            <ComboBox HorizontalAlignment="Center" Margin="362,220,113.6,0" VerticalAlignment="Top" Width="158" RenderTransformOrigin="0.844,-0.779" x:Name="UnitBox" FontSize="18" Height="35"/>
+            <Label Content="Language" HorizontalAlignment="Center" Margin="178,270,353.6,0" VerticalAlignment="Top" x:Name="LanguageLabel" FontSize="18" Width="102" Height="35"/>
+            <ComboBox HorizontalAlignment="Center" Margin="362,271,113.6,0" VerticalAlignment="Top" Width="158" x:Name="LanguageBox" FontSize="18" Height="35"/>
+            <Label Content="Currency" HorizontalAlignment="Center" Margin="178,320,353.6,0" VerticalAlignment="Top" x:Name="CurrencyLabel" FontSize="18" Width="102" Height="35"/>
+            <ComboBox HorizontalAlignment="Center" Margin="362,319,113.6,0" VerticalAlignment="Top" Width="158" x:Name="CurrencyBox" FontSize="18" Height="35"/>
+            <Label Content="Price" HorizontalAlignment="Center" Margin="178,370,353.6,0" VerticalAlignment="Top" x:Name="PriceLabel" FontSize="18" Width="102" Height="35"/>
+            <TextBox HorizontalAlignment="Center" Height="35" Margin="362,370,113.6,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" MaxLength="7" x:Name="PriceField" FontSize="18"/>
+            <Button Content="Add" HorizontalAlignment="Center" Margin="542,223,16.6,0" VerticalAlignment="Top" Width="75" Click="Button_Click" x:Name="AddButton" FontSize="18" Height="35"/>
+            <ComboBox HorizontalAlignment="Center" Margin="362,170,113.6,0" VerticalAlignment="Top" Width="158" RenderTransformOrigin="0.844,-0.779" x:Name="CategoryBox" FontSize="18" Height="35"/>
+            <Label Content="Category" HorizontalAlignment="Center" Margin="178,170,353.6,0" VerticalAlignment="Top" x:Name="CategoryLabel" RenderTransformOrigin="0.547,-1.038" FontSize="18" Width="102"/>
+        </Grid>
     </Grid>
 </Window>

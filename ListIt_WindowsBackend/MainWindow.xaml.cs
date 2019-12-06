@@ -23,7 +23,7 @@ namespace ListIt_WindowsBackend
         public MainWindow()
         {
             InitializeComponent();
-            var window = new MenuWindow();
+            var window = new AddProduct();
             window.Show();
             this.Close();
         }
