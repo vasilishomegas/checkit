@@ -10,22 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ListIt_WindowsBackend
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MenuWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuWindow : Window
     {
-        public MainWindow()
+        public MenuWindow()
         {
             InitializeComponent();
-            var window = new MenuWindow();
-            window.Show();
-            this.Close();
         }
+
     }
 }
