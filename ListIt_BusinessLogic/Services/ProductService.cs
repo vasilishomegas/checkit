@@ -85,6 +85,11 @@ namespace ListIt_BusinessLogic.Services
             _prodRepository.SaveDefaultProductName(translation);
 
             // Link category
+            //var categoryrelation = new LinkDefaultProductToCategory
+            //{
+            //    DefaultProductId = dto.ProductId,
+            //    CategoryId = dto.Category_Id
+            //};
         }
 
         protected DefaultProductDto ConvertDBToDto(DefaultProduct entity)

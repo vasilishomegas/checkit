@@ -104,7 +104,6 @@ namespace ListIt_WindowsBackend
             UnitBox.ItemsSource = unitService.GetUnitTypesByLanguage(2);
             UnitBox.SelectedValuePath = "Id";
             UnitBox.DisplayMemberPath = "Name";
-            //UnitBox.SelectedIndex = 0;
             LanguageBox.ItemsSource = languageService.GetAll();
             LanguageBox.SelectedValuePath = "Id";
             LanguageBox.DisplayMemberPath = "Name";
