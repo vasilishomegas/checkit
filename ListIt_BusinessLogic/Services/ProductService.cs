@@ -19,6 +19,7 @@ namespace ListIt_BusinessLogic.Services
         {
             _prodRepository = (ProductRepository)_repository;
         }
+		
         public void Create(DefaultProductDto dto)
         {
             _prodRepository.Create(StaticDtoToDB(dto));
@@ -76,6 +77,7 @@ namespace ListIt_BusinessLogic.Services
 
             return productDtoList;
         }
+		
         protected ProductDto ConvertUserProductDBToDto(Product entity, UserProduct userProduct, ShoppingListEntry entry)
         {
             return StaticDBToDto(entity, userProduct, entry);
@@ -85,6 +87,7 @@ namespace ListIt_BusinessLogic.Services
         {
             return StaticDBToDto(entity, defaultProduct, entry, translation);
         }
+		
         protected ProductDto ConvertApiProductDBToDto(Product entity, ApiProduct apiProduct, ShoppingListEntry entry, TranslationOfProduct translation)
         {
             return StaticDBToDto(entity, apiProduct, entry, translation);
@@ -125,7 +128,6 @@ namespace ListIt_BusinessLogic.Services
 
         public static DefaultProductDto StaticDBToDto(DefaultProduct defaultProduct)
         {
-
             return new DefaultProductDto
             {
                 Id = defaultProduct.Id,
@@ -155,7 +157,6 @@ namespace ListIt_BusinessLogic.Services
 
         public static UserProductDto StaticDBToDto(UserProduct userProduct)
         {    
-
             return new UserProductDto
             {
                 Id = userProduct.Id,
