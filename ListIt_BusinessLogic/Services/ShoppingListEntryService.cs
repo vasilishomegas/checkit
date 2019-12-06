@@ -25,7 +25,7 @@ namespace ListIt_BusinessLogic.Services
             return _entryRepository.GetByProductId(productId).Id;
         }
 
-        public new int Create(ShoppingListEntryDto dto)
+        public void Create(ShoppingListEntryDto dto)
         {
             var product = new Product
             {
@@ -41,7 +41,7 @@ namespace ListIt_BusinessLogic.Services
             {
                 Id = dto.Id,
                 Quantity = dto.Quantity,
-                Product_Id = prodId,
+                Product_Id = dto.Product_Id,
                 ShoppingList_Id = dto.ShoppingList_Id,
                 State_Id = dto.State_Id
             };
@@ -50,8 +50,6 @@ namespace ListIt_BusinessLogic.Services
 
 
             //sorting.Update() !! 
-
-            return prodId;
         }
                
 

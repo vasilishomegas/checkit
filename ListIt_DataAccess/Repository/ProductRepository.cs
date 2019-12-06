@@ -48,6 +48,45 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
+        public IList<DefaultProduct> GetAllDefaultProducts()
+        {
+            using (var context = new ListItContext())
+            {
+                return context.DefaultProducts
+                    .ToList();
+            }
+        }
+
+        public IList<Product> GetReusableProducts()
+        {
+            using (var context = new ListItContext()) 
+            {
+                return context.Products
+                    .Where(x => x.ProductType_Id == 3)
+                    .ToList();
+            }
+        }
+
+        public int GetProductTypeId(int productId)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.Products
+                    .SingleOrDefault(x => x.Id == productId)
+                    .ProductType_Id;
+            }
+        }
+
+        public int GetDefaultProductId(int productId)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.DefaultProducts
+                    .SingleOrDefault(x => x.Product_Id == productId)
+                    .Id;
+            }
+        }
+
         public int CreateProduct(Product product)
         {
             using (var context = new ListItContext())
@@ -142,6 +181,35 @@ namespace ListIt_DataAccess.Repository
             using (var context = new ListItContext())
             {
                 var result = context.Set<DefaultProduct>().Add(entity);
+
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
+                                                         + " in state " + eve.Entry.State + " has the following" +
+                                                         " validation errors:");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
+                        }
+                    }
+
+                    throw new Exception(builder.ToString());
+                }
+            }
+        }
+
+        public void Create(LinkUserToDefaultProduct entity)
+        {
+            using (var context = new ListItContext())
+            {
+                var result = context.Set<LinkUserToDefaultProduct>().Add(entity);
 
                 try
                 {
