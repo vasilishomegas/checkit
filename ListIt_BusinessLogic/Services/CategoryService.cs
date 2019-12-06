@@ -28,7 +28,7 @@ namespace ListIt_BusinessLogic.Services
         }
 
         //Returns a list of default categories and user categories
-        public IEnumerable<CategoryDto> GetCategories(int langId, int userId)
+        public IEnumerable<CategoryDto> GetUserCategories(int langId, int userId)
         {        
             List<CategoryDto> categoryList = new List<CategoryDto>();
 
