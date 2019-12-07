@@ -14,10 +14,10 @@ namespace ListIt_DomainModel.DTO
 
         //Generic Values
         public string Name { get; set; }
-        public int Currency_Id { get; set; }
-        public int Unit_Id { get; set; }
+        public int? Currency_Id { get; set; }
+        public int? Unit_Id { get; set; }
         public int Quantity { get; set; }
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         public int ProductId { get; set; }
     }
 
@@ -27,17 +27,6 @@ namespace ListIt_DomainModel.DTO
         public int ShopApi_Id { get; set; }        
         public string Endpoint { get; set; }
         
-    }
-
-    public class UserProductDto : ProductDto
-    {
-        //public int Id { get; set; }
-        public Nullable<int> Category_Id { get; set; }
-        public new Nullable<int> Currency_Id { get; set; }
-        public new Nullable<int> Unit_Id { get; set; }
-        public new Nullable<decimal> Price { get; set; }
-        public int User_Id { get; set; }
-
     }
 
     public class DefaultProductDto : ProductDto

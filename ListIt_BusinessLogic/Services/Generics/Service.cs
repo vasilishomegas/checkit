@@ -8,7 +8,7 @@ using ListIt_DomainInterface.Interfaces.Service;
 namespace ListIt_BusinessLogic.Services.Generics
 {
 
-    public class Service<T, DTO> : IService<DTO> 
+    public class Service<T, DTO> : IService<T, DTO> 
         where T : class
         where DTO : class
     {
@@ -31,6 +31,7 @@ namespace ListIt_BusinessLogic.Services.Generics
         {
             return _repository.GetAll().Select(_converter.ConvertDBToDto).ToList();
         }
+
         public virtual DTO Get(int id)
         {
             var entity = _repository.Get(id);

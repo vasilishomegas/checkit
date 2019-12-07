@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using ListIt_BusinessLogic.Services.Generics;
+using ListIt_DomainInterface.Interfaces.Service;
 using ListIt_DomainModel.DTO.Interfaces;
 
 namespace ListIt_WebAPI.Controllers.Generics
@@ -13,9 +14,9 @@ namespace ListIt_WebAPI.Controllers.Generics
     where T : class
     where IDTO : class
     {
-        protected readonly Service<T, IDTO> _service;
+        private readonly IService<T, IDTO> _service;
 
-        protected GenericController(Service<T, IDTO> service)
+        protected GenericController(IService<T, IDTO> service)
         {
             _service = service;
         }

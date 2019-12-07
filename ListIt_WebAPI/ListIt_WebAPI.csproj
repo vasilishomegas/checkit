@@ -131,7 +131,9 @@
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\Generics\GenericController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShopApisController.cs" />
+    <Compile Include="Controllers\UserProductsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

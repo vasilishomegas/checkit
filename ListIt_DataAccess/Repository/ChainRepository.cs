@@ -11,7 +11,7 @@ namespace ListIt_DataAccess.Repository
 {
     public class ChainRepository : Repository<Chain>, IChainRepository
     {
-        // THIS STUPID GET METHODS ARE NECESSARY FOR EAGER LOADING, WHICH MEANS THAT RELATED CLASSES ARE ALSO RETURNED IN WEB API
+        // Include methods specify which of reference data has to be loaded
         public override IEnumerable<Chain> GetAll()
         {
             using (var context = new ListItContext())

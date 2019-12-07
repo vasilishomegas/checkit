@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ListIt_DataAccess.Repository.Generics;
+using ListIt_DataAccess.Repository.Helpers;
 using ListIt_DataAccessModel;
 using ListIt_DomainInterface.Interfaces.Repository;
 
@@ -31,7 +32,7 @@ namespace ListIt_DataAccess.Repository
                     throw new KeyNotFoundException("No entries were affected. " + e.Message);
                 }
 
-                context.SaveChanges();
+                ContextManager.SaveChanges(context);
             }
         }
     }

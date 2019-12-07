@@ -2,8 +2,9 @@
 
 namespace ListIt_DomainInterface.Interfaces.Service
 {
-    public interface IService<DTO>
-        where DTO : class
+    public interface IService<T, DTO>
+    where T : class
+    where DTO : class
     {
         IEnumerable<DTO> GetAll();
         DTO Get(int id);

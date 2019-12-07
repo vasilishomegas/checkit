@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using ListIt_DataAccess.Repository.Helpers;
 using ListIt_DomainInterface.Interfaces.Repository;
 
 namespace ListIt_DataAccess.Repository.Generics
@@ -30,26 +31,7 @@ namespace ListIt_DataAccess.Repository.Generics
             using (var context = new ListItContext())
             {
                 var result = context.Set<T>().Add(entity);
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException e)
-                {
-                    StringBuilder builder = new StringBuilder();
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
-                                                         + " in state " + eve.Entry.State + " has the following" +
-                                                         " validation errors:");
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
-                        }
-                    }
-
-                    throw new Exception(builder.ToString());
-                }
+                ContextManager.SaveChanges(context);
             }
         }
 
@@ -59,14 +41,7 @@ namespace ListIt_DataAccess.Repository.Generics
             {
                 context.Set<T>().Attach(entity);
                 context.Entry(entity).State = EntityState.Modified;
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException e)
-                {
-                    throw new KeyNotFoundException(e.Message, e.InnerException);
-                }
+                ContextManager.SaveChanges(context);
             }
         }
 
@@ -83,7 +58,7 @@ namespace ListIt_DataAccess.Repository.Generics
                 {
                     throw new KeyNotFoundException("No entries were affected; the row does not exist." + e.Message);
                 }
-                context.SaveChanges();
+                ContextManager.SaveChanges(context);
             }
         }
 

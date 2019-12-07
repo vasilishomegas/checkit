@@ -63,6 +63,7 @@ namespace ListIt_BusinessLogic.Services
         }
         */
 
+        /*
         public void Create(UserProductDto userProduct)
         {
             _shoppingListEntryRepository.CreateUserProduct(new UserProduct
@@ -77,6 +78,8 @@ namespace ListIt_BusinessLogic.Services
                 Price = userProduct.Price
             });
         }
+
+        */
 
         public IList<ShoppingListEntryDto> GetEntriesByListId(int listId)
         {

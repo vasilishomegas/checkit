@@ -82,6 +82,7 @@
     <Compile Include="DTO\ShoppingListEntryDto.cs" />
     <Compile Include="DTO\UnitTypeDto.cs" />
     <Compile Include="DTO\UserDto.cs" />
+    <Compile Include="DTO\UserProductDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

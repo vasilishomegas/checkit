@@ -63,15 +63,22 @@
     <Compile Include="Interfaces\Repository\IShoppingListEntryRepository.cs" />
     <Compile Include="Interfaces\Repository\IShoppingListRepository.cs" />
     <Compile Include="Interfaces\Repository\IUnitTypeRepository.cs" />
+    <Compile Include="Interfaces\Repository\IUserProductRepository.cs" />
     <Compile Include="Interfaces\Repository\IUserRepository.cs" />
     <Compile Include="Interfaces\Converter\IDtoDbConverter.cs" />
+    <Compile Include="Interfaces\Service\IApiProductService.cs" />
     <Compile Include="Interfaces\Service\IChainService.cs" />
+    <Compile Include="Interfaces\Service\IDefaultProductService.cs" />
+    <Compile Include="Interfaces\Service\IProductService.cs" />
     <Compile Include="Interfaces\Service\IService.cs" />
+    <Compile Include="Interfaces\Service\IUserProductService.cs" />
     <Compile Include="Interfaces\Service\IUserService.cs" />
     <Compile Include="Interfaces\Service\IUnitTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\Controller\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">
       <Project>{1FC38C28-DF7B-403E-A99E-D4AF6C044A32}</Project>

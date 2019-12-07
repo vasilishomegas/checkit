@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ListIt_DataAccessModel;
 
 namespace ListIt_DomainInterface.Interfaces.Service
 {
-    public interface IUserService : IService<UserDto>
+    public interface IUserService : IService<User, UserDto>
     {
         void Create(UserDto userDto);
         void Update(UserDto userDto);

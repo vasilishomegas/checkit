@@ -11,9 +11,5 @@ namespace ListIt_DomainInterface.Interfaces.Repository
     {
         new IEnumerable<ShoppingListEntry> GetAll();
         IEnumerable<ShoppingListEntry> GetEntriesByListId(int listId);
-        Product Get(int id);
-        void CreateProduct(Product product);
-        void CreateUserProduct(UserProduct product);
-
     }
 }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Web;
 using ListIt_DataAccess.Repository.Generics;
+using ListIt_DataAccess.Repository.Helpers;
 using ListIt_DataAccessModel;
 using ListIt_DomainInterface.Interfaces.Repository;
 
@@ -33,14 +35,6 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
-        public Product Get(int id)
-        {
-            using (var context = new ListItContext())
-            {
-                return context.Set<Product>().Find(id);
-            }
-        }
-
         //public int GetIdOfProduct(Product product)
         //{
         //    using (var context = new ListItContext())
@@ -53,32 +47,14 @@ namespace ListIt_DataAccess.Repository
         //    }
         //}
 
+        /*
         public void CreateProduct(Product product)
         {
             using (var context = new ListItContext())
             {
                 var prod = context.Set<Product>().Add(product);
 
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException e)
-                {
-                    StringBuilder builder = new StringBuilder();
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
-                                                         + " in state " + eve.Entry.State + " has the following" +
-                                                         " validation errors:");
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
-                        }
-                    }
-
-                    throw new Exception(builder.ToString());
-                }
+                ContextManager.SaveChanges(context);
             }
         }
 
@@ -88,28 +64,9 @@ namespace ListIt_DataAccess.Repository
             {
                 var result = context.Set<UserProduct>().Add(product);
 
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException e)
-                {
-                    StringBuilder builder = new StringBuilder();
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
-                                                         + " in state " + eve.Entry.State + " has the following" +
-                                                         " validation errors:");
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
-                        }
-                    }
-
-                    throw new Exception(builder.ToString());
-                }
+                ContextManager.SaveChanges(context);
             }
 
-        }
+        } */
     }
 }

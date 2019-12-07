@@ -1,5 +1,6 @@
 ﻿using ListIt_BusinessLogic.Services;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Service;
 using ListIt_DomainModel.DTO;
 using ListIt_WebAPI.Controllers.Generics;
 
@@ -8,6 +9,11 @@ namespace ListIt_WebAPI.Controllers
     public class ChainsController : GenericController<Chain, ChainDto>
     {
         public ChainsController() : base(new ChainService())
+        {
+
+        }
+
+        public ChainsController(IChainService chainService): base(chainService)
         {
 
         }
