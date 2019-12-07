@@ -40,7 +40,7 @@ namespace ListIt_WindowsBackend
                 try
                 {
                     adminService.Login(UsernameField.Text, PasswordField.Password);
-                    var window = new AddProduct();
+                    var window = new MenuWindow();
                     window.Show();
                     this.Close();
                 }

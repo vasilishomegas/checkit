@@ -61,7 +61,8 @@ namespace ListIt_WindowsBackend
             else
             {
                 ProductService productService = new ProductService();
-                //if (TypeBox.SelectedItem == 1)
+                // Currently, every product is added as if it's a DefaultProduct,
+                // even though it's possible to make it as another type of Product
                 try
                 {
                    // Create Product
@@ -85,7 +86,6 @@ namespace ListIt_WindowsBackend
                 {
                     MessageBox.Show("Failed to add product");
                 }
-                //productService.Create(new DefaultProductDto { })
             }
         }
 
@@ -115,6 +115,13 @@ namespace ListIt_WindowsBackend
             CategoryBox.ItemsSource = categoryService.GetCategories(2);
             CategoryBox.SelectedValuePath = "Id";
             CategoryBox.DisplayMemberPath = "Name";
-        }        
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new MenuWindow();
+            window.Show();
+            this.Close();
+        }
     }
 }

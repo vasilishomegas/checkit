@@ -23,7 +23,7 @@ namespace ListIt_WindowsBackend
         public MainWindow()
         {
             InitializeComponent();
-            var window = new AddChain();
+            var window = new AdminLogin();
             window.Show();
             this.Close();
         }
