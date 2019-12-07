@@ -18,8 +18,8 @@ namespace ListIt_BusinessLogic.Services.Generics
         // Therefore I extracted convert methods to new class.
         // It is a great example why TDD leads to better design.
 
-        protected IRepository<T> _repository;
-        protected IDtoDbConverter<T, DTO> _converter;
+        private readonly IRepository<T> _repository;
+        private readonly IDtoDbConverter<T, DTO> _converter;
 
         public Service(IRepository<T> repository, IDtoDbConverter<T, DTO> converter)
         {

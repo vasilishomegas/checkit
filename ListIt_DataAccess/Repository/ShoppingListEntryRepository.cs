@@ -6,10 +6,11 @@ using System.Text;
 using System.Web;
 using ListIt_DataAccess.Repository.Generics;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Repository;
 
 namespace ListIt_DataAccess.Repository
 {
-    public class ShoppingListEntryRepository : Repository<ShoppingListEntry>
+    public class ShoppingListEntryRepository : Repository<ShoppingListEntry>, IShoppingListEntryRepository
     {
         public override IEnumerable<ShoppingListEntry> GetAll()
         {
@@ -32,7 +33,7 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
-        public new Product Get(int id)
+        public Product Get(int id)
         {
             using (var context = new ListItContext())
             {
@@ -52,7 +53,7 @@ namespace ListIt_DataAccess.Repository
         //    }
         //}
 
-        public int CreateProduct(Product product)
+        public void CreateProduct(Product product)
         {
             using (var context = new ListItContext())
             {
@@ -61,7 +62,6 @@ namespace ListIt_DataAccess.Repository
                 try
                 {
                     context.SaveChanges();
-                    return prod.Id;
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException e)
                 {

@@ -9,18 +9,20 @@ using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
 using System.Security.Cryptography;
 using ListIt_BusinessLogic.Services.Converters;
+using ListIt_DomainInterface.Interfaces.Repository;
+using ListIt_DomainInterface.Interfaces.Converter;
 
 namespace ListIt_BusinessLogic.Services
 {
     public class ShoppingListService : Service<ShoppingList, ShoppingListDto>
     {
-        private readonly ShoppingListRepository _listRepository;
-        private readonly ShoppingListConverter _shoppingListConverter;
+        private readonly IShoppingListRepository _shoppingListRepository;
+        private readonly IShoppingListConverter _shoppingListConverter;
 
-        public ShoppingListService() : base(new ShoppingListRepository(), new ShoppingListConverter())
+        public ShoppingListService(IShoppingListRepository shoppingListRepository, IShoppingListConverter shoppingListConverter) : base(shoppingListConverter, shoppingListRepository)
         {
-            _listRepository = (ShoppingListRepository)_repository;
-            _shoppingListConverter = (ShoppingListConverter) _converter;
+            _shoppingListRepository = shoppingListRepository;
+            _shoppingListConverter = shoppingListConverter;
         }
 
         public override void Create(ShoppingListDto dto)
@@ -41,12 +43,12 @@ namespace ListIt_BusinessLogic.Services
                 ListAccessTypeId = dto.ListAccessTypeId,
             };
 
-            _listRepository.Create(list, link);
+            _shoppingListRepository.Create(list, link);
         }
 
         public override void Update(ShoppingListDto dto)
         {
-            var dbList = _listRepository.Get(dto.Id);
+            var dbList = _shoppingListRepository.Get(dto.Id);
             if (dbList == null) throw new KeyNotFoundException("No list with this id found");
 
             if (dto.Name == null) dto.Name = dbList.Name;
@@ -54,7 +56,7 @@ namespace ListIt_BusinessLogic.Services
             if (dto.ChosenSortingId == 0) dto.ChosenSortingId = dbList.ChosenSorting_Id;
             
 
-            _repository.Update(new ShoppingList
+            _shoppingListRepository.Update(new ShoppingList
             {
                 Id = dto.Id,
                 Name = dto.Name,
@@ -66,7 +68,7 @@ namespace ListIt_BusinessLogic.Services
  
         public IList<ShoppingListDto> GetListsByUserId(int userId)
         {
-            var linkedUserLists = _listRepository.GetLinkByUserId(userId);
+            var linkedUserLists = _shoppingListRepository.GetLinkByUserId(userId);
             List<ShoppingListDto> listOfLists = new List<ShoppingListDto>();
 
             foreach(LinkUserToList link in linkedUserLists)

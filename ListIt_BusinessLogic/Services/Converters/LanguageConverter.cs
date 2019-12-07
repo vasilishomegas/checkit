@@ -5,7 +5,7 @@ using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class LanguageConverter : IDtoDbConverter<Language, LanguageDto>
+    public class LanguageConverter : ILanguageConverter
     {
         public LanguageDto ConvertDBToDto(Language language)
         {

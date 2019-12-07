@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ListIt_DataAccessModel;
+using ListIt_DomainModel.DTO;
 
-namespace ListIt_DomainInterface.Interfaces.Repository
+namespace ListIt_DomainInterface.Interfaces.Converter
 {
-    public interface ILanguageRepository : IRepository<Language>
+    public interface ICurrencyConverter : IDtoDbConverter<Currency, CurrencyDto>
     {
-        Language GetByCode(string code);
+
     }
 }

@@ -7,20 +7,28 @@ using ListIt_BusinessLogic.Services.Converters;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Converter;
+using ListIt_DomainInterface.Interfaces.Repository;
+using ListIt_DomainInterface.Interfaces.Service;
 using ListIt_DomainModel;
 using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services
 {
-    public class UnitTypeService : Service<UnitType, UnitTypeDto>
+    public class UnitTypeService : Service<UnitType, UnitTypeDto>, IUnitTypeService
     {
-        private readonly UnitTypesRepository _unitTypeRepository;
-        private readonly UnitTypeConverter _unitTypeConverter;
+        private readonly IUnitTypeRepository _unitTypeRepository;
+        private readonly IUnitTypeConverter _unitTypeConverter;
 
-        public UnitTypeService() : base(new UnitTypesRepository(), new UnitTypeConverter())
+        public UnitTypeService(): this(new UnitTypeRepository(), new UnitTypeConverter())
         {
-            _unitTypeRepository = (UnitTypesRepository)_repository;
-            _unitTypeConverter = (UnitTypeConverter) _converter;
+
+        }
+
+        public UnitTypeService(IUnitTypeRepository unitTypeRepository, IUnitTypeConverter unitTypeConverter) : base(unitTypeRepository, unitTypeConverter)
+        {
+            _unitTypeConverter = unitTypeConverter;
+            _unitTypeRepository = unitTypeRepository;
         }
 
         public IList<UnitTypeDto> GetUnitTypesByLanguage(int langId)

@@ -9,18 +9,24 @@ using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
 using System.Security.Cryptography;
 using ListIt_BusinessLogic.Services.Converters;
+using ListIt_DomainInterface.Interfaces.Repository;
+using ListIt_DomainInterface.Interfaces.Converter;
 
 namespace ListIt_BusinessLogic.Services
 {
     public class ShoppingListEntryService : Service<ShoppingListEntry, ShoppingListEntryDto>
     {
-        private readonly ShoppingListEntryRepository _entryRepository;
-        private readonly ShoppingListEntryConverter _shoppingListEntryConverter;
+        private readonly IShoppingListEntryRepository _shoppingListEntryRepository;
+        private readonly IShoppingListEntryConverter _shoppingListEntryConverter;
 
-        public ShoppingListEntryService() : base(new ShoppingListEntryRepository(), new ShoppingListEntryConverter())
+        public ShoppingListEntryService() : this(new ShoppingListEntryConverter(), new ShoppingListEntryRepository())
         {
-            _entryRepository = (ShoppingListEntryRepository)_repository;
-            _shoppingListEntryConverter = (ShoppingListEntryConverter) _converter;
+
+        }
+        public ShoppingListEntryService(IShoppingListEntryConverter shoppingListEntryConverter, IShoppingListEntryRepository shoppingListEntryRepository) : base()
+        {
+            _shoppingListEntryRepository = shoppingListEntryRepository;
+            _shoppingListEntryConverter = shoppingListEntryConverter;
         }
 
         //If a new Entry is created, the update function of the SortingService must be called as well
@@ -34,7 +40,7 @@ namespace ListIt_BusinessLogic.Services
                 ProductType_Id = dto.ProductTypeId
             };
 
-            var prodId  = _entryRepository.CreateProduct(product);
+            var prodId  = _shoppingListEntryRepository.CreateProduct(product);
             ///= _entryRepository.GetIdOfProduct(product);
 
             var entry = new ShoppingListEntry
@@ -46,7 +52,7 @@ namespace ListIt_BusinessLogic.Services
                 State_Id = dto.State_Id
             };
 
-            _entryRepository.Create(entry);
+            _shoppingListEntryRepository.Create(entry);
 
 
             //sorting.Update() !! 
@@ -56,7 +62,7 @@ namespace ListIt_BusinessLogic.Services
 
         public void Create(UserProductDto userProduct)
         {
-            _entryRepository.CreateUserProduct(new UserProduct
+            _shoppingListEntryRepository.CreateUserProduct(new UserProduct
             {
                 Id = userProduct.Id,
                 Product_Id = userProduct.ProductId,

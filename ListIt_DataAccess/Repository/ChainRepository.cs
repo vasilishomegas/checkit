@@ -5,10 +5,11 @@ using System.Web;
 using ListIt_DataAccess.Repository.Generics;
 using System.Data.Entity;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Repository;
 
 namespace ListIt_DataAccess.Repository
 {
-    public class ChainRepository : Repository<Chain>
+    public class ChainRepository : Repository<Chain>, IChainRepository
     {
         // THIS STUPID GET METHODS ARE NECESSARY FOR EAGER LOADING, WHICH MEANS THAT RELATED CLASSES ARE ALSO RETURNED IN WEB API
         public override IEnumerable<Chain> GetAll()

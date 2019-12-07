@@ -20,12 +20,21 @@ namespace ListIt_BusinessLogic.Services
     {
         private readonly ICountryRepository _countryRepository;
         private readonly ILanguageRepository _languageRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IUserConverter _userConverter;
+
+        public UserService(): this(new UserRepository(), new UserConverter())
+        {
+
+        }
 
         public UserService(IUserRepository userRepository, IUserConverter userConverter, ICountryRepository countryRepository, ILanguageRepository languageRepository) 
             : base(userRepository, userConverter)
         {
             _countryRepository = countryRepository;
             _languageRepository = languageRepository;
+            _userRepository = userRepository;
+            _userConverter = userConverter;
         }
 
         public override void Create(UserDto userDto)
@@ -37,7 +46,7 @@ namespace ListIt_BusinessLogic.Services
                 || _countryRepository.Get(userDto.Country.Id) == null)
                 throw new Exception("Country and/or Language cannot be null value");
 
-            _repository.Create(new User
+            _userRepository.Create(new User
             {
                 Language_Id = userDto.Language.Id,
                 Country_Id = userDto.Country.Id,
@@ -54,7 +63,7 @@ namespace ListIt_BusinessLogic.Services
             UserRepository repo = new UserRepository();
             var user = repo.GetUserByEmailAndPasswordHash(email, HashPassword(pw));
 
-            return _converter.ConvertDBToDto(user);
+            return _userConverter.ConvertDBToDto(user);
         }
 
         public string HashPassword(string pw)
@@ -72,7 +81,7 @@ namespace ListIt_BusinessLogic.Services
         public override void Update(UserDto userDto)
         {
 
-            var inDbUser = _repository.Get(userDto.Id);
+            var inDbUser = _userRepository.Get(userDto.Id);
             if (inDbUser == null) throw new KeyNotFoundException("No user with such ID");
 
             if (userDto.Nickname == null) userDto.Nickname = inDbUser.Nickname;
@@ -82,7 +91,7 @@ namespace ListIt_BusinessLogic.Services
             var newCountryId = userDto.Country?.Id ?? inDbUser.Country_Id;
             var newLanguageId = userDto.Language?.Id ?? inDbUser.Language_Id;
             
-            _repository.Update(new User
+            _userRepository.Update(new User
             {
                 Language_Id = newLanguageId,
                 Country_Id = newCountryId,

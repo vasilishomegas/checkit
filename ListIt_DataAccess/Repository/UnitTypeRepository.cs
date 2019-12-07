@@ -7,7 +7,7 @@ using ListIt_DataAccessModel;
 
 namespace ListIt_DataAccess.Repository
 {
-    public class UnitTypesRepository : Repository<UnitType>
+    public class UnitTypeRepository : Repository<UnitType>
     {
         //TODO: get names from translation table
         public IList<TranslationOfUnitType> GetUnitTypesByLanguage(int langId)

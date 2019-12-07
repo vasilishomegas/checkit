@@ -5,7 +5,7 @@ using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class CountryConverter : IDtoDbConverter<Country, CountryDto>
+    public class CountryConverter : IDtoDbConverter<Country, CountryDto>, ICountryConverter
     {
         public CountryDto ConvertDBToDto(Country country)
         {

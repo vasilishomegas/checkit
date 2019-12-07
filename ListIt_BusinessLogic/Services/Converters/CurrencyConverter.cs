@@ -10,7 +10,7 @@ using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class CurrencyConverter : IDtoDbConverter<Currency, CurrencyDto>
+    public class CurrencyConverter : IDtoDbConverter<Currency, CurrencyDto>, ICurrencyConverter
     {
         public CurrencyDto ConvertDBToDto(Currency currency)
         {

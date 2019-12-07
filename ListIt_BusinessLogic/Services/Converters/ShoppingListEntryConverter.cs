@@ -11,7 +11,7 @@ using ListIt_DomainModel.DTO.Interfaces;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class ShoppingListEntryConverter : IDtoDbConverter<ShoppingListEntry, ShoppingListEntryDto>
+    public class ShoppingListEntryConverter : IDtoDbConverter<ShoppingListEntry, ShoppingListEntryDto>, IShoppingListEntryConverter
     {
         public ShoppingListEntryDto ConvertDBToDto(ShoppingListEntry entry)
         {

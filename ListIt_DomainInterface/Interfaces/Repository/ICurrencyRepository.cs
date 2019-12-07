@@ -7,8 +7,8 @@ using ListIt_DataAccessModel;
 
 namespace ListIt_DomainInterface.Interfaces.Repository
 {
-    public interface ILanguageRepository : IRepository<Language>
+    public interface ICurrencyRepository : IRepository<Currency>
     {
-        Language GetByCode(string code);
+
     }
 }

@@ -7,6 +7,8 @@ using ListIt_BusinessLogic.Services.Converters;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Converter;
+using ListIt_DomainInterface.Interfaces.Repository;
 using ListIt_DomainModel;
 using ListIt_DomainModel.DTO;
 
@@ -14,13 +16,18 @@ namespace ListIt_BusinessLogic.Services
 {
     public class LanguageService : Service<Language, LanguageDto>
     {
-        private readonly LanguageRepository _languageRepository;
-        private readonly LanguageConverter _languageConverter;
+        private readonly ILanguageRepository _languageRepository;
+        private readonly ILanguageConverter _languageConverter;
 
-        public LanguageService() : base(new LanguageRepository(), new LanguageConverter())
+        public LanguageService(): this(new LanguageRepository(), new LanguageConverter())
         {
-            _languageRepository = (LanguageRepository) _repository;
-            _languageConverter = (LanguageConverter) _converter;
+            
+        }
+
+        public LanguageService(ILanguageRepository languageRepository, ILanguageConverter languageConverter) : base(languageRepository, languageConverter)
+        {
+            _languageRepository = languageRepository;
+            _languageConverter = languageConverter;
         }
 
         public LanguageDto GetByCode(string code)

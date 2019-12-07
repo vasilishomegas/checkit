@@ -12,10 +12,17 @@ namespace ListIt_BusinessLogic.Services
 {
     public class ChainService : Service<Chain, ChainDto>, IChainService
     {
+        private readonly IChainRepository _chainRepository;
         private readonly IShopApiRepository _shopApiRepository;
+
+        public ChainService(): this(new ChainRepository(), new ChainConverter(), new ShopApiRepository())
+        {
+
+        }
 
         public ChainService(IChainRepository chainRepository, IChainConverter chainConverter, IShopApiRepository shopApiRepository) : base(chainRepository, chainConverter)
         {
+            _chainRepository = chainRepository;
             _shopApiRepository = shopApiRepository;
         }
 
@@ -39,7 +46,7 @@ namespace ListIt_BusinessLogic.Services
                 shopApiId = shopApi.Id;
             }
             
-            _repository.Create(new Chain
+            _chainRepository.Create(new Chain
             {
                 Id = chainDto.Id,
                 Logo = chainDto.Logo,

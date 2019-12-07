@@ -88,6 +88,35 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services
 
             userRepository.Verify(r => r.Create(It.IsAny<User>()), Times.Once);
         }
+        [Test]
+        public void Update_EmailAndLanguage_Updated()
+        {
+            var userRepository = MockUserRepository.GetMock();
+            var userConverter = MockUserConverter.GetMock();
+            var languageRepository = MockLanguageRepository.GetMock();
+            var countryRepository = MockCountryRepository.GetMock();
+            var userService = new UserService(userRepository.Object, userConverter.Object, countryRepository.Object, languageRepository.Object);
+
+
+            var languageDto = new LanguageDto();
+            var userDto = new UserDto()
+            {
+                Id = 1,
+                Country = new CountryDto(),
+                Language = languageDto,
+                Email = "Sample email",
+                Timestamp = new DateTime(2019, 2, 5),
+                Nickname = "Barry",
+                PasswordHash = "bunchofrandomnumbers"
+            };
+
+            userService.Update(userDto);
+
+            Assert.AreEqual(userDto.Email, "Sample email");
+            Assert.AreEqual(userDto.Language, languageDto);
+
+            userRepository.Verify(r => r.Update(It.IsAny<User>()), Times.Once);
+        }
     }
 
     internal abstract class MockUserRepository
@@ -95,6 +124,16 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services
         public static Mock<IUserRepository> GetMock()
         {
             var userRepository = new Mock<IUserRepository>();
+            userRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new User()
+            {
+                Id = 1,
+                Language = new Language(),
+                Country = new Country(),
+                Email = "@gmail.com",
+                PasswordHash = "bunchofrandomnumbers",
+                Nickname = "Barry",
+                Timestamp = new DateTime(2019, 2, 5)
+            });
             return userRepository;
         }
     }

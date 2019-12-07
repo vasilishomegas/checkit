@@ -7,6 +7,8 @@ using ListIt_BusinessLogic.Services.Converters;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
 using ListIt_DataAccessModel;
+using ListIt_DomainInterface.Interfaces.Converter;
+using ListIt_DomainInterface.Interfaces.Repository;
 using ListIt_DomainModel;
 using ListIt_DomainModel.DTO;
 
@@ -14,10 +16,16 @@ namespace ListIt_BusinessLogic.Services
 {
     public class CategoryService : Service<Category, CategoryDto>
     {
-        private readonly CategoryRepository _catRepository;
-        public CategoryService() : base(new CategoryRepository(), new CategoryConverter())
+        private readonly ICategoryRepository _categoryRepository;
+
+        public CategoryService() : this(new CategoryRepository(), new CategoryConverter())
         {
-            _catRepository = (CategoryRepository)_repository;
+
+        }
+
+        public CategoryService(ICategoryRepository categoryRepository, ICategoryConverter categoryConverter) : base(categoryRepository, categoryConverter)
+        {
+            _categoryRepository = categoryRepository;
         }
 
         //Returns a list of default categories and user categories
@@ -25,18 +33,18 @@ namespace ListIt_BusinessLogic.Services
         {        
             List<CategoryDto> categoryList = new List<CategoryDto>();
 
-            var defaultCatList = _catRepository.GetDefaultCategoryIds();
+            var defaultCatList = _categoryRepository.GetDefaultCategoryIds();
             foreach (Category cat in defaultCatList)
             {
-                var translationInstance = _catRepository.Get(cat.Id, langId);
+                var translationInstance = _categoryRepository.Get(cat.Id, langId);
                 //categoryList.Add(ConvertDBToDto(translationInstance));
                 categoryList.Add(ConvertDBToDto(translationInstance));
             }
 
-            var userCategories = _catRepository.GetUserCategoryIds(userId);
+            var userCategories = _categoryRepository.GetUserCategoryIds(userId);
             foreach(Category cat in userCategories)
             {
-                var translationInstance = _catRepository.Get(cat.Id, langId);
+                var translationInstance = _categoryRepository.Get(cat.Id, langId);
                 categoryList.Add(ConvertDBToDto(translationInstance));
             }
 
