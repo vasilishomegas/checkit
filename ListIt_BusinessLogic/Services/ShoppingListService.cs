@@ -19,7 +19,7 @@ namespace ListIt_BusinessLogic.Services
         private readonly IShoppingListRepository _shoppingListRepository;
         private readonly IShoppingListConverter _shoppingListConverter;
 
-        public ShoppingListService(IShoppingListRepository shoppingListRepository, IShoppingListConverter shoppingListConverter) : base(shoppingListConverter, shoppingListRepository)
+        public ShoppingListService(IShoppingListRepository shoppingListRepository, IShoppingListConverter shoppingListConverter) : base(shoppingListRepository, shoppingListConverter)
         {
             _shoppingListRepository = shoppingListRepository;
             _shoppingListConverter = shoppingListConverter;
@@ -36,14 +36,15 @@ namespace ListIt_BusinessLogic.Services
                 ChosenSorting_Id = dto.ChosenSortingId
             };
 
+            /*
             var link = new LinkUserToList
             {
                 UserId = dto.UserId,
                 ShoppingListId = dto.Id,
                 ListAccessTypeId = dto.ListAccessTypeId,
-            };
+            }; */
 
-            _shoppingListRepository.Create(list, link);
+            _shoppingListRepository.Create(list);
         }
 
         public override void Update(ShoppingListDto dto)
@@ -66,6 +67,7 @@ namespace ListIt_BusinessLogic.Services
             });
         }
  
+        /*
         public IList<ShoppingListDto> GetListsByUserId(int userId)
         {
             var linkedUserLists = _shoppingListRepository.GetLinkByUserId(userId);
@@ -79,6 +81,7 @@ namespace ListIt_BusinessLogic.Services
 
             return listOfLists;
         }
+        */
 
         /* moved to ShoppingListConverter
         public static ShoppingList StaticDtoToDB(ShoppingListDto listDto)

@@ -10,7 +10,7 @@ using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class UnitTypeConverter : IDtoDbConverter<UnitType, UnitTypeDto>
+    public class UnitTypeConverter : IDtoDbConverter<UnitType, UnitTypeDto>, IUnitTypeConverter
     {
         public UnitTypeDto ConvertDBToDto(UnitType unit)
         {

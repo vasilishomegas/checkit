@@ -19,15 +19,23 @@ namespace ListIt_BusinessLogic.Services
         private readonly IProductRepository _productRepository;
         private readonly IProductConverter _productConverter;
 
+
+        public ProductService() : this(new ProductRepository(), new ProductConverter())
+        {
+
+        }
+
         public ProductService(IProductRepository productRepository, IProductConverter productConverter) : base(productRepository, productConverter)
         {
             _productRepository = productRepository;
             _productConverter = productConverter;
         }
 
+        /*
         public void Create(UserProductDto dto)
         {
             _productRepository.Create(_productConverter.ConvertDtoToDB(dto));
         }
+        */
     }
 }

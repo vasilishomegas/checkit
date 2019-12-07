@@ -23,7 +23,8 @@ namespace ListIt_BusinessLogic.Services
         {
 
         }
-        public ShoppingListEntryService(IShoppingListEntryConverter shoppingListEntryConverter, IShoppingListEntryRepository shoppingListEntryRepository) : base()
+        public ShoppingListEntryService(IShoppingListEntryConverter shoppingListEntryConverter, IShoppingListEntryRepository shoppingListEntryRepository) 
+            : base(shoppingListEntryRepository, shoppingListEntryConverter)
         {
             _shoppingListEntryRepository = shoppingListEntryRepository;
             _shoppingListEntryConverter = shoppingListEntryConverter;
@@ -31,6 +32,7 @@ namespace ListIt_BusinessLogic.Services
 
         //If a new Entry is created, the update function of the SortingService must be called as well
 
+        /*
         public new int Create(ShoppingListEntryDto dto)
         {
             var product = new Product
@@ -59,6 +61,7 @@ namespace ListIt_BusinessLogic.Services
 
             return prodId;
         }
+        */
 
         public void Create(UserProductDto userProduct)
         {

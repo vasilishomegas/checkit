@@ -23,7 +23,7 @@ namespace ListIt_BusinessLogic.Services
         private readonly IUserRepository _userRepository;
         private readonly IUserConverter _userConverter;
 
-        public UserService(): this(new UserRepository(), new UserConverter())
+        public UserService(): this(new UserRepository(), new UserConverter(), new CountryRepository(), new LanguageRepository())
         {
 
         }

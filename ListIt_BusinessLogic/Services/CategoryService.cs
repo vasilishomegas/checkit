@@ -17,6 +17,7 @@ namespace ListIt_BusinessLogic.Services
     public class CategoryService : Service<Category, CategoryDto>
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryConverter _categoryConverter;
 
         public CategoryService() : this(new CategoryRepository(), new CategoryConverter())
         {
@@ -26,7 +27,10 @@ namespace ListIt_BusinessLogic.Services
         public CategoryService(ICategoryRepository categoryRepository, ICategoryConverter categoryConverter) : base(categoryRepository, categoryConverter)
         {
             _categoryRepository = categoryRepository;
+            _categoryConverter = categoryConverter;
         }
+
+        /*
 
         //Returns a list of default categories and user categories
         public IEnumerable<CategoryDto> GetCategories(int langId, int userId)
@@ -51,6 +55,9 @@ namespace ListIt_BusinessLogic.Services
             return categoryList;
         }
 
+        */
+
+        /*
         protected CategoryDto ConvertDBToDto(TranslationOfCategory translation)
         {
             return StaticDBtranslationToDto(translation);
@@ -66,5 +73,7 @@ namespace ListIt_BusinessLogic.Services
                 LanguageId = translation.Language_Id
             };
         }
+
+        */
     }
 }

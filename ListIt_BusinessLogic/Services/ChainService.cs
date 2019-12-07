@@ -14,6 +14,7 @@ namespace ListIt_BusinessLogic.Services
     {
         private readonly IChainRepository _chainRepository;
         private readonly IShopApiRepository _shopApiRepository;
+        private readonly IChainConverter _chainConverter;
 
         public ChainService(): this(new ChainRepository(), new ChainConverter(), new ShopApiRepository())
         {
@@ -24,6 +25,7 @@ namespace ListIt_BusinessLogic.Services
         {
             _chainRepository = chainRepository;
             _shopApiRepository = shopApiRepository;
+            _chainConverter = chainConverter;
         }
 
 

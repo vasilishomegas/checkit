@@ -10,7 +10,7 @@ using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class ProductConverter : IDtoDbConverter<Product, ProductDto>
+    public class ProductConverter : IDtoDbConverter<Product, ProductDto>, IProductConverter
     {
         public ProductDto ConvertDBToDto(Product entry)
         {
