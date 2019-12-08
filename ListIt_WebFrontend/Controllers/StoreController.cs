@@ -19,28 +19,34 @@ namespace ListIt_WebFrontend.Controllers
 
         #region FindStore
         protected string mapsKey = "&key=AIzaSyAk3NRXmyq5nFc3iXwZMcNNp-jDNJzup1c";
-        protected string defaultUrl = "https://www.google.com/maps/embed/v1/search?q=grocery+stores+near";
-
+        protected string defaultUrl = "https://www.google.com/maps/embed/v1/search?q=";
+        protected string parameter = "+grocery+stores";
         // GET: Store/FindStore
         public ActionResult FindStore()
         {
-            ViewBag.Message = TempData["SuccessMessage"];
-            ViewBag.Error = TempData["ErrorMessage"];
+            if(Session["UserId"] != null)
+            {
+                ViewBag.Message = TempData["SuccessMessage"];
+                ViewBag.Error = TempData["ErrorMessage"];
 
-            // https://developers.google.com/maps/documentation/urls/guide
-            /* ENCODING URLs */
-            // pipe character (|) as a separator, which you must encode as %7C in the final URL
-            // encode the comma as %2C
-            // Encode spaces with %20, or replace them with a plus sign (+).
-            //https://developers.google.com/maps/documentation/embed/usage-and-billing
+                // https://developers.google.com/maps/documentation/urls/guide
+                /* ENCODING URLs */
+                // pipe character (|) as a separator, which you must encode as %7C in the final URL
+                // encode the comma as %2C
+                // Encode spaces with %20, or replace them with a plus sign (+).
+                //https://developers.google.com/maps/documentation/embed/start
 
-            //var mapsKey = "&key=AIzaSyAk3NRXmyq5nFc3iXwZMcNNp-jDNJzup1c";
+                FindStoreVM findStoreVM = new FindStoreVM();
+                findStoreVM.Place = "Aalborg, Denmark"; //initialized default place Aalborg
+                findStoreVM.Url = defaultUrl + "Aalborg+Denmark" + parameter + mapsKey;
 
-            FindStoreVM findStoreVM = new FindStoreVM();
-            findStoreVM.Place = "Aalborg, Denmark"; //initialized default place Aalborg
-            findStoreVM.Url = defaultUrl + "+Aalborg+Denmark" + mapsKey;
-
-            return View(findStoreVM);
+                return View(findStoreVM);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+            
         }
 
         [HttpPost]
@@ -53,16 +59,10 @@ namespace ListIt_WebFrontend.Controllers
                 FindStoreVM findStoreVM = new FindStoreVM();
                 findStoreVM.Place = searchPlace;
 
-                char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
-                string[] keywords = searchPlace.Split(delimiterChars);
-                string search = "";                
+                string search = searchPlace.Replace(" ", "%20");
+                search = search.Replace(",", "%2C");
 
-                foreach (String word in keywords)
-                {
-                    search = search + "+" + word;
-                }
-
-                findStoreVM.Url = defaultUrl + search + mapsKey;
+                findStoreVM.Url = defaultUrl + search + parameter + mapsKey;
 
                 return View("FindStore", findStoreVM);
             }
