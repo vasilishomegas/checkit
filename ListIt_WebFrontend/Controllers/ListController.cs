@@ -235,12 +235,22 @@ namespace ListIt_WebFrontend.Controllers
         {
             try
             {
-                int listId = Int32.Parse(collection["listId"].ToString());
+                int listId = Int32.Parse(collection["ShoppingList_Id"].ToString());
 
                 ShoppingListService listService = new ShoppingListService();
-                //var dbList = listService.Get(listId);
+                LanguageService languageService = new LanguageService();
+                var langId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;
 
                 //TO DO: delete all related entries (ShoppingListEntry)
+                ProductService productService = new ProductService();
+                var listEntries = productService.GetEntriesAsProducts(listId, langId);
+
+                foreach(ProductDto product in listEntries)
+                {
+                    DeleteItem(product.Id, listId);
+                }
+                
+                //delete list itself & all links in LinkUserToList
                 listService.Delete(listId);
 
                 TempData["SuccessMessage"] = "The list was successfully deleted.";

@@ -45,17 +45,6 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
-        //public override ShoppingList Get(int id)
-        //{
-        //    using (var context = new ListItContext())
-        //    {
-        //        return context.ShoppingLists
-        //            .Include(x => x.LinkUserToLists)
-        //            .SingleOrDefault(x => x.Id == id);
-        //    }
-        //}
-
-
         /* UPDATING Create() to save ShoppingList AND LinkUserToList */
 
         public void Create(ShoppingList entity, LinkUserToList link)
@@ -112,38 +101,29 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
-        //public virtual void Update(T entity)
-        //{
-        //    using (var context = new ListItContext())
-        //    {
-        //        context.Set<T>().Attach(entity);
-        //        context.Entry(entity).State = EntityState.Modified;
-        //        try
-        //        {
-        //            context.SaveChanges();
-        //        }
-        //        catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException e)
-        //        {
-        //            throw new KeyNotFoundException(e.Message, e.InnerException);
-        //        }
-        //    }
-        //}
+        public override void Delete(int id)
+        {
+            using (var context = new ListItContext())
+            {
+                //Delete ALL LinkUserToList Entries for this list AND list itself
+                var list = context.Set<ShoppingList>().Find(id);
+                var links = context.LinkUserToLists.Where(x => x.ShoppingListId == id).ToList();
 
-        //public virtual void Delete(int id)
-        //{
-        //    using (var context = new ListItContext())
-        //    {
-        //        var entity = context.Set<T>().Find(id);
-        //        try
-        //        {
-        //            context.Set<T>().Remove(entity);
-        //        }
-        //        catch (System.ArgumentNullException e)
-        //        {
-        //            throw new KeyNotFoundException("No entries were affected; the row does not exist." + e.Message);
-        //        }
-        //        context.SaveChanges();
-        //    }
-        //}
+                try
+                {
+                    foreach(LinkUserToList link in links)
+                    {
+                        context.Set<LinkUserToList>().Remove(link);
+                    }
+
+                    context.Set<ShoppingList>().Remove(list);
+                }
+                catch (System.ArgumentNullException e)
+                {
+                    throw new KeyNotFoundException("No entries were affected; the row does not exist." + e.Message);
+                }
+                context.SaveChanges();
+            }
+        }
     }
 }

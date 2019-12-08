@@ -96,6 +96,11 @@ namespace ListIt_BusinessLogic.Services
                 : ConvertDBToDtoWithListAccessType(link, entity);
         }
 
+        public override void Delete(int id)
+        {
+            _listRepository.Delete(id);
+        }
+
         protected ShoppingListDto ConvertDBToDtoWithListAccessType(LinkUserToList link, ShoppingList list)
         {
             return StaticLinkDBToDto(link, list);

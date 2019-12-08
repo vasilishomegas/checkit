@@ -25,7 +25,6 @@ namespace ListIt_WebFrontend.Models
         public int Quantity { get; set; }
 
         //List values:
-        public int ListId { get; set; }
         //public int ListId { get; set; }
         public string ListName { get; set; }
         public int ListAccessTypeId { get; set; }
