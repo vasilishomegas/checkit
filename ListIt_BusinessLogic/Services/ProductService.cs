@@ -261,6 +261,7 @@ namespace ListIt_BusinessLogic.Services
                 Name = userProduct.Name,
                 Currency_Id = (int)userProduct.Currency_Id,
                 Unit_Id = (int)userProduct.UnitType_Id,
+                ProductId = userProduct.Product_Id,
                 //Quantity = from ProductTable
                 Price = (int)userProduct.Price,
                 Category_Id = userProduct.Category_Id,

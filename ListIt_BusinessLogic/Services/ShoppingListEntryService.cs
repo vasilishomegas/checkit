@@ -27,27 +27,14 @@ namespace ListIt_BusinessLogic.Services
 
         public void Create(ShoppingListEntryDto dto)
         {
-            //var product = new Product
-            //{
-            //    Id = dto.Product_Id,
-            //    Timestamp = DateTime.Now,
-            //    ProductType_Id = dto.ProductTypeId
-            //};
-
-            //ProductRepository productRepository = new ProductRepository();
-            //var prodId  = productRepository.CreateProduct(product);
-
-            var entry = new ShoppingListEntry
+            _entryRepository.Create(new ShoppingListEntry
             {
                 Id = dto.Id,
                 Quantity = dto.Quantity,
                 Product_Id = dto.Product_Id,
                 ShoppingList_Id = dto.ShoppingList_Id,
                 State_Id = dto.State_Id
-            };
-
-            _entryRepository.Create(entry);
-
+            });
 
             //sorting.Update() !! 
         }
