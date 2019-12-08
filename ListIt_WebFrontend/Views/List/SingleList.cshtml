@@ -56,18 +56,18 @@
 
         <!-- HEADING -->
         <div class="row" id="accordionHeading">
-            <div class="col-md-8 d-flex justify-content-between" id="headingNames">
-                <span class="form-text">
+            <div class="col-md-9 d-flex justify-content-between" id="headingNames">
+                <span class="col-4">
                     @Lang.itemName
                 </span>
-                <span class="form-text">
+                <span class="col-2 text-center">
                     @Lang.quantity
                 </span>
-                <span class="form-text">
+                <span class="col-2 text-center">
                     @Lang.price
                 </span>
             </div>
-            <div class="col-md-4 d-flex justify-content-end">
+            <div class="col-md-3 d-flex justify-content-end">
                 <span>
                     <button class="btn" type="button">
                         <i class="fa fa-sort-amount-asc fa-lg"></i>
@@ -86,20 +86,20 @@
 
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-8 d-flex justify-content-between check-toggle">
-                            <div class="form-text">
+                        <div class="col-md-9 d-flex justify-content-between check-toggle">
+                            <div class="form-text col-5">
                                 @Html.CheckBox("checkbox", false, htmlAttributes: new { @class = "checkbox", id = entry.ProductId })
                                 <label for="checkbox" class="@identifier">
                                     @entry.Name <!-- INSERT ITEM NAME HERE -->
                                 </label>
                             </div>
-                            <div class="form-text">
+                            <div class="form-text col-2">
                                 <label for="checkbox" class="@identifier">
                                     @entry.Quantity pc.
                                     <!-- TODO: get UnitTypeName -->
                                 </label>
                             </div>
-                            <div class="form-text">
+                            <div class="form-text col-2">
                                 <label for="checkbox" class="@identifier">
                                     @entry.Price dkk/pc.
                                     <!-- TODO: get CurrencyName -->
@@ -108,7 +108,7 @@
                         </div>
                         @if (Model.ListAccessTypeId == 1 || Model.ListAccessTypeId == 4)
                         {
-                            <div class="col-md-4 d-flex justify-content-end">
+                            <div class="col-md-3 d-flex justify-content-end">
                                 <span class="btn-group d-flex justify-content-end">                                    
                                     <button class="btn" type="button" id="editItem" onclick="location.href='@Url.Action("Item", "List", new { @id = entry.ProductId, @listId = Model.ShoppingList_Id })'">
                                         <i class="fa fa-pencil"></i>
