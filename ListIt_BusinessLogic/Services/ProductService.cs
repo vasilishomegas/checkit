@@ -114,13 +114,16 @@ namespace ListIt_BusinessLogic.Services
                     translation = _prodRepository.GetProductTranslation(2, (int)prod.Product_Id);
                 }
 
-                products.Add(ConvertDBToDto(prod, translation));
+                var defProduct = ConvertDBToDto(prod, translation);
+                if(defProduct != null) products.Add(defProduct);
+
             }
 
             foreach(Product prod in reusableProducts)
             {
                 var entry = _prodRepository.GetUserProduct(prod.Id);
-                products.Add(ConvertDBToDto(entry));
+                var userProd = ConvertDBToDto(entry);
+                if(userProd != null) products.Add(userProd);
             }
 
             return products;
@@ -169,6 +172,7 @@ namespace ListIt_BusinessLogic.Services
         }
         public static DefaultProductDto StaticDBToDto(DefaultProduct defaultProduct, TranslationOfProduct translation)
         {
+            if (defaultProduct == null || translation == null) return null;
             return new DefaultProductDto
             {
                 Id = defaultProduct.Id,
@@ -193,6 +197,7 @@ namespace ListIt_BusinessLogic.Services
 
         public static ProductDto StaticDBToDto(Product product)
         {
+            if (product == null) return null;
             return new ProductDto
             {
                 Id = product.Id,
@@ -247,6 +252,7 @@ namespace ListIt_BusinessLogic.Services
 
         public static UserProductDto StaticDBToDto(UserProduct userProduct)
         {
+            if (userProduct == null) return null;
             return new UserProductDto
             {
                 Id = userProduct.Id,

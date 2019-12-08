@@ -79,11 +79,11 @@ namespace ListIt_WebFrontend.Controllers
 
                         list.ChosenProductId = 0;  //By default no defaultProduct should be selected
                         list.ChooseProductsList = (from item in productService.GetDefaultAndReusableProductsByLanguage(langId)
-                                                    select new SelectListItem()
-                                                    {
-                                                        Text = item.Name,
-                                                        Value = item.ProductId.ToString()
-                                                    }).ToList();
+                                                   select new SelectListItem()
+                                                   {
+                                                       Text = item.Name,
+                                                       Value = item.ProductId.ToString()
+                                                   }).ToList();
 
                         UnitTypeService unitTypeService = new UnitTypeService();
                         list.UnitTypesListId = 1; //default value

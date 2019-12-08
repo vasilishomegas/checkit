@@ -178,10 +178,11 @@
                 {
                     @Html.AntiForgeryToken()
 
+                    <p class="text-center font-weight-light">
+                        Either create a new item:
+                    </p>
+
                     <div class="form-row">
-                        <p>
-                            Either create your a new item:
-                        </p>
                         <div class="form-group col">
                             @Html.LabelFor(model => model.Name, Lang.itemName, htmlAttributes: new { @class = "control-label" })
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = Lang.name } })
@@ -191,17 +192,19 @@
                             @Html.Label("UserProduct", "I want to reuse this item")
                         </div>
                     </div>
+                    <hr />
+                    <p class="text-center font-weight-light">
+                        Or choose from the list of default products and your reusable items:
+                    </p>
                     <div class="form-row">
-                        <p>
-                            Or choose from the list of default products and your reusable items:
-                        </p>
                         <div class="form-group col">
                             @Html.LabelFor(model => model.ChosenProductId, "Default Products", htmlAttributes: new { @class = "control-label" })
                             @Html.DropDownListFor(x => x.ChosenProductId, Model.ChooseProductsList, htmlAttributes: new { @class = "form-control custom-select" })
 
                         </div>
                     </div>
-                    <div class="form-row">                        
+                    <hr />
+                    <div class="form-row">
                         <div class="form-group col">
                             @Html.LabelFor(model => model.Price, Lang.price, htmlAttributes: new { @class = "control-label" })
                             @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price } })
@@ -221,7 +224,7 @@
                         <div class="form-group col">
                             @Html.LabelFor(model => model.UnitTypesListId, Lang.unit, htmlAttributes: new { @class = "control-label" })
                             @Html.DropDownListFor(x => x.UnitTypesListId, Model.UnitTypesList, htmlAttributes: new { @class = "form-control custom-select" })
-                            
+
                         </div>
                     </div>
                     <div class="form-row">
