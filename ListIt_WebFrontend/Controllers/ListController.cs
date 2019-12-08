@@ -86,7 +86,7 @@ namespace ListIt_WebFrontend.Controllers
                                                    }).ToList();
 
                         UnitTypeService unitTypeService = new UnitTypeService();
-                        list.UnitTypesListId = 1; //default value
+                        list.UnitTypesListId = 8; //default value: pc.
                         list.UnitTypesList = (from item in unitTypeService.GetUnitTypesByLanguage(langId)
                                               select new SelectListItem()
                                               {
@@ -402,10 +402,11 @@ namespace ListIt_WebFrontend.Controllers
                 var userCat = collection["UserCategory"];
                 int userCatId = 0;
                 var currencyId = int.Parse(collection["CurrencyListId"]);
-                int prodType; 
-                var chosenProductId = int.Parse(collection["ChosenProductId"]); //gets defaultProductId from dropdown
+                int prodType = 0;
+                var prodId = 0;
+                var chosenProductId = collection["ChosenProductId"]; //gets defaultProductId from dropdown
 
-                if(name != "" && chosenProductId != 0) //Name filled in and defaultProduct chosen
+                if(name != "" && chosenProductId != "") //Name filled in and defaultProduct chosen
                 {
                     throw new Exception("You can either create a new item or choose from the default products, but not both!");
                 }
@@ -440,7 +441,7 @@ namespace ListIt_WebFrontend.Controllers
                     //create a new Product
                     ProductDto productDto = new ProductDto();
                     productDto.ProductTypeId = prodType;
-                    var prodId = productService.Create(productDto);
+                    prodId = productService.Create(productDto);
 
                     //create new UserProduct
                     UserProductDto userProduct = new UserProductDto();
@@ -455,17 +456,18 @@ namespace ListIt_WebFrontend.Controllers
 
                     entryService.Create(userProduct);
                 }
-                else /*if(name == "" && chosenProductId != 0)   */  //IF DefaultProduct -> create ShoppingListEntry & LinkDefaultProductToUser
+                else if(chosenProductId != "")   //IF DefaultProduct -> create ShoppingListEntry & LinkDefaultProductToUser
                 {
                     //check if chosen defaultProduct or reusable UserProduct
-                    prodType = productService.GetProductTypeId(chosenProductId);
+                    prodId = int.Parse(chosenProductId);
+                    prodType = productService.GetProductTypeId(prodId);
 
                     if(prodType == 1)    //if DefaultProduct: create Link entry
                     {
                         DefaultProductDto defaultProductDto = new DefaultProductDto();
-                        defaultProductDto.Id = productService.GetDefaultProductId(chosenProductId);
+                        defaultProductDto.Id = productService.GetDefaultProductId(prodId);
                         productService.CreateLink(defaultProductDto, int.Parse(Session["UserId"].ToString()));
-                    }                    
+                    }
 
                     //if reusable UserProduct: only create ShoppingListEntry
                 }
@@ -473,7 +475,7 @@ namespace ListIt_WebFrontend.Controllers
                 //create Entry
                 ShoppingListEntryDto entry = new ShoppingListEntryDto();
                 entry.Quantity = qty;
-                entry.ProductTypeId = prodType;
+                entry.Product_Id = prodId;
                 entry.ShoppingList_Id = listId;
                 entry.State_Id = 2; //Default is unchecked
                 entryService.Create(entry); 
@@ -491,9 +493,9 @@ namespace ListIt_WebFrontend.Controllers
             {
                 TempData["ErrorMessage"] = "There was an error while creating a new item. Be aware that you can only create either a new item or choose from the dropdown list of default products and your own reusable items, but you can't do both.";
                 return Redirect(Request.UrlReferrer.ToString());
-        }
+            }
 
-}
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

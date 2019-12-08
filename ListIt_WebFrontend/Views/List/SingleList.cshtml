@@ -199,7 +199,7 @@
                     <div class="form-row">
                         <div class="form-group col">
                             @Html.LabelFor(model => model.ChosenProductId, "Default Products", htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(x => x.ChosenProductId, Model.ChooseProductsList, htmlAttributes: new { @class = "form-control custom-select" })
+                            @Html.DropDownListFor(x => x.ChosenProductId, Model.ChooseProductsList, "Select a predefined product", htmlAttributes: new { @class = "form-control custom-select" })
 
                         </div>
                     </div>

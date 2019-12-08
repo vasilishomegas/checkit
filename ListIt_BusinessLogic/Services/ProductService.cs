@@ -96,7 +96,9 @@ namespace ListIt_BusinessLogic.Services
         //create Linking for User if DefaultProduct used as entry
         public void CreateLink(DefaultProductDto defaultProduct, int userId)
         {
-            _prodRepository.Create(ConvertDefaultProductDtoToLinkDB(defaultProduct, userId));
+            var link = _prodRepository.GetLinkUserToDefaultProduct(userId, defaultProduct.Id);
+            if(link == null) _prodRepository.Create(ConvertDefaultProductDtoToLinkDB(defaultProduct, userId));
+            //else if(link != null) if link already exists do nothing
         }
 
         public IList<ProductDto> GetDefaultAndReusableProductsByLanguage(int langId)

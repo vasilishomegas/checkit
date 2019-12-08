@@ -261,5 +261,15 @@ namespace ListIt_DataAccess.Repository
                 
             }
         }
+
+        public LinkUserToDefaultProduct GetLinkUserToDefaultProduct(int userId, int defaultProdId)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.LinkUserToDefaultProducts
+                    .Where(x => x.UserId == userId)
+                    .SingleOrDefault(x => x.DefaultProductId == defaultProdId);
+            }
+        }
     }
 }
