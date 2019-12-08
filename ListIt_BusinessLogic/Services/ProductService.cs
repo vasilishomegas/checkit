@@ -22,14 +22,14 @@ namespace ListIt_BusinessLogic.Services
 
         #region PRODUCT
 
-        public ProductDto Get(int langId, int id)
+        public ProductDto Get(int langId, int id, int listId)
         {
             var product = _repository.Get(id);
             var translation = _prodRepository.GetProductTranslation(langId, id);
 
             ProductDto productDto = new ProductDto();
             ShoppingListEntryRepository entryRepository = new ShoppingListEntryRepository();
-            var entry = entryRepository.GetByProductId(id);
+            var entry = entryRepository.GetByProductAndListId(id, listId);
 
             if (product.ProductType_Id == 3 || product.ProductType_Id == 4) //UserProducts
             {
@@ -228,6 +228,12 @@ namespace ListIt_BusinessLogic.Services
             var userProduct = _prodRepository.GetUserProduct(productId);
             return userProduct.Id;
         }
+
+        public void DeleteUserProduct(int id)
+        {
+            _prodRepository.DeleteUserProduct(id);
+        }
+
         protected UserProduct ConvertDtoToDB(UserProductDto dto)
         {
             return StaticDtoToDB(dto);

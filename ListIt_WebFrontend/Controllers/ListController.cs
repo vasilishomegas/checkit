@@ -11,6 +11,8 @@ namespace ListIt_WebFrontend.Controllers
 {
     public class ListController : Controller
     {
+
+        #region Lists
         // GET: User/Lists
         public ActionResult Lists()
         {
@@ -126,6 +128,136 @@ namespace ListIt_WebFrontend.Controllers
             }
         }
 
+        // GET: User/CreateList
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateList(FormCollection collection)
+        {
+            try
+            {
+                var name = collection["listname"];
+
+                if (name == null || name == "")
+                {
+                    throw new Exception("Name cannot be null.");
+                }
+
+                var sessionUserId = Session["UserId"];
+                int userid = Int32.Parse(sessionUserId.ToString());
+
+                ShoppingListDto list = new ShoppingListDto();
+                list.Name = name;
+                list.Path = "somerandomPath";
+                list.ListAccessTypeId = 1; //Default owner when creating
+                list.UserId = userid;
+                list.ChosenSortingId = null;
+
+                ShoppingListService listService = new ShoppingListService();
+                listService.Create(list);
+
+                TempData["SuccessMessage"] = "You successfully created a new shopping list!";
+                return RedirectToAction("Lists");
+            }
+            catch (Exception e)
+            {
+                TempData["ErrorMessage"] = "Something went wrong. Make sure to have entered a valid list name. Try again!";
+                return RedirectToAction("Lists");
+            }
+
+        }
+
+        //Post: User/List/Rename
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RenameList(FormCollection collection)
+        {
+            try
+            {
+                var newName = collection["ListName"];
+                int listId = int.Parse(collection["ShoppingList_Id"]);
+
+                ShoppingListService listService = new ShoppingListService();
+                var dbList = listService.Get(listId);
+
+                if (newName == dbList.Name)
+                {
+                    throw new Exception("The name of the list is unchanged.");
+                }
+
+                ShoppingListDto list = new ShoppingListDto();
+                list.Id = listId;
+                list.Name = newName;
+
+                listService.Update(list);
+
+                TempData["SuccessMessage"] = "The list's name was successfully updated!";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Updating the list's name wasn't successful.";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ShareList(FormCollection collection)
+        {
+            try
+            {
+                var emailAddress = collection["EmailAddress"];
+                var type = int.Parse(collection["Type"]);
+                var listId = int.Parse(collection["ShoppingList_Id"]);
+                UserService userService = new UserService();
+                var userId = userService.GetIdByEmail(emailAddress);
+                ShoppingListDto shoppingListDto = new ShoppingListDto();
+                shoppingListDto.UserId = userId;
+                shoppingListDto.Id = listId;
+                shoppingListDto.ListAccessTypeId = type;
+                ShoppingListService listService = new ShoppingListService();
+                listService.CreateLink(shoppingListDto);
+                TempData["SuccessMessage"] = "You successfully shared your list!";
+                return RedirectToAction("SingleList", new { @id = listId });
+            }
+            catch
+            {
+                var listId = int.Parse(collection["ShoppingList_Id"]);
+                TempData["ErrorMessage"] = "An error occured and your list hasn't been shared.";
+                return RedirectToAction("SingleList", new { @id = listId });
+            }
+        }
+
+        //Post: User/List/Rename
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteList(FormCollection collection)
+        {
+            try
+            {
+                int listId = Int32.Parse(collection["listId"].ToString());
+
+                ShoppingListService listService = new ShoppingListService();
+                //var dbList = listService.Get(listId);
+
+                //TO DO: delete all related entries (ShoppingListEntry)
+                listService.Delete(listId);
+
+                TempData["SuccessMessage"] = "The list was successfully deleted.";
+                return RedirectToAction("Lists");
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Deleting the list wasn't successful. Try again.";
+                return RedirectToAction("Lists");
+            }
+        }
+
+
+        #endregion Lists
+
+        #region Items
+
         //GET List/Item -> EditItemView
         public ActionResult Item(int? id, int? listId)
         {
@@ -142,7 +274,7 @@ namespace ListIt_WebFrontend.Controllers
                 var langId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;
 
                 ProductService productService = new ProductService();
-                var entry = productService.Get(langId, (int)id); //Gets productDto by langId(for translation if default or api product) and ProductId
+                var entry = productService.Get(langId, (int)id, (int)listId); //Gets productDto by langId(for translation if default or api product) and ProductId
                 
                 if(entry == null)
                 {
@@ -200,191 +332,6 @@ namespace ListIt_WebFrontend.Controllers
             }
         }
 
-        // GET: User/CreateList
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateList(FormCollection collection)
-        {
-            try
-            {
-                var name = collection["listname"];
-
-                if (name == null || name == "")
-                {
-                    throw new Exception("Name cannot be null.");
-                }
-
-                var sessionUserId = Session["UserId"];
-                int userid = Int32.Parse(sessionUserId.ToString());
-
-                ShoppingListDto list = new ShoppingListDto();
-                list.Name = name;
-                list.Path = "somerandomPath";
-                list.ListAccessTypeId = 1; //Default owner when creating
-                list.UserId = userid;
-                list.ChosenSortingId = null;
-
-                ShoppingListService listService = new ShoppingListService();
-                listService.Create(list);
-
-                TempData["SuccessMessage"] = "You successfully created a new shopping list!";
-                return RedirectToAction("Lists");
-            }
-            catch (Exception e)
-            {
-                TempData["ErrorMessage"] = "Something went wrong. Make sure to have entered a valid list name. Try again!";
-                return RedirectToAction("Lists");
-            }
-
-        }
-
-        //Post: User/List/Rename
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult RenameList(FormCollection collection)
-        {
-            try
-            {
-                var newName = collection["ListName"];
-                int listId = int.Parse(collection["ShoppingList_Id"]);
-
-                ShoppingListService listService = new ShoppingListService();
-                var dbList = listService.Get(listId);
-
-                if(newName == dbList.Name)
-                {
-                    throw new Exception("The name of the list is unchanged.");
-                }
-
-                ShoppingListDto list = new ShoppingListDto();
-                list.Id = listId;
-                list.Name = newName;
-
-                listService.Update(list);
-
-                TempData["SuccessMessage"] = "The list's name was successfully updated!";
-                return Redirect(Request.UrlReferrer.ToString());
-            }
-            catch
-            {
-                TempData["ErrorMessage"] = "Updating the list's name wasn't successful.";
-                return Redirect(Request.UrlReferrer.ToString());
-            }
-        }
-
-        //Post: User/List/Rename
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteList(FormCollection collection)
-        {
-            try
-            {
-                int listId = Int32.Parse(collection["listId"].ToString());
-
-                ShoppingListService listService = new ShoppingListService();
-                //var dbList = listService.Get(listId);
-
-                //TO DO: delete all related entries (ShoppingListEntry)
-                listService.Delete(listId);
-
-                TempData["SuccessMessage"] = "The list was successfully deleted.";
-                return RedirectToAction("Lists");
-            }
-            catch
-            {
-                TempData["ErrorMessage"] = "Deleting the list wasn't successful. Try again.";
-                return RedirectToAction("Lists");
-            }
-        }
-
-
-        // POST: User/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditItem(FormCollection collection)
-        {
-            //try
-            //{
-                var name = collection["Name"];
-                var reusable = collection["UserProduct"];
-                var price = decimal.Parse(collection["Price"]);
-                var listId = int.Parse(collection["ListId"]);
-                var qty = int.Parse(collection["Quantity"]);
-                var unitTypeId = int.Parse(collection["UnitTypesListId"]); 
-                var catId = int.Parse(collection["CategoryListId"]);
-                var userCat = collection["UserCategory"];
-                var currencyId = int.Parse(collection["CurrencyListId"]);
-                var prodType = int.Parse(collection["ProductTypeId"]);
-                var prodId = int.Parse(collection["ProductId"]);
-
-                if (reusable == "false")
-                {
-                    prodType = 4;   //4 = UserListProduct = non reusable
-                }
-                else
-                {
-                    prodType = 3;
-                }
-
-                /* UPDATING ShoppingListEntry */
-
-                ShoppingListEntryService entryService = new ShoppingListEntryService();
-                ShoppingListEntryDto entry = new ShoppingListEntryDto();
-                entry.Id = entryService.GetEntryId(prodId);
-                entry.Quantity = qty;
-                entry.ProductTypeId = prodType;
-                entry.ShoppingList_Id = listId;
-                entry.Product_Id = prodId;
-                entry.State_Id = 2; //Default is unchecked
-
-                
-                entryService.Update(entry); //updates ShoppingListEntry
-
-                /* UPDATING UserProduct */
-
-                ProductService productService = new ProductService();
-                UserProductDto userProduct = new UserProductDto();
-                userProduct.Id = productService.GetUserProductId(prodId);
-                userProduct.ProductId = prodId;
-                userProduct.Name = name;
-                userProduct.Category_Id = catId;
-                userProduct.User_Id = int.Parse(Session["UserId"].ToString());
-                userProduct.Unit_Id = unitTypeId;
-                userProduct.Price = price;
-                userProduct.Currency_Id = currencyId;
-
-                productService.Update(userProduct);
-
-                /* UPDATING Product -> for new Timestamp*/
-
-                ProductDto productDto = new ProductDto();
-                productDto.Id = prodId;
-                productDto.ProductTypeId = prodType;
-                productService.Update(productDto);
-
-                /* UPDATING ShoppingList -> for new Timestamp: */
-
-                ShoppingListDto shoppingList = new ShoppingListDto();
-                shoppingList.Id = listId;
-                ShoppingListService listService = new ShoppingListService();
-                listService.Update(shoppingList);
-
-                TempData["SuccessMessage"] = "Successfully created a new item";
-                return RedirectToAction("SingleList", new { @id = listId });
-            //}
-            //catch
-            //{
-            //    TempData["ErrorMessage"] = "There was an error while editing the item";
-            //    return Redirect(Request.UrlReferrer.ToString());
-            //}
-        }
-
-        // GET: List
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         // GET: List/Details/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -406,12 +353,12 @@ namespace ListIt_WebFrontend.Controllers
                 var prodId = 0;
                 var chosenProductId = collection["ChosenProductId"]; //gets defaultProductId from dropdown
 
-                if(name != "" && chosenProductId != "") //Name filled in and defaultProduct chosen
+                if (name != "" && chosenProductId != "") //Name filled in and defaultProduct chosen
                 {
                     throw new Exception("You can either create a new item or choose from the default products, but not both!");
                 }
 
-                if(userCat != "")
+                if (userCat != "")
                 {
                     LanguageService languageService = new LanguageService();
 
@@ -423,7 +370,7 @@ namespace ListIt_WebFrontend.Controllers
                     CategoryService categoryService = new CategoryService();
                     userCatId = categoryService.Create(category);
                 }
-             
+
                 ShoppingListEntryService entryService = new ShoppingListEntryService();
                 ProductService productService = new ProductService();
 
@@ -456,13 +403,13 @@ namespace ListIt_WebFrontend.Controllers
 
                     entryService.Create(userProduct);
                 }
-                else if(chosenProductId != "")   //IF DefaultProduct -> create ShoppingListEntry & LinkDefaultProductToUser
+                else if (chosenProductId != "")   //IF DefaultProduct -> create ShoppingListEntry & LinkDefaultProductToUser
                 {
                     //check if chosen defaultProduct or reusable UserProduct
                     prodId = int.Parse(chosenProductId);
                     prodType = productService.GetProductTypeId(prodId);
 
-                    if(prodType == 1)    //if DefaultProduct: create Link entry
+                    if (prodType == 1)    //if DefaultProduct: create Link entry
                     {
                         DefaultProductDto defaultProductDto = new DefaultProductDto();
                         defaultProductDto.Id = productService.GetDefaultProductId(prodId);
@@ -478,7 +425,7 @@ namespace ListIt_WebFrontend.Controllers
                 entry.Product_Id = prodId;
                 entry.ShoppingList_Id = listId;
                 entry.State_Id = 2; //Default is unchecked
-                entryService.Create(entry); 
+                entryService.Create(entry);
 
                 //Update ShoppingList to update Timestamp:
                 ShoppingListDto shoppingList = new ShoppingListDto();
@@ -487,7 +434,7 @@ namespace ListIt_WebFrontend.Controllers
                 listService.Update(shoppingList);
 
                 TempData["SuccessMessage"] = "Successfully created a new item";
-                return RedirectToAction("SingleList", new { @id = listId});
+                return RedirectToAction("SingleList", new { @id = listId });
             }
             catch
             {
@@ -497,98 +444,132 @@ namespace ListIt_WebFrontend.Controllers
 
         }
 
+        // POST: User/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ShareList(FormCollection collection)
+        public ActionResult EditItem(FormCollection collection)
+        {
+            //try
+            //{
+            var name = collection["Name"];
+            var reusable = collection["UserProduct"];
+            var price = decimal.Parse(collection["Price"]);
+            var listId = int.Parse(collection["ListId"]);
+            var qty = int.Parse(collection["Quantity"]);
+            var unitTypeId = int.Parse(collection["UnitTypesListId"]);
+            var catId = int.Parse(collection["CategoryListId"]);
+            var userCat = collection["UserCategory"];
+            var currencyId = int.Parse(collection["CurrencyListId"]);
+            var prodType = int.Parse(collection["ProductTypeId"]);
+            var prodId = int.Parse(collection["ProductId"]);
+
+            if (reusable == "false")
+            {
+                prodType = 4;   //4 = UserListProduct = non reusable
+            }
+            else
+            {
+                prodType = 3;
+            }
+
+            /* UPDATING ShoppingListEntry */
+
+            ShoppingListEntryService entryService = new ShoppingListEntryService();
+            ShoppingListEntryDto entry = new ShoppingListEntryDto();
+            entry.Id = entryService.GetEntryId(prodId, listId);
+            entry.Quantity = qty;
+            entry.ProductTypeId = prodType;
+            entry.ShoppingList_Id = listId;
+            entry.Product_Id = prodId;
+            entry.State_Id = 2; //Default is unchecked
+
+
+            entryService.Update(entry); //updates ShoppingListEntry
+
+            /* UPDATING UserProduct */
+
+            ProductService productService = new ProductService();
+            UserProductDto userProduct = new UserProductDto();
+            userProduct.Id = productService.GetUserProductId(prodId);
+            userProduct.ProductId = prodId;
+            userProduct.Name = name;
+            userProduct.Category_Id = catId;
+            userProduct.User_Id = int.Parse(Session["UserId"].ToString());
+            userProduct.Unit_Id = unitTypeId;
+            userProduct.Price = price;
+            userProduct.Currency_Id = currencyId;
+
+            productService.Update(userProduct);
+
+            /* UPDATING Product -> for new Timestamp*/
+
+            ProductDto productDto = new ProductDto();
+            productDto.Id = prodId;
+            productDto.ProductTypeId = prodType;
+            productService.Update(productDto);
+
+            /* UPDATING ShoppingList -> for new Timestamp: */
+
+            ShoppingListDto shoppingList = new ShoppingListDto();
+            shoppingList.Id = listId;
+            ShoppingListService listService = new ShoppingListService();
+            listService.Update(shoppingList);
+
+            TempData["SuccessMessage"] = "Successfully created a new item";
+            return RedirectToAction("SingleList", new { @id = listId });
+            //}
+            //catch
+            //{
+            //    TempData["ErrorMessage"] = "There was an error while editing the item";
+            //    return Redirect(Request.UrlReferrer.ToString());
+            //}
+        }
+
+        // GET: List/Item/Delete/5
+        public ActionResult DeleteItem(int id, int listId)  //id = productId
         {
             try
             {
-                var emailAddress = collection["EmailAddress"];
-                var type = int.Parse(collection["Type"]);
-                var listId = int.Parse(collection["ShoppingList_Id"]);
-                UserService userService = new UserService();
-                var userId = userService.GetIdByEmail(emailAddress);
-                ShoppingListDto shoppingListDto = new ShoppingListDto();
-                shoppingListDto.UserId = userId;
-                shoppingListDto.Id = listId;
-                shoppingListDto.ListAccessTypeId = type;
-                ShoppingListService listService = new ShoppingListService();
-                listService.CreateLink(shoppingListDto);
-                TempData["SuccessMessage"] = "You successfully shared your list!";
-                return RedirectToAction("SingleList", new { @id = listId });
+                //1. If UserProduct -> Delete
+                ProductService productService = new ProductService();
+                var prodType = productService.GetProductTypeId(id);
+
+                if (prodType == 4) //one-time UserProduct
+                {
+                    var userProdId = productService.GetUserProductId(id);
+                    productService.DeleteUserProduct(userProdId);
+                }
+
+                //2. Delete ShoppingListEntry (if default or reusable only this)
+                ShoppingListEntryService shoppingListEntryService = new ShoppingListEntryService();
+                var entryId = shoppingListEntryService.GetEntryId(id, listId);
+                shoppingListEntryService.Delete(entryId);
+
+                TempData["SuccessMessage"] = "Successfully deleted the entry.";
+                return Redirect(Request.UrlReferrer.ToString());
             }
             catch
             {
-                var listId = int.Parse(collection["ShoppingList_Id"]);
-                TempData["ErrorMessage"] = "An error occured and your list hasn't been shared.";
-                return RedirectToAction("SingleList", new { @id = listId });
+                TempData["ErrorMessage"] = "There was an error while trying to delete this entry.";
+                return Redirect(Request.UrlReferrer.ToString());
             }
         }
 
-        // GET: List/Create
-        public ActionResult Create()
+        #endregion Items
+
+
+
+
+
+        // GET: List
+        public ActionResult Index()
         {
             return View();
         }
 
-        // POST: List/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: List/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: List/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: List/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: List/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

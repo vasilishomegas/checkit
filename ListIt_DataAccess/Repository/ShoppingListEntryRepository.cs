@@ -32,11 +32,12 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
-        public ShoppingListEntry GetByProductId(int productId)
+        public ShoppingListEntry GetByProductAndListId(int productId, int listId)
         {
             using (var context = new ListItContext())
             {
                 return context.ShoppingListEntries
+                    .Where(x => x.ShoppingList_Id == listId)    //if reusbale or default: can appear in multiple lists
                     .SingleOrDefault(x => x.Product_Id == productId);
             }
         }

@@ -20,12 +20,12 @@ namespace ListIt_BusinessLogic.Services
             _entryRepository = (ShoppingListEntryRepository)_repository;
         }
 
-        public int GetEntryId(int productId)
+        public int GetEntryId(int productId, int listId)
         {
-            return _entryRepository.GetByProductId(productId).Id;
+            return _entryRepository.GetByProductAndListId(productId, listId).Id;
         }
 
-        public void Create(ShoppingListEntryDto dto)
+        public override void Create(ShoppingListEntryDto dto)
         {
             _entryRepository.Create(new ShoppingListEntry
             {

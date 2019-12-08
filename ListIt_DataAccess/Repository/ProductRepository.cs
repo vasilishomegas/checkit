@@ -271,5 +271,22 @@ namespace ListIt_DataAccess.Repository
                     .SingleOrDefault(x => x.DefaultProductId == defaultProdId);
             }
         }
+
+        public void DeleteUserProduct(int id)
+        {
+            using (var context = new ListItContext())
+            {
+                var entity = context.Set<UserProduct>().Find(id);
+                try
+                {
+                    context.Set<UserProduct>().Remove(entity);
+                }
+                catch (System.ArgumentNullException e)
+                {
+                    throw new KeyNotFoundException("No entries were affected; the row does not exist." + e.Message);
+                }
+                context.SaveChanges();
+            }
+        }
     }
 }
