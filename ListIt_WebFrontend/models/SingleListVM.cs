@@ -12,17 +12,16 @@ namespace ListIt_WebFrontend.Models
         public IList<ProductDto> ListEntries { get; set; } 
 
         //FROM either UserProduct or APIProduct or DefaultProduct
-        [Required]
         [DataType(DataType.Text)]
         public string Name { get; set; }
-        [Range(0, 1000, ErrorMessage = "Please enter valid float Number")]
+        [Range(0, 1000, ErrorMessage = "Please enter valid Number")]
         public double Price { get; set; }
         public int UnitTypeId { get; set; }
         public int CategoryId { get; set; }
         public string UserCategory { get; set; }
 
-        [Range(0, 10000, ErrorMessage = "Please enter valid float Number")]
-        public int Quantity { get; set; }
+        [Range(0, 10000, ErrorMessage = "Please enter valid Number")]
+        public uint Quantity { get; set; }
 
         //List values:
         //public int ListId { get; set; }
@@ -39,6 +38,7 @@ namespace ListIt_WebFrontend.Models
         public IList<SelectListItem> ChooseProductsList { get; set; }
         public int ChosenProductId { get; set; }
     }
-        
+
+
 
 }

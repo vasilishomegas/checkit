@@ -10,7 +10,8 @@ namespace ListIt_WebFrontend.Models
     public class ItemsVM : ProductDto
     {
         //FOR Item edit view
-
+        [Range(0, 1000, ErrorMessage = "Please enter valid float Number")]
+        public uint Quantity { get; set; }
 
         public string UserCategory { get; set; }
 

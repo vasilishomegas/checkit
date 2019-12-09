@@ -68,24 +68,20 @@
             <div class="form-row">
                 <div class="form-group col">
                     @Html.LabelFor(model => model.Price, Lang.price, htmlAttributes: new { @class = "control-label" })
-                    @if (defaultOrApi == true)
-                    {@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price, @readonly = "readonly", data_toggle = "tooltip", title = "You can't edit this value of a reusable or default product item!" } })}
-                else
-                {@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price } })}
+                    @if (defaultOrApi == true){@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price, min="0" , @readonly = "readonly", data_toggle = "tooltip", title = "You can't edit this value of a reusable or default product item!" } })}
+                    else{@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price, min="0"  } })}
                 </div>
                 <div class="form-group col">
                     @Html.LabelFor(model => model.CurrencyListId, Lang.currency, htmlAttributes: new { @class = "control-label" })
                     @if (defaultOrApi == true)
                     {@Html.DropDownListFor(x => x.CurrencyListId, Model.CurrencyList, htmlAttributes: new { @class = "form-control custom-select", @readonly = "readonly", data_toggle = "tooltip", title = "You can't edit this value of a reusable or default product item!" })}
-                else
-                {@Html.DropDownListFor(x => x.CurrencyListId, Model.CurrencyList, htmlAttributes: new { @class = "form-control custom-select" })}
+                    else{@Html.DropDownListFor(x => x.CurrencyListId, Model.CurrencyList, htmlAttributes: new { @class = "form-control custom-select" })}
                 </div>
-
             </div>
             <div class="form-row">
                 <div class="form-group col">
                     @Html.LabelFor(model => model.Quantity, Lang.quantity, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Quantity } })
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Quantity, min="0" } })
                 </div>
                 <div class="form-group col">
                     @Html.LabelFor(model => model.UnitTypesListId, Lang.unit, htmlAttributes: new { @class = "control-label" })

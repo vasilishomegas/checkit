@@ -289,7 +289,7 @@ namespace ListIt_WebFrontend.Controllers
                 item.Id = entry.Id;
                 item.Name = entry.Name;
                 item.Price = entry.Price;
-                item.Quantity = entry.Quantity;
+                item.Quantity = Convert.ToUInt32(entry.Quantity);
                 item.Unit_Id = entry.Unit_Id;
                 item.Currency_Id = entry.Currency_Id;
                 item.Category_Id = entry.Category_Id;
@@ -479,7 +479,7 @@ namespace ListIt_WebFrontend.Controllers
                 var reusable = collection["UserProduct"];
                 var price = decimal.Parse(collection["Price"]);
                 var listId = int.Parse(collection["ListId"]);
-                var qty = int.Parse(collection["Quantity"]);
+                var qty = uint.Parse(collection["Quantity"]);
                 var unitTypeId = int.Parse(collection["UnitTypesListId"]);
                 int catId = 0;
                 int userCatId = 0;
@@ -494,7 +494,7 @@ namespace ListIt_WebFrontend.Controllers
                 ShoppingListEntryService entryService = new ShoppingListEntryService();
                 ShoppingListEntryDto entry = new ShoppingListEntryDto();
                 entry.Id = entryService.GetEntryId(prodId, listId);
-                entry.Quantity = qty;
+                entry.Quantity = (int)qty;
                 entry.ProductTypeId = prodTypeId;
                 entry.ShoppingList_Id = listId;
                 entry.Product_Id = prodId;
