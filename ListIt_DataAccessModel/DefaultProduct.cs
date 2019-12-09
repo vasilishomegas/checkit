@@ -18,8 +18,8 @@ namespace ListIt_DataAccessModel
         public DefaultProduct()
         {
             this.ApiProducts = new HashSet<ApiProduct>();
+            this.LinkDefaultProductToCategories = new HashSet<LinkDefaultProductToCategory>();
             this.LinkUserToDefaultProducts = new HashSet<LinkUserToDefaultProduct>();
-            this.Categories = new HashSet<Category>();
         }
     
         public int Id { get; set; }
@@ -31,10 +31,12 @@ namespace ListIt_DataAccessModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApiProduct> ApiProducts { get; set; }
         public virtual Currency Currency { get; set; }
+        public virtual Product Product { get; set; }
         public virtual UnitType UnitType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LinkUserToDefaultProduct> LinkUserToDefaultProducts { get; set; }
+        public virtual ICollection<LinkDefaultProductToCategory> LinkDefaultProductToCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<LinkUserToDefaultProduct> LinkUserToDefaultProducts { get; set; }
+        public virtual Product Product1 { get; set; }
     }
 }

@@ -18,6 +18,8 @@ namespace ListIt_DataAccessModel
         public Product()
         {
             this.ApiProducts = new HashSet<ApiProduct>();
+            this.DefaultProducts = new HashSet<DefaultProduct>();
+            this.DefaultProducts1 = new HashSet<DefaultProduct>();
             this.ShoppingListEntries = new HashSet<ShoppingListEntry>();
             this.TemplateSortedProducts = new HashSet<TemplateSortedProduct>();
             this.TranslationOfProducts = new HashSet<TranslationOfProduct>();
@@ -30,6 +32,10 @@ namespace ListIt_DataAccessModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApiProduct> ApiProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DefaultProduct> DefaultProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DefaultProduct> DefaultProducts1 { get; set; }
         public virtual ProductType ProductType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShoppingListEntry> ShoppingListEntries { get; set; }

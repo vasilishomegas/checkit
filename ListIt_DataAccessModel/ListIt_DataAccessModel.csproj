@@ -99,6 +99,9 @@
     <Compile Include="Language.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="LinkDefaultProductToCategory.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="LinkUserToDefaultProduct.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

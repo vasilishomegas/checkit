@@ -12,14 +12,13 @@ namespace ListIt_DataAccessModel
     using System;
     using System.Collections.Generic;
     
-    public partial class TemplateSortedProduct
+    public partial class LinkDefaultProductToCategory
     {
-        public int TemplateListOrderingId { get; set; }
+        public int DefaultProductId { get; set; }
         public int CategoryId { get; set; }
-        public int Rank { get; set; }
-        public System.DateTime Timestamp { get; set; }
+        public Nullable<System.DateTime> LastUpdate { get; set; }
     
-        public virtual Product Product { get; set; }
-        public virtual TemplateListOrdering TemplateListOrdering { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual DefaultProduct DefaultProduct { get; set; }
     }
 }
