@@ -309,7 +309,7 @@ namespace ListIt_BusinessLogic.Services
                 {
                     var defaultProduct = _prodRepository.GetDefaultProduct(entry.Product_Id);
                     var translation = _prodRepository.GetProductTranslation(langId, entry.Product_Id);
-
+                    if (translation == null) translation = _prodRepository.GetProductTranslation(2, entry.Product_Id); //get Default english
                     //4. Create ProductDto and add to list
                     var productDto = ConvertDefaultProductDBToDto(product, defaultProduct, entry, translation);
                     productDtoList.Add(productDto);
@@ -318,7 +318,7 @@ namespace ListIt_BusinessLogic.Services
                 {
                     var apiProduct = _prodRepository.GetApiProduct(entry.Product_Id);
                     var translation = _prodRepository.GetProductTranslation(langId, entry.Product_Id);
-
+                    if (translation == null) translation = _prodRepository.GetProductTranslation(2, entry.Product_Id); //get Default english
                     //4. Create ProductDto and add to list
                     var productDto = ConvertApiProductDBToDto(product, apiProduct, entry, translation);
                     productDtoList.Add(productDto);

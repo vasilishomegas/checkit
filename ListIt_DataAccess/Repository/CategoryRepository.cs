@@ -39,9 +39,14 @@ namespace ListIt_DataAccess.Repository
         {
             using (var context = new ListItContext())
             {
-                return context.TranslationOfCategories
+                var translation = context.TranslationOfCategories
                     .Where(x => x.Language_Id == langId)
                     .SingleOrDefault(x => x.Category_Id == id);
+
+                if(translation == null) translation = context.TranslationOfCategories
+                    .FirstOrDefault(x => x.Category_Id == id);
+
+                return translation;
             }
         }
 

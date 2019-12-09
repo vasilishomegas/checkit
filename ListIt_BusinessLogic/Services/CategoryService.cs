@@ -35,8 +35,7 @@ namespace ListIt_BusinessLogic.Services
             var defaultCatList = _catRepository.GetDefaultCategoryIds();
             foreach (Category cat in defaultCatList)
             {
-                var translationInstance = _catRepository.Get(cat.Id, langId);
-                //categoryList.Add(ConvertDBToDto(translationInstance));
+                var translationInstance = _catRepository.Get(cat.Id, langId); 
                 categoryList.Add(ConvertDBToDto(translationInstance));
             }
 
