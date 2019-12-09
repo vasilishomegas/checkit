@@ -46,8 +46,8 @@ namespace ListIt_WindowsBackend
             else
             {
                 ChainService chainService = new ChainService();
-                //try
-                //{
+                try
+                {
                     ChainDto chainDto = new ChainDto
                     {
                         Name = ChainNameTextBox.Text,
@@ -60,12 +60,12 @@ namespace ListIt_WindowsBackend
                     ChainNameTextBox.Text = "";
                     LogoLinkTextBox.Text = "";
                     APIdropdown.SelectedIndex = -1;
-                //}
-                //catch
-                //{
-                //    MessageBox.Show("failed to add a chain.");
-                //}
             }
+                catch
+            {
+                MessageBox.Show("Failed to add a chain.");
+            }
+        }
         }
 
         private void Load_Data()
@@ -75,6 +75,13 @@ namespace ListIt_WindowsBackend
             //APIdropdown.SelectedIndex = -1;
             APIdropdown.SelectedValuePath = "Id";
             APIdropdown.DisplayMemberPath = "Url";
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new MenuWindow();
+            window.Show();
+            this.Close();
         }
     }
 }

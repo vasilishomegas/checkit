@@ -16,7 +16,7 @@ namespace ListIt_BusinessLogic.Services
 
         public ProductTypeService() : base(new ProductTypeRepository())
         {
-
+            _productTypeRepository = (ProductTypeRepository)_repository;
         }
         protected override ProductTypeDto ConvertDBToDto(ProductType entity)
         {
