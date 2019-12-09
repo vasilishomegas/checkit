@@ -1,111 +1,110 @@
-﻿@using Resources
-@model ListIt_WebFrontend.Models.ItemsVM
-
+﻿@model ListIt_WebFrontend.Models.ItemsVM
+@using Resources
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Edit Item";
 }
 
-    <div class="container-fluid">
+<div class="container-fluid">
 
-        <h1 class="text-center">
-            @ViewBag.Title
-        </h1>
+    <h1 class="text-center">
+        @ViewBag.Title
+    </h1>
 
-        @if (ViewBag.Message != null)
-        {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <p class="text-center mb-0">
-                    @ViewBag.Message
-                </p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <p class="text-center mb-0">
+                @ViewBag.Message
+            </p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p class="text-center mb-0">
+                @ViewBag.Error
+            </p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @using (Html.BeginForm("EditItem", "List", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-row">
+            <div class="form-group col">
+                @Html.LabelFor(model => model.Name, Lang.itemName, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", value = Model.Name, required = "required" } })
+            </div>
+            <div class="form-group col">
+                @Html.CheckBox("UserProduct")
+                @Html.Label("UserProduct", "I want to reuse this item")
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                @Html.LabelFor(model => model.Price, Lang.price, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price } })
+            </div>
+            <div class="form-group col">
+                @Html.LabelFor(model => model.CurrencyListId, Lang.currency, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(x => x.CurrencyListId, Model.CurrencyList, htmlAttributes: new { @class = "form-control custom-select" })
+
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                @Html.LabelFor(model => model.Quantity, Lang.quantity, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Quantity } })
+            </div>
+            <div class="form-group col">
+                @Html.LabelFor(model => model.UnitTypesListId, Lang.unit, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(x => x.UnitTypesListId, Model.UnitTypesList, htmlAttributes: new { @class = "form-control custom-select" })
+
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                @Html.LabelFor(model => model.CategoryListId, Lang.category, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(x => x.CategoryListId, Model.CategoryList, htmlAttributes: new { @class = "form-control custom-select" })
+
+            </div>
+            <div class="form-group col">
+                @Html.LabelFor(model => model.UserCategory, Lang.createCat, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.UserCategory, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.UserCategory } })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.ListId, new { htmlAttributes = new { value = Model.ListId } })
+        @Html.HiddenFor(model => model.ProductTypeId, new { htmlAttributes = new { value = Model.ProductTypeId } })
+        @Html.HiddenFor(model => model.ProductId, new { htmlAttributes = new { value = Model.ProductId } })
+
+
+        <div class="form-row">
+            <div class="form-group col d-flex">
+                <button type="button" onclick="" class="btn btn-dark">
+                    translate item
                 </button>
             </div>
-        }
-        @if (ViewBag.Error != null)
-        {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <p class="text-center mb-0">
-                    @ViewBag.Error
-                </p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+            <div class="form-group col d-flex justify-content-end">
+                <button class="btn" type="reset">
+                    <i class="fa fa-close fa-lg"></i>
+                </button>
+                <button class="btn" type="submit">
+                    <i class="fa fa-check-circle fa-lg"></i>
                 </button>
             </div>
-        }
 
-        @using (Html.BeginForm("EditItem", "List", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-row">
-                <div class="form-group col">
-                    @Html.LabelFor(model => model.Name, Lang.itemName, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", value = Model.Name, required = "required" } })
-                </div>
-                <div class="form-group col">
-                    @Html.CheckBox("UserProduct")
-                    @Html.Label("UserProduct", "I want to reuse this item")
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    @Html.LabelFor(model => model.Price, Lang.price, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price } })
-                </div>
-                <div class="form-group col">
-                    @Html.LabelFor(model => model.CurrencyListId, Lang.currency, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(x => x.CurrencyListId, Model.CurrencyList, htmlAttributes: new { @class = "form-control custom-select" })
-
-                </div>
-
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    @Html.LabelFor(model => model.Quantity, Lang.quantity, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Quantity } })
-                </div>
-                <div class="form-group col">
-                    @Html.LabelFor(model => model.UnitTypesListId, Lang.unit, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(x => x.UnitTypesListId, Model.UnitTypesList, htmlAttributes: new { @class = "form-control custom-select" })
-
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    @Html.LabelFor(model => model.CategoryListId, Lang.category, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(x => x.CategoryListId, Model.CategoryList, htmlAttributes: new { @class = "form-control custom-select" })
-
-                </div>
-                <div class="form-group col">
-                    @Html.LabelFor(model => model.UserCategory, Lang.createCat, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.UserCategory, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.UserCategory } })
-                </div>
-            </div>
-
-            @Html.HiddenFor(model => model.ListId, new { htmlAttributes = new { value = Model.ListId } })
-            @Html.HiddenFor(model => model.ProductTypeId, new { htmlAttributes = new { value = Model.ProductTypeId } })
-            @Html.HiddenFor(model => model.ProductId, new { htmlAttributes = new { value = Model.ProductId } })
-
-
-            <div class="form-row">
-                <div class="form-group col d-flex">
-                    <button type="button" onclick="" class="btn btn-dark">
-                        translate item
-                    </button>
-                </div>
-                <div class="form-group col d-flex justify-content-end">
-                    <button class="btn" type="reset">
-                        <i class="fa fa-close fa-lg"></i>
-                    </button>
-                    <button class="btn" type="submit">
-                        <i class="fa fa-check-circle fa-lg"></i>
-                    </button>
-                </div>
-
-            </div>
-        }
-    </div>
+        </div>
+    }
+</div>
 

@@ -14,10 +14,10 @@ namespace ListIt_DataAccess
     using System.Data.Entity.Infrastructure;
     using ListIt_DataAccessModel;
     
-    public partial class dmaj0918_1074524Entities : DbContext
+    public partial class dmaj0918_1074524Entities1 : DbContext
     {
-        public dmaj0918_1074524Entities()
-            : base("name=dmaj0918_1074524Entities")
+        public dmaj0918_1074524Entities1()
+            : base("name=dmaj0918_1074524Entities1")
         {
         }
     
@@ -35,6 +35,7 @@ namespace ListIt_DataAccess
         public virtual DbSet<DefaultProduct> DefaultProducts { get; set; }
         public virtual DbSet<EntryState> EntryStates { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<LinkDefaultProductToCategory> LinkDefaultProductToCategories { get; set; }
         public virtual DbSet<LinkUserToDefaultProduct> LinkUserToDefaultProducts { get; set; }
         public virtual DbSet<LinkUserToList> LinkUserToLists { get; set; }
         public virtual DbSet<ListAccessType> ListAccessTypes { get; set; }

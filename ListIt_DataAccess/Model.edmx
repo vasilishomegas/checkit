@@ -91,6 +91,7 @@
           </Key>
           <Property Name="DefaultProductId" Type="int" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
         </EntityType>
         <EntityType Name="LinkUserToDefaultProduct">
           <Key>
@@ -180,10 +181,10 @@
         <EntityType Name="TemplateSortedProducts">
           <Key>
             <PropertyRef Name="TemplateListOrderingId" />
-            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="CategoryId" />
           </Key>
           <Property Name="TemplateListOrderingId" Type="int" Nullable="false" />
-          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="Rank" Type="int" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
         </EntityType>
@@ -299,6 +300,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ApiProducts">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPLICATION_ATTACHMENT">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="DefaultProducts" Type="Self.DefaultProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultProducts">
               <PropertyRef Name="Product_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -563,7 +576,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="TemplateSortedProducts">
-              <PropertyRef Name="ProductId" />
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -807,6 +820,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Product_Id">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="DefaultProducts" Type="Self.DefaultProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultProducts">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dmaj0918_1074524ModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApiProducts" EntityType="Self.ApiProducts" Schema="dbo" store:Type="Tables" />
@@ -848,6 +873,10 @@
           <AssociationSet Name="FK_ApiProductsProductId_ProductId" Association="Self.FK_ApiProductsProductId_ProductId">
             <End Role="Products" EntitySet="Products" />
             <End Role="ApiProducts" EntitySet="ApiProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPLICATION_ATTACHMENT" Association="Self.FK_APPLICATION_ATTACHMENT">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ApiProducts_dbo_Currencies_Currency_Id" Association="Self.FK_dbo_ApiProducts_dbo_Currencies_Currency_Id">
             <End Role="Currencies" EntitySet="Currencies" />
@@ -1017,6 +1046,10 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="UserProducts" EntitySet="UserProducts" />
           </AssociationSet>
+          <AssociationSet Name="Product_Id" Association="Self.Product_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -1056,9 +1089,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User_Id" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_Categories_dbo_Users_User_Id" FromRole="Categories" ToRole="Users" />
+          <NavigationProperty Name="LinkDefaultProductToCategories" Relationship="Self.FK_dbo_LinkDefaultProductToCategory_dbo_Categories_CategoryId" FromRole="Categories" ToRole="LinkDefaultProductToCategory" />
           <NavigationProperty Name="TranslationOfCategories" Relationship="Self.FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id" FromRole="Categories" ToRole="TranslationOfCategories" />
           <NavigationProperty Name="UserProducts" Relationship="Self.FK_dbo_UserProducts_dbo_Categories_Category_Id" FromRole="Categories" ToRole="UserProducts" />
-          <NavigationProperty Name="DefaultProducts" Relationship="Self.LinkDefaultProductToCategory" FromRole="Categories" ToRole="DefaultProducts" />
         </EntityType>
         <EntityType Name="Chain">
           <Key>
@@ -1104,9 +1137,11 @@
           <Property Name="Product_Id" Type="Int32" />
           <NavigationProperty Name="ApiProducts" Relationship="Self.FK_dbo_ApiProducts_dbo_DefaultProducts_DefaultProduct_Id" FromRole="DefaultProducts" ToRole="ApiProducts" />
           <NavigationProperty Name="Currency" Relationship="Self.FK_dbo_DefaultProducts_dbo_Currencies_Currency_Id" FromRole="DefaultProducts" ToRole="Currencies" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_APPLICATION_ATTACHMENT" FromRole="DefaultProducts" ToRole="Products" />
           <NavigationProperty Name="UnitType" Relationship="Self.FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id" FromRole="DefaultProducts" ToRole="UnitTypes" />
+          <NavigationProperty Name="LinkDefaultProductToCategories" Relationship="Self.FK_dbo_LinkDefaultProductToCategory_dbo_DefaultProducts_DefaultProductId" FromRole="DefaultProducts" ToRole="LinkDefaultProductToCategory" />
           <NavigationProperty Name="LinkUserToDefaultProducts" Relationship="Self.FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId" FromRole="DefaultProducts" ToRole="LinkUserToDefaultProduct" />
-          <NavigationProperty Name="Categories" Relationship="Self.LinkDefaultProductToCategory" FromRole="DefaultProducts" ToRole="Categories" />
+          <NavigationProperty Name="Product1" Relationship="Self.Product_Id" FromRole="DefaultProducts" ToRole="Products" />
         </EntityType>
         <EntityType Name="EntryState">
           <Key>
@@ -1127,6 +1162,17 @@
           <NavigationProperty Name="TranslationOfProducts" Relationship="Self.FK_dbo_TranslationOfProducts_dbo_Languages_Language_Id" FromRole="Languages" ToRole="TranslationOfProducts" />
           <NavigationProperty Name="TranslationOfUnitTypes" Relationship="Self.FK_dbo_TranslationOfUnitTypes_dbo_Languages_Language_Id" FromRole="Languages" ToRole="TranslationOfUnitTypes" />
           <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_Languages_Language_Id" FromRole="Languages" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="LinkDefaultProductToCategory">
+          <Key>
+            <PropertyRef Name="DefaultProductId" />
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="DefaultProductId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_dbo_LinkDefaultProductToCategory_dbo_Categories_CategoryId" FromRole="LinkDefaultProductToCategory" ToRole="Categories" />
+          <NavigationProperty Name="DefaultProduct" Relationship="Self.FK_dbo_LinkDefaultProductToCategory_dbo_DefaultProducts_DefaultProductId" FromRole="LinkDefaultProductToCategory" ToRole="DefaultProducts" />
         </EntityType>
         <EntityType Name="LinkUserToDefaultProduct">
           <Key>
@@ -1166,6 +1212,8 @@
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ProductType_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ApiProducts" Relationship="Self.FK_ApiProductsProductId_ProductId" FromRole="Products" ToRole="ApiProducts" />
+          <NavigationProperty Name="DefaultProducts" Relationship="Self.FK_APPLICATION_ATTACHMENT" FromRole="Products" ToRole="DefaultProducts" />
+          <NavigationProperty Name="DefaultProducts1" Relationship="Self.Product_Id" FromRole="Products" ToRole="DefaultProducts" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_dbo_Products_dbo_ProductTypes_ProductType_Id" FromRole="Products" ToRole="ProductTypes" />
           <NavigationProperty Name="ShoppingListEntries" Relationship="Self.FK_dbo_ShoppingListEntries_dbo_Products_Product_Id" FromRole="Products" ToRole="ShoppingListEntries" />
           <NavigationProperty Name="TemplateSortedProducts" Relationship="Self.FK_dbo_TemplateSortedProducts_dbo_Products_ProductId" FromRole="Products" ToRole="TemplateSortedProducts" />
@@ -1245,10 +1293,10 @@
         <EntityType Name="TemplateSortedProduct">
           <Key>
             <PropertyRef Name="TemplateListOrderingId" />
-            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="CategoryId" />
           </Key>
           <Property Name="TemplateListOrderingId" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="Rank" Type="Int32" Nullable="false" />
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Product" Relationship="Self.FK_dbo_TemplateSortedProducts_dbo_Products_ProductId" FromRole="TemplateSortedProducts" ToRole="Products" />
@@ -1437,6 +1485,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_LinkDefaultProductToCategory_dbo_Categories_CategoryId">
+          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
+          <End Role="LinkDefaultProductToCategory" Type="Self.LinkDefaultProductToCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkDefaultProductToCategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id">
           <End Role="Categories" Type="Self.Category" Multiplicity="1" />
           <End Role="TranslationOfCategories" Type="Self.TranslationOfCategory" Multiplicity="*" />
@@ -1533,6 +1593,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_APPLICATION_ATTACHMENT">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultProducts">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id">
           <End Role="UnitTypes" Type="Self.UnitType" Multiplicity="1" />
           <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
@@ -1545,6 +1617,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_LinkDefaultProductToCategory_dbo_DefaultProducts_DefaultProductId">
+          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="1" />
+          <End Role="LinkDefaultProductToCategory" Type="Self.LinkDefaultProductToCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DefaultProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkDefaultProductToCategory">
+              <PropertyRef Name="DefaultProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId">
           <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="1" />
           <End Role="LinkUserToDefaultProduct" Type="Self.LinkUserToDefaultProduct" Multiplicity="*" />
@@ -1554,6 +1638,18 @@
             </Principal>
             <Dependent Role="LinkUserToDefaultProduct">
               <PropertyRef Name="DefaultProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Product_Id">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DefaultProducts">
+              <PropertyRef Name="Product_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1685,7 +1781,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="TemplateSortedProducts">
-              <PropertyRef Name="ProductId" />
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1881,11 +1977,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="LinkDefaultProductToCategory">
-          <End Role="Categories" Type="Self.Category" Multiplicity="*" />
-          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="dmaj0918_1074524Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dmaj0918_1074524Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="ApiProducts" EntityType="Self.ApiProduct" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -1895,6 +1987,7 @@
           <EntitySet Name="DefaultProducts" EntityType="Self.DefaultProduct" />
           <EntitySet Name="EntryStates" EntityType="Self.EntryState" />
           <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="LinkDefaultProductToCategories" EntityType="Self.LinkDefaultProductToCategory" />
           <EntitySet Name="LinkUserToDefaultProducts" EntityType="Self.LinkUserToDefaultProduct" />
           <EntitySet Name="LinkUserToLists" EntityType="Self.LinkUserToList" />
           <EntitySet Name="ListAccessTypes" EntityType="Self.ListAccessType" />
@@ -1938,6 +2031,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Categories" EntitySet="Categories" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkDefaultProductToCategory_dbo_Categories_CategoryId" Association="Self.FK_dbo_LinkDefaultProductToCategory_dbo_Categories_CategoryId">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="LinkDefaultProductToCategory" EntitySet="LinkDefaultProductToCategories" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id" Association="Self.FK_dbo_TranslationOfCategories_dbo_Categories_Category_Id">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="TranslationOfCategories" EntitySet="TranslationOfCategories" />
@@ -1970,13 +2067,25 @@
             <End Role="Currencies" EntitySet="Currencies" />
             <End Role="UserProducts" EntitySet="UserProducts" />
           </AssociationSet>
+          <AssociationSet Name="FK_APPLICATION_ATTACHMENT" Association="Self.FK_APPLICATION_ATTACHMENT">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id" Association="Self.FK_dbo_DefaultProducts_dbo_UnitTypes_UnitType_Id">
             <End Role="UnitTypes" EntitySet="UnitTypes" />
             <End Role="DefaultProducts" EntitySet="DefaultProducts" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinkDefaultProductToCategory_dbo_DefaultProducts_DefaultProductId" Association="Self.FK_dbo_LinkDefaultProductToCategory_dbo_DefaultProducts_DefaultProductId">
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
+            <End Role="LinkDefaultProductToCategory" EntitySet="LinkDefaultProductToCategories" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId" Association="Self.FK_dbo_LinkUserToDefaultProduct_dbo_DefaultProducts_DefaultProductId">
             <End Role="DefaultProducts" EntitySet="DefaultProducts" />
             <End Role="LinkUserToDefaultProduct" EntitySet="LinkUserToDefaultProducts" />
+          </AssociationSet>
+          <AssociationSet Name="Product_Id" Association="Self.Product_Id">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id" Association="Self.FK_dbo_ShoppingListEntries_dbo_EntryStates_State_Id">
             <End Role="EntryStates" EntitySet="EntryStates" />
@@ -2086,17 +2195,13 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserProducts" EntitySet="UserProducts" />
           </AssociationSet>
-          <AssociationSet Name="LinkDefaultProductToCategory" Association="Self.LinkDefaultProductToCategory">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="DefaultProducts" EntitySet="DefaultProducts" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entities">
+        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entities1">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="dmaj0918_1074524Model.Admin">
               <MappingFragment StoreEntitySet="Admin">
@@ -2182,6 +2287,15 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinkDefaultProductToCategories">
+            <EntityTypeMapping TypeName="dmaj0918_1074524Model.LinkDefaultProductToCategory">
+              <MappingFragment StoreEntitySet="LinkDefaultProductToCategory">
+                <ScalarProperty Name="DefaultProductId" ColumnName="DefaultProductId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2282,7 +2396,7 @@
             <EntityTypeMapping TypeName="dmaj0918_1074524Model.TemplateSortedProduct">
               <MappingFragment StoreEntitySet="TemplateSortedProducts">
                 <ScalarProperty Name="TemplateListOrderingId" ColumnName="TemplateListOrderingId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
               </MappingFragment>
@@ -2372,14 +2486,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="LinkDefaultProductToCategory" TypeName="dmaj0918_1074524Model.LinkDefaultProductToCategory" StoreEntitySet="LinkDefaultProductToCategory">
-            <EndProperty Name="Categories">
-              <ScalarProperty Name="Id" ColumnName="CategoryId" />
-            </EndProperty>
-            <EndProperty Name="DefaultProducts">
-              <ScalarProperty Name="Id" ColumnName="DefaultProductId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

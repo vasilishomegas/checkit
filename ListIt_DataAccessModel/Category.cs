@@ -17,9 +17,9 @@ namespace ListIt_DataAccessModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
+            this.LinkDefaultProductToCategories = new HashSet<LinkDefaultProductToCategory>();
             this.TranslationOfCategories = new HashSet<TranslationOfCategory>();
             this.UserProducts = new HashSet<UserProduct>();
-            this.DefaultProducts = new HashSet<DefaultProduct>();
         }
     
         public int Id { get; set; }
@@ -27,10 +27,10 @@ namespace ListIt_DataAccessModel
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LinkDefaultProductToCategory> LinkDefaultProductToCategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TranslationOfCategory> TranslationOfCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProduct> UserProducts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DefaultProduct> DefaultProducts { get; set; }
     }
 }
