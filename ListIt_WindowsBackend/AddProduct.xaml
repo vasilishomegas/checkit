@@ -24,7 +24,7 @@
             <Button Content="Add" HorizontalAlignment="Center" Margin="542,223,16.6,0" VerticalAlignment="Top" Width="75" Click="Button_Click" x:Name="AddButton" FontSize="18" Height="35"/>
             <ComboBox HorizontalAlignment="Center" Margin="362,170,113.6,0" VerticalAlignment="Top" Width="158" RenderTransformOrigin="0.844,-0.779" x:Name="CategoryBox" FontSize="18" Height="35"/>
             <Label Content="Category" HorizontalAlignment="Center" Margin="178,170,353.6,0" VerticalAlignment="Top" x:Name="CategoryLabel" RenderTransformOrigin="0.547,-1.038" FontSize="18" Width="102"/>
-            <Button Name ="Back" Content="Back to menu" HorizontalAlignment="Left" Margin="0,379,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click"/>
+            <Button Name ="Back" Content="Back to menu" HorizontalAlignment="Left" Margin="0,379,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click" IsDefault="True"/>
         </Grid>
     </Grid>
 </Window>
