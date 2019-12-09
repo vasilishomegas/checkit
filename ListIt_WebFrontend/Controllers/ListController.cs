@@ -481,8 +481,9 @@ namespace ListIt_WebFrontend.Controllers
                 var listId = int.Parse(collection["ListId"]);
                 var qty = int.Parse(collection["Quantity"]);
                 var unitTypeId = int.Parse(collection["UnitTypesListId"]);
-                var catId = 0;
-                if(collection["CategoryListId"] != "") catId = int.Parse(collection["CategoryListId"]);
+                int catId = 0;
+                int userCatId = 0;
+                if (collection["CategoryListId"] != "") catId = int.Parse(collection["CategoryListId"]);
                 var userCat = collection["UserCategory"];
                 var currencyId = int.Parse(collection["CurrencyListId"]);
                 var prodTypeId = int.Parse(collection["ProductTypeId"]);
@@ -500,6 +501,20 @@ namespace ListIt_WebFrontend.Controllers
                 entry.State_Id = 2; //Default is unchecked
 
                 entryService.Update(entry); //updates ShoppingListEntry
+
+                /* CREATE NEW UserCatgory */
+                if (userCat != "")
+                {
+                    LanguageService languageService = new LanguageService();
+
+                    CategoryDto category = new CategoryDto();
+                    category.Name = userCat;
+                    category.LanguageId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;
+                    category.UserId = int.Parse(Session["UserId"].ToString());
+
+                    CategoryService categoryService = new CategoryService();
+                    userCatId = categoryService.Create(category);
+                }
 
                 ProductService productService = new ProductService();
                 if (prodTypeId == 4 || prodTypeId == 3)
@@ -519,7 +534,8 @@ namespace ListIt_WebFrontend.Controllers
                     userProduct.Id = productService.GetUserProductId(prodId);
                     userProduct.ProductId = prodId;
                     userProduct.Name = name;
-                    userProduct.Category_Id = catId;
+                    if (userCat != "") userProduct.Category_Id = userCatId;
+                    else userProduct.Category_Id = catId;
                     userProduct.User_Id = int.Parse(Session["UserId"].ToString());
                     userProduct.Unit_Id = unitTypeId;
                     userProduct.Price = price;
@@ -529,7 +545,13 @@ namespace ListIt_WebFrontend.Controllers
                 }
                 else if(prodTypeId == 1) //if default Product
                 {
-                    //TODO: if catId != 0 -> create LinkDefaultProductToCategory entry
+                    if(catId != 0)
+                    {
+                        //create LinkDefaultProductToCategory entry
+                    }else if(userCatId != 0)
+                    {
+                        //create LinkDefaultProductToCategory entry
+                    }
                 }                
 
                 /* UPDATING Product -> for new Timestamp*/
@@ -555,10 +577,10 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         // GET: List/Item/Delete/5
-            public ActionResult DeleteItem(int id, int listId)  //id = productId
+        public ActionResult DeleteItem(int id, int listId)  //id = productId
         {
-            //try
-            //{
+            try
+            {
                 //1. If UserProduct -> Delete
                 ProductService productService = new ProductService();
                 var prodType = productService.GetProductTypeId(id);
@@ -576,12 +598,12 @@ namespace ListIt_WebFrontend.Controllers
 
                 TempData["SuccessMessage"] = "Successfully deleted the entry.";
                 return Redirect(Request.UrlReferrer.ToString());
-            //}
-            //catch
-            //{
-            //    TempData["ErrorMessage"] = "There was an error while trying to delete this entry.";
-            //    return Redirect(Request.UrlReferrer.ToString());
-            //}
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "There was an error while trying to delete this entry.";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
         }
 
         #endregion Items
