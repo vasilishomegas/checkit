@@ -27,27 +27,28 @@ namespace ListIt_WindowsBackend
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
             var window = new AddProduct();
-            window.Show();
-            this.Close();
+            window.ShowDialog();
+            //this.Close();
         }
 
         private void AddChain_Click(object sender, RoutedEventArgs e)
         {
             var window = new AddChain();
-            window.Show();
-            this.Close();
+            window.ShowDialog();
+            //this.Close();
         }
 
         private void AddShop_Click(object sender, RoutedEventArgs e)
         {
             var window = new AddShop();
-            window.Show();
-            this.Close();
+            window.ShowDialog();
+            //this.Close();
         }
 
         private void EditProducts_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = new EditProducts();
+            window.ShowDialog();
         }
 
         private void EditChains_Click(object sender, RoutedEventArgs e)
@@ -65,6 +66,7 @@ namespace ListIt_WindowsBackend
             var window = new AdminLogin();
             window.Show();
             this.Close();
+            //((App)Application.Current).Logout(sender);
         }
     }
 }

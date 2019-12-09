@@ -35,12 +35,6 @@ namespace ListIt_WindowsBackend
             ChainDropdown.DisplayMemberPath = "Name";
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new MenuWindow();
-            window.Show();
-            this.Close();
-        }
 
         private void AddShop_Click(object sender, RoutedEventArgs e)
         {
@@ -84,6 +78,12 @@ namespace ListIt_WindowsBackend
                     MessageBox.Show("Failed to add shop");
                 }
             }
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            //((App)Application.Current).Back_To_Menu(sender);
         }
     }
 }

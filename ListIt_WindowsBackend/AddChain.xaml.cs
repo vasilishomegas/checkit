@@ -79,9 +79,8 @@ namespace ListIt_WindowsBackend
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            var window = new MenuWindow();
-            window.Show();
             this.Close();
+            //((App)Application.Current).Back_To_Menu(sender);
         }
     }
 }

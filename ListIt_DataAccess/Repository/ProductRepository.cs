@@ -48,6 +48,15 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
+        public IList<DefaultProduct> GetAllDefaultProducts()
+        {
+            using (var context = new ListItContext())
+            {
+                return context.DefaultProducts
+                    .ToList();
+            }
+        }
+
         public void SaveDefaultProductName(TranslationOfProduct translation)
         {
             using (var context = new ListItContext())

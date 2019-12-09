@@ -78,6 +78,7 @@ namespace ListIt_WindowsBackend
                     TypeBox.SelectedIndex = 0;
                     NameField.Text = "";
                     UnitBox.SelectedIndex = -1;
+                    CategoryBox.SelectedIndex = -1;
                     LanguageBox.SelectedIndex = 0;
                     CurrencyBox.SelectedIndex = 0;
                     PriceField.Text = "";
@@ -112,16 +113,15 @@ namespace ListIt_WindowsBackend
             CurrencyBox.SelectedValuePath = "Id";
             CurrencyBox.DisplayMemberPath = "Name";
             CurrencyBox.SelectedIndex = 0;
-            CategoryBox.ItemsSource = categoryService.GetCategories(2);
+            CategoryBox.ItemsSource = categoryService.GetDefaultCategories(2);
             CategoryBox.SelectedValuePath = "Id";
             CategoryBox.DisplayMemberPath = "Name";
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            var window = new MenuWindow();
-            window.Show();
             this.Close();
+            //((App)Application.Current).Back_To_Menu(sender);
         }
     }
 }

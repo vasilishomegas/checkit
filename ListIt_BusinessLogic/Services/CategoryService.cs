@@ -19,7 +19,7 @@ namespace ListIt_BusinessLogic.Services
             _catRepository = (CategoryRepository)_repository;
         }
 
-        public IEnumerable<CategoryDto> GetCategories(int langId)
+        public IEnumerable<CategoryDto> GetDefaultCategories(int langId)
         {
             List<CategoryDto> categoryList = new List<CategoryDto>();
 
@@ -34,9 +34,9 @@ namespace ListIt_BusinessLogic.Services
         }
 
         //Returns a list of default categories and user categories
-        public IEnumerable<CategoryDto> GetUserCategories(int langId, int userId)
+        public IEnumerable<CategoryDto> GetAllCategories(int langId, int userId)
         {        
-            List<CategoryDto> categoryList = new List<CategoryDto>(GetCategories(langId));
+            List<CategoryDto> categoryList = new List<CategoryDto>(GetDefaultCategories(langId));
 
             var userCategories = _catRepository.GetUserCategoryIds(userId);
             foreach(Category cat in userCategories)

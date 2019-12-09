@@ -97,7 +97,7 @@ namespace ListIt_WebFrontend.Controllers
 
                         CategoryService categoryService = new CategoryService();
                         list.CategoryListId = 20; //default category: others
-                        list.CategoryList = (from item in categoryService.GetUserCategories(langId, int.Parse(Session["UserId"].ToString()))
+                        list.CategoryList = (from item in categoryService.GetAllCategories(langId, int.Parse(Session["UserId"].ToString()))
                                              select new SelectListItem()
                                              {
                                                  Text = item.Name,
@@ -171,7 +171,7 @@ namespace ListIt_WebFrontend.Controllers
 
                 CategoryService categoryService = new CategoryService();
                 item.CategoryListId = (int)item.Category_Id; //saved value from db entry
-                item.CategoryList = (from x in categoryService.GetUserCategories(langId, int.Parse(Session["UserId"].ToString()))
+                item.CategoryList = (from x in categoryService.GetAllCategories(langId, int.Parse(Session["UserId"].ToString()))
                                      select new SelectListItem()
                                      {
                                          Text = x.Name,

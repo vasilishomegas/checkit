@@ -101,6 +101,7 @@ namespace ListIt_BusinessLogic.Services
         {
             return StaticDtoToDB(dto);
         }
+       
         public static DefaultProduct StaticDtoToDB(DefaultProductDto dto)
         {
             return new DefaultProduct
@@ -113,6 +114,7 @@ namespace ListIt_BusinessLogic.Services
                 Price = dto.Price
             };
         }
+        
         public static DefaultProductDto StaticDBToDto(DefaultProduct defaultProduct)
         {
             return new DefaultProductDto
@@ -127,6 +129,7 @@ namespace ListIt_BusinessLogic.Services
                 ProductId = (int)defaultProduct.Product_Id
             };
         }
+       
         public static Product StaticDtoToDB(ProductDto dto)
         {
             return new Product
@@ -145,6 +148,8 @@ namespace ListIt_BusinessLogic.Services
                 ProductTypeId = product.ProductType_Id
             };
         }
+
+        
 
         #endregion DEFAULTPRODUCT
 
