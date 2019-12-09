@@ -191,7 +191,7 @@ namespace ListIt_BusinessLogic.Services
         {
             return new Product
             {
-                Id = dto.ProductTypeId,
+                Id = dto.Id,
                 Timestamp = DateTime.Now,
                 ProductType_Id = dto.ProductTypeId,
             };
@@ -248,13 +248,14 @@ namespace ListIt_BusinessLogic.Services
         {
             return new UserProduct
             {
-                Id = dto.ProductTypeId,
+                Id = dto.Id,
                 Category_Id = dto.Category_Id,
                 Currency_Id = dto.Currency_Id,
                 UnitType_Id = dto.Unit_Id,
                 User_Id = dto.User_Id,
                 Name = dto.Name,
-                Price = dto.Price
+                Price = dto.Price,
+                Product_Id = dto.ProductId
             };
         }
 

@@ -465,9 +465,9 @@ namespace ListIt_WebFrontend.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditItem(FormCollection collection)
         {
-            //try
-            //{
-            var name = collection["Name"];
+            try
+            {
+                var name = collection["Name"];
             var reusable = collection["UserProduct"];
             var price = decimal.Parse(collection["Price"]);
             var listId = int.Parse(collection["ListId"]);
@@ -531,18 +531,18 @@ namespace ListIt_WebFrontend.Controllers
             ShoppingListService listService = new ShoppingListService();
             listService.Update(shoppingList);
 
-            TempData["SuccessMessage"] = "Successfully created a new item";
+            TempData["SuccessMessage"] = "Successfully edited this item";
             return RedirectToAction("SingleList", new { @id = listId });
-            //}
-            //catch
-            //{
-            //    TempData["ErrorMessage"] = "There was an error while editing the item";
-            //    return Redirect(Request.UrlReferrer.ToString());
-            //}
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "There was an error while editing the item";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
         }
 
         // GET: List/Item/Delete/5
-        public ActionResult DeleteItem(int id, int listId)  //id = productId
+            public ActionResult DeleteItem(int id, int listId)  //id = productId
         {
             //try
             //{
