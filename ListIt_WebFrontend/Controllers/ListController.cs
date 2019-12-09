@@ -429,7 +429,13 @@ namespace ListIt_WebFrontend.Controllers
                     //if reusable UserProduct: only create ShoppingListEntry
                 }
 
-                //create Entry
+                //create Entry if not existent right now!
+                var existentEntries = entryService.GetEntriesByListId(listId);
+                foreach(ShoppingListEntryDto shoppingListEntry in existentEntries)
+                {
+                    if (shoppingListEntry.Product_Id == prodId) throw new Exception("You can't add the same product to your list twice.");
+                }
+
                 ShoppingListEntryDto entry = new ShoppingListEntryDto();
                 entry.Quantity = qty;
                 entry.Product_Id = prodId;
@@ -437,7 +443,7 @@ namespace ListIt_WebFrontend.Controllers
                 entry.State_Id = 2; //Default is unchecked
                 entryService.Create(entry);
 
-                //Update ShoppingList to update Timestamp:
+                //Update ShoppingList to update Timestamp:                
                 ShoppingListDto shoppingList = new ShoppingListDto();
                 shoppingList.Id = listId;
                 ShoppingListService listService = new ShoppingListService();
@@ -538,8 +544,8 @@ namespace ListIt_WebFrontend.Controllers
         // GET: List/Item/Delete/5
         public ActionResult DeleteItem(int id, int listId)  //id = productId
         {
-            try
-            {
+            //try
+            //{
                 //1. If UserProduct -> Delete
                 ProductService productService = new ProductService();
                 var prodType = productService.GetProductTypeId(id);
@@ -557,12 +563,12 @@ namespace ListIt_WebFrontend.Controllers
 
                 TempData["SuccessMessage"] = "Successfully deleted the entry.";
                 return Redirect(Request.UrlReferrer.ToString());
-            }
-            catch
-            {
-                TempData["ErrorMessage"] = "There was an error while trying to delete this entry.";
-                return Redirect(Request.UrlReferrer.ToString());
-            }
+            //}
+            //catch
+            //{
+            //    TempData["ErrorMessage"] = "There was an error while trying to delete this entry.";
+            //    return Redirect(Request.UrlReferrer.ToString());
+            //}
         }
 
         #endregion Items
