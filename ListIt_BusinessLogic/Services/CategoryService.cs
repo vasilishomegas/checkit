@@ -27,25 +27,40 @@ namespace ListIt_BusinessLogic.Services
             return dto.Id;
         }
 
-        //Returns a list of default categories and user categories
-        public IEnumerable<CategoryDto> GetUserCategories(int langId, int userId)
-        {        
+        public IEnumerable<CategoryDto> GetDefaultCategories(int langId)
+        {
             List<CategoryDto> categoryList = new List<CategoryDto>();
-
             var defaultCatList = _catRepository.GetDefaultCategoryIds();
             foreach (Category cat in defaultCatList)
-            {
-                var translationInstance = _catRepository.Get(cat.Id, langId); 
-                categoryList.Add(ConvertDBToDto(translationInstance));
-            }
-
-            var userCategories = _catRepository.GetUserCategoryIds(userId);
-            foreach(Category cat in userCategories)
             {
                 var translationInstance = _catRepository.Get(cat.Id, langId);
                 categoryList.Add(ConvertDBToDto(translationInstance));
             }
+            return categoryList;
+        }
 
+        //Returns a list of default categories and user categories
+        public IEnumerable<CategoryDto> GetAllCategories(int langId, int userId)
+        {        
+            List<CategoryDto> categoryList = new List<CategoryDto>(GetDefaultCategories(langId));
+            List<CategoryDto> userCategories = (List<CategoryDto>)GetUserCategories(langId, userId);
+            foreach(CategoryDto categoryDto in userCategories)
+            {
+                categoryList.Add(categoryDto);
+            }           
+
+            return categoryList;
+        }
+
+        public IEnumerable<CategoryDto> GetUserCategories(int langId, int userId)
+        {
+            List<CategoryDto> categoryList = new List<CategoryDto>();
+            var userCategories = _catRepository.GetUserCategoryIds(userId);
+            foreach (Category cat in userCategories)
+            {
+                var translationInstance = _catRepository.Get(cat.Id, langId);
+                categoryList.Add(ConvertDBToDto(translationInstance));
+            }
             return categoryList;
         }
 

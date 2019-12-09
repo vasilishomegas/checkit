@@ -107,7 +107,7 @@ namespace ListIt_WebFrontend.Controllers
 
                         CategoryService categoryService = new CategoryService();
                         list.CategoryListId = 20; //default category: others
-                        list.CategoryList = (from item in categoryService.GetUserCategories(langId, int.Parse(Session["UserId"].ToString()))
+                        list.CategoryList = (from item in categoryService.GetAllCategories(langId, int.Parse(Session["UserId"].ToString()))
                                              select new SelectListItem()
                                              {
                                                  Text = item.Name,
@@ -285,12 +285,6 @@ namespace ListIt_WebFrontend.Controllers
 
                 ProductService productService = new ProductService();
                 var entry = productService.Get(langId, (int)id, (int)listId); //Gets productDto by langId(for translation if default or api product) and ProductId
-                
-                if(entry == null)
-                {
-                    TempData["ErrorMessage"] = "You can't edit default or api products.";
-                    return Redirect(Request.UrlReferrer.ToString());
-                }
 
                 item.Id = entry.Id;
                 item.Name = entry.Name;
@@ -320,13 +314,27 @@ namespace ListIt_WebFrontend.Controllers
                                      }).ToList();
 
                 CategoryService categoryService = new CategoryService();
-                item.CategoryListId = (int)item.Category_Id; //saved value from db entry
-                item.CategoryList = (from x in categoryService.GetUserCategories(langId, int.Parse(Session["UserId"].ToString()))
-                                     select new SelectListItem()
-                                     {
-                                         Text = x.Name,
-                                         Value = x.Id.ToString()
-                                     }).ToList();
+                if (item.Category_Id == null) item.CategoryListId = 0;
+                else item.CategoryListId = (int)item.Category_Id; //saved value from db entry
+                if (item.ProductTypeId == 1)    //if deafult product -> only show UserCategories
+                {
+                    item.CategoryList = (from x in categoryService.GetUserCategories(langId, int.Parse(Session["UserId"].ToString()))
+                                         select new SelectListItem()
+                                         {
+                                             Text = x.Name,
+                                             Value = x.Id.ToString()
+                                         }).ToList();
+                }
+                else
+                {
+                    item.CategoryList = (from x in categoryService.GetAllCategories(langId, int.Parse(Session["UserId"].ToString()))
+                                         select new SelectListItem()
+                                         {
+                                             Text = x.Name,
+                                             Value = x.Id.ToString()
+                                         }).ToList();
+                }              
+                
 
 
                 return View(item);
@@ -468,71 +476,76 @@ namespace ListIt_WebFrontend.Controllers
             try
             {
                 var name = collection["Name"];
-            var reusable = collection["UserProduct"];
-            var price = decimal.Parse(collection["Price"]);
-            var listId = int.Parse(collection["ListId"]);
-            var qty = int.Parse(collection["Quantity"]);
-            var unitTypeId = int.Parse(collection["UnitTypesListId"]);
-            var catId = int.Parse(collection["CategoryListId"]);
-            var userCat = collection["UserCategory"];
-            var currencyId = int.Parse(collection["CurrencyListId"]);
-            var prodType = int.Parse(collection["ProductTypeId"]);
-            var prodId = int.Parse(collection["ProductId"]);
+                var reusable = collection["UserProduct"];
+                var price = decimal.Parse(collection["Price"]);
+                var listId = int.Parse(collection["ListId"]);
+                var qty = int.Parse(collection["Quantity"]);
+                var unitTypeId = int.Parse(collection["UnitTypesListId"]);
+                var catId = 0;
+                if(collection["CategoryListId"] != "") catId = int.Parse(collection["CategoryListId"]);
+                var userCat = collection["UserCategory"];
+                var currencyId = int.Parse(collection["CurrencyListId"]);
+                var prodTypeId = int.Parse(collection["ProductTypeId"]);
+                var prodId = int.Parse(collection["ProductId"]);
 
-            if (reusable == "false")
-            {
-                prodType = 4;   //4 = UserListProduct = non reusable
-            }
-            else
-            {
-                prodType = 3;
-            }
+                /* UPDATING ShoppingListEntry */
 
-            /* UPDATING ShoppingListEntry */
+                ShoppingListEntryService entryService = new ShoppingListEntryService();
+                ShoppingListEntryDto entry = new ShoppingListEntryDto();
+                entry.Id = entryService.GetEntryId(prodId, listId);
+                entry.Quantity = qty;
+                entry.ProductTypeId = prodTypeId;
+                entry.ShoppingList_Id = listId;
+                entry.Product_Id = prodId;
+                entry.State_Id = 2; //Default is unchecked
 
-            ShoppingListEntryService entryService = new ShoppingListEntryService();
-            ShoppingListEntryDto entry = new ShoppingListEntryDto();
-            entry.Id = entryService.GetEntryId(prodId, listId);
-            entry.Quantity = qty;
-            entry.ProductTypeId = prodType;
-            entry.ShoppingList_Id = listId;
-            entry.Product_Id = prodId;
-            entry.State_Id = 2; //Default is unchecked
+                entryService.Update(entry); //updates ShoppingListEntry
 
+                ProductService productService = new ProductService();
+                if (prodTypeId == 4 || prodTypeId == 3)
+                {
+                    if (reusable == "false")
+                    {
+                        prodTypeId = 4;   //4 = UserListProduct = non reusable
+                    }
+                    else
+                    {
+                        prodTypeId = 3;
+                    }
 
-            entryService.Update(entry); //updates ShoppingListEntry
+                    /* UPDATING UserProduct */
 
-            /* UPDATING UserProduct */
+                    UserProductDto userProduct = new UserProductDto();
+                    userProduct.Id = productService.GetUserProductId(prodId);
+                    userProduct.ProductId = prodId;
+                    userProduct.Name = name;
+                    userProduct.Category_Id = catId;
+                    userProduct.User_Id = int.Parse(Session["UserId"].ToString());
+                    userProduct.Unit_Id = unitTypeId;
+                    userProduct.Price = price;
+                    userProduct.Currency_Id = currencyId;
 
-            ProductService productService = new ProductService();
-            UserProductDto userProduct = new UserProductDto();
-            userProduct.Id = productService.GetUserProductId(prodId);
-            userProduct.ProductId = prodId;
-            userProduct.Name = name;
-            userProduct.Category_Id = catId;
-            userProduct.User_Id = int.Parse(Session["UserId"].ToString());
-            userProduct.Unit_Id = unitTypeId;
-            userProduct.Price = price;
-            userProduct.Currency_Id = currencyId;
+                    productService.Update(userProduct);
+                }
+                else if(prodTypeId == 1) //if default Product
+                {
+                    //TODO: if catId != 0 -> create LinkDefaultProductToCategory entry
+                }                
 
-            productService.Update(userProduct);
+                /* UPDATING Product -> for new Timestamp*/
+                ProductDto productDto = new ProductDto();
+                productDto.Id = prodId;
+                productDto.ProductTypeId = prodTypeId;
+                productService.Update(productDto);
 
-            /* UPDATING Product -> for new Timestamp*/
+                /* UPDATING ShoppingList -> for new Timestamp: */
+                ShoppingListDto shoppingList = new ShoppingListDto();
+                shoppingList.Id = listId;
+                ShoppingListService listService = new ShoppingListService();
+                listService.Update(shoppingList);
 
-            ProductDto productDto = new ProductDto();
-            productDto.Id = prodId;
-            productDto.ProductTypeId = prodType;
-            productService.Update(productDto);
-
-            /* UPDATING ShoppingList -> for new Timestamp: */
-
-            ShoppingListDto shoppingList = new ShoppingListDto();
-            shoppingList.Id = listId;
-            ShoppingListService listService = new ShoppingListService();
-            listService.Update(shoppingList);
-
-            TempData["SuccessMessage"] = "Successfully edited this item";
-            return RedirectToAction("SingleList", new { @id = listId });
+                TempData["SuccessMessage"] = "Successfully edited this item";
+                return RedirectToAction("SingleList", new { @id = listId });
             }
             catch
             {

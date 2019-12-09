@@ -5,6 +5,12 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Edit Item";
+
+    var reusable = false;
+    var defaultOrApi = false;
+    if (Model.ProductTypeId == 1 || Model.ProductTypeId == 2) { defaultOrApi = true; }
+    else if(Model.ProductTypeId == 3) { reusable = true; ViewBag.Message = "You are editing a reusable product of yours. This will affect the product at all places where you use it."; }
+
 }
 
     <div class="container-fluid">
@@ -12,6 +18,8 @@
         <h1 class="text-center">
             @ViewBag.Title
         </h1>
+
+        
 
         @if (ViewBag.Message != null)
         {
@@ -38,27 +46,39 @@
 
         @using (Html.BeginForm("EditItem", "List", FormMethod.Post))
         {
+
             @Html.AntiForgeryToken()
 
             <div class="form-row">
                 <div class="form-group col">
                     @Html.LabelFor(model => model.Name, Lang.itemName, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", value = Model.Name, required = "required" } })
+                    @if (defaultOrApi == true)
+                    {@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", value = Model.Name, id = "toolTip", @readonly = "readonly", data_toggle = "tooltip", title = "You can't edit this value of a reusable or default product item!" } })}
+                else
+                {@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", value = Model.Name, required = "required" } })}
                 </div>
-                <div class="form-group col">
-                    @Html.CheckBox("UserProduct")
-                    @Html.Label("UserProduct", "I want to reuse this item")
-                </div>
+                @if (reusable == false && defaultOrApi == false)
+                {
+                    <div class="form-group col">
+                        @Html.CheckBox("UserProduct")
+                        @Html.Label("UserProduct", "I want to reuse this item")
+                    </div>
+                }
             </div>
             <div class="form-row">
                 <div class="form-group col">
                     @Html.LabelFor(model => model.Price, Lang.price, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price } })
+                    @if (defaultOrApi == true)
+                    {@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price, @readonly = "readonly", data_toggle = "tooltip", title = "You can't edit this value of a reusable or default product item!" } })}
+                else
+                {@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "1", value = Model.Price } })}
                 </div>
                 <div class="form-group col">
                     @Html.LabelFor(model => model.CurrencyListId, Lang.currency, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(x => x.CurrencyListId, Model.CurrencyList, htmlAttributes: new { @class = "form-control custom-select" })
-
+                    @if (defaultOrApi == true)
+                    {@Html.DropDownListFor(x => x.CurrencyListId, Model.CurrencyList, htmlAttributes: new { @class = "form-control custom-select", @readonly = "readonly", data_toggle = "tooltip", title = "You can't edit this value of a reusable or default product item!" })}
+                else
+                {@Html.DropDownListFor(x => x.CurrencyListId, Model.CurrencyList, htmlAttributes: new { @class = "form-control custom-select" })}
                 </div>
 
             </div>
@@ -69,14 +89,14 @@
                 </div>
                 <div class="form-group col">
                     @Html.LabelFor(model => model.UnitTypesListId, Lang.unit, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(x => x.UnitTypesListId, Model.UnitTypesList, htmlAttributes: new { @class = "form-control custom-select" })
-
+                    @if (defaultOrApi == true){@Html.DropDownListFor(x => x.UnitTypesListId, Model.UnitTypesList, htmlAttributes: new { @class = "form-control custom-select", @readonly = "readonly", data_toggle = "tooltip", title = "You can't edit this value of a reusable or default product item!" })}
+                    else{@Html.DropDownListFor(x => x.UnitTypesListId, Model.UnitTypesList, htmlAttributes: new { @class = "form-control custom-select" })}
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col">
                     @Html.LabelFor(model => model.CategoryListId, Lang.category, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(x => x.CategoryListId, Model.CategoryList, htmlAttributes: new { @class = "form-control custom-select" })
+                    @Html.DropDownListFor(x => x.CategoryListId, Model.CategoryList, "Assign a category", htmlAttributes: new { @class = "form-control custom-select" })
 
                 </div>
                 <div class="form-group col">
@@ -109,3 +129,10 @@
         }
     </div>
 
+<script>
+    $('#toolTip').tooltip({
+        container: 'body',
+        placement: "top",
+        trigger: "hover focus"
+    });
+</script>

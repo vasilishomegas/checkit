@@ -35,6 +35,11 @@ namespace ListIt_BusinessLogic.Services
             {
                 var userProduct = _prodRepository.GetUserProduct(id);
                 productDto = ConvertUserProductDBToDto(product, userProduct, entry);
+            }else if(product.ProductType_Id == 1)
+            {
+                var defaultProduct = _prodRepository.GetDefaultProduct(id);
+                //var translation = _prodRepository.GetProductTranslation(langId, id);
+                productDto = ConvertDefaultProductDBToDto(product, defaultProduct, entry, translation);
             }
 
             return productDto;
