@@ -351,6 +351,36 @@ namespace ListIt_WebFrontend.Controllers
             }
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult SaveSorting(FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        var listId = int.Parse(collection["ShoppingList_Id"]);
+        //        var sortingName = collection["SortingName"];
+        //        var listEntries = collection["listEntries"];
+
+        //        UserListSortingService listSortingService = new UserListSortingService();
+        //        ShoppingListService listService = new ShoppingListService();
+        //        UserListSortingDto sortingDto = new UserListSortingDto
+        //        {
+        //            Id = (int)listService.Get(listId).ChosenSortingId,
+        //            UserSortingName = sortingName,
+        //            ShoppingList_Id = listId
+        //        };
+        //        listSortingService.SaveSorting(sortingDto, listEntries);
+
+        //        TempData["SuccessMessage"] = "Saved this sorting successfully.";
+        //        return RedirectToAction("SingleList", "List", new { @id = listId });
+        //    }
+        //    catch
+        //    {
+        //        TempData["ErrorMessage"] = "Saving this sorting wasn't possible.";
+        //        return RedirectToAction("SingleList");
+        //    }
+        //}
+
         #endregion Sorting
 
 
