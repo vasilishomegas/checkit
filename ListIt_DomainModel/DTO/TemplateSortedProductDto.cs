@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using ListIt_DomainModel.DTO.Interfaces;
+
+namespace ListIt_DomainModel.DTO
+{
+    public class TemplateSortedProductDto : IDto
+    {
+        //FOR TemplateListOrdering:
+        public int Id { get; set; }
+        public int ShopId { get; set; }
+
+        //FOR TemplateSortedProduct
+        public int CategoryId { get; set; }
+        public int Rank { get; set; }
+
+        IEnumerable<TemplateSortedProductDto> CategorySortings { get; set; }        
+    }
+}
