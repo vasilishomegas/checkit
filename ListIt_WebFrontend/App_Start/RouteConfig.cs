@@ -34,7 +34,7 @@ namespace ListIt_WebFrontend
             routes.MapRoute(
                 name: "List",
                 url: "user/lists/{action}/{id}",
-                defaults: new { controller = "List", action = "Index", id = UrlParameter.Optional, listId = UrlParameter.Optional }
+                defaults: new { controller = "List", action = "Index", id = UrlParameter.Optional, listId = UrlParameter.Optional, templateId = UrlParameter.Optional, sortingId = UrlParameter.Optional }
             );
         }
     }

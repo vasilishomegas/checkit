@@ -28,6 +28,9 @@
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>3.6</TypeScriptToolsVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <TypeScriptLib>dom,es2015</TypeScriptLib>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>

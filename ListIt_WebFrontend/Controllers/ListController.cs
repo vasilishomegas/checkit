@@ -46,7 +46,7 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         // GET: User/SingleList
-        public ActionResult SingleList(int? id)
+        public ActionResult SingleList(int? id, int? templateId, int? sortingId)
         {
             if (Session["UserId"] != null && id != null)
             {
@@ -83,6 +83,53 @@ namespace ListIt_WebFrontend.Controllers
                             ViewBag.Message = "You don't have any entries yet. Start creating your entries now!";
                         }
 
+                        TemplateSortingService templateService = new TemplateSortingService();
+                        UserListSortingService listSortingService = new UserListSortingService();
+                        if (listObj.ChosenSortingId != null)
+                        {
+                            // TODO: apply UserEntrySorting
+                            list.ListEntries = listSortingService.ApplyUserSorting((int)listObj.ChosenSortingId, list.ListEntries);
+                        }
+
+                        if(templateId != null)
+                        {
+                            list.ListEntries = templateService.SortByTemplate((int)templateId, list.ListEntries);
+                                                        
+                            UserListSortingDto sorting = new UserListSortingDto();
+                            if (listObj.ChosenSortingId != null) sorting.Id = (int)listObj.ChosenSortingId;
+                            sorting.ShoppingList_Id = list.ShoppingList_Id;
+                            listSortingService.SaveSorting(sorting, list.ListEntries);
+
+                            ViewBag.Message = "Your list has been sorted according to the template. This sorting has been saved permanently for you.";
+                        }
+                        else if(sortingId != null)
+                        {
+                            switch ((int)sortingId)
+                            {
+                                case 1: // A - Z
+                                    {
+                                        list.ListEntries = list.ListEntries.OrderBy(z => z.Name).ToList();
+                                        break;
+                                    }
+                                case 2: // Z - A
+                                    {
+                                        list.ListEntries = list.ListEntries.OrderByDescending(z => z.Name).ToList();
+                                        break;
+                                    }
+                                case 3: // lowest price
+                                    {
+                                        list.ListEntries = list.ListEntries.OrderBy(z => z.Price).ToList();
+                                        break;
+                                    }
+                                case 4: // highest price
+                                    {
+                                        list.ListEntries = list.ListEntries.OrderByDescending(z => z.Price).ToList();
+                                        break;
+                                    }
+                                default: break;
+                            }
+                        }
+
                         list.ChosenProductId = 0;  //By default no defaultProduct should be selected
                         list.ChooseProductsList = (from item in productService.GetDefaultAndReusableProductsByLanguage(langId)
                                                    select new SelectListItem()
@@ -117,6 +164,14 @@ namespace ListIt_WebFrontend.Controllers
                                                  Text = item.Name,
                                                  Value = item.Id.ToString()
                                              }).ToList();
+                        
+                        list.ChosenTemplateId = 0;
+                        list.Templates = (from item in templateService.GetTemplates()
+                                          select new SelectListItem()
+                                          {
+                                              Text = item.TemplateName,
+                                              Value = item.Id.ToString()
+                                          }).ToList();
 
                         return View(list);
                     }
@@ -275,6 +330,69 @@ namespace ListIt_WebFrontend.Controllers
 
 
         #endregion Lists
+
+        #region Sorting
+        [HttpPost]
+        public ActionResult SortByTemplate(FormCollection collection)
+        {
+            try
+            {
+                var id = int.Parse(collection["ChosenTemplateId"]);
+                var listId = int.Parse(collection["ShoppingList_Id"]);
+                return RedirectToAction("SingleList", "List", new { @id = listId, @templateId = id });
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Sorting according to the template wasn't possible.";
+                return RedirectToAction("SingleList");
+            }
+        }
+
+        public ActionResult Sort(int id, int listId)
+        {
+            try
+            {
+                return RedirectToAction("SingleList", "List", new { @id = listId, @sortingId = id });
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Sorting wasn't possible.";
+                return RedirectToAction("SingleList");
+            }
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult SaveSorting(FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        var listId = int.Parse(collection["ShoppingList_Id"]);
+        //        var sortingName = collection["SortingName"];
+        //        var listEntries = collection["listEntries"];
+
+        //        UserListSortingService listSortingService = new UserListSortingService();
+        //        ShoppingListService listService = new ShoppingListService();
+        //        UserListSortingDto sortingDto = new UserListSortingDto
+        //        {
+        //            Id = (int)listService.Get(listId).ChosenSortingId,
+        //            UserSortingName = sortingName,
+        //            ShoppingList_Id = listId
+        //        };
+        //        listSortingService.SaveSorting(sortingDto, listEntries);
+
+        //        TempData["SuccessMessage"] = "Saved this sorting successfully.";
+        //        return RedirectToAction("SingleList", "List", new { @id = listId });
+        //    }
+        //    catch
+        //    {
+        //        TempData["ErrorMessage"] = "Saving this sorting wasn't possible.";
+        //        return RedirectToAction("SingleList");
+        //    }
+        //}
+
+        #endregion Sorting
+
 
         #region Items
 
@@ -641,15 +759,6 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         #endregion Items
-
-        // GET: List
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-
-
 
 
     }

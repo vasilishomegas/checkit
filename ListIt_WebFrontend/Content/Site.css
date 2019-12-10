@@ -2,11 +2,15 @@
     overflow-x: hidden;
 }
 
-#links {
-    color: gray;
+a.links {
+    color: gray !important;
     font-style: inherit;
 }
 
+a.links:hover{
+    color: black !important;
+
+}
 
 
 h1 .pageheading {
@@ -20,18 +24,9 @@ h1 .pageheading {
 }
 
 .box {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 10px;
 }
 
-i{
-    transition-duration: 1s;
-}
-
-i:hover {
-    width: 1.5em;
-    height: 1.5em;
-}
 
 
 /* SEARHCING AND FILTERING*/
@@ -151,13 +146,10 @@ ul li .listLinksWrite {
     }
 
 
-
-
 /* SINGLE LIST ITEMS */
 
-.dropdown:hover .dropdown-menu {
-    display: block;
-    
+.dropleft:hover .dropdown-menu {
+    display: block;    
 }
 
 .nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {

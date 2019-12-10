@@ -26,5 +26,21 @@ namespace ListIt_DataAccess.Repository
                 return context.Chains.Include(x => x.ShopApi).FirstOrDefault(x => x.Id == id);
             }
         }
+
+        public string[] GetShopAndChainNames(int id)
+        {
+            using (var context = new ListItContext())
+            {
+                var shop = context.Shops.Find(id);
+                var chain = context.Chains.Find(shop.Chain_Id);
+                return new string[]
+                {
+                    chain.Name,
+                    shop.City,
+                    shop.Street,
+                    shop.StreetNumber
+                };
+            }
+        }
     }
 }

@@ -21,7 +21,9 @@
         <div class="row align-items-center mh-100">
             <div class="col">
                 <div class="logo-box d-flex justify-content-center align-items-center">
-                    <img src="~/Content/img/logo-black.png" alt="List It Logo" class="logo" />
+                    <a href="@Url.Action("Login", "User")">
+                        <img src="~/Content/img/logo-black.png" alt="List It Logo" class="logo" />
+                    </a>
                 </div>
 
                 <h1 class="text-center">@ViewBag.Title</h1>
@@ -39,19 +41,25 @@
                         <div class="carousel-item active">
                             <img src="~/Content/img/slider_1_v2.jpg" class="d-block w-100" alt="List your items, define them and check them!">
                             <div class="carousel-caption d-none d-md-block">
-                                <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.list_it, "Login", "User", null, htmlAttributes: new { id="links"})</button>
+                                <button type="button" class="btn btn-dark btn-lg" onclick="location.href='@Url.Action("Login", "User")'">
+                                    @Lang.list_it
+                                </button>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <img src="~/Content/img/slider_2.jpg" class="d-block w-100" alt="Discover nearby stores and their products!">
                             <div class="carousel-caption d-none d-md-block">
-                                <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.discover, "Login", "User", null, htmlAttributes: new { id="links"})</button>
+                                <button type="button" class="btn btn-dark btn-lg" onclick="location.href='@Url.Action("Login", "User")'">
+                                    @Lang.discover
+                                </button>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <img src="~/Content/img/slider_3.jpg" class="d-block w-100" alt="Share your lists with a household.">
                             <div class="carousel-caption d-none d-md-block">
-                                <button type="button" class="btn btn-dark">@Html.ActionLink(@Lang.start_now, "Login", "User", null, htmlAttributes: new { id="links"})</button>
+                                <button type="button" class="btn btn-dark btn-lg" onclick="location.href='@Url.Action("Login", "User")'">
+                                    @Lang.start_now
+                                </button>
                             </div>
                         </div>
                     </div>

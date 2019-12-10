@@ -113,8 +113,11 @@
     <Compile Include="Repository\ShopApiRepository.cs" />
     <Compile Include="Repository\ShoppingListEntryRepository.cs" />
     <Compile Include="Repository\ShoppingListRepository.cs" />
+    <Compile Include="Repository\TemplateSortingRepository.cs" />
     <Compile Include="Repository\ShopRepository.cs" />
     <Compile Include="Repository\UnitTypesRepository.cs" />
+    <Compile Include="Repository\UserEntrySortingRepository.cs" />
+    <Compile Include="Repository\UserListSortingRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
