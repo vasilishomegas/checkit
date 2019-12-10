@@ -17,7 +17,6 @@ namespace ListIt_DomainModel.DTO
         //FOR TemplateSortedProduct
         public int CategoryId { get; set; }
         public int Rank { get; set; }
-
-        IList<TemplateSortedProductDto> CategorySortings { get; set; }        
+       
     }
 }

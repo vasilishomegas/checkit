@@ -80,24 +80,22 @@ namespace ListIt_WebFrontend.Controllers
                         }
 
                         TemplateSortingService templateService = new TemplateSortingService();
+                        UserListSortingService listSortingService = new UserListSortingService();
                         if (listObj.ChosenSortingId != null)
                         {
                             // TODO: apply UserEntrySorting
+                            list.ListEntries = listSortingService.ApplyUserSorting((int)listObj.ChosenSortingId, list.ListEntries);
                         }
 
                         if(templateId != null)
                         {
                             list.ListEntries = templateService.SortByTemplate((int)templateId, list.ListEntries);
                             ViewBag.Message = "Your list has been sorted according to the template.";
-
-                            if(listObj.ChosenSortingId == null)
-                            {
-                                //create new UserEntrySorting according to applied template
-                            }
-                            else
-                            {
-                                //update existing UserEntrySorting according to template
-                            }
+                                                        
+                            UserListSortingDto sorting = new UserListSortingDto();
+                            if (listObj.ChosenSortingId != null) sorting.Id = (int)listObj.ChosenSortingId;
+                            sorting.ShoppingList_Id = list.ShoppingList_Id;
+                            listSortingService.SaveSorting(sorting, list.ListEntries);
                         }
 
                         list.ChosenProductId = 0;  //By default no defaultProduct should be selected

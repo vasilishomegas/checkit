@@ -331,11 +331,12 @@ namespace ListIt_BusinessLogic.Services
             }
             return productDtoList;
         }
+
         public static ProductDto StaticDBToDto(Product product, UserProduct userProduct, ShoppingListEntry entry)
         {
             return new ProductDto
             {
-                Id = product.Id,
+                Id = entry.Id,
                 ProductTypeId = product.ProductType_Id,
                 Name = userProduct.Name,
                 Currency_Id = (int)userProduct.Currency_Id,
@@ -351,7 +352,7 @@ namespace ListIt_BusinessLogic.Services
         {
             return new ProductDto
             {
-                Id = product.Id,
+                Id = entry.Id,
                 ProductTypeId = product.ProductType_Id,
                 Name = translation.Translation,
                 Currency_Id = (int)defaultProduct.Currency_Id,
@@ -367,7 +368,7 @@ namespace ListIt_BusinessLogic.Services
         {
             return new ProductDto
             {
-                Id = product.Id,
+                Id = entry.Id,
                 ProductTypeId = product.ProductType_Id,
                 Name = translation.Translation,
                 Currency_Id = (int)apiProduct.Currency_Id,

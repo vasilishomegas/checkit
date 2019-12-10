@@ -43,7 +43,7 @@ namespace ListIt_BusinessLogic.Services
 
         public IList<ProductDto> SortByTemplate(int id, IList<ProductDto> products)
         {
-            var listOrdering = _templateRepository.GetListOrdering(id);
+            //var listOrdering = _templateRepository.GetListOrdering(id);
             var templates = _templateRepository.GetTemplates(id);
             List<ProductDto> sortedList = new List<ProductDto>();
             

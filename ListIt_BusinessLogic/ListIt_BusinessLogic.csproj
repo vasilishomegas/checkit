@@ -58,6 +58,7 @@
     <Compile Include="Services\ShoppingListService.cs" />
     <Compile Include="Services\TemplateSortingService.cs" />
     <Compile Include="Services\UnitTypeService.cs" />
+    <Compile Include="Services\UserListSortingService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
