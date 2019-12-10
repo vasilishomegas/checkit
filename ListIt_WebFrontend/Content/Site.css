@@ -2,11 +2,15 @@
     overflow-x: hidden;
 }
 
-#links {
-    color: gray;
+a.links {
+    color: gray !important;
     font-style: inherit;
 }
 
+a.links:hover{
+    color: black !important;
+
+}
 
 
 h1 .pageheading {
@@ -20,8 +24,7 @@ h1 .pageheading {
 }
 
 .box {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 10px;
 }
 
 

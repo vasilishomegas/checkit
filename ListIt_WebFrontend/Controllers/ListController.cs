@@ -44,7 +44,7 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         // GET: User/SingleList
-        public ActionResult SingleList(int? id, int? templateId)
+        public ActionResult SingleList(int? id, int? templateId, int? sortingId)
         {
             if (Session["UserId"] != null && id != null)
             {
@@ -90,12 +90,40 @@ namespace ListIt_WebFrontend.Controllers
                         if(templateId != null)
                         {
                             list.ListEntries = templateService.SortByTemplate((int)templateId, list.ListEntries);
-                            ViewBag.Message = "Your list has been sorted according to the template.";
                                                         
                             UserListSortingDto sorting = new UserListSortingDto();
                             if (listObj.ChosenSortingId != null) sorting.Id = (int)listObj.ChosenSortingId;
                             sorting.ShoppingList_Id = list.ShoppingList_Id;
                             listSortingService.SaveSorting(sorting, list.ListEntries);
+
+                            ViewBag.Message = "Your list has been sorted according to the template. This sorting has been saved permanently for you.";
+                        }
+                        else if(sortingId != null)
+                        {
+                            switch ((int)sortingId)
+                            {
+                                case 1: // A - Z
+                                    {
+                                        list.ListEntries = list.ListEntries.OrderBy(z => z.Name).ToList();
+                                        break;
+                                    }
+                                case 2: // Z - A
+                                    {
+                                        list.ListEntries = list.ListEntries.OrderByDescending(z => z.Name).ToList();
+                                        break;
+                                    }
+                                case 3: // lowest price
+                                    {
+                                        list.ListEntries = list.ListEntries.OrderBy(z => z.Price).ToList();
+                                        break;
+                                    }
+                                case 4: // highest price
+                                    {
+                                        list.ListEntries = list.ListEntries.OrderByDescending(z => z.Price).ToList();
+                                        break;
+                                    }
+                                default: break;
+                            }
                         }
 
                         list.ChosenProductId = 0;  //By default no defaultProduct should be selected
@@ -306,6 +334,19 @@ namespace ListIt_WebFrontend.Controllers
             catch
             {
                 TempData["ErrorMessage"] = "Sorting according to the template wasn't possible.";
+                return RedirectToAction("SingleList");
+            }
+        }
+
+        public ActionResult Sort(int id, int listId)
+        {
+            try
+            {
+                return RedirectToAction("SingleList", "List", new { @id = listId, @sortingId = id });
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Sorting wasn't possible.";
                 return RedirectToAction("SingleList");
             }
         }
