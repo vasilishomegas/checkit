@@ -24,10 +24,12 @@ namespace ListIt_WebFrontend.Controllers
                 ViewBag.Message = TempData["SuccessMessage"];
 
                 UserService service = new UserService();
-                var user = service.Get(Int32.Parse(Session["UserId"].ToString()));
-                UserVM userVM = new UserVM();
-                userVM.Nickname = user.Nickname;
-                userVM.Email = user.Email;
+                var user = service.Get(int.Parse(Session["UserId"].ToString()));
+                UserVM userVM = new UserVM
+                {
+                    Nickname = user.Nickname,
+                    Email = user.Email
+                };
 
                 return View(userVM);
             }
@@ -133,14 +135,18 @@ namespace ListIt_WebFrontend.Controllers
         {
             try
             {
-                UserDto user = new UserDto();                
+                UserDto user = new UserDto();
 
-                CountryDto country = new CountryDto();              
-                country.Id = int.Parse(collection["CountryId"]);    //Denmark is default
+                CountryDto country = new CountryDto
+                {
+                    Id = int.Parse(collection["CountryId"])    //Denmark is default
+                };
 
 
-                LanguageDto lang = new LanguageDto();
-                lang.Id = int.Parse(collection["LanguageId"]);      //English is default
+                LanguageDto lang = new LanguageDto
+                {
+                    Id = int.Parse(collection["LanguageId"])      //English is default
+                };
 
                 user.Nickname = collection["Nickname"]; 
                 user.Email = collection["Email"]; 
@@ -202,10 +208,12 @@ namespace ListIt_WebFrontend.Controllers
                 var newMail = collection["Email"];
 
                 UserService service = new UserService();
-                UserDto user = new UserDto();
-                user.Id = id;
-                user.Nickname = newName;
-                user.Email = newMail;
+                UserDto user = new UserDto
+                {
+                    Id = id,
+                    Nickname = newName,
+                    Email = newMail
+                };
 
                 service.Update(user);
 
@@ -238,9 +246,11 @@ namespace ListIt_WebFrontend.Controllers
                     throw new Exception("Old PW doesn't match");
                 }
 
-                UserDto user = new UserDto();
-                user.Id = id;
-                user.PasswordHash = service.HashPassword(newPW);
+                UserDto user = new UserDto
+                {
+                    Id = id,
+                    PasswordHash = service.HashPassword(newPW)
+                };
 
                 service.Update(user);
 
@@ -264,11 +274,15 @@ namespace ListIt_WebFrontend.Controllers
             try
             {
                 UserService service = new UserService();
-                UserDto user = new UserDto();
-                user.Id = Int32.Parse(Session["UserId"].ToString());
+                UserDto user = new UserDto
+                {
+                    Id = int.Parse(Session["UserId"].ToString())
+                };
 
-                CountryDto country = new CountryDto();
-                country.Id = Int32.Parse(collection["CountryId"]);
+                CountryDto country = new CountryDto
+                {
+                    Id = Int32.Parse(collection["CountryId"])
+                };
                 //user.Country.Id = Int32.Parse(collection["CountryId"].ToString());
                 user.Country = country;
 

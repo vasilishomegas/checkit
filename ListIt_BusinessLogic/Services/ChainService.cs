@@ -17,25 +17,27 @@ namespace ListIt_BusinessLogic.Services
             var shopApiRepository = new ShopApiRepository();
 
             int? shopApiId = null;
-            if (chainDto.ShopApi != null)
-            {
-                var shopApi = shopApiRepository.Get(chainDto.ShopApi.Id);
-                if (shopApi == null)
-                {
-                    shopApi = ShopApiService.StaticDtoToDB(chainDto.ShopApi);
-                    shopApiRepository.Create(shopApi);
-                }
-                shopApiId = shopApi.Id;
-            }
+            shopApiId = chainDto.ShopApi_Id;
+            //if (chainDto.ShopApi != null)
+            //{
+            //    var shopApi = shopApiRepository.Get(chainDto.ShopApi.Id);
+            //    if (shopApi == null)
+            //    {
+            //        shopApi = ShopApiService.StaticDtoToDB(chainDto.ShopApi);
+            //        shopApiRepository.Create(shopApi);
+            //    }
+            //    shopApiId = shopApi.Id;
+            //}
 
-            _repository.Create(new Chain
+            Chain chain = new Chain
             {
                 Id = chainDto.Id,
                 Logo = chainDto.Logo,
-                Name = chainDto.Name,
-                ShopApi_Id = shopApiId
-                // ShopApi = shopApi    Don't link it because every time it creates a new instance
-            });
+                Name = chainDto.Name
+            };
+            if (chainDto.ShopApi_Id != 0)
+                chain.ShopApi_Id = chainDto.ShopApi_Id;
+            _repository.Create(chain);
         }
 
         /* CASCADE DELETE - DELETING CHAIN WILL ALSO DELETE ITS SHOPAPI // IMPLEMENTED IN REPOSITORY CLASS

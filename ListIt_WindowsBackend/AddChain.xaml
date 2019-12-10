@@ -1,0 +1,21 @@
+﻿<Window x:Class="ListIt_WindowsBackend.AddChain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ListIt_WindowsBackend"
+        mc:Ignorable="d"
+        Title="AddChain" Height="450" Width="800">
+    <Grid Margin="3,0,2.6,0" HorizontalAlignment="Center" Width="788">
+        <Label Content="Add a chain" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="165" FontSize="25" FontWeight="Bold" Margin="310,50,0,0"/>
+        <Label Content="Chain name:" HorizontalAlignment="Left" Height="40" Margin="210,130,0,0" VerticalAlignment="Top" Width="130" FontSize="20" />
+        <TextBox Name="ChainNameTextBox" HorizontalAlignment="Left" Height="35" Margin="400,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" FontSize="18" BorderThickness="1" BorderBrush="Black"/>
+        <Label Content="Logo link: " HorizontalAlignment="Left" Height="40" Margin="210,195,0,0" VerticalAlignment="Top" Width="130" FontSize="20" />
+        <TextBox Name="LogoLinkTextBox" HorizontalAlignment="Left" Height="35" Margin="400,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" FontSize="18" BorderThickness="1" BorderBrush="Black" />
+        <Label Content="API link:" HorizontalAlignment="Left" Height="40" Margin="210,255,0,0" VerticalAlignment="Top" Width="130" FontSize="20" />
+        <ComboBox HorizontalAlignment="Left" Height="45" Margin="400,250,0,0" VerticalAlignment="Top" Width="240" Name="APIdropdown" FontSize="20" />
+        <Button Content="Add chain" HorizontalAlignment="Left" Height="40" Margin="205,355,0,0" VerticalAlignment="Top" Width="135" FontSize="20" FontWeight="DemiBold" Click="Button_Click" IsDefault="True"/>
+        <Button Content="Discard changes" HorizontalAlignment="Left" Height="40" Margin="420,355,0,0" VerticalAlignment="Top" Width="160" FontSize="20" FontWeight="DemiBold"/>
+        <Button Name ="Back" Content="Back to menu" HorizontalAlignment="Left" Margin="0,379,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click"/>
+    </Grid>
+</Window>

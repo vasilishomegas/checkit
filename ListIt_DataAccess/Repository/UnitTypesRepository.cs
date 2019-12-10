@@ -19,7 +19,5 @@ namespace ListIt_DataAccess.Repository
                     .ToList();
             }
         }
-
-
     }
 }

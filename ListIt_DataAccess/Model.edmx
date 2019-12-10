@@ -1977,7 +1977,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dmaj0918_1074524Entities1" annotation:LazyLoadingEnabled="true">
+        <!--<Association Name="LinkDefaultProductToCategory">
+          <End Role="Categories" Type="Self.Category" Multiplicity="*" />
+          <End Role="DefaultProducts" Type="Self.DefaultProduct" Multiplicity="*" />
+        </Association>-->
+        <EntityContainer Name="dmaj0918_1074524Entity" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="ApiProducts" EntityType="Self.ApiProduct" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -2201,7 +2205,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entities1">
+        <EntityContainerMapping StorageEntityContainer="dmaj0918_1074524ModelStoreContainer" CdmEntityContainer="dmaj0918_1074524Entity">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="dmaj0918_1074524Model.Admin">
               <MappingFragment StoreEntitySet="Admin">

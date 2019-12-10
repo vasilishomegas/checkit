@@ -22,7 +22,7 @@ namespace ListIt_WebFrontend.Controllers
                 ViewBag.Error = TempData["ErrorMessage"];
 
                 //TODO: Logic to show all lists of a user
-                int userId = Int32.Parse(Session["UserId"].ToString());
+                int userId = int.Parse(Session["UserId"].ToString());
 
                 ShoppingListService listService = new ShoppingListService();
                 var listOfLists = listService.GetListsByUserId(userId).OrderByDescending(x => x.TimeStamp).ToList();
@@ -32,8 +32,10 @@ namespace ListIt_WebFrontend.Controllers
                     ViewBag.Message = "You don't have any lists yet. Start creating your lists now!";
                 }
 
-                ListsVM lists = new ListsVM();
-                lists.AllUserLists = listOfLists;
+                ListsVM lists = new ListsVM
+                {
+                    AllUserLists = listOfLists
+                };
 
                 return View(lists);
             }
@@ -60,8 +62,10 @@ namespace ListIt_WebFrontend.Controllers
                 {
                     if (x.Id == requestedList.Id)
                     {
-                        SingleListVM list = new SingleListVM();
-                        list.ShoppingList_Id = requestedList.Id;
+                        SingleListVM list = new SingleListVM
+                        {
+                            ShoppingList_Id = requestedList.Id
+                        };
 
                         var listObj = listService.Get(list.ShoppingList_Id, int.Parse(Session["UserId"].ToString()));
 
@@ -143,14 +147,16 @@ namespace ListIt_WebFrontend.Controllers
                 }
 
                 var sessionUserId = Session["UserId"];
-                int userid = Int32.Parse(sessionUserId.ToString());
+                int userid = int.Parse(sessionUserId.ToString());
 
-                ShoppingListDto list = new ShoppingListDto();
-                list.Name = name;
-                list.Path = "somerandomPath";
-                list.ListAccessTypeId = 1; //Default owner when creating
-                list.UserId = userid;
-                list.ChosenSortingId = null;
+                ShoppingListDto list = new ShoppingListDto
+                {
+                    Name = name,
+                    Path = "somerandomPath",
+                    ListAccessTypeId = 1, //Default owner when creating
+                    UserId = userid,
+                    ChosenSortingId = null
+                };
 
                 ShoppingListService listService = new ShoppingListService();
                 listService.Create(list);
@@ -158,7 +164,7 @@ namespace ListIt_WebFrontend.Controllers
                 TempData["SuccessMessage"] = "You successfully created a new shopping list!";
                 return RedirectToAction("Lists");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 TempData["ErrorMessage"] = "Something went wrong. Make sure to have entered a valid list name. Try again!";
                 return RedirectToAction("Lists");
@@ -184,9 +190,11 @@ namespace ListIt_WebFrontend.Controllers
                     throw new Exception("The name of the list is unchanged.");
                 }
 
-                ShoppingListDto list = new ShoppingListDto();
-                list.Id = listId;
-                list.Name = newName;
+                ShoppingListDto list = new ShoppingListDto
+                {
+                    Id = listId,
+                    Name = newName
+                };
 
                 listService.Update(list);
 
@@ -211,10 +219,12 @@ namespace ListIt_WebFrontend.Controllers
                 var listId = int.Parse(collection["ShoppingList_Id"]);
                 UserService userService = new UserService();
                 var userId = userService.GetIdByEmail(emailAddress);
-                ShoppingListDto shoppingListDto = new ShoppingListDto();
-                shoppingListDto.UserId = userId;
-                shoppingListDto.Id = listId;
-                shoppingListDto.ListAccessTypeId = type;
+                ShoppingListDto shoppingListDto = new ShoppingListDto
+                {
+                    UserId = userId,
+                    Id = listId,
+                    ListAccessTypeId = type
+                };
                 ShoppingListService listService = new ShoppingListService();
                 listService.CreateLink(shoppingListDto);
                 TempData["SuccessMessage"] = "You successfully shared your list!";
@@ -276,9 +286,11 @@ namespace ListIt_WebFrontend.Controllers
                 ViewBag.Message = TempData["SuccessMessage"];
                 ViewBag.Error = TempData["ErrorMessage"];
 
-                ItemsVM item = new ItemsVM();
-                item.ListId = (int)listId;
-                item.ProductId = (int)id;
+                ItemsVM item = new ItemsVM
+                {
+                    ListId = (int)listId,
+                    ProductId = (int)id
+                };
 
                 LanguageService languageService = new LanguageService();
                 var langId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;
@@ -380,10 +392,12 @@ namespace ListIt_WebFrontend.Controllers
                 {
                     LanguageService languageService = new LanguageService();
 
-                    CategoryDto category = new CategoryDto();
-                    category.Name = userCat;
-                    category.LanguageId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;
-                    category.UserId = int.Parse(Session["UserId"].ToString());
+                    CategoryDto category = new CategoryDto
+                    {
+                        Name = userCat,
+                        LanguageId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id,
+                        UserId = int.Parse(Session["UserId"].ToString())
+                    };
 
                     CategoryService categoryService = new CategoryService();
                     userCatId = categoryService.Create(category);
@@ -404,14 +418,18 @@ namespace ListIt_WebFrontend.Controllers
                     }
 
                     //create a new Product
-                    ProductDto productDto = new ProductDto();
-                    productDto.ProductTypeId = prodType;
+                    ProductDto productDto = new ProductDto
+                    {
+                        ProductTypeId = prodType
+                    };
                     prodId = productService.Create(productDto);
 
                     //create new UserProduct
-                    UserProductDto userProduct = new UserProductDto();
-                    userProduct.ProductId = prodId;
-                    userProduct.Name = name;
+                    UserProductDto userProduct = new UserProductDto
+                    {
+                        ProductId = prodId,
+                        Name = name
+                    };
                     if (userCat != "") userProduct.Category_Id = userCatId;
                     else userProduct.Category_Id = catId;
                     userProduct.User_Id = int.Parse(Session["UserId"].ToString());
@@ -429,8 +447,10 @@ namespace ListIt_WebFrontend.Controllers
 
                     if (prodType == 1)    //if DefaultProduct: create Link entry
                     {
-                        DefaultProductDto defaultProductDto = new DefaultProductDto();
-                        defaultProductDto.Id = productService.GetDefaultProductId(prodId);
+                        DefaultProductDto defaultProductDto = new DefaultProductDto
+                        {
+                            Id = productService.GetDefaultProductId(prodId)
+                        };
                         productService.CreateLink(defaultProductDto, int.Parse(Session["UserId"].ToString()));
                     }
 
@@ -444,16 +464,20 @@ namespace ListIt_WebFrontend.Controllers
                     if (shoppingListEntry.Product_Id == prodId) throw new Exception("You can't add the same product to your list twice.");
                 }
 
-                ShoppingListEntryDto entry = new ShoppingListEntryDto();
-                entry.Quantity = qty;
-                entry.Product_Id = prodId;
-                entry.ShoppingList_Id = listId;
-                entry.State_Id = 2; //Default is unchecked
+                ShoppingListEntryDto entry = new ShoppingListEntryDto
+                {
+                    Quantity = qty,
+                    Product_Id = prodId,
+                    ShoppingList_Id = listId,
+                    State_Id = 2 //Default is unchecked
+                };
                 entryService.Create(entry);
 
                 //Update ShoppingList to update Timestamp:                
-                ShoppingListDto shoppingList = new ShoppingListDto();
-                shoppingList.Id = listId;
+                ShoppingListDto shoppingList = new ShoppingListDto
+                {
+                    Id = listId
+                };
                 ShoppingListService listService = new ShoppingListService();
                 listService.Update(shoppingList);
 
@@ -492,13 +516,15 @@ namespace ListIt_WebFrontend.Controllers
                 /* UPDATING ShoppingListEntry */
 
                 ShoppingListEntryService entryService = new ShoppingListEntryService();
-                ShoppingListEntryDto entry = new ShoppingListEntryDto();
-                entry.Id = entryService.GetEntryId(prodId, listId);
-                entry.Quantity = (int)qty;
-                entry.ProductTypeId = prodTypeId;
-                entry.ShoppingList_Id = listId;
-                entry.Product_Id = prodId;
-                entry.State_Id = 2; //Default is unchecked
+                ShoppingListEntryDto entry = new ShoppingListEntryDto
+                {
+                    Id = entryService.GetEntryId(prodId, listId),
+                    Quantity = (int)qty,
+                    ProductTypeId = prodTypeId,
+                    ShoppingList_Id = listId,
+                    Product_Id = prodId,
+                    State_Id = 2 //Default is unchecked
+                };
 
                 entryService.Update(entry); //updates ShoppingListEntry
 
@@ -507,10 +533,12 @@ namespace ListIt_WebFrontend.Controllers
                 {
                     LanguageService languageService = new LanguageService();
 
-                    CategoryDto category = new CategoryDto();
-                    category.Name = userCat;
-                    category.LanguageId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id;
-                    category.UserId = int.Parse(Session["UserId"].ToString());
+                    CategoryDto category = new CategoryDto
+                    {
+                        Name = userCat,
+                        LanguageId = languageService.GetByCode(Session["LanguageCode"].ToString()).Id,
+                        UserId = int.Parse(Session["UserId"].ToString())
+                    };
 
                     CategoryService categoryService = new CategoryService();
                     userCatId = categoryService.Create(category);
@@ -530,10 +558,12 @@ namespace ListIt_WebFrontend.Controllers
 
                     /* UPDATING UserProduct */
 
-                    UserProductDto userProduct = new UserProductDto();
-                    userProduct.Id = productService.GetUserProductId(prodId);
-                    userProduct.ProductId = prodId;
-                    userProduct.Name = name;
+                    UserProductDto userProduct = new UserProductDto
+                    {
+                        Id = productService.GetUserProductId(prodId),
+                        ProductId = prodId,
+                        Name = name
+                    };
                     if (userCat != "") userProduct.Category_Id = userCatId;
                     else userProduct.Category_Id = catId;
                     userProduct.User_Id = int.Parse(Session["UserId"].ToString());
@@ -552,17 +582,21 @@ namespace ListIt_WebFrontend.Controllers
                     {
                         //create LinkDefaultProductToCategory entry
                     }
-                }                
+                }
 
                 /* UPDATING Product -> for new Timestamp*/
-                ProductDto productDto = new ProductDto();
-                productDto.Id = prodId;
-                productDto.ProductTypeId = prodTypeId;
+                ProductDto productDto = new ProductDto
+                {
+                    Id = prodId,
+                    ProductTypeId = prodTypeId
+                };
                 productService.Update(productDto);
 
                 /* UPDATING ShoppingList -> for new Timestamp: */
-                ShoppingListDto shoppingList = new ShoppingListDto();
-                shoppingList.Id = listId;
+                ShoppingListDto shoppingList = new ShoppingListDto
+                {
+                    Id = listId
+                };
                 ShoppingListService listService = new ShoppingListService();
                 listService.Update(shoppingList);
 
@@ -607,10 +641,6 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         #endregion Items
-
-
-
-
 
         // GET: List
         public ActionResult Index()

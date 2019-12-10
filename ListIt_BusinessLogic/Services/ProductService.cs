@@ -55,6 +55,43 @@ namespace ListIt_BusinessLogic.Services
                 ProductType_Id = dto.ProductTypeId
             });
         }
+        public void Create(DefaultProductDto dto, int langId)
+        {
+            var product = new Product
+            {
+                Id = dto.ProductId,
+                Timestamp = DateTime.Now,
+                ProductType_Id = dto.ProductTypeId
+            };
+            var prodId = _prodRepository.CreateProduct(product);
+
+            var defaultProduct = new DefaultProduct
+            {
+                Id = dto.Id,
+                Product_Id = prodId,
+                Currency_Id = dto.Currency_Id,
+                UnitType_Id = dto.Unit_Id,
+                Price = dto.Price,
+            };
+
+            _prodRepository.Create(defaultProduct);
+
+            // Save name
+            var translation = new TranslationOfProduct
+            {
+                Language_Id = langId,
+                Product_Id = prodId,
+                Translation = dto.Name
+            };
+            _prodRepository.SaveDefaultProductName(translation);
+
+            // Link category
+            //var categoryrelation = new LinkDefaultProductToCategory
+            //{
+            //    DefaultProductId = dto.ProductId,
+            //    CategoryId = dto.Category_Id
+            //};
+        }
 
         public int GetProductTypeId(int productId)
         {
@@ -212,6 +249,21 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
+        public static DefaultProductDto StaticDBToDto(DefaultProduct defaultProduct)
+        {
+            return new DefaultProductDto
+            {
+                Id = defaultProduct.Id,
+                //Name = defaultProduct.Name,
+                Currency_Id = defaultProduct.Currency_Id,
+                Unit_Id = defaultProduct.UnitType_Id,
+                Price = defaultProduct.Price,
+                //Category_Id = defaultProduct.Category_Id,
+                //ProductTypeId = from ProductTable
+                ProductId = (int)defaultProduct.Product_Id
+            };
+        }
+
         #endregion DEFAULTPRODUCT
 
         #region APIPRODUCT
@@ -233,12 +285,11 @@ namespace ListIt_BusinessLogic.Services
             var userProduct = _prodRepository.GetUserProduct(productId);
             return userProduct.Id;
         }
-
         public void DeleteUserProduct(int id)
         {
             _prodRepository.DeleteUserProduct(id);
         }
-
+        
         protected UserProduct ConvertDtoToDB(UserProductDto dto)
         {
             return StaticDtoToDB(dto);
