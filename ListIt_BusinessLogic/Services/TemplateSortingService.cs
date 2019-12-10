@@ -23,25 +23,36 @@ namespace ListIt_BusinessLogic.Services
         {
             List<TemplateSortedProductDto> templates = new List<TemplateSortedProductDto>();
             var all = _templateRepository.GetAll();
+            if (all == null) return null;
+
             foreach(TemplateListOrdering listOrdering in all)
             {
-                templates.Add(ConvertDBToDto(listOrdering));
+                ChainRepository chainRepository = new ChainRepository();
+                var names = chainRepository.GetShopAndChainNames((int)listOrdering.Shop_Id);
+                string templateName = "Template";
+                foreach(String name in names)
+                {
+                    templateName = templateName + " " + name;
+                }
+
+                templates.Add(ConvertDBToDto(listOrdering, templateName));
             }
+
             return templates;
         }
 
-        public IList<ProductDto> SortByTemplate(int id, List<ProductDto> products)
+        public IList<ProductDto> SortByTemplate(int id, IList<ProductDto> products)
         {
             var listOrdering = _templateRepository.GetListOrdering(id);
             var templates = _templateRepository.GetTemplates(id);
             List<ProductDto> sortedList = new List<ProductDto>();
-
-            foreach(TemplateSortedProduct template in templates)
+            
+            for (int x = 1; x <= templates.Count(); x++)
             {
-                for (int x = 1; x == templates.Count(); x++)
-                {   
+                foreach (TemplateSortedProduct template in templates)
+                {
                     //find template with according rank, starting by rank 1
-                    if(template.Rank == x)
+                    if (template.Rank == x)
                     {
                         foreach (ProductDto product in products)
                         {
@@ -64,9 +75,9 @@ namespace ListIt_BusinessLogic.Services
             return StaticDBToDto(entity);
         }
 
-        protected TemplateSortedProductDto ConvertDBToDto(TemplateListOrdering entity)
+        protected TemplateSortedProductDto ConvertDBToDto(TemplateListOrdering entity, string name)
         {
-            return StaticDBToDto(entity);
+            return StaticDBToDto(entity, name);
         }
 
         protected TemplateSortedProductDto ConvertDBToDto(TemplateListOrdering ordering, TemplateSortedProduct template)
@@ -118,13 +129,14 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        public static TemplateSortedProductDto StaticDBToDto(TemplateListOrdering entity)
+        public static TemplateSortedProductDto StaticDBToDto(TemplateListOrdering entity, string name)
         {
             if (entity == null) return null;
             return new TemplateSortedProductDto
             {
                 Id = entity.Id,
-                ShopId = (int)entity.Shop_Id
+                ShopId = (int)entity.Shop_Id,
+                TemplateName = name
             };
         }
 

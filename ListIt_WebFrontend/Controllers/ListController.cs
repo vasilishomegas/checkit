@@ -44,7 +44,7 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         // GET: User/SingleList
-        public ActionResult SingleList(int? id)
+        public ActionResult SingleList(int? id, int? templateId)
         {
             if (Session["UserId"] != null && id != null)
             {
@@ -77,6 +77,27 @@ namespace ListIt_WebFrontend.Controllers
                         if (list.ListEntries.Count() == 0)
                         {
                             ViewBag.Message = "You don't have any entries yet. Start creating your entries now!";
+                        }
+
+                        TemplateSortingService templateService = new TemplateSortingService();
+                        if (listObj.ChosenSortingId != null)
+                        {
+                            // TODO: apply UserEntrySorting
+                        }
+
+                        if(templateId != null)
+                        {
+                            list.ListEntries = templateService.SortByTemplate((int)templateId, list.ListEntries);
+                            ViewBag.Message = "Your list has been sorted according to the template.";
+
+                            if(listObj.ChosenSortingId == null)
+                            {
+                                //create new UserEntrySorting according to applied template
+                            }
+                            else
+                            {
+                                //update existing UserEntrySorting according to template
+                            }
                         }
 
                         list.ChosenProductId = 0;  //By default no defaultProduct should be selected
@@ -113,6 +134,14 @@ namespace ListIt_WebFrontend.Controllers
                                                  Text = item.Name,
                                                  Value = item.Id.ToString()
                                              }).ToList();
+                        
+                        list.ChosenTemplateId = 0;
+                        list.Templates = (from item in templateService.GetTemplates()
+                                          select new SelectListItem()
+                                          {
+                                              Text = item.TemplateName,
+                                              Value = item.Id.ToString()
+                                          }).ToList();
 
                         return View(list);
                     }
@@ -266,7 +295,27 @@ namespace ListIt_WebFrontend.Controllers
 
         #endregion Lists
 
-        #region Items
+        #region Sorting
+        [HttpPost]
+        public ActionResult SortByTemplate(FormCollection collection)
+        {
+            try
+            {
+                var id = int.Parse(collection["ChosenTemplateId"]);
+                var listId = int.Parse(collection["ShoppingList_Id"]);
+                return RedirectToAction("SingleList", "List", new { @id = listId, @templateId = id });
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Sorting according to the template wasn't possible.";
+                return RedirectToAction("SingleList");
+            }
+        }
+
+        #endregion Sorting
+
+
+            #region Items
 
         //GET List/Item -> EditItemView
         public ActionResult Item(int? id, int? listId)
@@ -607,19 +656,6 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         #endregion Items
-
-
-
-
-
-        // GET: List
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-
-
 
 
     }

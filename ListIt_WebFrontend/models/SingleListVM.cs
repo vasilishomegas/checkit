@@ -37,6 +37,9 @@ namespace ListIt_WebFrontend.Models
         public int CurrencyListId { get; set; }
         public IList<SelectListItem> ChooseProductsList { get; set; }
         public int ChosenProductId { get; set; }
+
+        public IList<SelectListItem> Templates { get; set; }
+        public int ChosenTemplateId { get; set; }
     }
 
 

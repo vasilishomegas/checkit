@@ -68,11 +68,30 @@
                 </span>
             </div>
             <div class="col-md-3 d-flex justify-content-end">
-                <span>
-                    <button class="btn" type="button">
+                <div class="btn-group dropleft">
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-sort-amount-asc fa-lg"></i>
                     </button>
-                </span>
+                    <div class="dropdown-menu">
+                        @using (Html.BeginForm("SortByTemplate", "List", FormMethod.Post, htmlAttributes: new { @class = "px-4 py-3" }))
+                        {
+                            <div class="input-group">
+                                @Html.HiddenFor(model => model.ShoppingList_Id, new { htmlAttributes = new { value = Model.ShoppingList_Id } })
+
+                                @Html.DropDownListFor(model => model.ChosenTemplateId, Model.Templates, "Choose template", htmlAttributes: new { @class = "form-control custom-select" })
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-outline-dark btn-sm">
+                                        <span class="fa fa-check-circle-o"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">@Lang.A_Z</a>
+                        <a class="dropdown-item" href="#">@Lang.Z_A</a>
+                        <a class="dropdown-item" href="#">@Lang.lowestPrice</a>
+                    </div>
+                </div>
             </div>
         </div>
 

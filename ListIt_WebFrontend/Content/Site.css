@@ -24,14 +24,6 @@ h1 .pageheading {
     padding-bottom: 20px;
 }
 
-i{
-    transition-duration: 1s;
-}
-
-i:hover {
-    width: 1.5em;
-    height: 1.5em;
-}
 
 
 /* SEARHCING AND FILTERING*/
@@ -151,13 +143,10 @@ ul li .listLinksWrite {
     }
 
 
-
-
 /* SINGLE LIST ITEMS */
 
-.dropdown:hover .dropdown-menu {
-    display: block;
-    
+.dropleft:hover .dropdown-menu {
+    display: block;    
 }
 
 .nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {

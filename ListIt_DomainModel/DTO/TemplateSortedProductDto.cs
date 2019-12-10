@@ -12,10 +12,12 @@ namespace ListIt_DomainModel.DTO
         public int Id { get; set; }
         public int ShopId { get; set; }
 
+        public string TemplateName { get; set; }
+
         //FOR TemplateSortedProduct
         public int CategoryId { get; set; }
         public int Rank { get; set; }
 
-        IEnumerable<TemplateSortedProductDto> CategorySortings { get; set; }        
+        IList<TemplateSortedProductDto> CategorySortings { get; set; }        
     }
 }
