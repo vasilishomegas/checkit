@@ -17,9 +17,6 @@ using ListIt_DomainModel.DTO.Interfaces;
 
 namespace ListIt_WindowsBackend
 {
-    /// <summary>
-    /// Interaction logic for EditProducts.xaml
-    /// </summary>
     public partial class EditProducts : Window
     {
         public EditProducts()
@@ -31,18 +28,13 @@ namespace ListIt_WindowsBackend
         private void Load_Data()
         {
             ProductService productService = new ProductService();
-            ProductData.ItemsSource = productService.GetAll();
+            ProductData.ItemsSource = productService.GetDefaultProductDtos();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
             //((App)Application.Current).Back_To_Menu(sender);
-        }
-
-        private void ProductData_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

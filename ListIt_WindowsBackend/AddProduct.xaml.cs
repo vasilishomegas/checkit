@@ -72,7 +72,8 @@ namespace ListIt_WindowsBackend
                         Name = NameField.Text,
                         Currency_Id = (int)CurrencyBox.SelectedValue,
                         Unit_Id = (int)UnitBox.SelectedValue,
-                        Price = (decimal)price
+                        Price = (decimal)price,
+                        Category_Id = (int)CategoryBox.SelectedValue
                     }, (int)LanguageBox.SelectedValue);
                     MessageBox.Show("Product added!");
                     TypeBox.SelectedIndex = 0;

@@ -35,7 +35,8 @@ namespace ListIt_BusinessLogic.Services
             {
                 var userProduct = _prodRepository.GetUserProduct(id);
                 productDto = ConvertUserProductDBToDto(product, userProduct, entry);
-            }else if(product.ProductType_Id == 1)
+            }
+            else if(product.ProductType_Id == 1)
             {
                 var defaultProduct = _prodRepository.GetDefaultProduct(id);
                 //var translation = _prodRepository.GetProductTranslation(langId, id);
@@ -86,11 +87,12 @@ namespace ListIt_BusinessLogic.Services
             _prodRepository.SaveDefaultProductName(translation);
 
             // Link category
-            //var categoryrelation = new LinkDefaultProductToCategory
-            //{
-            //    DefaultProductId = dto.ProductId,
-            //    CategoryId = dto.Category_Id
-            //};
+            var categoryrelation = new LinkDefaultProductToCategory
+            {
+                DefaultProductId = prodId,
+                CategoryId = (int)dto.Category_Id
+            };
+            _prodRepository.SaveDefaultProductCategory(categoryrelation);
         }
 
         public int GetProductTypeId(int productId)
@@ -143,6 +145,27 @@ namespace ListIt_BusinessLogic.Services
             //else if(link != null) if link already exists do nothing
         }
 
+        public List<ProductDto> GetDefaultProductDtos(int langId = 2)
+        {
+            var defaultProducts = _prodRepository.GetAllDefaultProducts();
+            var products = new List<ProductDto>();
+            foreach (DefaultProduct prod in defaultProducts)
+            {
+                var translation = _prodRepository.GetProductTranslation(langId, (int)prod.Product_Id);
+                var category = _prodRepository.GetCategory((int)prod.Product_Id);
+
+                if (translation == null) //if no translation for this language -> switch to english
+                {
+                    translation = _prodRepository.GetProductTranslation(2, (int)prod.Product_Id);
+                }
+
+                var defProduct = ConvertDBToDto(prod, translation, category);
+                if (defProduct != null) products.Add(defProduct);
+
+            }
+            return products;
+        }
+
         public IList<ProductDto> GetDefaultAndReusableProductsByLanguage(int langId)
         {
             var defaultProducts = _prodRepository.GetAllDefaultProducts();
@@ -177,22 +200,22 @@ namespace ListIt_BusinessLogic.Services
         {
             return _prodRepository.GetDefaultProductId(productId);
         }
-
         protected LinkUserToDefaultProduct ConvertDefaultProductDtoToLinkDB(DefaultProductDto defaultProductDto, int userId)
         {
             return StaticDefaultProductDtoToLinkDB(defaultProductDto, userId);
         }
-
         protected DefaultProductDto ConvertDBToDto(DefaultProduct entity, TranslationOfProduct translation)
         {
             return StaticDBToDto(entity, translation);
         }
-
+        protected DefaultProductDto ConvertDBToDto(DefaultProduct entity, TranslationOfProduct translation, LinkDefaultProductToCategory productToCategory)
+        {
+            return StaticDBToDto(entity, translation, productToCategory);
+        }
         protected DefaultProduct ConvertDtoToDB(DefaultProductDto dto)
         {
             return StaticDtoToDB(dto);
         }
-
         public static LinkUserToDefaultProduct StaticDefaultProductDtoToLinkDB(DefaultProductDto dto, int userId)
         {
             return new LinkUserToDefaultProduct
@@ -229,6 +252,21 @@ namespace ListIt_BusinessLogic.Services
                 ProductId = (int)defaultProduct.Product_Id
             };
         }
+        public static DefaultProductDto StaticDBToDto(DefaultProduct defaultProduct, TranslationOfProduct translation, LinkDefaultProductToCategory category)
+        {
+            if (defaultProduct == null || translation == null || category == null) return null;
+            return new DefaultProductDto
+            {
+                Id = defaultProduct.Id,
+                Name = translation.Translation,
+                Currency_Id = defaultProduct.Currency_Id,
+                Unit_Id = defaultProduct.UnitType_Id,
+                Price = defaultProduct.Price,
+                Category_Id = category.CategoryId,
+                ProductTypeId = 1,	//= DefaultProduct
+                ProductId = (int)defaultProduct.Product_Id
+            };
+        }
         public static Product StaticDtoToDB(ProductDto dto)
         {
             return new Product
@@ -238,7 +276,6 @@ namespace ListIt_BusinessLogic.Services
                 ProductType_Id = dto.ProductTypeId,
             };
         }
-
         public static ProductDto StaticDBToDto(Product product)
         {
             if (product == null) return null;
@@ -248,7 +285,6 @@ namespace ListIt_BusinessLogic.Services
                 ProductTypeId = product.ProductType_Id
             };
         }
-
         public static DefaultProductDto StaticDBToDto(DefaultProduct defaultProduct)
         {
             return new DefaultProductDto

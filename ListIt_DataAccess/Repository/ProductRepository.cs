@@ -48,6 +48,15 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
+        public LinkDefaultProductToCategory GetCategory(int productId)
+            {
+            using (var context = new ListItContext())
+            {
+                return context.LinkDefaultProductToCategories
+                    .SingleOrDefault(x => x.DefaultProductId == productId);
+            }
+        }
+
         public IList<DefaultProduct> GetAllDefaultProducts()
         {
             using (var context = new ListItContext())
@@ -86,11 +95,40 @@ namespace ListIt_DataAccess.Repository
                     .Id;
             }
         }
+        
         public void SaveDefaultProductName(TranslationOfProduct translation)
         {
             using (var context = new ListItContext())
             {
                 var response = context.Set<TranslationOfProduct>().Add(translation);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
+                                                         + " in state " + eve.Entry.State + " has the following" +
+                                                         " validation errors:");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
+                        }
+                    }
+
+                    throw new Exception(builder.ToString());
+                }
+            }
+        }
+
+        public void SaveDefaultProductCategory(LinkDefaultProductToCategory category)
+        {
+            using (var context = new ListItContext())
+            {
+                var cat = context.Set<LinkDefaultProductToCategory>().Add(category);
                 try
                 {
                     context.SaveChanges();
@@ -143,7 +181,6 @@ namespace ListIt_DataAccess.Repository
                 }
             }
         }
-
 
         public void Create(UserProduct entity)
         {
