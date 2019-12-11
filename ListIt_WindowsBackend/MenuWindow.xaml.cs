@@ -53,12 +53,14 @@ namespace ListIt_WindowsBackend
 
         private void EditChains_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = new EditChains();
+            window.ShowDialog();
         }
 
         private void EditShops_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = new EditShops();
+            window.ShowDialog();
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)

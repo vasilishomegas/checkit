@@ -59,35 +59,36 @@ namespace ListIt_BusinessLogic.Services
 
         protected override Chain ConvertDtoToDB(ChainDto chainDto) 
         {
-            int? shopApiId = null;
-            ShopApiDto shopApiDto = null;
+            //int? shopApiId = null;
+            //ShopApiDto shopApiDto = null;
 
-            if (chainDto.ShopApi != null)
-            {
-                shopApiId = chainDto.ShopApi.Id;
-                shopApiDto = chainDto.ShopApi;
-            }
+            //if (chainDto.ShopApi != null)
+            //{
+            //    shopApiId = chainDto.ShopApi.Id;
+            //    shopApiDto = chainDto.ShopApi;
+            //}
 
             return new Chain()
             {
                 Id = chainDto.Id,
                 Logo = chainDto.Logo,
                 Name = chainDto.Name,
-                ShopApi_Id = shopApiId,
-                ShopApi = ShopApiService.StaticDtoToDB(shopApiDto)
+                ShopApi_Id = chainDto.ShopApi_Id,
+                //ShopApi = ShopApiService.StaticDtoToDB(shopApiDto)
             };
 
         }
 
         protected override ChainDto ConvertDBToDto(Chain chain)
         {
-            return new ChainDto
-            {
-                Id = chain.Id,
-                ShopApi = ShopApiService.StaticDBToDto(chain.ShopApi),
-                Name = chain.Name,
-                Logo = chain.Logo
+            var chainDto = new ChainDto { 
+                Id = chain.Id, 
+                Name = chain.Name, 
+                Logo = chain.Logo 
             };
+            if (chain.ShopApi_Id.HasValue)
+                chainDto.ShopApi_Id = (int)chain.ShopApi_Id;
+            return chainDto;
         }
     }
 }
