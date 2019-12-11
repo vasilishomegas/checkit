@@ -38,8 +38,8 @@ namespace ListIt_BusinessLogic.Services
             }else if(product.ProductType_Id == 1)
             {
                 var defaultProduct = _prodRepository.GetDefaultProduct(id);
-                //var translation = _prodRepository.GetProductTranslation(langId, id);
-                productDto = ConvertDefaultProductDBToDto(product, defaultProduct, entry, translation);
+                var category = _prodRepository.GetCategory(id);
+                productDto = ConvertDefaultProductDBToDto(product, defaultProduct, entry, translation, category);
             }
 
             return productDto;
@@ -359,16 +359,17 @@ namespace ListIt_BusinessLogic.Services
 
                     //4. Create ProductDto and add to list
                     var productDto = ConvertUserProductDBToDto(product, userProduct, entry);
-                    productDtoList.Add(productDto);
+                    if(productDto != null) productDtoList.Add(productDto);
                 }
                 else if (product.ProductType_Id == 1) //DefaultProduct
                 {
                     var defaultProduct = _prodRepository.GetDefaultProduct(entry.Product_Id);
                     var translation = _prodRepository.GetProductTranslation(langId, entry.Product_Id);
+                    var category = _prodRepository.GetCategory((int)defaultProduct.Product_Id);
                     if (translation == null) translation = _prodRepository.GetProductTranslation(2, entry.Product_Id); //get Default english
                     //4. Create ProductDto and add to list
-                    var productDto = ConvertDefaultProductDBToDto(product, defaultProduct, entry, translation);
-                    productDtoList.Add(productDto);
+                    var productDto = ConvertDefaultProductDBToDto(product, defaultProduct, entry, translation, category);
+                    if(productDto != null) productDtoList.Add(productDto);
                 }
                 else if (product.ProductType_Id == 2) //ApiProduct
                 {
@@ -377,7 +378,7 @@ namespace ListIt_BusinessLogic.Services
                     if (translation == null) translation = _prodRepository.GetProductTranslation(2, entry.Product_Id); //get Default english
                     //4. Create ProductDto and add to list
                     var productDto = ConvertApiProductDBToDto(product, apiProduct, entry, translation);
-                    productDtoList.Add(productDto);
+                    if (productDto != null) productDtoList.Add(productDto);
                 }
             }
             return productDtoList;
@@ -385,6 +386,7 @@ namespace ListIt_BusinessLogic.Services
 
         public static ProductDto StaticDBToDto(Product product, UserProduct userProduct, ShoppingListEntry entry)
         {
+            if (userProduct == null || product == null || entry == null) return null;
             return new ProductDto
             {
                 Id = entry.Id,
@@ -399,7 +401,7 @@ namespace ListIt_BusinessLogic.Services
             };
         }
 
-        public static ProductDto StaticDBToDto(Product product, DefaultProduct defaultProduct, ShoppingListEntry entry, TranslationOfProduct translation)
+        public static ProductDto StaticDBToDto(Product product, DefaultProduct defaultProduct, ShoppingListEntry entry, TranslationOfProduct translation, LinkDefaultProductToCategory category)
         {
             return new ProductDto
             {
@@ -411,7 +413,7 @@ namespace ListIt_BusinessLogic.Services
                 Quantity = (int)entry.Quantity,
                 Price = (decimal)defaultProduct.Price,
                 ProductId = product.Id,
-                //Category_Id = defaultProduct.Category_Id
+                Category_Id = category.CategoryId
             };
         }
 
@@ -435,9 +437,9 @@ namespace ListIt_BusinessLogic.Services
             return StaticDBToDto(entity, userProduct, entry);
         }
 
-        protected ProductDto ConvertDefaultProductDBToDto(Product entity, DefaultProduct defaultProduct, ShoppingListEntry entry, TranslationOfProduct translation)
+        protected ProductDto ConvertDefaultProductDBToDto(Product entity, DefaultProduct defaultProduct, ShoppingListEntry entry, TranslationOfProduct translation, LinkDefaultProductToCategory category)
         {
-            return StaticDBToDto(entity, defaultProduct, entry, translation);
+            return StaticDBToDto(entity, defaultProduct, entry, translation, category);
         }
 
         protected ProductDto ConvertApiProductDBToDto(Product entity, ApiProduct apiProduct, ShoppingListEntry entry, TranslationOfProduct translation)

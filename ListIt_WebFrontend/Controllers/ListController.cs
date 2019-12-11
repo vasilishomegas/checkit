@@ -85,21 +85,19 @@ namespace ListIt_WebFrontend.Controllers
 
                         TemplateSortingService templateService = new TemplateSortingService();
                         UserListSortingService listSortingService = new UserListSortingService();
+                        UserListSortingDto sorting = new UserListSortingDto();
+                        if (listObj.ChosenSortingId != null) sorting.Id = (int)listObj.ChosenSortingId;
+                        sorting.ShoppingList_Id = list.ShoppingList_Id;
+
                         if (listObj.ChosenSortingId != null)
                         {
-                            // TODO: apply UserEntrySorting
                             list.ListEntries = listSortingService.ApplyUserSorting((int)listObj.ChosenSortingId, list.ListEntries);
                         }
 
                         if(templateId != null)
                         {
-                            list.ListEntries = templateService.SortByTemplate((int)templateId, list.ListEntries);
-                                                        
-                            UserListSortingDto sorting = new UserListSortingDto();
-                            if (listObj.ChosenSortingId != null) sorting.Id = (int)listObj.ChosenSortingId;
-                            sorting.ShoppingList_Id = list.ShoppingList_Id;
+                            list.ListEntries = templateService.SortByTemplate((int)templateId, list.ListEntries);                                                     
                             listSortingService.SaveSorting(sorting, list.ListEntries);
-
                             ViewBag.Message = "Your list has been sorted according to the template. This sorting has been saved permanently for you.";
                         }
                         else if(sortingId != null)
@@ -109,21 +107,25 @@ namespace ListIt_WebFrontend.Controllers
                                 case 1: // A - Z
                                     {
                                         list.ListEntries = list.ListEntries.OrderBy(z => z.Name).ToList();
+                                        listSortingService.SaveSorting(sorting, list.ListEntries);
                                         break;
                                     }
                                 case 2: // Z - A
                                     {
                                         list.ListEntries = list.ListEntries.OrderByDescending(z => z.Name).ToList();
+                                        listSortingService.SaveSorting(sorting, list.ListEntries);
                                         break;
                                     }
                                 case 3: // lowest price
                                     {
                                         list.ListEntries = list.ListEntries.OrderBy(z => z.Price).ToList();
+                                        listSortingService.SaveSorting(sorting, list.ListEntries);
                                         break;
                                     }
                                 case 4: // highest price
                                     {
                                         list.ListEntries = list.ListEntries.OrderByDescending(z => z.Price).ToList();
+                                        listSortingService.SaveSorting(sorting, list.ListEntries);
                                         break;
                                     }
                                 default: break;
@@ -314,7 +316,11 @@ namespace ListIt_WebFrontend.Controllers
                 {
                     DeleteItem(product.Id, listId);
                 }
-                
+
+                //delete ListSorting
+                UserListSortingService listSortingService = new UserListSortingService();
+                listSortingService.Delete((int)listService.Get(listId).ChosenSortingId);
+
                 //delete list itself & all links in LinkUserToList
                 listService.Delete(listId);
 
@@ -506,10 +512,9 @@ namespace ListIt_WebFrontend.Controllers
                     throw new Exception("You can either create a new item or choose from the default products, but not both!");
                 }
 
+                LanguageService languageService = new LanguageService();
                 if (userCat != "")
-                {
-                    LanguageService languageService = new LanguageService();
-
+                {   
                     CategoryDto category = new CategoryDto
                     {
                         Name = userCat,
@@ -598,6 +603,15 @@ namespace ListIt_WebFrontend.Controllers
                 };
                 ShoppingListService listService = new ShoppingListService();
                 listService.Update(shoppingList);
+
+                // Update Sorting
+                var listEntries = productService.GetEntriesAsProducts(listId, languageService.GetByCode(Session["LanguageCode"].ToString()).Id);
+                UserListSortingService listSortingService = new UserListSortingService();
+                var sortingId = listService.Get(listId, int.Parse(Session["UserId"].ToString())).ChosenSortingId;
+                UserListSortingDto sorting = new UserListSortingDto();
+                if (sortingId != null) sorting.Id = (int)sortingId;
+                sorting.ShoppingList_Id = listId;
+                listSortingService.SaveSorting(sorting, listEntries);
 
                 TempData["SuccessMessage"] = "Successfully created a new item";
                 return RedirectToAction("SingleList", new { @id = listId });
@@ -731,8 +745,8 @@ namespace ListIt_WebFrontend.Controllers
         // GET: List/Item/Delete/5
         public ActionResult DeleteItem(int id, int listId)  //id = productId
         {
-            try
-            {
+            //try
+            //{
                 //1. If UserProduct -> Delete
                 ProductService productService = new ProductService();
                 var prodType = productService.GetProductTypeId(id);
@@ -743,23 +757,36 @@ namespace ListIt_WebFrontend.Controllers
                     productService.DeleteUserProduct(userProdId);
                 }
 
-                //2. Delete ShoppingListEntry (if default or reusable only this)
+                //2. Update Sorting without this item
+                LanguageService languageService = new LanguageService();
+                var listEntries = productService.GetEntriesAsProducts(listId, languageService.GetByCode(Session["LanguageCode"].ToString()).Id);
+                UserListSortingService listSortingService = new UserListSortingService();
+                ShoppingListService listService = new ShoppingListService();
+                var sortingId = listService.Get(listId, int.Parse(Session["UserId"].ToString())).ChosenSortingId;
+                UserListSortingDto sorting = new UserListSortingDto();
+                if (sortingId != null) sorting.Id = (int)sortingId;
+                sorting.ShoppingList_Id = listId;
+
                 ShoppingListEntryService shoppingListEntryService = new ShoppingListEntryService();
                 var entryId = shoppingListEntryService.GetEntryId(id, listId);
+
+                listSortingService.SaveSorting(sorting, listEntries, entryId);
+
+                //3. Delete ShoppingListEntry (if default or reusable only this)                
                 shoppingListEntryService.Delete(entryId);
 
                 TempData["SuccessMessage"] = "Successfully deleted the entry.";
-                return Redirect(Request.UrlReferrer.ToString());
-            }
-            catch
-            {
-                TempData["ErrorMessage"] = "There was an error while trying to delete this entry.";
-                return Redirect(Request.UrlReferrer.ToString());
-            }
+                return RedirectToAction("SingleList", new { @id = listId });
+            //}
+            //catch
+            //{
+            //    TempData["ErrorMessage"] = "There was an error while trying to delete this entry.";
+            //    return Redirect(Request.UrlReferrer.ToString());
+            //}
         }
 
         #endregion Items
 
 
-    }
+        }
 }

@@ -25,25 +25,35 @@ namespace ListIt_BusinessLogic.Services
         public IList<ProductDto> ApplyUserSorting(int sortingId, IList<ProductDto> products)
         {
             List<ProductDto> sortedList = new List<ProductDto>();
+            var nextEntry = _entrySortingRepository.GetFirstEntry(sortingId);
 
             //1. finding very first product
             foreach (ProductDto product in products)
             {
-                if (_entrySortingRepository.GetFirstEntry(sortingId).ShoppingListEntry_Id == product.Id) sortedList.Add(product);
+                if (nextEntry.ShoppingListEntry_Id == product.Id) sortedList.Add(product);
             }
 
             //2. getting each next product
-            for(int x = 0; x <= products.Count(); x++)
+            if(products.Count > 1)
             {
-                var entry = _entrySortingRepository.GetByPrevEntryId(sortingId, sortedList[x].Id);
-
-                foreach (ProductDto product in products)
+                for (int x = 0; x < products.Count(); x++)
                 {
-                    if (entry.ShoppingListEntry_Id == product.Id) sortedList.Add(product);                    
-                }
+                    UserEntrySorting entry = new UserEntrySorting();
+                    if(nextEntry.NextEntryId_Id != null) entry = _entrySortingRepository.GetByEntryId(sortingId, (int)nextEntry.NextEntryId_Id);
 
-                if (entry.NextEntryId_Id == null) return sortedList;
-            }         
+                    foreach (ProductDto product in products)
+                    {
+                        if (entry.ShoppingListEntry_Id == product.Id)
+                        {
+                            sortedList.Add(product);
+                            if(entry.NextEntryId_Id != null) nextEntry = _entrySortingRepository.GetByEntryId(sortingId, (int)entry.NextEntryId_Id);
+                        }
+                    }
+
+                    if (entry.NextEntryId_Id == null) return sortedList;
+                }
+            }
+             
 
             return sortedList;
         }
@@ -54,6 +64,19 @@ namespace ListIt_BusinessLogic.Services
             if(_listSortingRepository.Get(dto.Id) != null)
             {
                 UpdateSorting(dto, products);
+            }
+            else
+            {
+                CreateSorting(dto, products);
+            }
+        }
+
+        public void SaveSorting(UserListSortingDto dto, IList<ProductDto> products, int deletedEntryId)
+        {
+            //if exists -> update | else -> create
+            if (_listSortingRepository.Get(dto.Id) != null)
+            {
+                UpdateSorting(dto, products, deletedEntryId);
             }
             else
             {
@@ -97,22 +120,50 @@ namespace ListIt_BusinessLogic.Services
         {
             _listSortingRepository.Update(ConvertDtoToDB(dto));
 
-            for (int x = 0; x <= products.Count(); x++)
-            {
-                Nullable<int> prevEntryId = null;
-                if (products[x - 1] != null) prevEntryId = products[x - 1].Id;
-                Nullable<int> nextEntryId = null;
-                if (products[x + 1] != null) nextEntryId = products[x + 1].Id;
 
-                UserEntrySorting entrySorting = new UserEntrySorting
+            for (int x = 0; x < products.Count(); x++)
+            {
+                Nullable<int> prevEntryId;
+                if (x == 0) prevEntryId = null;
+                else prevEntryId = products[x - 1].Id;
+                Nullable<int> nextEntryId;
+                if(x == products.Count()-1) nextEntryId = null;
+                else nextEntryId = products[x + 1].Id;
+
+                _entrySortingRepository.Update(new UserEntrySorting
                 {
                     UserListSorting_Id = dto.Id,
                     ShoppingListEntry_Id = products[x].Id,
                     PrevEntryId_Id = prevEntryId,
                     NextEntryId_Id = nextEntryId
-                };
+                });
+            }
+        }
 
-                _entrySortingRepository.Update(entrySorting);
+        public void UpdateSorting(UserListSortingDto dto, IList<ProductDto> products, int deletedEntryId)
+        {
+            var allEntrySortings = _entrySortingRepository.GetEntrySortings(dto.Id);
+
+            foreach (UserEntrySorting userEntrySorting in allEntrySortings)
+            {
+                if (userEntrySorting.ShoppingListEntry_Id == deletedEntryId)
+                {
+                    if (userEntrySorting.PrevEntryId_Id != null)
+                    {
+                        var prevEntrySorting = _entrySortingRepository.GetByEntryId(dto.Id, (int)userEntrySorting.PrevEntryId_Id);
+                        prevEntrySorting.NextEntryId_Id = userEntrySorting.NextEntryId_Id;
+                        _entrySortingRepository.Update(prevEntrySorting);
+                    }
+
+                    if (userEntrySorting.NextEntryId_Id != null)
+                    {
+                        var nextEntrySorting = _entrySortingRepository.GetByEntryId(dto.Id, (int)userEntrySorting.NextEntryId_Id);
+                        nextEntrySorting.PrevEntryId_Id = userEntrySorting.PrevEntryId_Id;
+                        _entrySortingRepository.Update(nextEntrySorting);
+                    }
+
+                    _entrySortingRepository.Delete(userEntrySorting);
+                }
             }
         }
 
