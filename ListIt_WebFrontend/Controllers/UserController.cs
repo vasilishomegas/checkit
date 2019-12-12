@@ -107,7 +107,7 @@ namespace ListIt_WebFrontend.Controllers
                 UserService service = new UserService();
                 CountryService countryService = new CountryService();
 
-                var userDto = service.Get(Int32.Parse(Session["UserId"].ToString()));                
+                var userDto = service.Get( int.Parse(Session["UserId"].ToString()));                
                 user.CountryId = userDto.Country.Id;
 
                 user.CountryList = (from item in countryService.GetAll().OrderBy(x => x.Name)
@@ -203,7 +203,7 @@ namespace ListIt_WebFrontend.Controllers
         {
             try
             {
-                int id = Int32.Parse(Session["UserId"].ToString());
+                int id =  int.Parse(Session["UserId"].ToString());
                 var newName = collection["Nickname"];
                 var newMail = collection["Email"];
 
@@ -233,7 +233,7 @@ namespace ListIt_WebFrontend.Controllers
         {
             try
             {
-                int id = Int32.Parse(Session["UserId"].ToString());
+                int id =  int.Parse(Session["UserId"].ToString());
                 var oldPw = collection["PasswordHash"];
                 var newPW = collection["NewPassword"];
 
@@ -281,9 +281,9 @@ namespace ListIt_WebFrontend.Controllers
 
                 CountryDto country = new CountryDto
                 {
-                    Id = Int32.Parse(collection["CountryId"])
+                    Id =  int.Parse(collection["CountryId"])
                 };
-                //user.Country.Id = Int32.Parse(collection["CountryId"].ToString());
+                //user.Country.Id =  int.Parse(collection["CountryId"].ToString());
                 user.Country = country;
 
                 //TODO: add attributes in user for default currency and sorting
@@ -316,7 +316,7 @@ namespace ListIt_WebFrontend.Controllers
                 //LanguageDto lang = new LanguageDto();
                 LanguageService languageService = new LanguageService();
                 user.Language = languageService.GetByCode(shortCode);
-                user.Id = Int32.Parse(Session["UserId"].ToString());
+                user.Id =  int.Parse(Session["UserId"].ToString());
                 //lang.Code = shortCode;
                 //user.Language = lang;
                 service.Update(user);

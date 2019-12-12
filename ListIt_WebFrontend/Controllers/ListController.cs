@@ -54,7 +54,7 @@ namespace ListIt_WebFrontend.Controllers
                 ViewBag.Error = TempData["ErrorMessage"];
 
                 ShoppingListService listService = new ShoppingListService();                
-                var userLists = listService.GetListsByUserId(Int32.Parse(Session["UserId"].ToString()));
+                var userLists = listService.GetListsByUserId( int.Parse(Session["UserId"].ToString()));
                 var requestedList = listService.Get((int)id);
 
                 //checking whether the list the user tries to access is his or if he has access rights
@@ -300,7 +300,7 @@ namespace ListIt_WebFrontend.Controllers
         {
             try
             {
-                int listId = Int32.Parse(collection["ShoppingList_Id"].ToString());
+                int listId =  int.Parse(collection["ShoppingList_Id"].ToString());
 
                 ShoppingListService listService = new ShoppingListService();
                 LanguageService languageService = new LanguageService();
@@ -392,7 +392,6 @@ namespace ListIt_WebFrontend.Controllers
         //}
 
         #endregion Sorting
-
 
         #region Items
 
@@ -759,7 +758,6 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         #endregion Items
-
 
     }
 }
