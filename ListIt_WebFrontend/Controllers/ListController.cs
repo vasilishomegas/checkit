@@ -618,7 +618,7 @@ namespace ListIt_WebFrontend.Controllers
             }
             catch
             {
-                TempData["ErrorMessage"] = "There was an error while creating a new item. Be aware that you can only create either a new item or choose from the dropdown list of default products and your own reusable items, but you can't do both.";
+                TempData["ErrorMessage"] = "There was an error while creating a new item. Be aware that you can only create a new item or choose from the dropdown list of default products and your own reusable items, but you can't do both.";
                 return Redirect(Request.UrlReferrer.ToString());
             }
 
