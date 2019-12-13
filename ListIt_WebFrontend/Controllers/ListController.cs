@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ListIt_WebFrontend.Models;
 using ListIt_BusinessLogic.Services;
@@ -393,7 +391,6 @@ namespace ListIt_WebFrontend.Controllers
 
         #endregion Sorting
 
-
         #region Items
 
         //GET List/Item -> EditItemView
@@ -759,7 +756,6 @@ namespace ListIt_WebFrontend.Controllers
         }
 
         #endregion Items
-
 
     }
 }

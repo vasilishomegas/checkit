@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Web;
 using ListIt_DataAccess.Repository.Generics;
 using ListIt_DataAccessModel;
 
@@ -118,7 +117,6 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
-
                     throw new Exception(builder.ToString());
                 }
             }
@@ -146,7 +144,6 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
-
                     throw new Exception(builder.ToString());
                 }
             }
@@ -176,7 +173,6 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
-
                     throw new Exception(builder.ToString());
                 }
             }
@@ -205,7 +201,6 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
-
                     throw new Exception(builder.ToString());
                 }
             }
@@ -234,7 +229,6 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
-
                     throw new Exception(builder.ToString());
                 }
             }
@@ -291,7 +285,6 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
-
                     throw new Exception(builder.ToString());
                 }
             }
