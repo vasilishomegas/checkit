@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListIt_WindowsBackend"
         mc:Ignorable="d"
-        Title="EditChains" Height="450" Width="800">
+        Title="EditChains" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <DataGrid Name="ChainData">
         
     </DataGrid>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListIt_WindowsBackend"
         mc:Ignorable="d"
-        Title="AdminLogin" Height="459.6" Width="800">
+        Title="AdminLogin" Height="459.6" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid HorizontalAlignment="Center" Width="800" Height="430" VerticalAlignment="center" Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition/>
