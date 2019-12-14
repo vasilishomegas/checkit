@@ -57,6 +57,15 @@ namespace ListIt_DataAccess.Repository
             }
         }
 
+        public LinkDefaultProductToCategory GetCategory(int productId)
+        {
+            using (var context = new ListItContext())
+            {
+                return context.LinkDefaultProductToCategories
+                    .SingleOrDefault(x => x.DefaultProductId == productId);
+            }
+        }
+
         public IList<Product> GetReusableProducts()
         {
             using (var context = new ListItContext()) 
