@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ListIt_BusinessLogic.Services.Converters;
+using ListIt_BusinessLogic.Services.Converters.Interface;
 using ListIt_BusinessLogic.Services.Generics;
+using ListIt_BusinessLogic.Services.Interface;
 using ListIt_DataAccess.Repository;
+using ListIt_DataAccess.Repository.Interface;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Converter;
-using ListIt_DomainInterface.Interfaces.Repository;
-using ListIt_DomainInterface.Interfaces.Service;
 using ListIt_DomainModel;
 using ListIt_DomainModel.DTO;
 
@@ -34,15 +34,8 @@ namespace ListIt_BusinessLogic.Services
         public IList<UnitTypeDto> GetUnitTypesByLanguage(int langId)
         {
             var unitList = _unitTypeRepository.GetUnitTypesByLanguage(langId);
-            List<UnitTypeDto> unitTypes = new List<UnitTypeDto>();
 
-            foreach(TranslationOfUnitType translation in unitList)
-            {
-                var unit = ConvertDBToDto(translation);
-                unitTypes.Add(unit);
-            }
-
-            return unitTypes;
+            return unitList.Select(ConvertDBToDto).ToList();
         }
 
         protected UnitTypeDto ConvertDBToDto(TranslationOfUnitType translation)
@@ -56,8 +49,9 @@ namespace ListIt_BusinessLogic.Services
             return new UnitTypeDto
             {
                 Id = translation.UnitType_Id,
-                Name = translation.Translation,
-                LanguageId =  translation.Language_Id
+                // Name = translation.Translation,
+                // LanguageId =  translation.Language_Id
+                // TODO
             };
         }
     }

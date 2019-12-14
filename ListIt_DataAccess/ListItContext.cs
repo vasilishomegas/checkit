@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
+using ListIt_DataAccessModel;
 
 namespace ListIt_DataAccess
 {
-    public class ListItContext : dmaj0918_1074524Entity
+    public class ListItContext : dmaj0918_1074247Entities
     {
         public ListItContext() : base()
         {

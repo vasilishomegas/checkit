@@ -10,9 +10,9 @@ using ListIt_DataAccessModel;
 using ListIt_DomainModel.DTO;
 using System.Security.Cryptography;
 using ListIt_BusinessLogic.Services.Converters;
-using ListIt_DomainInterface.Interfaces.Converter;
-using ListIt_DomainInterface.Interfaces.Repository;
-using ListIt_DomainInterface.Interfaces.Service;
+using ListIt_BusinessLogic.Services.Converters.Interface;
+using ListIt_BusinessLogic.Services.Interface;
+using ListIt_DataAccess.Repository.Interface;
 
 namespace ListIt_BusinessLogic.Services
 {

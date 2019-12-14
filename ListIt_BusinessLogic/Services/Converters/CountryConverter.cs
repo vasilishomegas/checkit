@@ -1,11 +1,11 @@
-﻿using ListIt_BusinessLogic.Services.Generics;
+﻿using ListIt_BusinessLogic.Services.Converters.Interface;
+using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Converter;
 using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class CountryConverter : IDtoDbConverter<Country, CountryDto>, ICountryConverter
+    public class CountryConverter : ICountryConverter
     {
         public CountryDto ConvertDBToDto(Country country)
         {

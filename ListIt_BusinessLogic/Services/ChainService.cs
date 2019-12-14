@@ -1,11 +1,11 @@
 ﻿using System;
 using ListIt_BusinessLogic.Services.Converters;
+using ListIt_BusinessLogic.Services.Converters.Interface;
 using ListIt_BusinessLogic.Services.Generics;
+using ListIt_BusinessLogic.Services.Interface;
 using ListIt_DataAccess.Repository;
+using ListIt_DataAccess.Repository.Interface;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Converter;
-using ListIt_DomainInterface.Interfaces.Repository;
-using ListIt_DomainInterface.Interfaces.Service;
 using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services

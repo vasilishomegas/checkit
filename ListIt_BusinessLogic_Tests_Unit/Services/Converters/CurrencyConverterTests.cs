@@ -41,7 +41,7 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services.Converters
             {
                 Id = 1,
                 Name = "Sample Name",
-                Users = new List<User>() { new User { Id = 1, Nickname = "Sample Nickname" } },
+                // Users = new List<User>() { new User { Id = 1, Nickname = "Sample Nickname" } },
                 Code = "Sample Code",
                 ApiProducts = new List<ApiProduct>() { new ApiProduct { Id = 1 } },
                 DefaultProducts = new List<DefaultProduct>() { new DefaultProduct() },
@@ -79,7 +79,7 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services.Converters
             Assert.IsNotNull(currency.ApiProducts);
             Assert.IsNotNull(currency.DefaultProducts);
             Assert.IsNotNull(currency.UserProducts);
-            Assert.IsNotNull(currency.Users);
+            // Assert.IsNotNull(currency.Users);
         }
     }
 }

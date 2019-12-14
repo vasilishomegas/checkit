@@ -9,10 +9,10 @@ namespace ListIt_DomainModel.DTO
     public class CategoryDto : IDto
     {
         public int Id { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public UserDto User { get; set; }
 
         //from translation table:
-        public int LanguageId { get; set; }
-        public string Name { get; set; }
+        // public LanguageDto Language { get; set; }
+        // public string Name { get; set; }
     }
 }

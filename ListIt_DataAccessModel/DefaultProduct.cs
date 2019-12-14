@@ -26,11 +26,11 @@ namespace ListIt_DataAccessModel
         public int Currency_Id { get; set; }
         public int UnitType_Id { get; set; }
         public decimal Price { get; set; }
-        public Nullable<int> Product_Id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApiProduct> ApiProducts { get; set; }
         public virtual Currency Currency { get; set; }
+        public virtual Product Product { get; set; }
         public virtual UnitType UnitType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LinkUserToDefaultProduct> LinkUserToDefaultProducts { get; set; }

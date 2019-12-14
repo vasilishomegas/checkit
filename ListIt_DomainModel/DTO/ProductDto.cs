@@ -9,31 +9,41 @@ namespace ListIt_DomainModel.DTO
     public class ProductDto : IDto
     {
         public int Id { get; set; }
-        public int ProductTypeId { get; set; }
-        
-
-        //Generic Values
-        public string Name { get; set; }
-        public int? Currency_Id { get; set; }
-        public int? Unit_Id { get; set; }
-        public int Quantity { get; set; }
-        public decimal? Price { get; set; }
-        public int ProductId { get; set; }
+        public ProductTypeDto ProductType { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 
     public class ApiProductDto : ProductDto
     {
-        public Nullable<int> DefaultProduct_Id { get; set; }
-        public int ShopApi_Id { get; set; }        
+        public string Name { get; set; }
+        public CurrencyDto Currency { get; set; }
+        public UnitTypeDto UnitType { get; set; }
+        public int Quantity { get; set; }
+        public decimal? Price { get; set; }
+        public DefaultProductDto DefaultProduct { get; set; }
+        public ShopApiDto ShopApi { get; set; }        
         public string Endpoint { get; set; }
         
     }
 
     public class DefaultProductDto : ProductDto
     {
-        public int Category_Id { get; set; }
+        public string Name { get; set; }
+        public CurrencyDto Currency { get; set; }
+        public UnitTypeDto UnitType { get; set; }
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+        public CategoryDto Category { get; set; }
+    }
 
-        //Own table for names and categories
-
+    public class UserProductDto : ProductDto
+    {
+        public string Name { get; set; }
+        public CurrencyDto Currency { get; set; }
+        public UnitTypeDto UnitType { get; set; }
+        // public int Quantity { get; set; }
+        public decimal? Price { get; set; }
+        public CategoryDto Category { get; set; }
+        public UserDto User { get; set; }
     }
 }

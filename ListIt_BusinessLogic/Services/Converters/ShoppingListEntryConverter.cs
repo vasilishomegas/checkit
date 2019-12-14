@@ -3,16 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ListIt_BusinessLogic.Services.Converters.Interface;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Converter;
 using ListIt_DomainModel.DTO;
 using ListIt_DomainModel.DTO.Interfaces;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class ShoppingListEntryConverter : IDtoDbConverter<ShoppingListEntry, ShoppingListEntryDto>, IShoppingListEntryConverter
+    public class ShoppingListEntryConverter : IShoppingListEntryConverter
     {
+        private readonly IShoppingListConverter _shoppingListConverter;
+        private readonly IProductConverter _productConverter;
+        private readonly IProductTypeConverter _productTypeConverter;
+
+        public ShoppingListEntryConverter() : this(new ShoppingListConverter(), new ProductConverter(), new ProductTypeConverter())
+        {
+
+        }
+
+        public ShoppingListEntryConverter(IShoppingListConverter shoppingListConverter, IProductConverter productConverter, IProductTypeConverter productTypeConverter)
+        {
+            _shoppingListConverter = shoppingListConverter;
+            _productConverter = productConverter;
+            _productTypeConverter = productTypeConverter;
+        }
+
         public ShoppingListEntryDto ConvertDBToDto(ShoppingListEntry entry)
         {
             // EACH Entry IS LINKED TO A 
@@ -26,8 +42,8 @@ namespace ListIt_BusinessLogic.Services.Converters
             {
                 Id = entry.Id,
                 Quantity = entry.Quantity,
-                Product_Id = entry.Product_Id,
-                ShoppingList_Id = entry.ShoppingList_Id,
+                Product = _productConverter.ConvertDBToDto(entry.Product),
+                ShoppingList = _shoppingListConverter.ConvertDBToDto(entry.ShoppingList),
                 State_Id = entry.State_Id
             };
         }
@@ -43,9 +59,13 @@ namespace ListIt_BusinessLogic.Services.Converters
             {
                 Id = entryDto.Id,
                 Quantity = entryDto.Quantity,
-                Product_Id = entryDto.Product_Id,
-                ShoppingList_Id = entryDto.ShoppingList_Id,
-                State_Id = entryDto.State_Id
+                Product_Id = entryDto.Product.Id,
+                ShoppingList_Id = entryDto.ShoppingList.Id,
+                State_Id = entryDto.State_Id,
+                Product = _productConverter.ConvertDtoToDB(entryDto.Product),
+                ShoppingList = _shoppingListConverter.ConvertDtoToDB(entryDto.ShoppingList)
+
+                // TODO EntryState?
             };
         }
     }

@@ -29,18 +29,13 @@ namespace ListIt_DataAccessModel
         public System.DateTime Timestamp { get; set; }
         public int Country_Id { get; set; }
         public int Language_Id { get; set; }
-        public string ProfilePicPath { get; set; }
-        public Nullable<int> DefaultCurrency_Id { get; set; }
-        public Nullable<int> DefaultSorting_Id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Category> Categories { get; set; }
         public virtual Country Country { get; set; }
-        public virtual Currency Currency { get; set; }
         public virtual Language Language { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LinkUserToDefaultProduct> LinkUserToDefaultProducts { get; set; }
-        public virtual UserListSorting UserListSorting { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProduct> UserProducts { get; set; }
     }

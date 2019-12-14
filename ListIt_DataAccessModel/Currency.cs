@@ -18,7 +18,6 @@ namespace ListIt_DataAccessModel
         public Currency()
         {
             this.ApiProducts = new HashSet<ApiProduct>();
-            this.Users = new HashSet<User>();
             this.DefaultProducts = new HashSet<DefaultProduct>();
             this.UserProducts = new HashSet<UserProduct>();
         }
@@ -30,8 +29,6 @@ namespace ListIt_DataAccessModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApiProduct> ApiProducts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DefaultProduct> DefaultProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

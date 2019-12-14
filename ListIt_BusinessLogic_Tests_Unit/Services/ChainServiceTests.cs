@@ -1,8 +1,8 @@
 ﻿using System;
 using ListIt_BusinessLogic.Services;
+using ListIt_BusinessLogic.Services.Converters.Interface;
+using ListIt_DataAccess.Repository.Interface;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Converter;
-using ListIt_DomainInterface.Interfaces.Repository;
 using ListIt_DomainModel.DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

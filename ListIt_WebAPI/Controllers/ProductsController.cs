@@ -4,9 +4,8 @@ using System.Linq;
 using System.Web;
 using ListIt_BusinessLogic.Services;
 using ListIt_BusinessLogic.Services.Generics;
+using ListIt_BusinessLogic.Services.Interface;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Converter;
-using ListIt_DomainInterface.Interfaces.Service;
 using ListIt_DomainModel.DTO;
 using ListIt_WebAPI.Controllers.Generics;
 

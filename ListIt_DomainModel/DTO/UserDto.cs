@@ -19,7 +19,6 @@ namespace ListIt_DomainModel.DTO
 
         //FROM LinkUserToList.cs in DataAccessModels:
         //public List<ShoppingListDto> UserLists { get; set; } //List vs IEnumerable ...
-           
-
+        
     }
 }

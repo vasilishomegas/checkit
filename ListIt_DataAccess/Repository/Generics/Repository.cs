@@ -2,17 +2,28 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using ListIt_DataAccess.Repository.Helpers;
-using ListIt_DomainInterface.Interfaces.Repository;
+using ListIt_DataAccess.Repository.Interface;
 
 namespace ListIt_DataAccess.Repository.Generics
 {
-    public abstract class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class
     {
+        private readonly Func<DbContext> _dbContextFactory;
+
+        public Repository(Func<DbContext> dbContextFactory)
+        {
+            _dbContextFactory = dbContextFactory;
+        }
+
+        public Repository()
+        {
+            _dbContextFactory = () => new ListItContext();
+        }
+
         public virtual IEnumerable<T> GetAll()
         {
-            using (var context = new ListItContext())
+            using (var context = _dbContextFactory())
             {
                 return context.Set<T>().ToList();
             }
@@ -20,7 +31,7 @@ namespace ListIt_DataAccess.Repository.Generics
         
         public virtual T Get(int id)
         {
-            using (var context = new ListItContext())
+            using (var context = _dbContextFactory())
             {
                 return context.Set<T>().Find(id);
             }
@@ -28,16 +39,16 @@ namespace ListIt_DataAccess.Repository.Generics
 
         public virtual void Create(T entity)
         {
-            using (var context = new ListItContext())
+            using (var context = _dbContextFactory())
             {
-                var result = context.Set<T>().Add(entity);
+                context.Set<T>().Add(entity);
                 ContextManager.SaveChanges(context);
             }
         }
 
         public virtual void Update(T entity)
         {
-            using (var context = new ListItContext())
+            using (var context = _dbContextFactory())
             {
                 context.Set<T>().Attach(entity);
                 context.Entry(entity).State = EntityState.Modified;
@@ -47,7 +58,7 @@ namespace ListIt_DataAccess.Repository.Generics
 
         public virtual void Delete(int id)
         {
-            using (var context = new ListItContext())
+            using (var context = _dbContextFactory())
             {
                 var entity = context.Set<T>().Find(id);
                 try

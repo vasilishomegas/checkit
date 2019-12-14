@@ -1,6 +1,6 @@
 ﻿using ListIt_BusinessLogic.Services;
+using ListIt_BusinessLogic.Services.Interface;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Service;
 using ListIt_DomainModel.DTO;
 using ListIt_WebAPI.Controllers.Generics;
 

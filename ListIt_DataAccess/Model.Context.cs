@@ -13,11 +13,11 @@ namespace ListIt_DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using ListIt_DataAccessModel;
-    
-    public partial class dmaj0918_1074524Entity : DbContext
+
+    public partial class dmaj0918_1074247Entities : DbContext
     {
-        public dmaj0918_1074524Entity()
-            : base("name=dmaj0918_1074524Entity")
+        public dmaj0918_1074247Entities()
+            : base("name=dmaj0918_1074247Entities")
         {
         }
     

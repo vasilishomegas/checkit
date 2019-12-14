@@ -95,10 +95,6 @@
       <Project>{6d072a3b-84d4-4b44-a13c-40a0d4c63062}</Project>
       <Name>ListIt_DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ListIt_DomainInterface\ListIt_DomainInterface.csproj">
-      <Project>{59EF25CB-F5C7-4678-ACAE-91D0F446BED2}</Project>
-      <Name>ListIt_DomainInterface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
       <Project>{6BE169C0-8627-42CF-A723-9B545CFEF07B}</Project>
       <Name>ListIt_DomainModel</Name>

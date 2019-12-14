@@ -15,7 +15,6 @@ namespace ListIt_DataAccessModel
     public partial class UserProduct
     {
         public int Id { get; set; }
-        public int Product_Id { get; set; }
         public Nullable<int> Category_Id { get; set; }
         public Nullable<int> Currency_Id { get; set; }
         public Nullable<int> UnitType_Id { get; set; }

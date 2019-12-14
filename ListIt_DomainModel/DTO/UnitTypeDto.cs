@@ -10,8 +10,10 @@ namespace ListIt_DomainModel.DTO
     {
         public int Id { get; set; }
 
-        //from translatin table:
+        /*
+        //from translation table:
         public string Name { get; set; }
         public int LanguageId { get; set; }
+        */
     }
 }

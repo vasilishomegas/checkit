@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ListIt_BusinessLogic.Services;
 using ListIt_BusinessLogic.Services.Converters;
+using ListIt_BusinessLogic.Services.Converters.Interface;
 using ListIt_DataAccess.Repository;
 using ListIt_DataAccess.Repository.Generics;
+using ListIt_DataAccess.Repository.Interface;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Converter;
-using ListIt_DomainInterface.Interfaces.Repository;
 using ListIt_DomainModel.DTO;
 using Moq;
 using NUnit.Framework;
@@ -25,7 +25,8 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services
             var userConverter = MockUserConverter.GetMock();
             var languageRepository = MockLanguageRepository.GetMock();
             var countryRepository = MockCountryRepository.GetMock();
-            var userService = new UserService(userRepository.Object, userConverter.Object, countryRepository.Object, languageRepository.Object);
+            var userService = new UserService(userRepository.Object, userConverter.Object, 
+                countryRepository.Object, languageRepository.Object);
             
             var userDto = new UserDto()
             {
@@ -48,7 +49,8 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services
             var userConverter = MockUserConverter.GetMock();
             var languageRepository = MockLanguageRepository.GetMock();
             var countryRepository = MockCountryRepository.GetMock();
-            var userService = new UserService(userRepository.Object, userConverter.Object, countryRepository.Object, languageRepository.Object);
+            var userService = new UserService(userRepository.Object, userConverter.Object, 
+                countryRepository.Object, languageRepository.Object);
 
             var userDto = new UserDto()
             {
@@ -67,11 +69,13 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services
         [Test]
         public void Create_CountryAndLanguageAreInstantiated_Created()
         {
+            // Arrange
             var userRepository = MockUserRepository.GetMock();
             var userConverter = MockUserConverter.GetMock();
             var languageRepository = MockLanguageRepository.GetMock();
             var countryRepository = MockCountryRepository.GetMock();
-            var userService = new UserService(userRepository.Object, userConverter.Object, countryRepository.Object, languageRepository.Object);
+            var userService = new UserService(userRepository.Object, userConverter.Object, 
+                countryRepository.Object, languageRepository.Object);
 
             var userDto = new UserDto()
             {
@@ -84,8 +88,10 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services
                 PasswordHash = "Sample hash"
             };
 
+            // Act
             userService.Create(userDto);
 
+            // Assert
             userRepository.Verify(r => r.Create(It.IsAny<User>()), Times.Once);
         }
         [Test]
@@ -111,9 +117,6 @@ namespace ListIt_BusinessLogic_Tests_Unit.Services
             };
 
             userService.Update(userDto);
-
-            Assert.AreEqual(userDto.Email, "Sample email");
-            Assert.AreEqual(userDto.Language, languageDto);
 
             userRepository.Verify(r => r.Update(It.IsAny<User>()), Times.Once);
         }

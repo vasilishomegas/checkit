@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ListIt_BusinessLogic.Services.Converters;
+using ListIt_BusinessLogic.Services.Converters.Interface;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccess.Repository;
+using ListIt_DataAccess.Repository.Interface;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Converter;
-using ListIt_DomainInterface.Interfaces.Repository;
 using ListIt_DomainModel;
 using ListIt_DomainModel.DTO;
 

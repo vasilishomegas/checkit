@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ListIt_BusinessLogic.Services;
-using ListIt_DomainInterface.Interfaces.Service;
+using ListIt_BusinessLogic.Services.Interface;
 
 namespace ListIt_WebAPI.Controllers
 {

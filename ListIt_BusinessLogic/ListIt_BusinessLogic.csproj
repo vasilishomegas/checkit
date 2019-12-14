@@ -51,8 +51,22 @@
     <Compile Include="Services\Converters\ChainConverter.cs" />
     <Compile Include="Services\Converters\CountryConverter.cs" />
     <Compile Include="Services\Converters\CurrencyConverter.cs" />
+    <Compile Include="Services\Converters\Interface\ICategoryConverter.cs" />
+    <Compile Include="Services\Converters\Interface\IChainConverter.cs" />
+    <Compile Include="Services\Converters\Interface\ICountryConverter.cs" />
+    <Compile Include="Services\Converters\Interface\ICurrencyConverter.cs" />
+    <Compile Include="Services\Converters\Interface\IDtoDbConverter.cs" />
+    <Compile Include="Services\Converters\Interface\ILanguageConverter.cs" />
+    <Compile Include="Services\Converters\Interface\IProductConverter.cs" />
+    <Compile Include="Services\Converters\Interface\IProductTypeConverter.cs" />
+    <Compile Include="Services\Converters\Interface\IShopApiConverter.cs" />
+    <Compile Include="Services\Converters\Interface\IShoppingListConverter.cs" />
+    <Compile Include="Services\Converters\Interface\IShoppingListEntryConverter.cs" />
+    <Compile Include="Services\Converters\Interface\IUnitTypeConverter.cs" />
+    <Compile Include="Services\Converters\Interface\IUserConverter.cs" />
     <Compile Include="Services\Converters\LanguageConverter.cs" />
     <Compile Include="Services\Converters\ProductConverter.cs" />
+    <Compile Include="Services\Converters\ProductTypeConverter.cs" />
     <Compile Include="Services\Converters\ShopApiConverter.cs" />
     <Compile Include="Services\Converters\ShoppingListConverter.cs" />
     <Compile Include="Services\Converters\ShoppingListEntryConverter.cs" />
@@ -61,8 +75,20 @@
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\CurrencyService.cs" />
     <Compile Include="Services\Generics\Service.cs" />
+    <Compile Include="Services\Interface\IApiProductService.cs" />
+    <Compile Include="Services\Interface\IChainService.cs" />
+    <Compile Include="Services\Interface\ICurrencyService.cs" />
+    <Compile Include="Services\Interface\IDefaultProductService.cs" />
+    <Compile Include="Services\Interface\IProductService.cs" />
+    <Compile Include="Services\Interface\IProductTypeService.cs" />
+    <Compile Include="Services\Interface\IService.cs" />
+    <Compile Include="Services\Interface\IShopApiService.cs" />
+    <Compile Include="Services\Interface\IUnitTypeService.cs" />
+    <Compile Include="Services\Interface\IUserProductService.cs" />
+    <Compile Include="Services\Interface\IUserService.cs" />
     <Compile Include="Services\LanguageService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\ProductTypeService.cs" />
     <Compile Include="Services\ShopApiService.cs" />
     <Compile Include="Services\ShoppingListEntryService.cs" />
     <Compile Include="Services\ShoppingListService.cs" />
@@ -80,10 +106,6 @@
     <ProjectReference Include="..\ListIt_DataAccess\ListIt_DataAccess.csproj">
       <Project>{6d072a3b-84d4-4b44-a13c-40a0d4c63062}</Project>
       <Name>ListIt_DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ListIt_DomainInterface\ListIt_DomainInterface.csproj">
-      <Project>{59EF25CB-F5C7-4678-ACAE-91D0F446BED2}</Project>
-      <Name>ListIt_DomainInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
       <Project>{6BE169C0-8627-42CF-A723-9B545CFEF07B}</Project>

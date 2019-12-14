@@ -4,18 +4,30 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using ListIt_DataAccess.Repository.Generics;
+using ListIt_DataAccess.Repository.Interface;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Repository;
 
 namespace ListIt_DataAccess.Repository
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
+        private readonly Func<DbContext> _dbContextFactory;
+
+        public UserRepository()
+        {
+            _dbContextFactory = () => new ListItContext();
+        }
+
+        public UserRepository(Func<DbContext> dbContextFactory) : base(dbContextFactory)
+        {
+            _dbContextFactory = dbContextFactory;
+        }
+
         public override IEnumerable<User> GetAll()
         {
-            using (var context = new ListItContext())
+            using (var context = _dbContextFactory())
             {
-                return context.Users
+                return context.Set<User>()
                     .Include(x => x.Language)
                     .Include(x => x.Country)
                     .ToList();
@@ -24,9 +36,9 @@ namespace ListIt_DataAccess.Repository
 
         public override User Get(int id)
         {
-            using (var context = new ListItContext())
+            using (var context = _dbContextFactory())
             {
-                return context.Users
+                return context.Set<User>()
                     .Include(x => x.Language)
                     .Include(x => x.Country)
                     .SingleOrDefault(x => x.Id == id);
@@ -35,9 +47,9 @@ namespace ListIt_DataAccess.Repository
 
         public User GetUserByEmailAndPasswordHash(string email, string passwordHash)
         {
-            using (var context = new ListItContext())
+            using (var context = _dbContextFactory())
             {
-                return context.Users
+                return context.Set<User>()
                     .Include(x => x.Language)
                     .Include(x => x.Country)
                     .SingleOrDefault(x => x.Email == email && x.PasswordHash == passwordHash);

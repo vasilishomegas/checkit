@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\ListIt_DataAccess\bin\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,43 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\Converter\ICategoryConverter.cs" />
-    <Compile Include="Interfaces\Converter\IChainConverter.cs" />
-    <Compile Include="Interfaces\Converter\ICountryConverter.cs" />
-    <Compile Include="Interfaces\Converter\ICurrencyConverter.cs" />
-    <Compile Include="Interfaces\Converter\ILanguageConverter.cs" />
-    <Compile Include="Interfaces\Converter\IProductConverter.cs" />
-    <Compile Include="Interfaces\Converter\IShopApiConverter.cs" />
-    <Compile Include="Interfaces\Converter\IShoppingListConverter.cs" />
-    <Compile Include="Interfaces\Converter\IShoppingListEntryConverter.cs" />
-    <Compile Include="Interfaces\Converter\IUnitTypeConverter.cs" />
-    <Compile Include="Interfaces\Converter\IUserConverter.cs" />
-    <Compile Include="Interfaces\Repository\ICategoryRepository.cs" />
-    <Compile Include="Interfaces\Repository\IChainRepository.cs" />
-    <Compile Include="Interfaces\Repository\ICountryRepository.cs" />
-    <Compile Include="Interfaces\Repository\ICurrencyRepository.cs" />
-    <Compile Include="Interfaces\Repository\ILanguageRepository.cs" />
-    <Compile Include="Interfaces\Repository\IProductRepository.cs" />
-    <Compile Include="Interfaces\Repository\IRepository.cs" />
-    <Compile Include="Interfaces\Repository\IShopApiRepository.cs" />
-    <Compile Include="Interfaces\Repository\IShoppingListEntryRepository.cs" />
-    <Compile Include="Interfaces\Repository\IShoppingListRepository.cs" />
-    <Compile Include="Interfaces\Repository\IUnitTypeRepository.cs" />
-    <Compile Include="Interfaces\Repository\IUserProductRepository.cs" />
-    <Compile Include="Interfaces\Repository\IUserRepository.cs" />
-    <Compile Include="Interfaces\Converter\IDtoDbConverter.cs" />
-    <Compile Include="Interfaces\Service\IApiProductService.cs" />
-    <Compile Include="Interfaces\Service\IChainService.cs" />
-    <Compile Include="Interfaces\Service\IDefaultProductService.cs" />
-    <Compile Include="Interfaces\Service\IProductService.cs" />
-    <Compile Include="Interfaces\Service\IService.cs" />
-    <Compile Include="Interfaces\Service\IUserProductService.cs" />
-    <Compile Include="Interfaces\Service\IUserService.cs" />
-    <Compile Include="Interfaces\Service\IUnitTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\Controller\" />
+    <Folder Include="Interfaces\Converter\Interface\" />
+    <Folder Include="Interfaces\Repository\" />
+    <Folder Include="Interfaces\Service\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">

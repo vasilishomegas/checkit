@@ -17,19 +17,17 @@ namespace ListIt_DataAccessModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.ApiProducts = new HashSet<ApiProduct>();
             this.ShoppingListEntries = new HashSet<ShoppingListEntry>();
             this.TemplateSortedProducts = new HashSet<TemplateSortedProduct>();
             this.TranslationOfProducts = new HashSet<TranslationOfProduct>();
-            this.UserProducts = new HashSet<UserProduct>();
         }
     
         public int Id { get; set; }
         public System.DateTime Timestamp { get; set; }
         public int ProductType_Id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApiProduct> ApiProducts { get; set; }
+        public virtual ApiProduct ApiProduct { get; set; }
+        public virtual DefaultProduct DefaultProduct { get; set; }
         public virtual ProductType ProductType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShoppingListEntry> ShoppingListEntries { get; set; }
@@ -37,7 +35,6 @@ namespace ListIt_DataAccessModel
         public virtual ICollection<TemplateSortedProduct> TemplateSortedProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TranslationOfProduct> TranslationOfProducts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProduct> UserProducts { get; set; }
+        public virtual UserProduct UserProduct { get; set; }
     }
 }

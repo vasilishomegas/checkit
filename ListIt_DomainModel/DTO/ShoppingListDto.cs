@@ -16,6 +16,8 @@ namespace ListIt_DomainModel.DTO
 
         //FROM LinkUserToList.cs in DataAccessModels:
         public int ListAccessTypeId { get; set; }
-        public int UserId { get; set; }
+        public UserDto User { get; set; }
+
+        // TODO Chosen sorting, list access type
     }
 }

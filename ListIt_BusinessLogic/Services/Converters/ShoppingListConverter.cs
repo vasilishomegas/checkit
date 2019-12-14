@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ListIt_BusinessLogic.Services.Converters.Interface;
 using ListIt_BusinessLogic.Services.Generics;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Converter;
 using ListIt_DomainModel.DTO;
 
 namespace ListIt_BusinessLogic.Services.Converters
 {
-    public class ShoppingListConverter : IDtoDbConverter<ShoppingList, ShoppingListDto>, IShoppingListConverter
+    public class ShoppingListConverter : IShoppingListConverter
     {
         public ShoppingListDto ConvertDBToDto(ShoppingList list)
         {
@@ -47,9 +47,11 @@ namespace ListIt_BusinessLogic.Services.Converters
             {
                 Id = listDto.Id,
                 Name = listDto.Name,
-                Path = "whatever???",
-                Timestamp = DateTime.Now,
-                ChosenSorting_Id = null,
+                Path = listDto.Path
+                
+                // TODO ChosenSorting_Id = null,
+
+                // TODO Timestamp, UserListSorting?
             };
         }
     }

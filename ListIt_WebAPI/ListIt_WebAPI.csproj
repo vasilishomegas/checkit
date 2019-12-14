@@ -127,8 +127,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ApiProductsController.cs" />
     <Compile Include="Controllers\ChainsController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
+    <Compile Include="Controllers\DefaultProductsController.cs" />
     <Compile Include="Controllers\Generics\GenericController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -169,10 +171,6 @@
     <ProjectReference Include="..\ListIt_DataAccessModel\ListIt_DataAccessModel.csproj">
       <Project>{1fc38c28-df7b-403e-a99e-d4af6c044a32}</Project>
       <Name>ListIt_DataAccessModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ListIt_DomainInterface\ListIt_DomainInterface.csproj">
-      <Project>{59ef25cb-f5c7-4678-acae-91d0f446bed2}</Project>
-      <Name>ListIt_DomainInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\ListIt_DomainModel\ListIt_DomainModel.csproj">
       <Project>{6be169c0-8627-42cf-a723-9b545cfef07b}</Project>

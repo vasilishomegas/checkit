@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using ListIt_DataAccess.Repository.Generics;
 using ListIt_DataAccess.Repository.Helpers;
+using ListIt_DataAccess.Repository.Interface;
 using ListIt_DataAccessModel;
-using ListIt_DomainInterface.Interfaces.Repository;
 
 namespace ListIt_DataAccess.Repository
 {

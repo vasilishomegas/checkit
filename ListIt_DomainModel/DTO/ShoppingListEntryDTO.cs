@@ -9,14 +9,16 @@ namespace ListIt_DomainModel.DTO
     public class ShoppingListEntryDto : IDto
     {
         public int Id { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public int Product_Id { get; set; }
-        public int ShoppingList_Id { get; set; }
+        public int? Quantity { get; set; }
+        public ProductDto Product { get; set; }
+        public ShoppingListDto ShoppingList { get; set; }
         public int State_Id { get; set; }
 
+        // TODO State
 
-        //FORM Product Table
-        public int ProductTypeId { get; set; }
+        //FROM Product Table
+
+        // public ProductTypeDto ProductType { get; set; }   <==== Included in ProductDto
 
         
 
