@@ -25,11 +25,10 @@ namespace ListIt_WebFrontend.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [System.ComponentModel.DataAnnotations.Compare("PasswordHash", ErrorMessage = "Passwords do not match!")]
+        [System.ComponentModel.DataAnnotations
+            .Compare("PasswordHash", 
+            ErrorMessage = "Passwords do not match!")]
         public string PasswordRepeat { get; set; }
-
-        //public virtual CountryDto Country { get; set; }
-        //public virtual LanguageDto Language { get; set; }
 
         public IList<SelectListItem> LangList { get; set; }
         public IList<SelectListItem> CountryList { get; set; }
