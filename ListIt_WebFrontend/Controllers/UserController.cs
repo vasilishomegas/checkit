@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using ListIt_BusinessLogic;
 using ListIt_WebFrontend.Models;
 using ListIt_BusinessLogic.Services;
 using ListIt_DomainModel.DTO;

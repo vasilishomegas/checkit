@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListIt_WindowsBackend"
         mc:Ignorable="d"
-        Title="AddChain" Height="450" Width="800">
+        Title="AddChain" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="3,0,2.6,0" HorizontalAlignment="Center" Width="788">
         <Label Content="Add a chain" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="165" FontSize="25" FontWeight="Bold" Margin="310,50,0,0"/>
         <Label Content="Chain name:" HorizontalAlignment="Left" Height="40" Margin="210,130,0,0" VerticalAlignment="Top" Width="130" FontSize="20" />
@@ -16,6 +16,6 @@
         <ComboBox HorizontalAlignment="Left" Height="45" Margin="400,250,0,0" VerticalAlignment="Top" Width="240" Name="APIdropdown" FontSize="20" />
         <Button Content="Add chain" HorizontalAlignment="Left" Height="40" Margin="205,355,0,0" VerticalAlignment="Top" Width="135" FontSize="20" FontWeight="DemiBold" Click="Button_Click" IsDefault="True"/>
         <Button Content="Discard changes" HorizontalAlignment="Left" Height="40" Margin="420,355,0,0" VerticalAlignment="Top" Width="160" FontSize="20" FontWeight="DemiBold"/>
-        <Button Name ="Back" Content="Back to menu" HorizontalAlignment="Left" Margin="0,379,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click"/>
+        <!--<Button Name ="Back" Content="Back to menu" HorizontalAlignment="Left" Margin="20,391,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click"/>-->
     </Grid>
 </Window>

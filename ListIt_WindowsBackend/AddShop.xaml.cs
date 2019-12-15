@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using ListIt_BusinessLogic.Services;
 using ListIt_DomainModel.DTO;
 
@@ -38,7 +26,7 @@ namespace ListIt_WindowsBackend
 
         private void AddShop_Click(object sender, RoutedEventArgs e)
         {
-            //int housenr = 0;
+            // Input validation
             string error = "";
             if (ChainDropdown.SelectedIndex < 0)
                 error += "Select a chain\n";
@@ -46,8 +34,6 @@ namespace ListIt_WindowsBackend
                 error += "Fill in a street\n";
             if (NumberTextbox.Text == "")
                 error += "Fill in a house number\n";
-            //else if (!int.TryParse(NumberTextbox.Text, out housenr))
-            //    error += "Invalid house number\n";
             if (ZipTextbox.Text == "")
                 error += "Fill in a zipcode\n";
             if (CityTextbox.Text == "")
@@ -58,6 +44,7 @@ namespace ListIt_WindowsBackend
                 ShopService shopService = new ShopService();
                 try
                 {
+                    // Create Shop
                     shopService.Create(new ShopDto
                     {
                         Street = StreetTextbox.Text,
@@ -67,6 +54,7 @@ namespace ListIt_WindowsBackend
                         Chain_id = (int)ChainDropdown.SelectedValue
                     });
                     MessageBox.Show("Shop added");
+                    // Reset form
                     ChainDropdown.SelectedIndex = -1;
                     StreetTextbox.Text = "";
                     NumberTextbox.Text = "";
@@ -78,12 +66,6 @@ namespace ListIt_WindowsBackend
                     MessageBox.Show("Failed to add shop");
                 }
             }
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            //((App)Application.Current).Back_To_Menu(sender);
         }
     }
 }

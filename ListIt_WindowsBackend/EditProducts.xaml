@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListIt_WindowsBackend"
         mc:Ignorable="d"
-        Title="EditProducts" Height="450" Width="800">
-    <DataGrid Name="ProductData" SelectionChanged="ProductData_SelectionChanged"></DataGrid>
+        Title="EditProducts" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <DataGrid Name="ProductData"></DataGrid>
     <!--<Grid>-->
         <!--<Button Name ="Back" Content="Back to menu" HorizontalAlignment="Left" Margin="0,379,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click" IsDefault="True"/>-->
     <!--</Grid>-->

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Web;
 using ListIt_DataAccess.Repository.Generics;
 using ListIt_DataAccessModel;
 
@@ -45,6 +44,15 @@ namespace ListIt_DataAccess.Repository
                 return context.TranslationOfProducts
                     .Where(x => x.Language_Id == langId)
                     .SingleOrDefault(x => x.Product_Id == productId);
+            }
+        }
+
+        public LinkDefaultProductToCategory GetCategory(int productId)
+            {
+            using (var context = new ListItContext())
+            {
+                return context.LinkDefaultProductToCategories
+                    .SingleOrDefault(x => x.DefaultProductId == productId);
             }
         }
 
@@ -95,6 +103,7 @@ namespace ListIt_DataAccess.Repository
                     .Id;
             }
         }
+        
         public void SaveDefaultProductName(TranslationOfProduct translation)
         {
             using (var context = new ListItContext())
@@ -117,7 +126,33 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
+                    throw new Exception(builder.ToString());
+                }
+            }
+        }
 
+        public void SaveDefaultProductCategory(LinkDefaultProductToCategory category)
+        {
+            using (var context = new ListItContext())
+            {
+                var cat = context.Set<LinkDefaultProductToCategory>().Add(category);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        builder.Append("Entity of type " + eve.Entry.Entity.GetType().Name
+                                                         + " in state " + eve.Entry.State + " has the following" +
+                                                         " validation errors:");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
+                        }
+                    }
                     throw new Exception(builder.ToString());
                 }
             }
@@ -147,12 +182,10 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
-
                     throw new Exception(builder.ToString());
                 }
             }
         }
-
 
         public void Create(UserProduct entity)
         {
@@ -177,7 +210,6 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
-
                     throw new Exception(builder.ToString());
                 }
             }
@@ -206,7 +238,6 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
-
                     throw new Exception(builder.ToString());
                 }
             }
@@ -263,7 +294,6 @@ namespace ListIt_DataAccess.Repository
                             builder.Append("Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage);
                         }
                     }
-
                     throw new Exception(builder.ToString());
                 }
             }

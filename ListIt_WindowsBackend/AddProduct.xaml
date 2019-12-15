@@ -5,14 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListIt_WindowsBackend"
         mc:Ignorable="d"
-        Title="AddProduct" Height="450" Width="800">
+        Title="AddProduct" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid Margin="80,0,80,0">
+        <Grid Margin="4,1,3.6,1">
             <Label Content="Add Product" HorizontalAlignment="Center" Margin="224,11,217.6,0" VerticalAlignment="Top" Height="52" Width="192" FontSize="25"/>
             <Label Content="Type" HorizontalAlignment="Center" Margin="178,70,353.6,0" VerticalAlignment="Top" x:Name="TypeLabel" Width="102" FontSize="18" Height="35"/>
             <ComboBox HorizontalAlignment="Center" Margin="362,70,113.6,0" VerticalAlignment="Top" Width="158" x:Name="TypeBox" FontSize="18" Height="35"/>
             <Label Content="Name" HorizontalAlignment="Center" Margin="178,120,353.6,0" VerticalAlignment="Top" x:Name="NameLabel" FontSize="18" Height="35" Width="102"/>
             <TextBox HorizontalAlignment="Center" Height="35" Margin="362,120,113.6,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" MaxLength="15" x:Name="NameField" FontSize="18"/>
+            <Label Content="Category" HorizontalAlignment="Center" Margin="178,170,353.6,0" VerticalAlignment="Top" x:Name="CategoryLabel" RenderTransformOrigin="0.547,-1.038" FontSize="18" Width="102"/>
+            <ComboBox HorizontalAlignment="Center" Margin="362,170,113.6,0" VerticalAlignment="Top" Width="158" RenderTransformOrigin="0.844,-0.779" x:Name="CategoryBox" FontSize="18" Height="35"/>
             <Label Content="Unit" HorizontalAlignment="Center" Margin="178,220,353.6,0" VerticalAlignment="Top" x:Name="UnitLabel" FontSize="18" Width="102" Height="35"/>
             <ComboBox HorizontalAlignment="Center" Margin="362,220,113.6,0" VerticalAlignment="Top" Width="158" RenderTransformOrigin="0.844,-0.779" x:Name="UnitBox" FontSize="18" Height="35"/>
             <Label Content="Language" HorizontalAlignment="Center" Margin="178,270,353.6,0" VerticalAlignment="Top" x:Name="LanguageLabel" FontSize="18" Width="102" Height="35"/>
@@ -22,9 +24,7 @@
             <Label Content="Price" HorizontalAlignment="Center" Margin="178,370,353.6,0" VerticalAlignment="Top" x:Name="PriceLabel" FontSize="18" Width="102" Height="35"/>
             <TextBox HorizontalAlignment="Center" Height="35" Margin="362,370,113.6,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" MaxLength="7" x:Name="PriceField" FontSize="18"/>
             <Button Content="Add" HorizontalAlignment="Center" Margin="542,223,16.6,0" VerticalAlignment="Top" Width="75" Click="Button_Click" x:Name="AddButton" FontSize="18" Height="35"/>
-            <ComboBox HorizontalAlignment="Center" Margin="362,170,113.6,0" VerticalAlignment="Top" Width="158" RenderTransformOrigin="0.844,-0.779" x:Name="CategoryBox" FontSize="18" Height="35"/>
-            <Label Content="Category" HorizontalAlignment="Center" Margin="178,170,353.6,0" VerticalAlignment="Top" x:Name="CategoryLabel" RenderTransformOrigin="0.547,-1.038" FontSize="18" Width="102"/>
-            <Button Name ="Back" Content="Back to menu" HorizontalAlignment="Left" Margin="0,379,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click" IsDefault="True"/>
+            <!--<Button Name ="Back" Content="Back to menu" HorizontalAlignment="Left" Margin="18,379,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click" IsDefault="True"/>-->
         </Grid>
     </Grid>
 </Window>

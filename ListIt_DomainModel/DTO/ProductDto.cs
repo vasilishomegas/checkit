@@ -11,8 +11,6 @@ namespace ListIt_DomainModel.DTO
         public int Id { get; set; } 
         public int ProductTypeId { get; set; }
 
-        
-
         //Generic Values
         public string Name { get; set; }
         public int Currency_Id { get; set; }

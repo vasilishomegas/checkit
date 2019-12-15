@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using ListIt_DataAccess.Repository.Generics;
 using ListIt_DataAccessModel;
 
@@ -21,7 +19,8 @@ namespace ListIt_DataAccess.Repository
         {
             using(var context = new ListItContext())
             {
-                return context.Admins.SingleOrDefault(x => x.username == username && x.password == password);
+                return context.Admins
+                    .SingleOrDefault(x => x.username == username && x.password == password);
             }
         }
     }
