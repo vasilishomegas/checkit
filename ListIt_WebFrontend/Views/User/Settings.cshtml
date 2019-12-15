@@ -1,0 +1,73 @@
+﻿@model ListIt_WebFrontend.Models.UserVM
+@using Resources
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Lang.settings;
+}
+
+
+    <div class="container-fluid">
+        <h1 class="text-center pageheading">@ViewBag.Title</h1>
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <p class="text-center mb-0">
+                    @ViewBag.Message
+                </p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="text-center mb-0">
+                    @ViewBag.Error
+                </p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        <div class="settings-container">
+            @using (Html.BeginForm("EditSettings", "User", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Country, Lang.country, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col">
+                        @Html.DropDownListFor(x => x.CountryId, Model.CountryList, htmlAttributes: new { @class = "form-control custom-select" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="currency">@Lang._default @Lang.currency</label>
+                    <select id="currency" class="form-control custom-select custom-select-sm">
+                        <option selected>DKK</option>
+                        <option value="">EUR</option>
+                        <option value="">GBP</option>
+                        <option value="">SEK</option>
+                        <option value="">...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ordering">@Lang._default @Lang.ordering</label>
+                    <select id="ordering" class="form-control custom-select custom-select-sm">
+                        <option selected>MyOrdering</option>
+                        <option value="">Template Fakta</option>
+                        <option value="">Template Netto</option>
+                        <option value="">Template Fotex</option>
+                        <option value="">...</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-dark">
+                    @Lang.save
+                </button>
+            }
+        </div>
+
+    </div>

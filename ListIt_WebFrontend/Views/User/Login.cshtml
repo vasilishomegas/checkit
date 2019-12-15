@@ -1,0 +1,89 @@
+﻿@model ListIt_DomainModel.DTO.UserDto
+@using Resources
+
+@{
+    Layout = null;
+    ViewBag.Title = Lang.login;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="launch">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+
+            </div>
+            <div class="col-6 login-container min-vh-100">
+                <div class="">
+                    <h1 class="text-center pageheading">@ViewBag.Title</h1>
+
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <p class="text-center mb-0">
+                                @ViewBag.Message
+                            </p>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <p class="text-center mb-0">
+                                @ViewBag.Error
+                            </p>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+
+                    <div class="">
+                        @using (Html.BeginForm("LoginUser", "User", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email, Lang.email, new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "email", placeholder = "steve.smith@ucn.dk", required = "required" } })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PasswordHash, Lang.pw, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = Lang.pw, required = "required" } })
+                            </div>
+                            <button type="submit" class="btn btn-dark">@Lang.login</button>
+                        }
+
+                        <div class="box">
+                            <p>
+                                @Html.ActionLink(Lang.forwardToRegister, "Register", "User")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+                
+            <div class="col-3">
+
+            </div>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

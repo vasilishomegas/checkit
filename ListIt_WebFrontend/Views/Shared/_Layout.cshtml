@@ -1,0 +1,148 @@
+﻿@using Resources
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+
+        <!-- SIDEBAR -->
+        <div class="border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">
+
+            </div>
+            <div class="list-group list-group-flush">
+                <!-- ToDo: INSERT AVATAR PIC HERE -->
+                <a href="@Url.Action("Index", "User")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-user-circle-o" aria-hidden="true"></span>
+                    @Lang.yourProfile
+                </a>
+            </div>
+
+            <div class="list-group list-group-flush" aria-orientation="vertical">
+                <a href="@Url.Action("Lists", "List")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-list" aria-hidden="true"></span>
+                    @Lang.yourLists
+                </a>
+                <a href="@Url.Action("Index", "Store")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-puzzle-piece" aria-hidden="true"></span>
+                    @Lang.findItem
+                </a>
+                <a href="@Url.Action("FindStore", "Store")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-globe" aria-hidden="true"></span>
+                    @Lang.findStore
+                </a>
+                <a href="@Url.Action("BrowseStore", "Store")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-shopping-bag" aria-hidden="true"></span>
+                    @Lang.browseStore
+                </a>
+            </div>
+
+            <div class="list-group list-group-flush" aria-orientation="vertical">
+                <a href="@Url.Action("Settings", "User")" class="list-group-item list-group-item-action">
+                    <span class="fa fa-gear" aria-hidden="true"></span>
+                    @Lang.settings
+                </a>
+            </div>
+        </div>
+
+        <!-- NAVBAR HEADER -->
+
+
+
+        <div class="page-content-wrapper">
+            <nav class="navbar fixed-top  navbar-dark bg-dark">
+                <div class="w-100 d-flex justify-content-between">
+                    <button class="navbar-toggler" id="menu-toggle" type="button" data-toggle="collapse" data-target="#sidebar-wrapper" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+
+                    <span class="d-flex navbar-brand justify-content-center align-items-center" >
+                        <img src="~/Content/img/logo-white.png" alt="Logo" height="30" class="d-inline-block" />
+                        @Html.ActionLink(Lang.list_it, "Lists", "List", new { area = "" }, new { @class = "navbar-brand" })
+                    </span>
+
+
+
+                    <div class="d-flex justify-content-end align-items-center">
+                        <div class="form-inline">
+                            @using (Html.BeginForm("SaveLang", "User", FormMethod.Post, htmlAttributes: new { @class = "form-inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="input-group">
+                                    <select name="lang" id ="lang" class="custom-select">
+                                        <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>@Lang.english</option>
+                                        <option value="dk-DK" @(Culture == "dk-DK" ? "selected=\"selected\"" : "")>@Lang.danish</option>
+                                        <option value="de-DE" @(Culture == "de-DE" ? "selected=\"selected\"" : "")>@Lang.german</option>
+                                        <option value="nl-NL" @(Culture == "nl-NL" ? "selected=\"selected\"" : "")>@Lang.dutch</option>
+                                        <option value="hr-HR" @(Culture == "hr-HR" ? "selected=\"selected\"" : "")>@Lang.croatian</option>
+                                        <option value="fr-FR" @(Culture == "fr-FR" ? "selected=\"selected\"" : "")>@Lang.french</option>
+                                        <option value="it-IT" @(Culture == "it-IT" ? "selected=\"selected\"" : "")>@Lang.italian</option>
+                                        <option value="pl-PL" @(Culture == "pl-PL" ? "selected=\"selected\"" : "")>@Lang.polish</option>
+                                        <option value="lt-LT" @(Culture == "lt-LT" ? "selected=\"selected\"" : "")>@Lang.lithuanian</option>
+                                    </select>
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-outline-light btn-sm">
+                                            <span class="fa fa-check-circle-o fa-inverse"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="logout-box">
+                            <a href="@Url.Action("Logout", "User")" class="btn" role="button">
+                                <span class="fa fa-sign-out fa-inverse fa-lg" aria-hidden="true"></span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                
+
+            </nav>
+
+
+
+
+
+
+        </div>
+
+        <div class="container body-content">
+            @RenderBody()
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+</body>
+</html>

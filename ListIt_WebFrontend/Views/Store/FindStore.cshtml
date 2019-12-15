@@ -1,0 +1,79 @@
+﻿@model ListIt_WebFrontend.Models.FindStoreVM
+@using Resources
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Lang.findStore;
+}
+
+
+    <div class="container-fluid">
+        <h1 class="text-center pageheading">@ViewBag.Title</h1>
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p class="text-center mb-0">
+                Coming soon...
+            </p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div id="errorAlert">
+
+        </div>
+        <!-- SEARCH & FILTER -->
+        <div class="searchFilterArea">
+
+            <!-- SEARCHBAR -->
+            @using (Html.BeginForm("LoadMap", "Store", FormMethod.Post, new { id = "searchForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="searchbar input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-success my-sm-0" type="button" onclick="getLocation()">
+                            <span class="fa fa-map-marker"></span>
+                        </button>
+                    </div>
+                    
+                    @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control", placeholder = Lang.search, id="Place"} })
+
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </div>
+                </div>
+
+            }
+
+            <div class="google-maps">
+                <iframe height="500" frameborder="0" style="border:0"
+                        src="@Model.Url" allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+
+    </div>
+
+<script>
+    var x = document.getElementById('errorAlert');
+
+    function getLocation() {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                 var lat = position.coords.latitude;
+                 var long = position.coords.longitude;
+
+                document.getElementById('Place').value = lat + ", " + long;
+                document.getElementById("searchForm").submit();
+            });
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+            // Geolocation is not supported by this browser.
+        }
+    }
+</script>

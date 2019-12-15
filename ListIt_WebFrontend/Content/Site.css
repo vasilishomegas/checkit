@@ -1,0 +1,293 @@
+﻿body {
+    overflow-x: hidden;
+}
+
+a.links {
+    color: gray !important;
+    font-style: inherit;
+}
+
+a.links:hover{
+    color: black !important;
+
+}
+
+
+h1 .pageheading {
+    text-align: center !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.logout-box {
+    padding-left: 5px;
+}
+
+.box {
+    padding: 10px;
+}
+
+
+
+/* SEARHCING AND FILTERING*/
+
+.searchFilterArea {
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
+.searchbar {
+    padding-bottom: 5px;
+}
+
+.filterarea {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.searchresults {
+    padding-top: 15px;
+}
+
+/* LANDING PAGE */
+.col .logo-box img {
+    max-height: 15vw !important;
+}
+
+
+.col {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.carousel-inner .carousel-item img {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    object-fit: scale-down;
+    display: block;
+    
+}
+
+body .launch {
+
+    /*background*/
+}
+
+/* LOGIN & REGISTRATION */
+
+.login-container {
+    padding-top: 50px;
+    background-color:  lightgrey;
+    height: 100%;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 100px;
+    width: auto;
+}
+
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+   /* max-width: 280px;*/
+}
+
+.navbar-brand {
+    font-size: 30px !important;
+}
+
+/* YOUR LISTS */
+
+ul li .listLinks {
+    color: black;
+}
+
+ul li .listLinks:hover {
+    color: rgba(216, 0, 0, 0.6);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+ul li .listLinksReadonly {
+    color: dodgerblue;
+}
+
+    ul li .listLinksReadonly:hover {
+        color: #101c82;
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+ul li .listLinksWrite {
+    color: forestgreen;
+}
+
+    ul li .listLinksWrite:hover {
+        color: forestgreen;
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+
+/* SINGLE LIST ITEMS */
+
+.dropleft:hover .dropdown-menu {
+    display: block;    
+}
+
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+    margin-top: 0;
+}    
+
+
+#headingNames {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.check-toggle {
+    cursor: pointer;
+}
+
+#accordionHeading {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: dimgrey;
+    font-size: small;
+}
+
+.crossout {
+    text-decoration: line-through;
+    color: dimgray;
+}
+
+
+.editItem {
+    border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* FORMS FOCUS COLOR */
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+form-control:focus,
+select.form-control:focus,
+.uneditable-input:focus {
+    border-color: rgba(216, 0, 0, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(216, 0, 0, 0.6);
+    outline: 0 none;
+}
+
+/* FIND STORE MAP */
+
+.google-maps {
+    position: relative;
+    padding-bottom: 45%;
+    overflow: hidden;
+}
+
+.google-maps iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+
+/* SIDEBAR TOGGLE */
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 1.5rem 1.5rem;
+    font-size: 1.2rem;
+    opacity: 0;
+    height: 5em;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#sidebar-wrapper .list-group .list-group-item {
+    border: none;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+    padding-top: 20rem;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+
+    button#menu-toggle.navbar-toggler{
+        visibility: hidden;
+    }
+
+}
+
+@media (max-width: 768px) {
+    button#menu-toggle.navbar-toggler {
+        visibility: visible;
+    }
+
+    .google-maps {
+        position: relative;
+        padding-bottom: 75%;
+        overflow: hidden;
+    }
+}
