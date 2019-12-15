@@ -64,6 +64,7 @@ namespace ListIt_WindowsBackend
                         Category_Id = (int)CategoryBox.SelectedValue
                     }, (int)LanguageBox.SelectedValue);
                     MessageBox.Show("Product added!");
+                    // Reset input form
                     TypeBox.SelectedIndex = 0;
                     NameField.Text = "";
                     UnitBox.SelectedIndex = -1;
@@ -105,12 +106,6 @@ namespace ListIt_WindowsBackend
             CategoryBox.ItemsSource = categoryService.GetDefaultCategories(2);
             CategoryBox.SelectedValuePath = "Id";
             CategoryBox.DisplayMemberPath = "Name";
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            //((App)Application.Current).Back_To_Menu(sender);
         }
     }
 }

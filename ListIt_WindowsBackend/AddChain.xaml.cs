@@ -17,14 +17,7 @@ namespace ListIt_WindowsBackend
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //  WHAT WE NEED
-            //validate input
-            //tell user if something's wrong
-            //send to DB
-            //verify response
-            //inform user of response
-            //clear form for next product
-
+            // validate input
             string error = "";
             if (ChainNameTextBox.Text == "") 
                 error += "Fill in Chain name.\n";
@@ -36,6 +29,7 @@ namespace ListIt_WindowsBackend
                 ChainService chainService = new ChainService();
                 try
                 {
+                    // create and send dto
                     ChainDto chainDto = new ChainDto
                     {
                         Name = ChainNameTextBox.Text,
@@ -45,6 +39,7 @@ namespace ListIt_WindowsBackend
                         chainDto.ShopApi_Id = (int)APIdropdown.SelectedValue;
                     chainService.Create(chainDto);
                     MessageBox.Show("Chain was successfully created!");
+                    // reset form
                     ChainNameTextBox.Text = "";
                     LogoLinkTextBox.Text = "";
                     APIdropdown.SelectedIndex = -1;
@@ -60,15 +55,8 @@ namespace ListIt_WindowsBackend
         {
             ShopApiService shopApiService = new ShopApiService();
             APIdropdown.ItemsSource = shopApiService.GetAll();
-            //APIdropdown.SelectedIndex = -1;
             APIdropdown.SelectedValuePath = "Id";
             APIdropdown.DisplayMemberPath = "Url";
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            //((App)Application.Current).Back_To_Menu(sender);
         }
     }
 }

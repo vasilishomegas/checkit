@@ -20,6 +20,6 @@
             <TextBox x:Name="CityTextbox" TextWrapping="Wrap" FontSize="18" BorderThickness="1" BorderBrush="Black" Margin="181,265,64.6,0" HorizontalAlignment="Center" Width="220" Height="35" VerticalAlignment="Top"/>
             <Button x:Name="AddShopButton" Content="Save changes" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="160" FontSize="20" FontWeight="DemiBold" Margin="96,350,209.6,0" Click="AddShop_Click" IsDefault="True"/>
             <Button Content="Discard changes" HorizontalAlignment="Center" Height="35" Margin="306,350,-0.4,0" VerticalAlignment="Top" Width="160" FontSize="20" FontWeight="DemiBold" RenderTransformOrigin="-0.31,-5.703"/>
-            <Button x:Name ="Back" Content="Back to menu" HorizontalAlignment="Left" Margin="21,430,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click"/>
+            <!--<Button x:Name ="Back" Content="Back to menu" HorizontalAlignment="Left" Margin="21,430,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click"/>-->
     </Grid>
 </Window>

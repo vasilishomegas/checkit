@@ -18,11 +18,5 @@ namespace ListIt_WindowsBackend
             ProductService productService = new ProductService();
             ProductData.ItemsSource = productService.GetDefaultProductDtos();
         }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            //((App)Application.Current).Back_To_Menu(sender);
-        }
     }
 }
