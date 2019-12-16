@@ -1,6 +1,6 @@
 # ListIt
 
-The solution contains 5 projects:
+The solution contains 7 projects:
  - ListIt_WebFrontend: The user interface.
  - ListIt_WindowsBackend: The management program for admins.
  - ListIt_DomainModel: The models that will be used through the whole solution.
