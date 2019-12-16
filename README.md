@@ -12,6 +12,7 @@ The solution contains 5 projects:
  
  # Tips for running the zipped version
  
- As for the zipped version packages are only downloaded when building the solution, you might face some runtime errors. To fix this run the following command in the Package Manager Consoler:
+ As for the zipped version packages are only downloaded when building the solution, you might face some runtime errors. 
+ Please make sure that all NuGet Packages are updated, if you still face errors, try to run the following command in the Package Manager Consoler:
  
       Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
